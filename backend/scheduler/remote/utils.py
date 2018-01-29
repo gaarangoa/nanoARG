@@ -51,10 +51,11 @@ class canu():
         SeqIO.write(data, open(output_file, 'w'), 'fasta') 
     def correct(self, input_file):
         cmd = TOOLS+'/bin/canu -correct -p canu -d ' +  "/".join(input_file.split("/")[:-1])+'/canu' + ' useGrid=false  gnuplotTested=true genomeSize=2.5M -nanopore-raw ' + input_file + ' correctedErrorRate=0.2 '
+        print(cmd)
         os.system(cmd)
         fo = '/'.join(input_file.split('/')[:-1])+"/demux.corrected";
         cmd = 'zcat ' + "/".join(input_file.split("/")[:-1])+"/canu/canu.correctedReads.fasta.gz > " +fo+"";
-        print cmd
+        print(cmd)
         os.system(cmd)
         # remove this line to not merge known args
         # self.remove_seq_by_tag(fo+'.tmp', fo);
