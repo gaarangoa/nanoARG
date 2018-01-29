@@ -1,11 +1,11 @@
 from remote.tools.diamondClass import diamond as ALIGNER
 from remote.utils import bestLocalHit as BLH
-
+import conf
 class MGEs():
     def __init__(self):
         self.info=""
         self.aligner = ALIGNER();
-        self.reference = "/groups/metastorm_cscee/ARGpore/data/aclame.dmnd"
+        self.reference = conf.data+"/aclame.dmnd"
     
     def align(self, query):
         parameters= {

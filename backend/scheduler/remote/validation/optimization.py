@@ -2,6 +2,7 @@ import numpy as np
 from pyswarm import pso
 import sys
 import os
+import conf
 
 from sklearn.metrics import precision_score, recall_score, f1_score, confusion_matrix
 
@@ -10,7 +11,7 @@ _trueSamples = 34700;
 _negativeSamples = 37652;
 _potentialSamples = 2000;
 
-_ARGLEN = '/groups/metastorm_cscee/ARGpore/tools/Resfams-full.size'
+_ARGLEN = conf.tools+'Resfams-full.size'
 
 ARGLen = {i.split()[0]:int(i.split()[1]) for i in open(_ARGLEN)} 
 

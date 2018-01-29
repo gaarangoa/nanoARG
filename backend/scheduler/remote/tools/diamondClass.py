@@ -1,8 +1,8 @@
 import sys, os
-
+import conf
 class diamond():
     def __init__(self):
-        self.bin = "/groups/metastorm_cscee/ARGpore/tools/"
+        self.bin = conf.tools
 
     def makedb(self):
         return 0

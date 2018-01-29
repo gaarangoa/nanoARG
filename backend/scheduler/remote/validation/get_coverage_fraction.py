@@ -1,5 +1,6 @@
+import conf
 
-arglen = '/groups/metastorm_cscee/ARGpore/tools/Resfams-full.size'
+arglen = conf.tools+'Resfams-full.size'
 ARGLen = {i.split()[0]:int(i.split()[1]) for i in open(arglen)} 
 import sys
 for i in open(sys.argv[1]):

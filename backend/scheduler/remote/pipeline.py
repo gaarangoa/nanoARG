@@ -1,10 +1,8 @@
 import utils
 import sys
+import conf
 
-
-
-sys.path.insert(0, '/groups/metastorm_cscee/ARGpore/src')
-
+sys.path.insert(0, conf.add_python_path)
 from remote.tools import bestLocalHitClass as BestHit
 
 input = sys.argv[1];
@@ -13,9 +11,6 @@ barcodes = sys.argv[3];
 step = sys.argv[4];
 utils.mkdir_p(output);
 
-
-# _ARGLEN = '/groups/metastorm_cscee/deepARG/deeparg-ss/database/features.size'
-# _ARGLEN = '/groups/metastorm_cscee/ARGpore/data/megares.noSNPs.format.size'
 
 _IDEN = 0
 _EVALUE = 1e-10
@@ -45,7 +40,7 @@ from remote.pipelines.resfamsClass import hmmer as Resfams
 if step=='resfams': 
     Align = Resfams();
     args_aligned_file = Align.align(input);
-    Annotation = BestHit.bestLocalHit('/groups/metastorm_cscee/ARGpore/tools/Resfams-full.size', _IDEN, _EVALUE, _COVERAGE, _BITSCORE);
+    Annotation = BestHit.bestLocalHit(conf.tools+'Resfams-full.size', _IDEN, _EVALUE, _COVERAGE, _BITSCORE);
     annotation = Annotation.quant(args_aligned_file, 'resfams');
 
 
@@ -54,7 +49,7 @@ from remote.pipelines.mgeClass import MGEs
 if step=='aclame': 
     mges = MGEs()
     mges_aligned_file = mges.align(input)
-    mgesAnnotation = BestHit.bestLocalHit("/groups/metastorm_cscee/ARGpore/data/aclame.size", _IDEN, _EVALUE, _COVERAGE, _BITSCORE)
+    mgesAnnotation = BestHit.bestLocalHit(conf.data+"aclame.size", _IDEN, _EVALUE, _COVERAGE, _BITSCORE)
     mgesAnn = mgesAnnotation.quant(mges_aligned_file, 'aclame')
 
 

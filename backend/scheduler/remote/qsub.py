@@ -1,6 +1,7 @@
 import sys
 import time
 import os
+import conf
 
 input = sys.argv[1];
 output = sys.argv[2];
@@ -20,7 +21,7 @@ cmd = "\n".join([
         '#PBS -A computeomics',
         '#PBS -W group_list=newriver\n',
         'module load gcc/5.2.0  openmpi/1.8.5 hmmer bedtools python/2.7.10\n',
-        'python /groups/metastorm_cscee/ARGpore/src/remote/pipeline.py '+input+' '+output+' '+barcodes+" "+step,
+        'python '+ conf.main_pipeline +'  '+input+' '+output+' '+barcodes+" "+step,
         'exit;'
         ]);
 

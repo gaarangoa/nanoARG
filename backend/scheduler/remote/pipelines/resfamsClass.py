@@ -1,6 +1,6 @@
 from Bio.Data import CodonTable
 import os
-
+import conf
 from remote.utils import _cores
 
 class hmmer():
@@ -12,7 +12,7 @@ class hmmer():
     
     def hmm2blast(self, input, output):
         fo = open(output, 'w');
-        HMMTAGS = {i.strip().split('\t')[0]:(i.strip().split('\t')[0]+"|FEATURES|RESFAMS|"+i.strip().split('\t')[1]+"|"+i.strip().split('\t')[2]).replace(" ","_") for i in open("/groups/metastorm_cscee/ARGpore/tools/Resfams-full.dsc")}; 
+        HMMTAGS = {i.strip().split('\t')[0]:(i.strip().split('\t')[0]+"|FEATURES|RESFAMS|"+i.strip().split('\t')[1]+"|"+i.strip().split('\t')[2]).replace(" ","_") for i in open(conf.tools+"Resfams-full.dsc")}; 
         for i in open(input):
             if i[0] == "#": continue
             i = i.strip().split();
@@ -25,7 +25,7 @@ class hmmer():
     def align(self, input):
         input = '/'.join(input.split('/')[:-1])+"/demux.corrected.merged";
         self.get_open_reading_frames(input);
-        cmd = "hmmscan --domtblout "+input+".resfams.tbl --noali --cpu "+_cores+" /groups/metastorm_cscee/ARGpore/tools/Resfams-full.hmm "+input+".rf";
+        cmd = "hmmscan --domtblout "+input+".resfams.tbl --noali --cpu "+_cores+" "+conf.tools+"Resfams-full.hmm "+input+".rf";
         os.system(cmd);
         fo = '/'.join(input.split('/')[:-1])+"/demux.corrected.merged.resfams.aligned";
         self.hmm2blast(input+'.resfams.tbl', fo);
