@@ -1,0 +1,73 @@
+version: '3'
+
+services:
+
+  database:
+    image: mongo
+    environment: 
+      - MONGO_DATA_DIR=./backend/database
+      - MONGO_LOG_DIR=./backend/database
+    volumes:
+      - ./backend/database:/data/db
+    command: mongod --dbpath /data/db --directoryperdb --port 17863
+    ports:
+      - 27855:17863
+    tty: true
+
+  api:
+    image: node
+    build:
+      context: ./backend/API
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend/API:/src
+    ports:
+      - 27856:3000
+    links:
+      - database
+      - scheduler
+      - consumer
+    depends_on:
+      - database
+
+  frontend:
+    image: nginx
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/dist/:/usr/share/nginx/html/
+    tty: true
+    ports:
+      - 27857:80
+
+  scheduler:
+    image: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    volumes:
+      - ./backend/scheduler/enabled_plugins:/etc/rabbitmq/enabled_plugins
+    ports:
+      - 27858:15672
+      - 27859:5672
+  
+  consumer:
+    image: python
+    depends_on:
+      - scheduler
+    build:
+      context: ./backend/scheduler/consumer
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend/scheduler/consumer/:/src/
+      - ./backend/API/tmp/:/data/
+      - ./backend/scheduler/consumer/local/access/:/root/.ssh/
+    links:
+      - scheduler
+    ports:
+      - 27860:8082
+    command: sh /src/run.sh
+    
+
