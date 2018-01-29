@@ -3,8 +3,10 @@ import errno
 import json
 from Bio import SeqIO
 
-TOOLS="/groups/metastorm_cscee/ARGpore/tools/";
-DATA="/groups/metastorm_cscee/ARGpore/data/";
+import conf
+
+TOOLS=conf.tools;
+DATA=conf.data;
 DIAMOND_DATABASE = '/groups/metastorm_cscee/deepARG/deeparg-ss/database/';
 TRUE_POSITIVES = "/groups/metastorm_cscee/ARGpore/data/bacterial_genomes/RawAlignments/reinforce_correction/true_positives.fasta"
 _cores = "6";
@@ -112,7 +114,7 @@ class hmmer():
     
     def hmm2blast(self, input, output):
         fo = open(output, 'w');
-        HMMTAGS = {i.strip().split('\t')[0]:(i.strip().split('\t')[0]+"|FEATURES|RESFAMS|"+i.strip().split('\t')[1]+"|"+i.strip().split('\t')[2]).replace(" ","_") for i in open("/groups/metastorm_cscee/ARGpore/tools/Resfams-full.dsc")}; 
+        HMMTAGS = {i.strip().split('\t')[0]:(i.strip().split('\t')[0]+"|FEATURES|RESFAMS|"+i.strip().split('\t')[1]+"|"+i.strip().split('\t')[2]).replace(" ","_") for i in open(conf.tools+"Resfams-full.dsc")}; 
         for i in open(input):
             if i[0] == "#": continue
             i = i.strip().split();
@@ -124,7 +126,7 @@ class hmmer():
 
     def align(self, input):
         self.get_open_reading_frames(input);
-        cmd = "hmmscan --domtblout "+input+".tbl --noali --cpu "+_cores+" /groups/metastorm_cscee/ARGpore/tools/Resfams-full.hmm "+input+".rf";
+        cmd = "hmmscan --domtblout "+input+".tbl --noali --cpu "+_cores+" "+conf.tools+"Resfams-full.hmm "+input+".rf";
         os.system(cmd);
         fo = '/'.join(input.split('/')[:-1])+"/demux.corrected.merged.resfams.aligned";
         self.hmm2blast(input+'.tbl', fo);
