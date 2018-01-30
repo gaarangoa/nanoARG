@@ -25,7 +25,7 @@ class RetrieveResults(luigi.Task):
     parameters = luigi.Parameter();
 
     def requires(self):
-        return CreateEnv(parameters = parameters)
+        return CreateEnv(parameters = self.parameters)
     
     def output(self):
         return MockFile("output", mirror_on_stderr=True)
