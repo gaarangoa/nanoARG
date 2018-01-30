@@ -20,7 +20,7 @@ cmd = "\n".join([
         '#PBS -A computeomics',
         '#PBS -W group_list=newriver\n',
         'module load gcc/5.2.0  openmpi/1.8.5 hmmer bedtools python/2.7.10\n',
-        'python '+ conf.main_pipeline + " " + sys.argv[1],
+        'luigi -m '+ conf.main_pipeline + " CreateEnv " + " --local-scheduler --parameters" + sys.argv[1],
         'exit;'
         ]);
 
@@ -28,4 +28,4 @@ outq = open(qsub,'w');
 outq.write(cmd);
 outq.close();
 
-os.system('cd '+"/".join(input.split("/")[:-1])+' && sh '+qsub)
+os.system('cd '+parameters['storage_remote_dir']+' && sh '+qsub)
