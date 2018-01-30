@@ -24,8 +24,7 @@ class RetrieveResults(luigi.Task):
     parameters = luigi.Parameter();
 
     def requires(self):
-        par = json.loads(base64.b64decode(parameters))
-        return CreateEnv(parameters = par)
+        return CreateEnv(parameters = self.parameters)
     
     def output(self):
         return MockFile("output", mirror_on_stderr=True)
