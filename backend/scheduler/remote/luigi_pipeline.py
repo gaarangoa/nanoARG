@@ -5,7 +5,7 @@ import json
 
 class CreateEnv(luigi.Task):
     stage = 'CREATING ENVIRONMENT IN CLUSTER'
-    parameters = luigi.Parameter())
+    parameters = luigi.Parameter()
     parameters = json.loads(base64.b64decode(parameters)
 
     def output(self):
