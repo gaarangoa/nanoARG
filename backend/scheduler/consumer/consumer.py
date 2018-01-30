@@ -35,6 +35,7 @@ class CONSUMER:
             body = base64.b64decode(body)
             body = json.loads(body)
             body.update({'remote_dir': local.config.remote_storage})
+            body.update({'remote_path': local.config.remote_tools})
             body.update({'local_dir': local.config.local_storage})
             body.update({'localhost': local.config.local_host})
             body.update({'remotehost': local.config.ssh_host})
@@ -43,6 +44,7 @@ class CONSUMER:
             body.update({'storage_remote_dir': local.config.remote_storage+"/"+body['projectID']+"/"+body["_id"]+"/"})
             body.update({'qsub_file': local.config.remote_storage+"/"+body['projectID']+"/"+body["_id"]+"/qsub.sh"})
             body.update({'pipeline': local.config.pipeline})
+            
 
             item = base64.b64encode(json.dumps(body))
             
