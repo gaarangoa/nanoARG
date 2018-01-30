@@ -7,7 +7,6 @@ from luigi.contrib.ssh import RemoteContext, RemoteTarget, RemoteFileSystem
 from luigi.mock import MockFile
 
 class CreateEnv(luigi.Task):
-    stage = 'CREATING ENVIRONMENT IN CLUSTER'
     parameters = luigi.Parameter()
 
     def output(self):
@@ -16,8 +15,8 @@ class CreateEnv(luigi.Task):
         return luigi.LocalTarget(parameters['remote_input_file'])
 
     def run(self):
-        os.system("mkdir -p "+self.output().parameters['remote_sample_dir'])
-        os.system("ssh newriver1.arc.vt.edu python "+self.output().parameters['path']+"/retrieve_file.py "+raw_parameters)
+        os.system("mkdir -p "+self.output.parameters['remote_sample_dir'])
+        os.system("ssh newriver1.arc.vt.edu python "+self.output.parameters['path']+"/retrieve_file.py "+raw_parameters)
 
 
 
