@@ -8,9 +8,10 @@ from luigi.mock import MockFile
 
 class CreateEnv(luigi.Task):
     parameters = luigi.Parameter()
-    parameters = json.loads(base64.b64decode(parameters))
+    
 
     def output(self):
+        parameters = json.loads(base64.b64decode(parameters))
         return luigi.LocalTarget(parameters['remote_input_file'])
 
     def run(self):
