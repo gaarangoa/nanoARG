@@ -7,4 +7,4 @@ local_storage = "/data/"
 remote_storage = "/groups/metastorm_cscee/nanoARG/backend/scheduler/remote/storage/"
 cluster_user = "gustavo1"
 pipeline = "luigi_pipeline"
-max_cluster_jobs = 2
+max_cluster_jobs = 10
