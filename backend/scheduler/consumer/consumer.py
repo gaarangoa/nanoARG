@@ -51,6 +51,11 @@ class CONSUMER:
             # # # check whether there is space in the cluster to run more jobs
             while(not self.more_jobs()):
                 time.sleep(30)
+
+            # send the input file
+            cmd = "scp "+body['local_input_file']+" "+body['remotehost']+":"+body['remote_input_file']
+            os.system(cmd)
+            # run the pipeline
             cmd = "ssh gustavo1@newriver1.arc.vt.edu python "+local.config.remote_tools + "/qsub.py " +item
             os.system(cmd)
 
