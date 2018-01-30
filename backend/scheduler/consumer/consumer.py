@@ -63,15 +63,12 @@ class CONSUMER:
 
         self.channel.start_consuming()
 
-consumer = CONSUMER("consumer")
-consumer.run()
-
-# while True:
-#     try:
-#         consumer = CONSUMER("consumer")
-#         consumer.run()
-#     except Exception as inst:
-#         print(inst)
+while True:
+    try:
+        consumer = CONSUMER("consumer")
+        consumer.run()
+    except Exception as inst:
+        print(inst)
 
 # method_frame, header_frame, body = channel.basic_get(queue="hello")
 # if method_frame:

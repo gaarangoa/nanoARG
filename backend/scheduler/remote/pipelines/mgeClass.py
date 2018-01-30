@@ -1,7 +1,11 @@
 from remote.tools.diamondClass import diamond as ALIGNER
-from remote.utils import bestLocalHit as BLH
+from remote.utils import BestLocalHit as BestHit
 import conf
 
+_IDEN = 30
+_EVALUE = 1e-10
+_COVERAGE = 0.5
+_BITSCORE = 50
 class MGEs():
     def __init__(self):
         self.info=""
@@ -9,15 +13,21 @@ class MGEs():
         self.reference = conf.data+"aclame.dmnd"
     
     def align(self, input):
-        query = '/'.join(input.split('/')[:-1])+"/demux.corrected.merged";
         parameters= {
             "--id":30,
             "-k":500,
             "--evalue": 1e-10
         }
-        self.output = query+".mge.aln"
-        self.aligner.align(query, self.reference, self.output, parameters)
+        self.alignment_file = query+".mge.aln"
+        self.aligner.align(input, self.reference, self.alignment_file, parameters)
         return self.output
+
+    def postprocess(self):
+        mges_annotation = BestHit.BestLocalHit(conf.data+"aclame.size", _IDEN, _EVALUE, _COVERAGE, _BITSCORE)
+        mges_aligned_file = mges_annotation.align(self.alignment_file)
+        self.postprocess_file = mges_annotation.quant(mges_aligned_file, 'aclame')
+        return self.postprocess_file
+        
 
 # how to run it!
 # mges = MGEs()

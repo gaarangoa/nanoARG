@@ -1,4 +1,4 @@
-class bestLocalHit():
+class BestLocalHit():
     def __init__(self, arglen, iden, evalue, cov, bitscore):
         self.info = 'quantification using bedtools clustering'
         self.arglen = arglen
