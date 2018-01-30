@@ -20,9 +20,10 @@ cmd = "\n".join([
         '#PBS -A computeomics',
         '#PBS -W group_list=newriver\n',
         'module load gcc/5.2.0  openmpi/1.8.5 hmmer bedtools\n',
-        'cd '+ parameters['remote_dir'],
+        'cd '+ parameters['storage_remote_dir'],
         'export PYTHONPATH=$PYTHONPATH:'+parameters['remote_dir'],
         "luigid --background --logdir=logs",
+        'cd '+ parameters['remote_dir'],
         'luigi --module '+ parameters['pipeline'] + " CreateEnv " + " --local-scheduler --parameters " + sys.argv[1],
         'exit;'
         ]);
