@@ -26,7 +26,7 @@ class demux_hash():
     def __init__(self):
         self.info = "This is a perl script to trim out barcode sequences"
     def barcodes(self, fasta_file, barcodes_file, outdir):
-        os.system(''' awk '{if($_~/>/){gsub(">","",$_); x=$_; getline; print x"\t"$_}}' '''+barcodes_file + '>' + barcodes_file+'.tmp');
+        # os.system(''' awk '{if($_~/>/){gsub(">","",$_); x=$_; getline; print x"\t"$_}}' '''+barcodes_file + '>' + barcodes_file+'.tmp');
         ############################################################### 
         # TODO: BARCODES RETURNS THE SEQUENCE ID NOT THE FULL SEQUENCE:
         ############################################################### 
@@ -35,7 +35,7 @@ class demux_hash():
         # os.system(cmd)
         # os.system("cat "+outdir+"/*.bol.* > "+outdir+'/demux')
         # os.system("cat "+TRUE_POSITIVES+" "+outdir+'/demux.t'+" > "+outdir+'/demux && rm '+outdir+'/demux.t')
-        os.system("cp "+fasta_file+" "+outdir+"/demux");
+        # os.system("cp "+fasta_file+" "+outdir+"/demux");
         return fasta_file
 
 class canu():

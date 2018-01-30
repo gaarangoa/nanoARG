@@ -151,7 +151,7 @@ class ErrorCorrection(luigi.Task):
         return status
 
     def run(self):
-        jobid = remoteInterface.run([ parameters.data['remote_storage']+'demux', 
+        jobid = remoteInterface.run([ parameters.data['remote_input'], 
                                     parameters.data['remote_storage'], 
                                     parameters.data['remote_barcode'],
                                     'correct'

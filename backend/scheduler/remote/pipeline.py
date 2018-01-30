@@ -19,9 +19,9 @@ _BITSCORE = 50
 
 
 # Demultiplex fasta reads
-if step=='demux': 
-    Demux = utils.demux_hash();
-    demux_reads = Demux.barcodes(input, barcodes, output);
+# if step=='demux': 
+#     Demux = utils.demux_hash();
+#     demux_reads = Demux.barcodes(input, barcodes, output);
 # Correct reads using demultiplexed reads
 if step=='correct': 
     Correct = utils.canu();
