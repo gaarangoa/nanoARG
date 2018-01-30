@@ -12,5 +12,6 @@ cmd = " ".join([
     parameters['remote_input_file']
 ])
 
+os.system(cmd)
 
 

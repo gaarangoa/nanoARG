@@ -13,13 +13,12 @@ class CreateEnv(luigi.Task):
     
     def output(self):
         par = json.loads(base64.b64decode(self.parameters))
-        return luigi.LocalTarget(par['remote_input_file']+".log")
+        return luigi.LocalTarget( par['remote_input_file'] )
 
     def run(self):
         par = json.loads(base64.b64decode(self.parameters))
         os.system( "mkdir -p "+par['storage_remote_dir'] )
         os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/retrieve_file.py "+self.parameters )
-        os.system( ' echo "done" >> '+par['remote_input_file']+".log")
 
 
 class MGEs(luigi.Task):
@@ -41,7 +40,7 @@ class RetrieveResults(luigi.Task):
     parameters = luigi.Parameter();
 
     def requires(self):
-        return CreateEnv(parameters = self.parameters)
+        return MGEs(parameters = self.parameters)
     
     def output(self):
         return MockFile("output", mirror_on_stderr=True)
