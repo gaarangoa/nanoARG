@@ -8,15 +8,14 @@ from luigi.mock import MockFile
 
 class CreateEnv(luigi.Task):
     parameters = luigi.Parameter()
+    parameters = json.loads(base64.b64decode(parameters))
 
     def output(self):
-        parameters = json.loads(base64.b64decode(self.parameters))
-        print(parameters)
         return luigi.LocalTarget(parameters['remote_input_file'])
 
     def run(self):
-        os.system("mkdir -p "+self.output.parameters['remote_sample_dir'])
-        os.system("ssh newriver1.arc.vt.edu python "+self.output.parameters['path']+"/retrieve_file.py "+raw_parameters)
+        os.system("mkdir -p "+self.parameters['remote_sample_dir'])
+        os.system("ssh newriver1.arc.vt.edu python "+self.parameters['path']+"/retrieve_file.py "+json.dumps(base64.encode(raw_parameters))
 
 
 
