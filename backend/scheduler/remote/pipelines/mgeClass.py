@@ -1,5 +1,5 @@
-from remote.tools.diamondClass import diamond as ALIGNER
-from remote.utils import BestLocalHit as BestHit
+from tools.diamondClass import diamond as ALIGNER
+from tools.BestLocalHitClass import BestLocalHit as BestHit
 import conf
 
 _IDEN = 30
@@ -23,7 +23,7 @@ class MGEs():
         return self.output
 
     def postprocess(self):
-        mges_annotation = BestHit.BestLocalHit(conf.data+"aclame.size", _IDEN, _EVALUE, _COVERAGE, _BITSCORE)
+        mges_annotation = BestHit(conf.data+"aclame.size", _IDEN, _EVALUE, _COVERAGE, _BITSCORE)
         mges_aligned_file = mges_annotation.align(self.alignment_file)
         self.postprocess_file = mges_annotation.quant(mges_aligned_file, 'aclame')
         return self.postprocess_file
