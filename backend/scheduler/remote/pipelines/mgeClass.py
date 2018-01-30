@@ -9,6 +9,7 @@ _BITSCORE = 50
 class MGEs():
     def __init__(self, input):
         self.info=""
+        self.input = input
         self.aligner = ALIGNER();
         self.reference = conf.data+"aclame.dmnd"
         self.alignment_file = input+".mge.aln"
@@ -20,7 +21,7 @@ class MGEs():
             "-k":500,
             "--evalue": 1e-10
         }
-        self.aligner.align(input, self.reference, self.alignment_file, parameters)
+        self.aligner.align(self.input, self.reference, self.alignment_file, parameters)
         return self.output
 
     def postprocess(self):
