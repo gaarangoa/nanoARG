@@ -1,5 +1,5 @@
 from tools.diamondClass import diamond as ALIGNER
-from tools.BestLocalHitClass import BestLocalHit as BestHit
+from tools.bestLocalHitClass import BestLocalHit as BestHit
 import conf
 
 _IDEN = 30
