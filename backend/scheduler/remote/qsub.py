@@ -31,4 +31,4 @@ outq = open(qsub,'w');
 outq.write(cmd);
 outq.close();
 
-os.system('cd '+parameters['storage_remote_dir']+' && sh '+qsub)
+os.system('cd '+parameters['storage_remote_dir']+' && qsub '+qsub)
