@@ -42,6 +42,7 @@ class CONSUMER:
             body.update({'remote_input_file': local.config.remote_storage+"/"+body['projectID']+"/"+body["_id"]+"/"+str(body["timestamp"])+"_rawreads.fasta"})
             body.update({'storage_remote_dir': local.config.remote_storage+"/"+body['projectID']+"/"+body["_id"]+"/"})
             body.update({'qsub_file': local.config.remote_storage+"/"+body['projectID']+"/"+body["_id"]+"/qsub.sh"})
+            body.update({'pipeline': local.config.pipeline})
 
             item = base64.b64encode(json.dumps(body))
             
