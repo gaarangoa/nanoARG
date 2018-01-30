@@ -36,7 +36,7 @@ class demux_hash():
         # os.system("cat "+outdir+"/*.bol.* > "+outdir+'/demux')
         # os.system("cat "+TRUE_POSITIVES+" "+outdir+'/demux.t'+" > "+outdir+'/demux && rm '+outdir+'/demux.t')
         os.system("cp "+fasta_file+" "+outdir+"/demux");
-        return outdir+'/demux'
+        return fasta_file
 
 class canu():
     def __init__(self):
