@@ -21,6 +21,7 @@ class CreateEnv(luigi.Task):
         os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/retrieve_file.py "+self.parameters )
 
 
+
 class MGEs(luigi.Task):
     parameters = luigi.Parameter()
 
