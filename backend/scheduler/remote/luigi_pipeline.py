@@ -22,7 +22,7 @@ class CreateEnv(luigi.Task):
 
 
 
-class MGEs(luigi.Task):
+class MobileGenetiElements(luigi.Task):
     parameters = luigi.Parameter()
 
     def requires(self):
@@ -44,7 +44,7 @@ class RetrieveResults(luigi.Task):
     parameters = luigi.Parameter();
 
     def requires(self):
-        return MGEs(parameters = self.parameters)
+        return MobileGenetiElements(parameters = self.parameters)
     
     def output(self):
         return MockFile("output", mirror_on_stderr=True)
