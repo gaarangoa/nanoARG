@@ -1,7 +1,7 @@
 import json
 
 def absoluteAbundance(input, database):
-    fox = '/'.join(input.split('/')[:-1])+"/demux.corrected.merged.aligned";
+    fox = input;
     type = {}
     subtype = {}
     for bh in open(input):

@@ -23,17 +23,19 @@ class CreateEnv(luigi.Task):
 
 class MGEs(luigi.Task):
     parameters = luigi.Parameter()
-    target_file = ''
+
     def requires(self):
         return CreateEnv(parameters = self.parameters)
 
     def run(self):
-        mges = MGEs()
-        mges.run()
-        self.target_file = mges.postprocess()
+        par = json.loads(base64.b64decode(self.parameters))
+        mges = MGEs(par['remote_input_file'])
+        mges.align()
+        mges.postprocess()
 
     def output(self):
-        return luigi.LocalTarget(self.target_file)
+        mges = MGEs(par['remote_input_file'])
+        return luigi.LocalTarget(mges.postprocess_file)
 
 
 class RetrieveResults(luigi.Task):
