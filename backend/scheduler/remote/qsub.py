@@ -19,6 +19,7 @@ cmd = "\n".join([
         '#PBS -q normal_q',
         '#PBS -A computeomics',
         '#PBS -W group_list=newriver\n',
+        'source /home/gustavo1/environments/nanopore/bin/activate',
         'module load gcc/5.2.0  openmpi/1.8.5 hmmer bedtools\n',
         'cd '+ parameters['storage_remote_dir'],
         'export PYTHONPATH=$PYTHONPATH:'+parameters['remote_path'],
