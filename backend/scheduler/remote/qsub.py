@@ -19,10 +19,11 @@ cmd = "\n".join([
         '#PBS -q normal_q',
         '#PBS -A computeomics',
         '#PBS -W group_list=newriver\n',
-        'module load gcc/5.2.0  openmpi/1.8.5 hmmer bedtools python/2.7.10\n',
+        'module load gcc/5.2.0  openmpi/1.8.5 hmmer bedtools\n',
         'cd '+ parameters['storage_remote_dir'],
-        'export PYTHONPATH=$PYTHONPATH:$PWD',
-        'python -m '+ conf.main_pipeline + " CreateEnv " + " --local-scheduler --parameters" + sys.argv[1],
+        'export PYTHONPATH=$PYTHONPATH:'+parameters['remote_dir'],
+        "luigid --background --logdir=logs",
+        'python '+ conf.main_pipeline + " CreateEnv " + " --local-scheduler --parameters" + sys.argv[1],
         'exit;'
         ]);
 
