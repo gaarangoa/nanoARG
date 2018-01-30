@@ -2,15 +2,14 @@ import sys
 import time
 import os
 import conf
+import json
+import base64
 
-input = sys.argv[1];
-output = sys.argv[2];
-barcodes = sys.argv[3];
 
-step = sys.argv[4];
+parameters = json.loads(base64.b64decode(sys.argv[1]))
 
-input = input;
-qsub = input+"."+step+".run.qsub";
+os.system('mkdir -p '+parameters['storage_remote_dir'])
+qsub = parameters['qsub_file']
 
 cmd = "\n".join([
         '#!/bin/bash',
@@ -21,7 +20,7 @@ cmd = "\n".join([
         '#PBS -A computeomics',
         '#PBS -W group_list=newriver\n',
         'module load gcc/5.2.0  openmpi/1.8.5 hmmer bedtools python/2.7.10\n',
-        'python '+ conf.main_pipeline +'  '+input+' '+output+' '+barcodes+" "+step,
+        'python '+ conf.main_pipeline + " " + sys.argv[1],
         'exit;'
         ]);
 
@@ -29,4 +28,4 @@ outq = open(qsub,'w');
 outq.write(cmd);
 outq.close();
 
-os.system('cd '+"/".join(input.split("/")[:-1])+' && sh '+conf.monitor+' '+qsub)
+os.system('cd '+"/".join(input.split("/")[:-1])+' && sh '+qsub)

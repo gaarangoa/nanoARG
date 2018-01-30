@@ -25,7 +25,8 @@ _BITSCORE = 50
 # Correct reads using demultiplexed reads
 if step=='correct': 
     Correct = utils.canu();
-    corrected_reads = Correct.correct(input);
+    corrected_reads = Correct.correct(input)
+
 # Merge reads that are not demultiplexed
 if step=='merge': 
     Merge = utils.rawreads();
