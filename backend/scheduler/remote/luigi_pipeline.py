@@ -14,8 +14,8 @@ class CreateEnv(luigi.Task):
         return luigi.LocalTarget(parameters['remote_input_file'])
 
     def run(self):
-        os.system("mkdir -p "+self.parameters['remote_sample_dir'])
-        os.system("ssh newriver1.arc.vt.edu python "+self.parameters['path']+"/retrieve_file.py "+json.dumps(base64.encode(raw_parameters))
+        os.system( "mkdir -p "+self.parameters['remote_sample_dir'] )
+        os.system( "ssh newriver1.arc.vt.edu python "+self.parameters['path']+"/retrieve_file.py "+json.dumps(base64.encode(raw_parameters)) )
 
 
 
