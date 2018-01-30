@@ -25,7 +25,7 @@ cmd = "\n".join([
         'export PYTHONPATH=$PYTHONPATH:'+parameters['remote_path'],
         "~/.local/bin/luigid --background --logdir=logs",
         'cd '+ parameters['remote_path'],
-        '~/.local/bin/luigi --module '+ parameters['pipeline'] + " CreateEnv " + " --local-scheduler --parameters " + sys.argv[1],
+        '~/.local/bin/luigi --module '+ parameters['pipeline'] + " RetrieveResults " + " --local-scheduler --parameters " + sys.argv[1],
         'exit;'
         ]);
 

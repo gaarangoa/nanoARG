@@ -16,3 +16,16 @@ class CreateEnv(luigi.Task):
         os.system("mkdir -p "+self.output().parameters['remote_sample_dir'])
         os.system("ssh newriver1.arc.vt.edu python "+self.output().parameters['path']+"/retrieve_file.py "+raw_parameters)
 
+
+
+class RetrieveResults(luigi.Task):
+    parameters = luigi.Parameter();
+
+    def requires(self):
+        return CreateEnv(parameters = parameters)
+    
+    def output(self):
+        return MockFile("output", mirror_on_stderr=True)
+
+    def run(self):
+        print("done")
