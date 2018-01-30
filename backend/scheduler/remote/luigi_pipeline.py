@@ -16,7 +16,7 @@ class CreateEnv(luigi.Task):
     def run(self):
         par = json.loads(base64.b64decode(self.parameters))
         os.system( "mkdir -p "+par['storage_remote_dir'] )
-        os.system( "ssh newriver1.arc.vt.edu python "+par['path']+"/retrieve_file.py "+self.parameters )
+        os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/retrieve_file.py "+self.parameters )
 
 
 
