@@ -34,6 +34,7 @@ class MGEs(luigi.Task):
         mges.postprocess()
 
     def output(self):
+        par = json.loads(base64.b64decode(self.parameters))
         mges = MGEs(par['remote_input_file'])
         return luigi.LocalTarget(mges.postprocess_file)
 
