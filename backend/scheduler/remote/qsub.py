@@ -29,4 +29,4 @@ outq = open(qsub,'w');
 outq.write(cmd);
 outq.close();
 
-os.system('cd '+"/".join(input.split("/")[:-1])+' && qsub '+qsub)
+os.system('cd '+"/".join(input.split("/")[:-1])+' && sh '+conf.monitor+' '+qsub)

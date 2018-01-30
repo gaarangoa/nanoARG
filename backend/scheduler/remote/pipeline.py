@@ -31,10 +31,6 @@ if step=='merge':
     Merge = utils.rawreads();
     merged_reads = Merge.merge(input)
 
-
-
-
-
 ################ ARGs-RESFAMS Align reads 
 from remote.pipelines.resfamsClass import hmmer as Resfams
 if step=='resfams': 
