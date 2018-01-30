@@ -3,6 +3,9 @@ import os
 import base64
 import json
 
+from luigi.contrib.ssh import RemoteContext, RemoteTarget, RemoteFileSystem
+from luigi.mock import MockFile
+
 class CreateEnv(luigi.Task):
     stage = 'CREATING ENVIRONMENT IN CLUSTER'
     parameters = luigi.Parameter()
