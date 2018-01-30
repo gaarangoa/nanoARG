@@ -25,7 +25,7 @@ class MGEs():
 
     def postprocess(self):
         mges_annotation = BestHit(conf.data+"aclame.size", _IDEN, _EVALUE, _COVERAGE, _BITSCORE)
-        mges_annotation.quant(mges_aligned_file, 'aclame')
+        mges_annotation.quant(self.alignment_file, 'aclame')
         
 
 # how to run it!
