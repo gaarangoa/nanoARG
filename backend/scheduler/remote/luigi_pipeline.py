@@ -6,8 +6,8 @@ import json
 from luigi.contrib.ssh import RemoteContext, RemoteTarget, RemoteFileSystem
 from luigi.mock import MockFile
 
-from remote.tools import BestLocalHitClass as BestHit
-from remote.pipelines.mgeClass import MGEs
+from tools import BestLocalHitClass as BestHit
+from pipelines.mgeClass import MGEs
 
 class CreateEnv(luigi.Task):
     parameters = luigi.Parameter()
