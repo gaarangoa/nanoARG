@@ -22,7 +22,6 @@ class MGEs():
             "--evalue": 1e-10
         }
         self.aligner.align(self.input, self.reference, self.alignment_file, parameters)
-        return self.output
 
     def postprocess(self):
         mges_annotation = BestHit(conf.data+"aclame.size", _IDEN, _EVALUE, _COVERAGE, _BITSCORE)
