@@ -5,7 +5,8 @@ import json
 
 class CreateEnv(luigi.Task):
     stage = 'CREATING ENVIRONMENT IN CLUSTER'
-    parameters = json.loads(base64.b64decode(luigi.Parameter()))
+    parameters = luigi.Parameter())
+    parameters = json.loads(base64.b64decode(parameters)
 
     def output(self):
         return luigi.LocalTarget(parameters['remote_input_file'])
