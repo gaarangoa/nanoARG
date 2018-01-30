@@ -22,11 +22,11 @@ class CreateEnv(luigi.Task):
         os.system( ' echo "done" >> '+par['remote_input_file']+".log")
 
 
-class MGEs(luigi.Taks):
+class MGEs(luigi.Task):
     parameters = luigi.Parameter()
     target_file = ''
     def requires(self):
-        return CreateEnv()
+        return CreateEnv(parameters = self.parameters)
 
     def run(self):
         mges = MGEs()
