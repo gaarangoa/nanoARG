@@ -31,7 +31,7 @@ class DeepARG():
         fo = open(input_file+".tmp", "w")
         for ix,i in enumerate(open(input_file)):
             i = i.split()
-            i[0] = str(ix)+"---"+i[0]+"---"+"---".join(i[6:10])
+            i[0] = str(ix)+"---"+i[0]+"---"+"---".join(i[3:10])
             fo.write("\t".join(i)+"\n")
         fo.close()
         os.system("mv "+input_file+".tmp"+" "+input_file)
@@ -40,8 +40,8 @@ class DeepARG():
         fo = open(input_file+".dl.tmp", "w")
         for i in open(input_file+".dl.ARG"):
             i = i.split()
-            j = i[0].split(":::")
-            item = "\t".join([j[1], i[5], i[7], '.', '.', '.', j[2], j[3], j[4], j[5]])+"\n"
+            j = i[0].split("---")
+            item = "\t".join([j[1], i[5], i[7], j[2], j[3], j[4], j[5], j[6], j[7], j[8] ])+"\n"
             fo.write( item )
         os.system("mv " + input_file+".dl.tmp " + input_file)
             
