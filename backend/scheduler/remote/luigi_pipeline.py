@@ -24,7 +24,7 @@ from pipelines.mgeClass import MGEs
 
 class MobileGenetiElements(luigi.Task):
     parameters = luigi.Parameter()
-    
+
     def run(self):
         par = json.loads(base64.b64decode(self.parameters))
         mges = MGEs(par['remote_input_file'])
@@ -47,4 +47,5 @@ class RetrieveResults(luigi.Task):
         return MockFile("output", mirror_on_stderr=True)
 
     def run(self):
-        print("done")
+        # MGEs
+        os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters )
