@@ -13,9 +13,9 @@ class ARGs():
         self.database_name = "deeparg"
         self.aligner = ALIGNER();
         self.reference = conf.data+self.database_name+".dmnd"
-        self.alignment_file = input+".mge.aln"
-        self.observable_file = input+".mge.aln.bed.clusters.bestHit.annotated."+self.database_name+".json"
-        self.postprocess_file = input+".mge.alg.annotated."+self.database_name+".json"
+        self.alignment_file = input+"."+self.database_name+".mge.aln"
+        self.observable_file = input+"."+self.database_name+".mge.aln.bed.clusters.bestHit.annotated."+self.database_name+".json"
+        self.postprocess_file = input+"."+self.database_name+".mge.alg.annotated."+self.database_name+".json"
     
     def align(self):
         parameters= {
