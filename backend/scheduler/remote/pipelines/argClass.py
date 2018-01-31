@@ -19,11 +19,9 @@ class ARGs():
     
     def align(self):
         parameters= {
-            "--iden":30,
-            "--prob":0.8,
+            "--id":30,
             "--evalue": 1e-10,
-            "--coverage": 0.0,
-            "--nk": 200
+            "-k": 500
         }
         self.aligner.align(self.input, self.reference, self.alignment_file, parameters)
 
