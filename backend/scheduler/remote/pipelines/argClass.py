@@ -31,7 +31,7 @@ class ARGs():
         parameters= {
             "--iden":30,
             "--evalue": 1e-10,
-            "-nk": 10000,
+            "--nk": 10000,
             "--prob": 0.8,
             "--coverage": 0.5
         }
