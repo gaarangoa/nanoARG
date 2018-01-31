@@ -11,6 +11,8 @@ class DeepARG():
         options = " ".join([i+" "+str(parameters[i]) for i in parameters])
         cmd = "source /groups/metastorm_cscee/deeparg/venv/bin/activate && "+" python /groups/metastorm_cscee/deeparg/deeparg-ss/deepARG.py  --align --genes --type nucl --input "+query+" --output "+output+"  "+ options
         print("running deepARG:", cmd)
-        os.system(cmd)
-
+        try:
+            os.system(cmd)
+        except Exception as inst:
+            os.system('echo "'+str(inst)+" >> "+ output)
         return True
