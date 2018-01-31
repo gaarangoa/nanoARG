@@ -29,11 +29,11 @@ class ARGs():
 
         # DeepARG
         parameters= {
-            "--iden":30,
+            "--iden":20,
             "--evalue": 1e-10,
             "--nk": 10000,
             "--prob": 0.8,
-            "--coverage": 0.5
+            "--coverage": 0.0
         }
 
         self.deeparg = DeepARG()
