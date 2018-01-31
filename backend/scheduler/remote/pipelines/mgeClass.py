@@ -14,6 +14,7 @@ class MGEs():
         self.reference = conf.data+"aclame.dmnd"
         self.alignment_file = input+".mge.aln"
         self.database_name = "aclame"
+        self.observable_file = input+".mge.aln.bed.clusters.bestHit.annotated.aclame.json"
         self.postprocess_file = input+".mge.alg.annotated."+self.database_name+".json"
     
     def align(self):
