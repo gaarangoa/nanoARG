@@ -9,7 +9,7 @@ def blast2bed(input, arglen, iden, evalue, cov, bitscore):
         rule = 0
         if float(i[2]) < iden: continue # minimum identity 60
         if float(i[10]) > evalue: continue # minimum evalue 1e-10
-        if int(i[3]) < cov*ARGLen[i[1].split('|')[0]]: continue # minimum coverage 90% ARG
+        if int(i[3])/float(ARGLen[i[1].split('|')[0]]) < cov: continue # minimum coverage 90% ARG
         if float(i[-1]) < bitscore: continue # minimum bitscore to consider
         # print int(i[3]), ARGLen['>'+i[1]], cov*ARGLen['>'+i[1]] 
         # Initial location and strand 
