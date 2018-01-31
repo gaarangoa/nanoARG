@@ -20,7 +20,7 @@ class MGEs():
     def align(self):
         parameters= {
             "--id":30,
-            "-k": 500,
+            "-k": 1000,
             "--evalue": 1e-10
         }
         self.aligner.align(self.input, self.reference, self.alignment_file, parameters)

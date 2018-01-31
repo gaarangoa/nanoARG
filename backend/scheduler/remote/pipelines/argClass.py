@@ -21,7 +21,7 @@ class ARGs():
         parameters= {
             "--id":30,
             "--evalue": 1e-10,
-            "-k": 500
+            "-k": 10000
         }
         self.aligner.align(self.input, self.reference, self.alignment_file, parameters)
 
