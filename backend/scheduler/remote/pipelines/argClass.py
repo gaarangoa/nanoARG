@@ -1,5 +1,6 @@
 from tools.diamondClass import diamond as ALIGNER
 from tools.bestLocalHitClass import BestLocalHit as BestHit
+from tools.deepARGClass import DeepARG 
 import conf
 
 _IDEN = 30
@@ -11,19 +12,32 @@ class ARGs():
         self.info=""
         self.input = input
         self.database_name = "deeparg"
-        self.aligner = ALIGNER();
+        self.aligner = ALIGNER()
         self.reference = conf.data+self.database_name+".dmnd"
         self.alignment_file = input+"."+self.database_name+".aln"
         self.observable_file = input+"."+self.database_name+".aln.bed.clusters.bestHit.annotated."+self.database_name+".json"
         self.postprocess_file = input+"."+self.database_name+".alg.annotated."+self.database_name+".json"
     
     def align(self):
+        # Sequence Alignment
         parameters= {
             "--id":30,
             "--evalue": 1e-10,
             "-k": 10000
         }
         self.aligner.align(self.input, self.reference, self.alignment_file, parameters)
+
+        # DeepARG
+        parameters= {
+            "--iden":30,
+            "--evalue": 1e-10,
+            "-k": 10000,
+            "--prob": 0.8,
+            "--coverage": 0.5
+        }
+
+        self.deeparg = DeepARG()
+        self.deeparg.align(self.alignment_file, self.reference, self.alignment_file+".dl", parameters)
 
     def postprocess(self):
         annotation = BestHit(conf.data+self.database_name+".size", _IDEN, _EVALUE, _COVERAGE, _BITSCORE)
