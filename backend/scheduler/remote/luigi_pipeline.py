@@ -7,6 +7,7 @@ from luigi.contrib.ssh import RemoteContext, RemoteTarget, RemoteFileSystem
 from luigi.mock import MockFile
 
 from pipelines.mgeClass import MGEs
+from pipelines.argClass import ARGs
 
 # class CreateEnv(luigi.Task):
 #     parameters = luigi.Parameter()
@@ -36,12 +37,25 @@ class MobileGenetiElements(luigi.Task):
         mges = MGEs(par['remote_input_file'])
         return luigi.LocalTarget(mges.observable_file)
 
+class ARGsDeepARG(luigi.Task):
+    parameters = luigi.Parameter()
+
+    def run(self):
+        par = json.loads(base64.b64decode(self.parameters))
+        mges = ARGs(par['remote_input_file'])
+        mges.align()
+        mges.postprocess()
+
+    def output(self):
+        par = json.loads(base64.b64decode(self.parameters))
+        mges = ARGs(par['remote_input_file'])
+        return luigi.LocalTarget(mges.observable_file)
 
 class RetrieveResults(luigi.Task):
     parameters = luigi.Parameter();
 
     def requires(self):
-        return MobileGenetiElements(parameters = self.parameters)
+        return [MobileGenetiElements(parameters = self.parameters), ARGsDeepARG(parameters = self.parameters)]
     
     def output(self):
         return MockFile("done.txt")
