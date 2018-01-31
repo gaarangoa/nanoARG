@@ -44,8 +44,10 @@ class RetrieveResults(luigi.Task):
         return MobileGenetiElements(parameters = self.parameters)
     
     def output(self):
-        return MockFile("output", mirror_on_stderr=True)
+        return MockFile("done.txt")
 
     def run(self):
         # MGEs
         os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters )
+        with self.output().open("w") as fout:
+            fout.write("success")
