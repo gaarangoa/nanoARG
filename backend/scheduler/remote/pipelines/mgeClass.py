@@ -10,7 +10,7 @@ class MGEs():
     def __init__(self, input):
         self.info=""
         self.input = input
-        self.database_name = "deeparg"
+        self.database_name = "aclame"
         self.aligner = ALIGNER();
         self.reference = conf.data+self.database_name+".dmnd"
         self.alignment_file = input+".mge.aln"

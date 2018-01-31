@@ -10,7 +10,7 @@ class ARGs():
     def __init__(self, input):
         self.info=""
         self.input = input
-        self.database_name = "aclame"
+        self.database_name = "deeparg"
         self.aligner = ALIGNER();
         self.reference = conf.data+self.database_name+".dmnd"
         self.alignment_file = input+".mge.aln"
