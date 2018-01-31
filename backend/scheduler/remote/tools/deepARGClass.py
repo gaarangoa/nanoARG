@@ -39,6 +39,7 @@ class DeepARG():
     def postprocess(self, input_file):
         fo = open(input_file+".dl.tmp", "w")
         for i in open(input_file+".dl.ARG"):
+            if "#" in i[0]: continue
             i = i.split()
             j = i[0].split("---")
             print i
