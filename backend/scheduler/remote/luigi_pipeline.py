@@ -49,5 +49,3 @@ class RetrieveResults(luigi.Task):
     def run(self):
         # MGEs
         os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters )
-        with self.output().open("w") as fout:
-            fout.write("success")
