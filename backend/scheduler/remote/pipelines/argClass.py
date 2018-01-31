@@ -39,6 +39,7 @@ class ARGs():
         self.deeparg = DeepARG()
         self.deeparg.preprocess(self.alignment_file)
         self.deeparg.predict(self.alignment_file, self.reference, self.alignment_file+".dl", parameters)
+        self.deeparg.postprocess(self.alignment_file)
 
     def postprocess(self):
         annotation = BestHit(conf.data+self.database_name+".size", _IDEN, _EVALUE, _COVERAGE, _BITSCORE)
