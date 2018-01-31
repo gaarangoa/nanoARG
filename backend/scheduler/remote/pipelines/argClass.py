@@ -1,4 +1,4 @@
-from tools.deepARGClass import DeepARG as ALIGNER
+from tools.diamondClass import diamond as ALIGNER
 from tools.bestLocalHitClass import BestLocalHit as BestHit
 import conf
 
