@@ -5,7 +5,7 @@ import conf
 
 _IDEN = 30
 _EVALUE = 1e-10
-_COVERAGE = 0.5
+_COVERAGE = 0
 _BITSCORE = 50
 class ARGs():
     def __init__(self, input):
