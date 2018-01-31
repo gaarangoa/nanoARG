@@ -37,6 +37,7 @@ class ARGs():
         }
 
         self.deeparg = DeepARG()
+        self.deeparg.preprocess(self.alignment_file)
         self.deeparg.align(self.alignment_file, self.reference, self.alignment_file+".dl", parameters)
 
     def postprocess(self):

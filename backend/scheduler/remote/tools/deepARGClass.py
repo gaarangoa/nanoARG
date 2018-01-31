@@ -26,3 +26,14 @@ class DeepARG():
         except Exception as inst:
             os.system('echo "'+str(inst)+" >> "+ output)
         return True
+
+    def preprocess(self, input_file):
+        fo = open(input_file+".tmp", "w")
+        for ix,i in enumerate(open(input_file, "w")):
+            i = i.split()
+            i[0] = str(ix)+"_"+i[0]+"_"+":".join(i[6:10])
+            fo.write("\t".join(i)+"\n")
+        fo.close()
+        os.system("mv "+input_file+".tmp"+" "+input_file)
+            
+            
