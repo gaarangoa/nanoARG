@@ -48,4 +48,5 @@ class RetrieveResults(luigi.Task):
 
     def run(self):
         # MGEs
+        par = json.loads(base64.b64decode(self.parameters))
         os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters )
