@@ -29,7 +29,7 @@ class DeepARG():
 
     def preprocess(self, input_file):
         fo = open(input_file+".tmp", "w")
-        for ix,i in enumerate(open(input_file, "w")):
+        for ix,i in enumerate(open(input_file)):
             i = i.split()
             i[0] = str(ix)+"_"+i[0]+"_"+":".join(i[6:10])
             fo.write("\t".join(i)+"\n")
