@@ -4,13 +4,13 @@ import conf
 
 _IDEN = 30
 _EVALUE = 1e-10
-_COVERAGE = 0.5
+_COVERAGE = 0.0
 _BITSCORE = 50
 class MGEs():
-    def __init__(self, input):
+    def __init__(self, input, database):
         self.info=""
         self.input = input
-        self.database_name = "aclame"
+        self.database_name = database
         self.aligner = ALIGNER();
         self.reference = conf.data+self.database_name+".dmnd"
         self.alignment_file = input+"."+self.database_name+".aln"

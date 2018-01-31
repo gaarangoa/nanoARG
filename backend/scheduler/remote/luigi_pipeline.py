@@ -15,14 +15,28 @@ class MobileGenetiElements(luigi.Task):
 
     def run(self):
         par = json.loads(base64.b64decode(self.parameters))
-        mges = MGEs(par['remote_input_file'])
+        mges = MGEs(par['remote_input_file'], "aclame")
         mges.align()
         mges.postprocess()
 
     def output(self):
         par = json.loads(base64.b64decode(self.parameters))
-        mges = MGEs(par['remote_input_file'])
+        mges = MGEs(par['remote_input_file'], "aclame")
         return luigi.LocalTarget(mges.observable_file)
+
+class MapUniref(luigi.Task):
+    parameters = luigi.Parameter()
+
+    def run(self):
+        par = json.loads(base64.b64decode(self.parameters))
+        ref = MGEs(par['remote_input_file'], "uniref")
+        ref.align()
+        ref.postprocess()
+
+    def output(self):
+        par = json.loads(base64.b64decode(self.parameters))
+        ref = MGEs(par['remote_input_file'], "uniref")
+        return luigi.LocalTarget(ref.observable_file)
 
 class ARGsDeepARG(luigi.Task):
     parameters = luigi.Parameter()
@@ -42,7 +56,7 @@ class RetrieveResults(luigi.Task):
     parameters = luigi.Parameter();
 
     def requires(self):
-        return [MobileGenetiElements(parameters = self.parameters), ARGsDeepARG(parameters = self.parameters)]
+        return [MobileGenetiElements(parameters = self.parameters), ARGsDeepARG(parameters = self.parameters), MapUniref(parameters = self.parameters)]
     
     def output(self):
         return MockFile("done.txt")
