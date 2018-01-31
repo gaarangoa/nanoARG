@@ -13,7 +13,8 @@ class MGEs():
         self.aligner = ALIGNER();
         self.reference = conf.data+"aclame.dmnd"
         self.alignment_file = input+".mge.aln"
-        self.postprocess_file = input+".mge.alg.annotated.aclame.json"
+        self.database_name = "aclame"
+        self.postprocess_file = input+".mge.alg.annotated."+self.database_name+".json"
     
     def align(self):
         parameters= {
@@ -25,7 +26,7 @@ class MGEs():
 
     def postprocess(self):
         mges_annotation = BestHit(conf.data+"aclame.size", _IDEN, _EVALUE, _COVERAGE, _BITSCORE)
-        mges_annotation.quant(self.alignment_file, 'mge')
+        mges_annotation.quant(self.alignment_file, self.database_name)
         
 
 # how to run it!
