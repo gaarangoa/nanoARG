@@ -41,6 +41,8 @@ class DeepARG():
         for i in open(input_file+".dl.ARG"):
             i = i.split()
             j = i[0].split("---")
+            print i
+            print j
             item = "\t".join([j[1], i[5], i[7], j[2], j[3], j[4], j[5], j[6], j[7], j[8] ])+"\n"
             fo.write( item )
         os.system("mv " + input_file+".dl.tmp " + input_file)
