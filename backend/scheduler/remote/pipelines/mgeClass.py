@@ -10,12 +10,11 @@ class MGEs():
     def __init__(self, input):
         self.info=""
         self.input = input
-        self.aligner = ALIGNER();
-        self.reference = conf.data+"aclame.dmnd"
-        self.alignment_file = input+".mge.aln"
         self.database_name = "aclame"
-        self.observable_file = input+".mge.aln.bed.clusters.bestHit.annotated.aclame.json"
-        self.postprocess_file = input+".mge.alg.annotated."+self.database_name+".json"
+        self.aligner = ALIGNER();
+        self.reference = conf.data+"."+self.database_name+".dmnd"
+        self.alignment_file = input+"."+self.database_name+".aln"
+        self.observable_file = self.alignment_file+".bed.clusters.bestHit.annotated."+self.database_name+".json"
     
     def align(self):
         parameters= {
@@ -26,10 +25,6 @@ class MGEs():
         self.aligner.align(self.input, self.reference, self.alignment_file, parameters)
 
     def postprocess(self):
-        mges_annotation = BestHit(conf.data+"aclame.size", _IDEN, _EVALUE, _COVERAGE, _BITSCORE)
-        mges_annotation.quant(self.alignment_file, self.database_name)
-        
+        annotation = BestHit(conf.data+self.database_name+".size", _IDEN, _EVALUE, _COVERAGE, _BITSCORE)
+        annotation.quant(self.alignment_file, self.database_name)
 
-# how to run it!
-# mges = MGEs()
-# mges.align("/groups/metastorm_cscee/ARGpore/storage/58efd3bc71308bb32b1b155f/58e0471756417d9b3c7428cb/demux.corrected.merged")
