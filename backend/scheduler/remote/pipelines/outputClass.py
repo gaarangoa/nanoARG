@@ -59,7 +59,7 @@ def read_map(parameters = []):
 
     data = []
     for i in x:
-        read = {"len": read_length[i], "color": 'black', "label": i, "id": i, "args": len([ k for k in x[i] if i['origin']==1 ]), "genes": len(x[i])}
+        read = {"len": read_length[i], "color": 'black', "label": i, "id": i, "args": len([ k for k in x[i] if k['origin']==1 ]), "genes": len(x[i])}
         item = {
             "read": [read],
             "data": x[i]
