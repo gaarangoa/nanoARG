@@ -2,6 +2,7 @@ import subprocess
 import os
 import sys
 from Bio import SeqIO
+import json
 
 _coverage = 0.8
 _identity = 30
