@@ -68,4 +68,4 @@ def read_map(parameters = []):
 
         data.append(item)
 
-    json.dump(data, open(parameters["storage_remote_dir"]+"/all.bestHit.json"))
+    json.dump(data, open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
