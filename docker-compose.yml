@@ -30,16 +30,16 @@ services:
     depends_on:
       - database
 
-  frontend:
-    image: nginx
-    build:
-      context: ./frontend/
-      dockerfile: Dockerfile
-    volumes:
-      - ./frontend/dist/:/usr/share/nginx/html/
-    tty: true
-    ports:
-      - 27857:80
+  # frontend:
+  #   image: nginx
+  #   build:
+  #     context: ./frontend/
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./frontend/dist/:/usr/share/nginx/html/
+  #   tty: true
+  #   ports:
+  #     - 27857:80
 
   scheduler:
     image: rabbitmq

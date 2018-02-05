@@ -52,6 +52,7 @@ class ARGsDeepARG(luigi.Task):
         mges = ARGs(par['remote_input_file'])
         return luigi.LocalTarget(mges.observable_file)
 
+from pipelines.outputClass import read_map
 class RetrieveResults(luigi.Task):
     parameters = luigi.Parameter();
 
@@ -62,6 +63,7 @@ class RetrieveResults(luigi.Task):
         return MockFile("done.txt")
 
     def run(self):
-        # MGEs
+        # create output files
         par = json.loads(base64.b64decode(self.parameters))
+        read_map(parameters = par)
         os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters )
