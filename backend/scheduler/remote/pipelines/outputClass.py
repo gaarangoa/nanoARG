@@ -57,7 +57,8 @@ def read_map(parameters = []):
             "coverage": par[3],
             "color": origin_color[origin(i[3])],
             "origin": origin(i[3]),
-            "stroke_width": 1
+            "stroke_width": 1,
+            "metadata": doc
         }
         # 
         try:
