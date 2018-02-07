@@ -15,7 +15,7 @@ class MobileGenetiElements(luigi.Task):
 
     def run(self):
         par = json.loads(base64.b64decode(self.parameters))
-        mges = MGEs(par['remote_input_file'], "aclame")
+        mges = MGEs(par['remote_input_file'], "MGEs90")
         mges.align()
         mges.postprocess()
 
