@@ -20,6 +20,7 @@ def origin(string):
     if "ARDB" in string: return 1
     if "UNIPROT" in string: return 1
     if "ACLAME" in string: return 2
+    if "MGEs" in string: return 2
     
     return 4
 
