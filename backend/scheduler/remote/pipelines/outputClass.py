@@ -47,6 +47,7 @@ def read_map(parameters = []):
         # 
         doc = i[3].split("|")
         doc[3] = doc[3].replace("_", " ").replace(".", " ")
+        doc[4] = doc[4].replace("_", " ").replace(".", " ")
 
         # 
         item = {
