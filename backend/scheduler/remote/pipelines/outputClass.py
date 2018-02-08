@@ -70,7 +70,11 @@ def read_map(parameters = []):
 
     data = []
     for i in x:
-        if len([ k for k in x[i] if k['origin']==1 ]) == 0 and len([ k for k in x[i] if k['origin']==2 ]) == 0: continue
+        _hasarg = len([ k for k in x[i] if k['origin']==1 ])
+        _hasmge = len([ k for k in x[i] if k['origin']==2 ])
+        _hasmrg = len([ k for k in x[i] if k['origin']==4 ])
+        
+        if _hasarg == 0 and _hasmge == 0 and _hasmrg == 0: continue
         read = {"len": read_length[i], "color": 'black', "label": i, "id": i, "args": len([ k for k in x[i] if k['origin']==1 ]), "genes": len(x[i])}
         item = {
             "read": [read],
