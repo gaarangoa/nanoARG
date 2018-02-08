@@ -9,10 +9,10 @@ _identity = 30
 _evalue = 1e-10
 
 origin_color = {
-    1: "black",
-    2: "red",
-    3: "blue",
-    4: "green"
+    1: "#107896",
+    2: "#0C374D",
+    3: "#93A661",
+    4: "#F26D21"
 }
 
 def origin(string):
@@ -73,7 +73,7 @@ def read_map(parameters = []):
         _hasarg = len([ k for k in x[i] if k['origin']==1 ])
         _hasmge = len([ k for k in x[i] if k['origin']==2 ])
         _hasmrg = len([ k for k in x[i] if k['origin']==4 ])
-        
+
         if _hasarg == 0 and _hasmge == 0 and _hasmrg == 0: continue
         read = {"len": read_length[i], "color": 'black', "label": i, "id": i, "args": len([ k for k in x[i] if k['origin']==1 ]), "genes": len(x[i])}
         item = {
