@@ -46,7 +46,8 @@ def read_map(parameters = []):
         if par[3] < _coverage: continue
         # 
         doc = i[3].split("|")
-        doc[3] = doc[3].replace("_", " ")
+        doc[3] = doc[3].replace("_", " ").replace(".", " ")
+
         # 
         item = {
             "block_id": i[0],
