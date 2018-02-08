@@ -11,7 +11,8 @@ _evalue = 1e-10
 origin_color = {
     1: "black",
     2: "red",
-    3: "blue"
+    3: "blue",
+    4: "green"
 }
 
 def origin(string):
@@ -21,6 +22,7 @@ def origin(string):
     if "UNIPROT" in string: return 1
     if "ACLAME" in string: return 2
     if "MGEs" in string: return 2
+    if "BACMET" in string: return 4
     
     return 4
 
