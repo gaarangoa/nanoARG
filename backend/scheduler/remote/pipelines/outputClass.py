@@ -69,9 +69,23 @@ def _get_id(gene):
 def network(data = {}):
     N = {}
     E = {}
+    arg_labels = {}
     for iread, read in enumerate(data):
         for ixgene, gene in enumerate(read['data']):
-            if gene['origin'] == 3: continue
+            # discard general functions
+            if gene['origin'] == 3: 
+                continue
+            # for labels to type only consider args
+            if gene['origin'] == 1: 
+                arg_labels.update({
+                    gene['metadata'][2]]:{
+                        "color": gene['color'],
+                        "id": gene['metadata'][2],
+                        "size": 1
+                    }
+                })
+                
+            # process nodes
             _id = _get_id(gene)
             try:
                 N[_id]['size']+=1
@@ -103,8 +117,9 @@ def network(data = {}):
 
     nodes = [{"data":N[i]} for i in N]
     edges = [{"data":E[i]} for i in E]
+    labels = [{"data":arg_labels[i]} for i in arg_labels]
 
-    return {"nodes": nodes, "edges": edges}
+    return { "nodes": nodes, "edges": edges, "labels": labels }
             
 
 def read_map(parameters = []):
