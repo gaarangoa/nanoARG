@@ -117,9 +117,8 @@ def network(data = {}):
 
     nodes = [{"data":N[i]} for i in N]
     edges = [{"data":E[i]} for i in E]
-    labels = [{"data":arg_labels[i]} for i in arg_labels]
 
-    return [{ "nodes": nodes, "edges": edges }, {"nodes": labels, "edges":[]}]
+    return [{ "nodes": nodes, "edges": edges }, arg_labels.values()]
             
 
 def read_map(parameters = []):
