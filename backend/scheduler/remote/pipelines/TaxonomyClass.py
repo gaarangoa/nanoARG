@@ -11,7 +11,7 @@ class Taxonomy():
         self.aligner = ALIGNER();
         self.reference = conf.data+self.database_name
         self.alignment_file = input+"."+self.database_name+".aln"
-        self.observable_file = input+"."+self.database_name+".aln.bed.clusters.bestHit.annotated."+self.database_name+".json"
+        self.observable_file = "/".join(self.input.split("/")[:-1])+"/taxa.json"
     
     def align(self):
         parameters= {
@@ -48,6 +48,3 @@ class Taxonomy():
         
         json.dump({"taxo": taxo_data, "reads": reads_data}, open(self.observable_file, "w"))
 
-
-
-#  $CENTRIFUGE_HOME/centrifuge -f -x $CENTRIFUGE_HOME/p_compressed+h+v  -U 1517427947869_rawreads.fasta --report report.taxa > reads.taxa
