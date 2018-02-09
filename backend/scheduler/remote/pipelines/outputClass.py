@@ -97,7 +97,7 @@ def network(data = {}):
                         "weight": 1,
                         "color": source['color']
                     }
-    return G.update(E)
+    return N.update(E)
             
 
 def read_map(parameters = []):
