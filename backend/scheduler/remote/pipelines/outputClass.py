@@ -78,9 +78,9 @@ def network(data = {}):
             # for labels to type only consider args
             if gene['origin'] == 1: 
                 arg_labels.update({
-                    gene['metadata'][2]:{
+                    gene['metadata'][3]:{
                         "color": gene['color'],
-                        "id": gene['metadata'][2],
+                        "id": gene['metadata'][3],
                         "size": 1
                     }
                 })
@@ -119,7 +119,7 @@ def network(data = {}):
     edges = [{"data":E[i]} for i in E]
     labels = [{"data":arg_labels[i]} for i in arg_labels]
 
-    return { "nodes": nodes, "edges": edges, "labels": labels }
+    return [{ "nodes": nodes, "edges": edges }, {"nodes": labels, "edges":[]}]
             
 
 def read_map(parameters = []):
@@ -179,6 +179,6 @@ def read_map(parameters = []):
         }
 
         data.append(item)
-        net = network(data)
+        net, arg_labels = network(data)
 
-    json.dump([data, net], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
+    json.dump([ data, net, arg_labels ], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
