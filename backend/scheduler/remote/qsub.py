@@ -23,6 +23,7 @@ cmd = "\n".join([
         'module load gcc/5.2.0  openmpi/1.8.5 hmmer bedtools\n',
         'cd '+ parameters['storage_remote_dir'],
         'export PYTHONPATH=$PYTHONPATH:'+parameters['remote_path'],
+        'export CENTRIFUGE_HOME='+parameters['remote_path']+'/bin/centrifuge-1.0.3-beta',
         "~/.local/bin/luigid --background --logdir=logs",
         'cd '+ parameters['remote_path'],
         '~/.local/bin/luigi --module '+ parameters['pipeline'] + " RetrieveResults " + " --local-scheduler --parameters " + sys.argv[1],

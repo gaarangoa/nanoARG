@@ -8,6 +8,7 @@ from luigi.mock import MockFile
 
 from pipelines.mgeClass import MGEs
 from pipelines.argClass import ARGs
+from pipelines.TaxonomyClass import Taxonomy
 
 
 class MobileGenetiElements(luigi.Task):
@@ -66,6 +67,20 @@ class ARGsDeepARG(luigi.Task):
         mges = ARGs(par['remote_input_file'])
         return luigi.LocalTarget(mges.observable_file)
 
+class Taxonomy(luigi.Task):
+    parameters = luigi.Parameter()
+
+    def run(self):
+        par = json.loads(base64.b64decode(self.parameters))
+        taxa = Taxonomy(par['remote_input_file'])
+        taxa.align()
+        taxa.postprocess()
+
+    def output(self):
+        par = json.loads(base64.b64decode(self.parameters))
+        taxa = Taxonomy(par['remote_input_file'])
+        return luigi.LocalTarget(taxa.observable_file)
+
 from pipelines.outputClass import read_map
 class RetrieveResults(luigi.Task):
     parameters = luigi.Parameter();
@@ -75,7 +90,8 @@ class RetrieveResults(luigi.Task):
             MobileGenetiElements(parameters = self.parameters), 
             ARGsDeepARG(parameters = self.parameters), 
             MapUniref(parameters = self.parameters),
-            MapBacMet(parameters = self.parameters)
+            MapBacMet(parameters = self.parameters),
+            Taxonomy(parameters = self.parameters)
         ]
     
     def output(self):
