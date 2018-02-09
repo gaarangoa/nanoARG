@@ -103,8 +103,8 @@ def network(data = {}):
 
     # print(json.dumps(N, indent=10))
     # print(json.dumps(E, indent=10))
-    N.update(E)
-    return N.values()
+    # N.update(E)
+    return {"nodes":{"data":N[i] for i in N}, "edges":{"data":E[1] for i in E}}
             
 
 def read_map(parameters = []):
