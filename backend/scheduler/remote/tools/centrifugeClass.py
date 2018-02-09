@@ -10,6 +10,6 @@ class Centrifuge():
     def align(self, query, reference, output, parameters):
         options = " ".join([i+" "+str(parameters[i]) for i in parameters])
         cmd = self.bin + "centrifuge-1.0.3-beta/centrifuge "+options+" -x "+reference+' -U '+query+" --report "+output+" > "+output+".reads"
-        # os.system(cmd)
-        print(cmd)
+        os.system(cmd)
+        # print(cmd)
         return True
