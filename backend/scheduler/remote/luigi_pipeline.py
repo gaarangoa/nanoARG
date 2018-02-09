@@ -67,7 +67,7 @@ class ARGsDeepARG(luigi.Task):
         mges = ARGs(par['remote_input_file'])
         return luigi.LocalTarget(mges.observable_file)
 
-class Taxonomy(luigi.Task):
+class TaxonomyTask(luigi.Task):
     parameters = luigi.Parameter()
 
     def run(self):
@@ -91,7 +91,7 @@ class RetrieveResults(luigi.Task):
             ARGsDeepARG(parameters = self.parameters), 
             MapUniref(parameters = self.parameters),
             MapBacMet(parameters = self.parameters),
-            Taxonomy(parameters = self.parameters)
+            TaxonomyTask(parameters = self.parameters)
         ]
     
     def output(self):
