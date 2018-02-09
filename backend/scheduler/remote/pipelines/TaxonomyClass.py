@@ -30,7 +30,7 @@ class Taxonomy():
             taxo_data[i[1]] = {
                 "name": i[0],
                 "tax_id": i[1],
-                "rax_rank": i[2],
+                "tax_rank": i[2],
                 "genome_size": int(i[3]),
                 "num_reads": int(i[4]),
             }
