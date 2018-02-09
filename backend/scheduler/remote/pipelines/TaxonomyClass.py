@@ -25,7 +25,7 @@ class Taxonomy():
         _ix = True
         for i in open(self.alignment_file):
             if _ix: _ix = False; continue
-            i = i.split()
+            i = i.split("\t")
             taxo_data[i[1]] = {
                 "name": i[0],
                 "tax_id": i[1],
@@ -38,7 +38,7 @@ class Taxonomy():
         _ix = True
         for i in open(self.alignment_file+'.reads'):
             if _ix: _ix = False; continue
-            i = i.split()
+            i = i.split("\t")
             reads_data[i[0]] = {
                 "id": i[0],
                 "tax_id": i[2],
