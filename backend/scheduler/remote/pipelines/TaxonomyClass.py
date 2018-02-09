@@ -11,7 +11,6 @@ class Taxonomy():
         self.reference = conf.data+self.database_name
         self.alignment_file = input+"."+self.database_name+".aln"
         self.observable_file = input+"."+self.database_name+".aln.bed.clusters.bestHit.annotated."+self.database_name+".json"
-        # self.postprocess_file = input+"."+self.database_name+".alg.annotated."+self.database_name+".json"
     
     def align(self):
         parameters= {
@@ -23,7 +22,9 @@ class Taxonomy():
     def postprocess(self):
         
         taxo_data = {}
-        for i in open(self.alignment_file):
+        _ix = True
+        for ix in open(self.alignment_file):
+            if _ix: _ix = False; continue
             i = i.split()
             taxo_data[i[1]] = {
                 "name": i[0],
@@ -34,7 +35,9 @@ class Taxonomy():
             }
 
         reads_data = {}
+        _ix = True
         for i in open(self.alignment_file+'.reads'):
+            if _ix: _ix = False; continue
             i = i.split()
             reads_data[i[0]] = {
                 "id": i[0],
