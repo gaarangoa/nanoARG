@@ -71,6 +71,7 @@ def network(data = {}):
     E = {}
     for iread, read in enumerate(data):
         for ixgene, gene in enumerate(read['data']):
+            if gene['origin'] == 3: continue
             _id = _get_id(gene)
             try:
                 N[_id]['size']+=1
@@ -86,11 +87,12 @@ def network(data = {}):
             source_id = _get_id(source)
             for next_gene in range(ixgene+1, len(read['data'])):
                 target = read['data'][next_gene]
+                if target['origin'] == 3: continue
                 target_id = _get_id(target)
                 try:
-                    E[(source_id, target_id)]['weight']+=1
+                    E[(source_id+"_"+target_id)]['weight']+=1
                 except Exception as e:
-                    E[(source_id, target_id)] = {
+                    E[(source_id+"_"+target_id)] = {
                         "source": source_id,
                         "target": target_id,
                         "id": source_id + "_" + target_id,
