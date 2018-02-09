@@ -98,7 +98,8 @@ def network(data = {}):
                         "color": source['color']
                     }
 
-    print(json.dumps(N.update(E), indent=10))
+    print(json.dumps(N, indent=10))
+    print(json.dumps(E, indent=10))
     return N
             
 
