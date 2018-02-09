@@ -107,7 +107,7 @@ def read_map(parameters = []):
             "evalue": par[1],
             "identity": par[2],
             "coverage": par[3],
-            "color": color_gene(doc[3]),
+            "color": color_gene[doc[3]],
             "origin": origin(i[3]),
             "stroke_width": 1,
             "metadata": doc,
