@@ -46,7 +46,7 @@ class Taxonomy():
                 "qlength": int(i[6]),
             }
         
-        json.dump({"taxo": taxo_data, "reads": reads_data}, open(self.observable_file))
+        json.dump({"taxo": taxo_data, "reads": reads_data}, open(self.observable_file, "w"))
 
 
 
