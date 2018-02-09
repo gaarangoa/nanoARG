@@ -82,10 +82,10 @@ def network(data = {}):
                     "color": gene['color']
                 }
             if ixgene == len(read['data']): continue
+            source = read['data'][ixgene]
+            source_id = _get_id(source)
             for next_gene in range(ixgene+1, len(read['data'])):
-                source = read['data'][ixgene]
                 target = read['data'][next_gene]
-                source_id = _get_id(source)
                 target_id = _get_id(target)
                 try:
                     E[(source_id, target_id)]['weight']+=1
@@ -97,7 +97,9 @@ def network(data = {}):
                         "weight": 1,
                         "color": source['color']
                     }
-    return N.update(E).values()
+
+    print(json.dumps(N.update(E), indent=10))
+    return N
             
 
 def read_map(parameters = []):
