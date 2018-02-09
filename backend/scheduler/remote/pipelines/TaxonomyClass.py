@@ -17,9 +17,9 @@ class Taxonomy():
     
     def align(self):
         parameters= {
-            "--f":""
+            "-f":""
         }
-        print("here------------")
+        
         self.aligner.align(self.input, self.reference, self.alignment_file, parameters)
 
     def postprocess(self):
