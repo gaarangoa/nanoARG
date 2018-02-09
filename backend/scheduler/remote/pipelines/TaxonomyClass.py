@@ -23,7 +23,7 @@ class Taxonomy():
         
         taxo_data = {}
         _ix = True
-        for ix in open(self.alignment_file):
+        for i in open(self.alignment_file):
             if _ix: _ix = False; continue
             i = i.split()
             taxo_data[i[1]] = {
