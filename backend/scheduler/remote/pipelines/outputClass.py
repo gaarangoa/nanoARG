@@ -55,6 +55,7 @@ def origin(string):
     return 4
 
 def get_fasta_read_length(fi=""):
+    lng = {}
     for record in SeqIO.parse(open(fi), "fasta"):
         lng[record.id] = len(record.seq)
     return lng
