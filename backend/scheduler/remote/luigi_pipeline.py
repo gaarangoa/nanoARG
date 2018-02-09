@@ -73,8 +73,8 @@ class Taxonomy(luigi.Task):
     def run(self):
         par = json.loads(base64.b64decode(self.parameters))
         taxa = Taxonomy(par['remote_input_file'], 'centrifuge')
-        taxa.align()
-        taxa.postprocess()
+        # taxa.align()
+        # taxa.postprocess()
 
     def output(self):
         par = json.loads(base64.b64decode(self.parameters))
