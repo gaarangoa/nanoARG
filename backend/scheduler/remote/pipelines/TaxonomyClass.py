@@ -1,6 +1,7 @@
 
 from tools.centrifugeClass import Centrifuge as ALIGNER
 import conf
+import json
 
 class Taxonomy():
     def __init__(self, input, database):
