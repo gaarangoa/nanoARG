@@ -3,7 +3,7 @@ import os
 import sys
 from Bio import SeqIO
 import json
-import neworkx as nx
+import networkx as nx
 
 import conf
 
