@@ -60,23 +60,44 @@ def get_fasta_read_length(fi=""):
         lng[record.id] = len(record.seq)
     return lng
 
+def _get_id(gene):
+    _id = gene['metadata'][3]
+    if gene['origin'] == 1: 
+        _id = gene['metadata'][4]
+    return _id
+
 def network(data = {}):
-    G = {}
+    N = {}
+    E = {}
     for iread, read in enumerate(data):
-        for gene in read['data']:
-            _id = gene['metadata'][3]
-            if gene['origin'] == 1: 
-                _id = gene['metadata'][4]
+        for ixgene, gene in enumerate(read['data']):
+            _id = _get_id(gene)
             try:
-                G[_id]['size']+=1
+                N[_id]['size']+=1
             except:
-                G[_id] = {
+                N[_id] = {
                     "id": _id,
                     "size": 1,
                     "origin": gene["origin"],
                     "color": gene['color']
                 }
-    return G
+            if ixgene == len(read['data']): continue
+            for next_gene in range(ixgene+1, len(read['data'])):
+                source = read['data'][ixgene]
+                target = read['data'][next_gene]
+                source_id = _get_id(source)
+                target_id = _get_id(target)
+                try:
+                    E[(source_id, target_id)]['weight']+=1
+                except Exception as e:
+                    E[(source_id, target_id)] = {
+                        "source": source_id,
+                        "target": target_id,
+                        "id": source_id + "_" + target_id,
+                        "weight": 1,
+                        "color": source['color']
+                    }
+    return G.update(E)
             
 
 def read_map(parameters = []):
