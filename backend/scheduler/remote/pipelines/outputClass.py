@@ -89,6 +89,7 @@ def network(data = {}):
                 target = read['data'][next_gene]
                 if target['origin'] == 3: continue
                 target_id = _get_id(target)
+                if target_id == source_id: continue
                 try:
                     E[(source_id+"_"+target_id)]['weight']+=1
                 except Exception as e:
@@ -103,7 +104,7 @@ def network(data = {}):
     # print(json.dumps(N, indent=10))
     # print(json.dumps(E, indent=10))
     N.update(E)
-    return N
+    return N.values()
             
 
 def read_map(parameters = []):
