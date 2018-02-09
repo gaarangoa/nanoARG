@@ -96,6 +96,10 @@ def read_map(parameters = []):
         doc[3] = doc[3].replace("_", " ").replace(".", " ")
         doc[4] = doc[4].replace("_", " ").replace(".", " ")
 
+        try:
+            gcolor = color_gene[doc[3]]
+        except:
+            gcolor = '#93A661'
         # 
         item = {
             "block_id": i[0],
@@ -107,7 +111,7 @@ def read_map(parameters = []):
             "evalue": par[1],
             "identity": par[2],
             "coverage": par[3],
-            "color": color_gene[doc[3]],
+            "color": gcolor,
             "origin": origin(i[3]),
             "stroke_width": 1,
             "metadata": doc,
