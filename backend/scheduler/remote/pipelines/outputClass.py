@@ -102,7 +102,7 @@ def network(data = {}):
                     }
 
     nodes = [{"data":N[i]} for i in N]
-    edges = [{"data":E[1]} for i in E]
+    edges = [{"data":E[i]} for i in E]
 
     return {"nodes": nodes, "edges": edges}
             
