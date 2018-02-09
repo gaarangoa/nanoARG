@@ -72,13 +72,13 @@ class Taxonomy(luigi.Task):
 
     def run(self):
         par = json.loads(base64.b64decode(self.parameters))
-        taxa = Taxonomy(par['remote_input_file'])
+        taxa = Taxonomy(par['remote_input_file'], 'centrifuge')
         taxa.align()
         taxa.postprocess()
 
     def output(self):
         par = json.loads(base64.b64decode(self.parameters))
-        taxa = Taxonomy(par['remote_input_file'])
+        taxa = Taxonomy(par['remote_input_file'], 'centrifuge')
         return luigi.LocalTarget(taxa.observable_file)
 
 from pipelines.outputClass import read_map
