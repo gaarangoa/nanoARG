@@ -63,7 +63,7 @@ def get_fasta_read_length(fi=""):
 def network(data = {}):
     G = {}
     for iread, read in enumerate(data):
-        for gene in data[read]['data']:
+        for gene in read['data']:
             _id = gene['metadata'][3]
             if gene['origin'] == 1: 
                 _id = gene['metadata'][4]
