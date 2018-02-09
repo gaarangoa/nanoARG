@@ -126,6 +126,11 @@ def read_map(parameters = []):
     data = [i.split() for i in open( parameters["storage_remote_dir"]+"/all.bestHit.txt" )]
     read_length = get_fasta_read_length( parameters["remote_input_file"] )
 
+    # taxonomy files
+    taxa = json.load(open(parameters["storage_remote_dir"]+"/taxa.json"))
+    taxa_reads = taxa['reads']
+    taxa_info = taxa['taxo']
+
     # filter data according to the parameters
     x = {}
     for i in data:
@@ -171,7 +176,19 @@ def read_map(parameters = []):
         _hasmrg = len([ k for k in x[i] if k['origin']==4 ])
 
         if _hasarg == 0 and _hasmge == 0 and _hasmrg == 0: continue
-        read = {"len": read_length[i], "color": 'black', "label": i, "id": i, "args": len([ k for k in x[i] if k['origin']==1 ]), "genes": len(x[i])}
+        read = {
+            "len": read_length[i], 
+            "color": 'black', 
+            "label": i, 
+            "id": i, 
+            "genes": len(x[i]), 
+            "args": len([ k for k in x[i] if k['origin']==1 ]), 
+            "mges": len([ k for k in x[i] if k['origin']==2 ]),
+            "mrgs": len([ k for k in x[i] if k['origin']==4 ]),
+            "fngs": len([ k for k in x[i] if k['origin']==3 ]),
+            "taxa": taxa_info[taxa_reads[i]['tax_id']]['name']
+        }
+
         item = {
             "read": [read],
             "data": x[i]
