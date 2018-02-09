@@ -187,7 +187,7 @@ def read_map(parameters = []):
             "mrgs": len([ k for k in x[i] if k['origin']==4 ]),
             "fngs": len([ k for k in x[i] if k['origin']==3 ]),
             "taxa": taxa_info[taxa_reads[i]['tax_id']]['name'],
-            "taxa_id": taxa_info[taxa_reads[i]['tax_id']]['tax_id']
+            "taxa_id": taxa_info[taxa_reads[i]['tax_id']]['tax_id'],
             "taxa_rank": taxa_info[taxa_reads[i]['tax_id']]['tax_rank']
         }
 
