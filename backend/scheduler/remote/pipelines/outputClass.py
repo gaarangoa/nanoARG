@@ -78,7 +78,7 @@ def network(data = {}):
             # for labels to type only consider args
             if gene['origin'] == 1: 
                 arg_labels.update({
-                    gene['metadata'][2]]:{
+                    gene['metadata'][2]:{
                         "color": gene['color'],
                         "id": gene['metadata'][2],
                         "size": 1
