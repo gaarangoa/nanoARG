@@ -30,8 +30,8 @@ def color_map():
     args_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/deeparg.size")}
     # 
     mges_colors = [str(i) for i in list(blue.range_to(Color("white"), len(mges_data)))]
-    mrgs_colors = [str(i) for i in list(red.range_to(Color("yellow"), len(mrgs_data)))]
-    args_colors = [str(i) for i in list(green.range_to(Color("black"), len(args_data)))]
+    args_colors = [str(i) for i in list(red.range_to(Color("yellow"), len(mrgs_data)))]
+    mrgs_colors = [str(i) for i in list(green.range_to(Color("black"), len(args_data)))]
     # 
     mges_c = { i:str(mges_colors[ix]) for ix,i in enumerate(mges_data) }
     mrgs_c = { i:str(mrgs_colors[ix]) for ix,i in enumerate(mrgs_data) }
