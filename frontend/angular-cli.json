@@ -20,7 +20,8 @@
             "styles.css"
         ],
         "scripts": [
-            "../node_modules/circos/dist/circos.js"
+            "../node_modules/circos/dist/circos.js",
+            "../node_modules/cytoscape/dist/cytoscape.js"
         ],
         "environmentSource": "environments/environment.ts",
         "environments": {

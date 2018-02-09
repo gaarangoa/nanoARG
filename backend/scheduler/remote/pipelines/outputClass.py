@@ -3,6 +3,11 @@ import os
 import sys
 from Bio import SeqIO
 import json
+import neworkx as nx
+
+import conf
+
+from colour import Color
 
 _coverage = 0.8
 _identity = 30
@@ -14,6 +19,29 @@ origin_color = {
     3: "#93A661",
     4: "#F26D21"
 }
+
+def color_map():
+    blue = Color('blue')
+    red = Color('red')
+    green = Color('green')
+    # 
+    mges_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/MGEs90.size")}
+    mrgs_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/bacmet.size")}
+    args_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/deeparg.size")}
+    # 
+    mges_colors = [str(i) for i in list(blue.range_to(Color("white"), len(mges_data)))]
+    mrgs_colors = [str(i) for i in list(red.range_to(Color("yellow"), len(mrgs_data)))]
+    args_colors = [str(i) for i in list(green.range_to(Color("black"), len(args_data)))]
+    # 
+    mges_c = { i:str(mges_colors[ix]) for ix,i in enumerate(mges_data) }
+    mrgs_c = { i:str(mrgs_colors[ix]) for ix,i in enumerate(mrgs_data) }
+    args_c = { i:str(args_colors[ix]) for ix,i in enumerate(args_data) }
+    mges_c.update(mrgs_c)
+    mges_c.update(args_c)
+    return mges_c
+
+color_gene = color_map()
+
 
 def origin(string):
     if "UNIREF90" in string: return 3
@@ -27,16 +55,34 @@ def origin(string):
     return 4
 
 def get_fasta_read_length(fi=""):
-    lng = {}
     for record in SeqIO.parse(open(fi), "fasta"):
         lng[record.id] = len(record.seq)
     return lng
-    
+
+def network(data = {}):
+    G = {}
+    for iread, read in enumerate(data):
+        for gene in data[read]['data']:
+            _id = gene['metadata'][3]
+            if gene['origin'] == 1: 
+                _id = gene['metadata'][4]
+            try:
+                G[_id]['size']+=1
+            except:
+                G[_id] = {
+                    "id": _id,
+                    "size": 1,
+                    "origin": gene["origin"],
+                    "color": gene['color']
+                }
+    return G
+            
 
 def read_map(parameters = []):
     os.system("cat "+parameters["storage_remote_dir"]+"/*.bestHit > "+parameters["storage_remote_dir"]+"/all.bestHit.txt")
     data = [i.split() for i in open( parameters["storage_remote_dir"]+"/all.bestHit.txt" )]
     read_length = get_fasta_read_length( parameters["remote_input_file"] )
+
     # filter data according to the parameters
     x = {}
     for i in data:
@@ -60,10 +106,10 @@ def read_map(parameters = []):
             "evalue": par[1],
             "identity": par[2],
             "coverage": par[3],
-            "color": origin_color[origin(i[3])],
+            "color": color_gene(doc[3]),
             "origin": origin(i[3]),
             "stroke_width": 1,
-            "metadata": doc
+            "metadata": doc,
         }
         # 
         try:
@@ -85,5 +131,6 @@ def read_map(parameters = []):
         }
 
         data.append(item)
+        net = network(data)
 
-    json.dump(data, open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
+    json.dump([data, net], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
