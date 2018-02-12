@@ -9,4 +9,9 @@ Antibiotic Resistance data analysis of nanopore sequencing reads
 add the global variable in the cluster to the external module on the cluster.
 add the line to the ~/.bashrc
 
-        export PYTHONPATH=$PYTHONPATH:/groups/metastorm_cscee/nanoARG/backend/scheduler/remote/
+
+## Front end
+
+ng build --base-href /nanoarg/ --prod --env=prod
+
+<!-- export PYTHONPATH=$PYTHONPATH:/groups/metastorm_cscee/nanoARG/backend/scheduler/remote/ -->
