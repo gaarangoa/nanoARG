@@ -94,7 +94,8 @@ def network(data = {}):
                     "id": _id,
                     "size": 1,
                     "origin": gene["origin"],
-                    "color": gene['color']
+                    "color": gene['color'],
+                    "category": gene['metadata'][2]
                 }
             if ixgene == len(read['data']): continue
             source = read['data'][ixgene]
@@ -162,6 +163,7 @@ def read_map(parameters = []):
             "origin": origin(i[3]),
             "stroke_width": 1,
             "metadata": doc,
+            "total_reads": len(read_length)
         }
         # 
         try:
@@ -199,4 +201,4 @@ def read_map(parameters = []):
         data.append(item)
         net, arg_labels = network(data)
 
-    json.dump([ data, net, arg_labels, taxa_info.values() ], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
+    json.dump([ data, net, arg_labels, taxa_info.values(), {"total_reads": len(read_length)} ], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))

@@ -52,6 +52,9 @@ class CONSUMER:
             while(not self.more_jobs()):
                 time.sleep(30)
 
+            # create environment
+            cmd = "ssh gustavo1@newriver1.arc.vt.edu mkdir -p " + body['storage_remote_dir']
+            os.system(cmd)
             # send the input file
             cmd = "scp "+body['local_input_file']+" "+body['remotehost']+":"+body['remote_input_file']
             os.system(cmd)
