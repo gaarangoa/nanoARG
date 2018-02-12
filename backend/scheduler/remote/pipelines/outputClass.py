@@ -95,7 +95,7 @@ def network(data = {}):
                     "size": 1,
                     "origin": gene["origin"],
                     "color": gene['color'],
-                    "category": gene['metadata'][2]
+                    "category": gene['metadata'][3]
                 }
             if ixgene == len(read['data']): continue
             source = read['data'][ixgene]
