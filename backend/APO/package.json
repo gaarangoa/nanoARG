@@ -1,0 +1,37 @@
+{
+  "name": "api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "amqplib": "^0.5.2",
+    "body-parser": "~1.15.2",
+    "connect-busboy": "~0.02",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "ejs": "~2.5.2",
+    "express": "~4.14.0",
+    "morgan": "~1.7.0",
+    "nodemon": "^1.14.11",
+    "serve-favicon": "~2.3.0"
+  },
+  "description": "// How to use the CRUD operations",
+  "main": ".config.js",
+  "devDependencies": {
+    "mongojs": "^2.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gaarangoa@bitbucket.org/gaarangoa/argpore-access-service.git"
+  },
+  "keywords": [
+    "nanopore",
+    "api",
+    "webservice"
+  ],
+  "author": "gustavo arango",
+  "license": "BSD-2-Clause",
+  "homepage": "https://bitbucket.org/gaarangoa/argpore-access-service#readme"
+}
