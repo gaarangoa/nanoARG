@@ -2098,6 +2098,10 @@ module.exports = "<br>\n\n<div style=\"text-align:center\">\n    <p-dataTable #d
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Gmap__ = __webpack_require__("../../../../../src/app/project/view-samples/Gmap.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__network__ = __webpack_require__("../../../../../src/app/project/view-samples/network.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__taxonomy__ = __webpack_require__("../../../../../src/app/project/view-samples/taxonomy.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rxjs_observable_TimerObservable__ = __webpack_require__("../../../../rxjs/observable/TimerObservable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rxjs_observable_TimerObservable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_rxjs_observable_TimerObservable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_rxjs_add_operator_takeWhile__ = __webpack_require__("../../../../rxjs/add/operator/takeWhile.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_rxjs_add_operator_takeWhile___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_rxjs_add_operator_takeWhile__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2116,7 +2120,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var ViewSamplesComponent = (function () {
+    // public sample_list: any;
     function ViewSamplesComponent(router, route, sampleService, confirmationService, session, projectComponent) {
         this.router = router;
         this.route = route;
@@ -2131,6 +2138,7 @@ var ViewSamplesComponent = (function () {
     ViewSamplesComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.stacked = {};
+        this.alive = true;
         this.read_chart = new __WEBPACK_IMPORTED_MODULE_6__Gmap__["a" /* Genome */]();
         this.network = new __WEBPACK_IMPORTED_MODULE_7__network__["a" /* Network */]();
         this.taxonomy_visualization = new __WEBPACK_IMPORTED_MODULE_8__taxonomy__["a" /* TaxonomyVisualization */]();
@@ -2142,6 +2150,19 @@ var ViewSamplesComponent = (function () {
         };
         this.sub = this.route.params.subscribe(function (params) {
             // this.dt.reset();
+            __WEBPACK_IMPORTED_MODULE_9_rxjs_observable_TimerObservable__["TimerObservable"].create(0, 15000)
+                .takeWhile(function () { return _this.alive; })
+                .subscribe(function () {
+                _this.sampleService.getSamplesByProject(_this.projectComponent.projectID)
+                    .subscribe(function (response) {
+                    // var samples = this.sampleService.samplesByProject;
+                    // // traverse the files, check if any of the samples are still running
+                    // samples.forEach(item => {
+                    //   if(item['status'] != 'done') {
+                    //   }
+                    // });
+                });
+            });
             _this.sampleService.getSamplesByProject(_this.projectComponent.projectID)
                 .subscribe(function (response) {
                 var samples = _this.sampleService.samplesByProject;
@@ -2169,7 +2190,7 @@ var ViewSamplesComponent = (function () {
                 return false;
             }
             ;
-            console.log(res);
+            // console.log(res);
             _this.raw_reads = res[0];
             _this.filter_reads = _this.filter_data(res[0]);
             _this.network_data = res[1];
@@ -2256,6 +2277,7 @@ var ViewSamplesComponent = (function () {
     };
     ViewSamplesComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
+        this.alive = false;
     };
     ViewSamplesComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -2567,6 +2589,12 @@ var SampleService = (function () {
         });
     };
     ;
+    SampleService.prototype.get_sample_status = function (sample_id) {
+        return this.http.get(this.base_url + '/sample/' + sample_id)
+            .map(function (res) {
+            return res.json();
+        });
+    };
     SampleService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === 'function' && _a) || Object])
