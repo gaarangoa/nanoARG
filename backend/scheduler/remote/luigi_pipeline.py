@@ -117,5 +117,5 @@ class RetrieveResults(luigi.Task):
 def mourn_failure(task, exception):
     parameters = task.parameters;
     par = json.loads(base64.b64decode(parameters))
-    print("----------------- ERROR ------------8-8--8-8-8-8--8-8-8-8-8-8-8-8-8-8-8-8-8-8-8-8--88-")
-    # os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters + " " + task.stage+":FAIL" )
+    # print("----------------- ERROR ------------8-8--8-8-8-8--8-8-8-8-8-8-8-8-8-8-8-8-8-8-8-8--88-")
+    os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters + " " + task.stage+":FAIL" )
