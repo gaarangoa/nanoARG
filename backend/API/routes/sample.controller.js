@@ -110,26 +110,33 @@ router.post('/remove/', function(req, res, next) {
 
 router.get('/status/:sample_id/:project_id/:status', function(req, res) {
 
-    var cmd = "scp " + remote_host + req.params.project_id + "/" + req.params.sample_id + "/all.bestHit.json /src/data/" + req.params.project_id + "_" + req.params.sample_id + ".json";
-    console.log(cmd);
-
-    var dir = exec(cmd, function(err, stdout, stderr) {
-        if (err) {
-            // should have err.code here?  
-            // sample.updateElementByID(req.params.sample_id, { "status": "error retrieving results" });
-            // res.json(false);
-            console.log('error retrieving file');
-        }
-        console.log(stdout);
-    });
-
-    dir.on('exit', function(code) {
-        // exit code is code
+    if (req.params.status != done) {
+        // update the status
         console.log('updating sample' + req.params.sample_id, req.params.status);
         sample.updateElementByID(req.params.sample_id, { "status": req.params.status });
         res.json(req.params);
-    });
+    } else {
+        // when the process is done retrieve the results
+        var cmd = "scp " + remote_host + req.params.project_id + "/" + req.params.sample_id + "/all.bestHit.json /src/data/" + req.params.project_id + "_" + req.params.sample_id + ".json";
+        console.log(cmd);
 
+        var dir = exec(cmd, function(err, stdout, stderr) {
+            if (err) {
+                // should have err.code here?  
+                // sample.updateElementByID(req.params.sample_id, { "status": "error retrieving results" });
+                // res.json(false);
+                console.log('error retrieving file');
+            }
+            console.log(stdout);
+        });
+
+        dir.on('exit', function(code) {
+            // exit code is code
+            console.log('updating sample' + req.params.sample_id, req.params.status);
+            sample.updateElementByID(req.params.sample_id, { "status": req.params.status });
+            res.json(req.params);
+        });
+    }
 });
 
 // export the module 
