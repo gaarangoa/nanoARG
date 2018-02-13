@@ -2279,7 +2279,7 @@ var ViewSamplesComponent = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 var environment = {
     production: true,
-    api_url: 'http://bench.cs.vt.edu/api/nanoarg/',
+    api_url: 'http://bench.cs.vt.edu/api/nanoarg',
     upload_dir: ''
 };
 //# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/environment.js.map
