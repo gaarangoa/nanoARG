@@ -19,7 +19,7 @@ class MobileGenetiElements(luigi.Task):
         mges = MGEs(par['remote_input_file'], "MGEs90")
         mges.align()
         mges.postprocess()
-        os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters + " running MGEs" )
+        os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters + " running-MGEs" )
 
     def output(self):
         par = json.loads(base64.b64decode(self.parameters))
@@ -34,7 +34,7 @@ class MapUniref(luigi.Task):
         ref = MGEs(par['remote_input_file'], "uniref")
         ref.align()
         ref.postprocess()
-        os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters + " running UniRef" )
+        os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters + " running-UniRef" )
 
     def output(self):
         par = json.loads(base64.b64decode(self.parameters))
@@ -49,7 +49,7 @@ class MapBacMet(luigi.Task):
         ref = MGEs(par['remote_input_file'], "bacmet")
         ref.align()
         ref.postprocess()
-        os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters + " running MRGs" )
+        os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters + " running-MRGs" )
 
     def output(self):
         par = json.loads(base64.b64decode(self.parameters))
@@ -64,7 +64,7 @@ class ARGsDeepARG(luigi.Task):
         mges = ARGs(par['remote_input_file'])
         mges.align()
         mges.postprocess()
-        os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters + " running DeepARG" )
+        os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters + " running-DeepARG" )
 
     def output(self):
         par = json.loads(base64.b64decode(self.parameters))
@@ -79,7 +79,7 @@ class TaxonomyTask(luigi.Task):
         taxa = Taxonomy(par['remote_input_file'], 'centrifuge')
         taxa.align()
         taxa.postprocess()
-        os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters + " running centrifuge" )
+        os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters + " running-centrifuge" )
 
     def output(self):
         par = json.loads(base64.b64decode(self.parameters))
