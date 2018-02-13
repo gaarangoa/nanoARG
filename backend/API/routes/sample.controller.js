@@ -118,8 +118,9 @@ router.get('/status/:sample_id/:project_id/:status', function(req, res) {
             // should have err.code here?  
             // sample.updateElementByID(req.params.sample_id, { "status": "error retrieving results" });
             // res.json(false);
+            console.log('error retrieving file');
         }
-        // console.log(stdout);
+        console.log(stdout);
     });
 
     dir.on('exit', function(code) {
@@ -127,8 +128,6 @@ router.get('/status/:sample_id/:project_id/:status', function(req, res) {
         sample.updateElementByID(req.params.sample_id, { "status": req.params.status });
         res.json(req.params);
     });
-
-
 
 });
 
