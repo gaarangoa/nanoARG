@@ -113,7 +113,7 @@ class RetrieveResults(luigi.Task):
         os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters + " done" )
 
 
-@luigi.Task.event_handler(luigi.Event.FAILURE)
+@luigi.Task.event_handler(luigi.Event.BROKEN_TASK)
 def mourn_failure(task, exception):
     parameters = luigi.Parameter();
     par = json.loads(base64.b64decode(parameters))
