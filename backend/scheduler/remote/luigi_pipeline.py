@@ -107,3 +107,10 @@ class RetrieveResults(luigi.Task):
         par = json.loads(base64.b64decode(self.parameters))
         read_map(parameters = par)
         os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters + " done" )
+
+
+@luigi.Task.event_handler(luigi.Event.FAILURE)
+def mourn_failure(task, exception):
+    parameters = luigi.Parameter();
+    par = json.loads(base64.b64decode(parameters))
+    os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters + " " + task.stage+":FAIL" )
