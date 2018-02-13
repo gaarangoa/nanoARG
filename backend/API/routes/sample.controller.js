@@ -110,7 +110,7 @@ router.post('/remove/', function(req, res, next) {
 
 router.get('/status/:sample_id/:project_id/:status', function(req, res) {
 
-    if (req.params.status != done) {
+    if (req.params.status != "done") {
         // update the status
         console.log('updating sample' + req.params.sample_id, req.params.status);
         sample.updateElementByID(req.params.sample_id, { "status": req.params.status });
