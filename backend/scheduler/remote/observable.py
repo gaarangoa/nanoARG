@@ -5,7 +5,7 @@ import requests
 
 parameters = json.loads(base64.b64decode(sys.argv[1]))
 
-cmd = 'http://bench.cs.vt.edu/api/nanoarg/sample/status/'+parameters['_id']+'/'+parameters['projectID']+'/done'
+cmd = 'http://bench.cs.vt.edu/api/nanoarg/sample/status/'+parameters['_id']+'/'+parameters['projectID']+'/'+sys.argv[2]
 r = requests.get(cmd)
 print(r.json())
 
