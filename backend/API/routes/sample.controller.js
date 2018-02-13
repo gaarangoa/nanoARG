@@ -125,6 +125,7 @@ router.get('/status/:sample_id/:project_id/:status', function(req, res) {
 
     dir.on('exit', function(code) {
         // exit code is code
+        console.log('updating sample' + req.params.sample_id, req.params.status);
         sample.updateElementByID(req.params.sample_id, { "status": req.params.status });
         res.json(req.params);
     });
