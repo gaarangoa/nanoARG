@@ -118,4 +118,5 @@ def mourn_failure(task, exception):
     parameters = task.parameters;
     par = json.loads(base64.b64decode(parameters))
     # print("----------------- ERROR ------------8-8--8-8-8-8--8-8-8-8-8-8-8-8-8-8-8-8-8-8-8-8--88-")
+    print(str(exception))
     os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+parameters + " " + " FAIL: problem with data" )
