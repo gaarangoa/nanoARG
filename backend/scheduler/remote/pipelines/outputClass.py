@@ -211,6 +211,7 @@ def read_map(parameters = []):
         }
 
         data.append(item)
+    
     print('building network')
     net, arg_labels = network(data)
 
