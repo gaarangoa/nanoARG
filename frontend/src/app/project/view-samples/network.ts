@@ -56,7 +56,7 @@ export class Network {
               },
 
               zoom: 0.5,
-              minZoom: 0.5,
+              minZoom: 0.001,
               maxZoom: 10,
               zoomingEnabled: true,
               boxSelectionEnabled: true,
