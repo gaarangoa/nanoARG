@@ -1,0 +1,16 @@
+#network {
+    width: 100%;
+    height: 500px;
+    display: block;
+}
+
+#network_labels {
+    width: 100%;
+    height: 100px;
+    display: block;
+}
+
+#read_circle_map-1 {
+    width: 30%;
+    /* height: 300px; */
+}

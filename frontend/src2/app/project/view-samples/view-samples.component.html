@@ -1,0 +1,244 @@
+<br>
+
+<div style="text-align:center">
+    <p-dataTable #dt [value]="sampleService.samplesByProject" [rows]="5" [paginator]="true" [pageLinks]="3" exportFilename="metadata">
+        <!-- <p-header> -->
+        <!-- <h4>Samples</h4> -->
+        <!-- <div class="ui-helper-clearfix">
+                <button class='btn btn-xs btn-default' type="button" label="metadata.csv" (click)="dt.exportCSV()" style="float:left"><i class="fa fa-download"></i> <strong>Metadata</strong></button>
+                <button class='btn btn-xs btn-default' type="button" label="type.csv" (click)="download_type('type_csv')" style="float:left"><i class="fa fa-download"></i> <strong>ARG categories</strong></button>
+                <button class='btn btn-xs btn-default' type="button" label="type.csv" (click)="download_type('subtype_csv')" style="float:left"><i class="fa fa-download"></i> <strong>ARG Groups</strong></button>
+            </div> -->
+
+        <!-- </p-header> -->
+        <p-column field='name' header='Sample Name'></p-column>
+        <p-column field='primary-group' header='Biome'></p-column>
+        <!-- <p-column field='secondary-group' header='Secondary Group'></p-column> -->
+        <!-- <p-column field='date' header='Createion Date'></p-column> -->
+        <p-column field='status' header='Status'></p-column>
+
+        <p-column header="Actions" styleClass="">
+            <template let-sample="rowData" pTemplate="body">
+                <a class="  bg-red " (click)="removeSample(sample)" pButton icon="fa-trash" ></a>
+                <a class=" bg-blue " (click)="rerun(sample)" pButton icon="fa-play" ></a>
+                <a class="   bg-black" (click)="view(sample)" pButton icon="fa-eye" ></a>
+                <!-- <a class="   bg-green" (click)="edit(sample)" pButton icon="fa-pencil" ></a> -->
+            </template>
+        </p-column>
+
+        <!--<p-column styleClass="col-button">
+            <template let-sample="rowData" pTemplate="body">
+                <button type="text" (click)="reRun(sample)" pButton icon="fa-play" label="Run"></button>
+            </template>
+        </p-column>-->
+
+    </p-dataTable>
+
+    <hr>
+
+    <p-growl [value]="msgs"></p-growl>
+    <p-confirmDialog header="Confirmation" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+
+
+
+</div>
+
+
+
+
+<div class="box box-solid">
+    <!-- <div class="box-header"> -->
+    <!-- <h3>Results</h3> -->
+    <!-- </div> -->
+
+    <div class="box-body">
+        <p>This section shows the primary statistics of the sample including read length distribution of the reads that contain at least one ARG and any other functional genes including: MGEs, MRG. Here also the distribution and taxonomy is shown.</p>
+        <!-- <br> -->
+        <h4>Read length distribution</h4>
+        <p class="small">This graph shows the distribution of the read length that contains at least one ARG. The length is represented in kilo basepairs. each position represents the number of sequences withing a length 1000kbp range. The data used in this graph corresponds
+            to the reads that contain at least one ARG.</p>
+        <div class="col-md-12 text-center">
+            <chart [options]="line_chart"></chart>
+        </div>
+        <hr>
+        <h4>Source hits distribution</h4>
+        <p class="small">The graph below displays the number of genes dicovered in the reads from the different databases (ARGs, MGEs, MRGs, others). The bars represent the number of genes from each specific category found in the sample.</p>
+
+
+        <h5>Antibiotc resistance genes annotation</h5>
+        <div class="col-md-6 text-center">
+            <!-- <h5>Antibiotic categories distribution</h5> -->
+            <chart style="width: 25%" [options]="antibiotic_distribution_chart"></chart>
+        </div>
+
+
+        <div class="col-md-6 text-center">
+            <!-- <h5>Antibiotic Resistance Genes distribution</h5> -->
+            <chart style="width: 25%" [options]="args_distribution_chart"></chart>
+        </div>
+        <div class="col-md-12">
+            <p class="small">
+                ARGs are computed using deepARG: a deep learning approach to predict antibiotic resistance genes in metagenomes (<a href="https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-018-0401-z">Arango-Argoty et., al.</a>). Because
+                of the high error rate of nanopore reads, the deepARG-LS v1.0 was run with permisive identity parameters (<code> --iden 30 --cov 80 --evalue 1e-10 --prob 0.8 </code>) to guarantee the correctness of the classifications.
+            </p>
+            <hr>
+        </div>
+        <h5>Distribution of Mobile Genetic Elements (MGEs) and Metal Resistance Genes (MRGs)</h5>
+        <div class="col-md-6 text-center">
+            <chart style="width: 25%" [options]="mges_distribution_chart"></chart>
+        </div>
+
+        <div class="col-md-6 text-center">
+            <chart style="width: 25%" [options]="metal_distribution_chart"></chart>
+        </div>
+
+        <div class="col-md-12">
+            <p class="small">
+                Annotations were classfied as mobile genetic elements (MGEs) based on matching metadata from protein sequences to one of the following keywords: transposase, transposon, conjugative, integrase, integron, recombinase, conjugal, mobilization, recombination,
+                plasmid (
+                <a href="https://www.nature.com/articles/nature13377">Forsberg et., al</a>). Protein sequences that matched those keywords were retrieved from the National Center for Biotechnology Information <a href="">NCBI</a>. Then, sequences with
+                an identity greater than 90% were clustered and the centroid sequence was substracted using <a href="">CD-HIT</a>. Nanopore reads are then screened against this customized set of MGEs using diamond with parameters (<code> --evalue 1e-10 --id 30 --coverage 80 </code>).
+            </p>
+            <p class="small">
+                Metal Resistane Genes (MRG) were downloaded from the <a href="http://bacmet.biomedicine.gu.se/">BacMet v1.0</a> database (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3965030/">Pal. et., al</a>) and screened agains the nanopore
+                reads using DIAMOND with parameters <code> --evalue 1e-10 --id 30 --coverage 80 </code>.
+
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+<div class="box box-solid">
+    <div class="box-header">
+        <h4>ARGs, MGEs, MRGs patterns</h4>
+        <p class="small">This section shows a circular representation of the nanopore reads with the detected ARGs and neighboring genes. It can help to identify common ARG patterns (the visualization contains only reads with antibiotic resistance genes). <a href=""> UniRef90</a>            was used to screen the nanopore to a broad set of functional genes using <a href="">diamond</a> with parameters <code> --evalue 1e-10 --id 30 --coverage 80 </code>. By using this set of functional genes, it is possible to identify the components
+            of each nanopore read. The order of the inner circles indicates: ARGS, MRGs, MGEs, and other functional genes.
+        </p>
+    </div>
+    <div class="box-body">
+
+        <!-- read circular mapping -->
+        <div class="col-md-6">
+            <div class="box box-solid text-center">
+                <h4> <strong> {{ selected_read.id }} </strong></h4>
+                <h5> <strong> (<i>{{ selected_read.taxa_rank }}</i> {{ selected_read.taxa }}) </strong> </h5>
+                <div class="d-inline" id="read_circle_map-1"></div>
+                <!-- <div class="d-inline" id="read_circle_map-2"></div> -->
+            </div>
+
+        </div>
+
+        <div class="col-md-6 text-center">
+            <br><br><br><br>
+            <p-dataTable #reads_table_vis [value]="reads_table" [rows]="10" [paginator]="true" [pageLinks]="5" exportFilename="reads">
+                <p-column field='id' header='Read'>
+
+                    <template let-column_data="rowData" pTemplate="body">
+                            <a class="small" (click)="render_read_circular_map(column_data)" > {{ column_data.id }}  </a>
+                        </template>
+
+                </p-column>
+
+                <p-column field='len' header='Read Length'></p-column>
+                <p-column field='genes' header='Genes'></p-column>
+                <p-column field='args' header='ARGs'></p-column>
+            </p-dataTable>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="box box-solid">
+    <div class="box-header">
+        <h4>Co-occurrence of MGEs, ARGs and MRGs</h4>
+        <p class="small">
+            This visualization shows the ARGs, MGEs and MRGs patterns in the sample. Nodes (genes) are connected in the network as long as they are place within the same nanopore read. Node size represent the number of genes, shape represents the different groups
+            (MGEs, ARGs, MRGs), colors represents the different category, e.g., antibiotic resistance genes. The thickness of the edges represent the extent of the pair is found in the sample.
+        </p>
+    </div>
+    <div class="box-body">
+        <div id="network"> </div>
+        <div class="text-center">
+            <span class="small" *ngFor="let item of network_labels">
+                <i [style.color]="item.color" class="fa fa-circle" aria-hidden="true"></i> {{ item.id }}
+            </span>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="box box-solid">
+    <div class="box-header">
+        <h4>Taxonomy Annotation</h4>
+        <p class="small">
+            The bar charts show the distribution of the <i>species</i> taxonomy rank. Taxonomy distribution is computed using a rapid, accurate and sensitive microbial community classification program called <a href="https://ccb.jhu.edu/software/centrifuge/manual.shtml">centrifuge</a>            <a href="http://genome.cshlp.org/content/early/2016/11/16/gr.210641.116.abstract">(Kim. et., al.)</a>. Reads are screened against the index for Bacteria, Aarchaea, Viruses and Human genomes, using default parameters. The graph displays the
+            top 10 <i>species</i> ranked by the number of reads.
+        </p>
+    </div>
+    <div class="box-body">
+        <!-- <div class="col-md-6 text-center">
+            <chart [options]="taxonomy_sample_chart_genus" style="width:25%"></chart>
+        </div> -->
+        <div class="ui-helper-clearfix">
+            <button class='btn btn-xs btn-default' type="button" label="taxonomy.csv" (click)="taxonomy_table.exportCSV()" style="float:right"><i class="fa fa-download"></i> <strong>download table</strong></button>
+        </div>
+        <div class="col-md-6">
+            <div class="box-body text-center">
+                <p-dataTable #taxonomy_table [value]="taxonomy_data" [rows]="5" [paginator]="true" [pageLinks]="5" exportFilename="reads">
+                    <p-column field='tax_id' header='Taxa ID'></p-column>
+                    <p-column field='tax_rank' header='Taxa Rank'></p-column>
+                    <p-column field='name' header='Name'></p-column>
+                    <p-column field='num_reads' header='Reads'></p-column>
+                    <!-- <p-column field='rpm' header='RPM'></p-column> -->
+                    <!-- download link -->
+                </p-dataTable>
+            </div>
+        </div>
+
+        <div class="col-md-6 text-center">
+            <chart [options]="taxonomy_sample_chart_species" style="width:25%"></chart>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<div class="box box-solid">
+    <div class="box-header">
+        <h3>Multiple Sample Comparison</h3>
+        <p class="small">
+            The table below contains the results for all the samples. Including, sample name, gene category, gene name, number of hits in the sample.
+        </p>
+    </div>
+    <div class="ui-helper-clearfix">
+        <button class='btn btn-xs btn-default' type="button" label="data.csv" (click)="reads_table_vis_comparison.exportCSV()" style="float:right"><i class="fa fa-download"></i> <strong>download table</strong></button>
+    </div>
+    <div class="box-body text-center">
+        <p-dataTable #reads_table_vis_comparison [value]="all_samples" [rows]="10" [paginator]="true" [pageLinks]="5" exportFilename="reads">
+            <p-column field='sample' header='Sample'></p-column>
+            <p-column field='category' header='Category'></p-column>
+            <p-column field='id' header='Gene'></p-column>
+            <p-column field='size' header='Hits'></p-column>
+            <p-column field='rpm' header='RPM'></p-column>
+            <!-- download link -->
+        </p-dataTable>
+    </div>
+</div>
+
+
+<div class="col-md-12">
+    <chart [options]="compare_samles_stacked_bar" style="width:60%;margin: 0 auto"></chart>
+</div>
+
+<p-growl [(value)]="msgs" baseZIndex="99999" autoZIndex="false"></p-growl>
