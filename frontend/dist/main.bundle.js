@@ -1924,8 +1924,8 @@ var Network = (function () {
                         'font-family': '"Lato", sans-serif',
                         // 'shape': data(shape),
                         'padding': '30%',
-                        'height': 'mapData(size, 0, 10000, 5, 50)',
-                        'width': 'mapData(size, 0, 10000, 5, 50)'
+                        'height': 'mapData(size, 0, 10000, 20, 50)',
+                        'width': 'mapData(size, 0, 10000, 20, 50)'
                     }
                 },
                 {
@@ -2190,7 +2190,7 @@ var ViewSamplesComponent = (function () {
                 return false;
             }
             ;
-            console.log(res);
+            // console.log(res);
             _this.raw_reads = res[0];
             _this.filter_reads = _this.filter_data(res[0]);
             _this.network_data = res[1];

@@ -27,8 +27,8 @@ export class Network {
                     'font-family': '"Lato", sans-serif',
                     // 'shape': data(shape),
                     'padding': '30%',
-                    'height': 'mapData(size, 0, 10000, 5, 50)',
-                    'width': 'mapData(size, 0, 10000, 5, 50)'
+                    'height': 'mapData(size, 0, 10000, 20, 50)',
+                    'width': 'mapData(size, 0, 10000, 20, 50)'
                   }
                 },
             
