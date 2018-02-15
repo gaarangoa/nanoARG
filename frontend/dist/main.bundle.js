@@ -1934,7 +1934,7 @@ var Network = (function () {
                         'width': 'mapData(weight, 0, 20000, 1, 50)',
                         // 'curve-style': 'bezier',
                         'line-style': 'solid',
-                        'line-color': 'data(color)',
+                        'line-color': 'black',
                         // 'edge-distances': 'control-point-weight',
                         'opacity': 0.5,
                         'target-arrow-color': '#000',
