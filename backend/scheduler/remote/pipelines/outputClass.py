@@ -8,6 +8,7 @@ import networkx as nx
 import conf
 
 from colour import Color
+import tqdm
 
 _coverage = 0.8
 _identity = 30
@@ -125,16 +126,17 @@ def network(data = {}):
 def read_map(parameters = []):
     os.system("cat "+parameters["storage_remote_dir"]+"/*.bestHit > "+parameters["storage_remote_dir"]+"/all.bestHit.txt")
     data = [i.split() for i in open( parameters["storage_remote_dir"]+"/all.bestHit.txt" )]
+    print('loading read lengths')
     read_length = get_fasta_read_length( parameters["remote_input_file"] )
-
+    print('loading taxonomy file')
     # taxonomy files
     taxa = json.load(open(parameters["storage_remote_dir"]+"/taxa.json"))
     taxa_reads = taxa['reads']
     taxa_info = taxa['taxo']
-
+    print('processing best hits and computing abundance')
     # filter data according to the parameters
     x = {}
-    for i in data:
+    for i in tqdm(data):
         par = [float(k) for k in i[6].split("_")]
         if par[1] > _evalue: continue
         if par[2] < _identity: continue
@@ -172,7 +174,7 @@ def read_map(parameters = []):
             x[i[0]] = [item]
 
     data = []
-    for i in x:
+    for i in tqdm(x):
         _hasarg = len([ k for k in x[i] if k['origin']==1 ])
         _hasmge = len([ k for k in x[i] if k['origin']==2 ])
         _hasmrg = len([ k for k in x[i] if k['origin']==4 ])
