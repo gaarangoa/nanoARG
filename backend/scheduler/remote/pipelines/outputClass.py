@@ -179,7 +179,7 @@ def read_map(parameters = []):
         _hasmge = len([ k for k in x[i] if k['origin']==2 ])
         _hasmrg = len([ k for k in x[i] if k['origin']==4 ])
 
-        if _hasarg == 0 and _hasmge == 0 and _hasmrg == 0: continue
+        if _hasarg == 0 or _hasmge == 0: continue
         
         try:
             read_taxa = taxa_info[taxa_reads[i]['tax_id'] ]['name']
