@@ -40,7 +40,7 @@ export class Network {
                     'line-style': 'solid',
                     'line-color': 'data(color)',
                     // 'edge-distances': 'control-point-weight',
-                    'opacity': 0.6,
+                    'opacity': 0.5,
                     'target-arrow-color': '#000',
                     'target-arrow-shape': 'triangle'
                   }
@@ -50,9 +50,10 @@ export class Network {
               ],
             
               layout: {
-                name: 'concentric',
-                rows: 5,
-                fit: true
+                name: 'circle',
+                rows: 10,
+                fit: true,
+                avoidOverlap: true
               },
 
               zoom: 0.5,
