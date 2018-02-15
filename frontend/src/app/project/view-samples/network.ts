@@ -27,15 +27,15 @@ export class Network {
                     'font-family': '"Lato", sans-serif',
                     // 'shape': data(shape),
                     'padding': '30%',
-                    'height': 'mapData(size, 0, 10000, 5, 10)',
-                    'width': 'mapData(size, 0, 10000, 5, 10)'
+                    'height': 'mapData(size, 0, 10000, 5, 50)',
+                    'width': 'mapData(size, 0, 10000, 5, 50)'
                   }
                 },
             
                 {
                   selector: 'edge',
                   style: {
-                    'width': 'mapData(weight, 0, 20000, 1, 10)',
+                    'width': 'mapData(weight, 0, 20000, 1, 50)',
                     // 'curve-style': 'bezier',
                     'line-style': 'solid',
                     'line-color': 'data(color)',
@@ -50,8 +50,7 @@ export class Network {
               ],
             
               layout: {
-                name: 'circle',
-                rows: 10,
+                name: 'concentric',
                 fit: true,
                 avoidOverlap: true
               },
