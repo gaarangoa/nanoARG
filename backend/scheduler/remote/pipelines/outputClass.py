@@ -156,7 +156,7 @@ def read_map(parameters = []):
             "start": int(i[1]),
             "end": int(i[2]),
             "position": int(i[1]) + ((int(i[2])-int(i[1]))/2),
-            "value": doc[0]+"<hr>"+doc[3]+"<br>"+doc[4],
+            "value": '',
             "strand": i[5],
             "evalue": par[1],
             "identity": par[2],
