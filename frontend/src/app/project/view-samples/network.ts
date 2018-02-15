@@ -35,7 +35,7 @@ export class Network {
                 {
                   selector: 'edge',
                   style: {
-                    'width': 'mapData(weight, 0, 20000, 20, 200)',
+                    'width': 'mapData(weight, 0, 20000, 1, 10)',
                     // 'curve-style': 'bezier',
                     'line-style': 'solid',
                     'line-color': 'data(color)',
