@@ -2174,7 +2174,7 @@ var ViewSamplesComponent = (function () {
     ViewSamplesComponent.prototype.filter_data = function (data) {
         var filtered_data = [];
         data.forEach(function (element) {
-            if (element.read[0].args >= 1) {
+            if (element.read[0].args >= 0) {
                 filtered_data.push(element);
             }
             ;
