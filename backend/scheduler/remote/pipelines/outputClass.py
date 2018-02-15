@@ -136,6 +136,7 @@ def read_map(parameters = []):
     print('processing best hits and computing abundance')
     # filter data according to the parameters
     x = {}
+    metadata = {}
     for i in tqdm(data):
         par = [float(k) for k in i[6].split("_")]
         if par[1] > _evalue: continue
@@ -151,16 +152,18 @@ def read_map(parameters = []):
         except:
             gcolor = '#93A661'
         # 
+        metadata.update({doc[0]: doc})
+
         item = {
             "block_id": i[0],
             "start": int(i[1]),
             "end": int(i[2]),
             "position": int(i[1]) + ((int(i[2])-int(i[1]))/2),
             "value": '',
-            "strand": i[5],
-            "evalue": par[1],
-            "identity": par[2],
-            "coverage": par[3],
+            # "strand": i[5],
+            # "evalue": par[1],
+            # "identity": par[2],
+            # "coverage": par[3],
             "color": gcolor,
             "origin": origin(i[3]),
             "stroke_width": 1,
@@ -215,4 +218,10 @@ def read_map(parameters = []):
     print('building network')
     net, arg_labels = network(data)
 
-    json.dump([ data, net, arg_labels, taxa_info.values(), {"total_reads": len(read_length)} ], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
+    print('formatting data')
+    for iread, read in enumerate(data):
+        for ixgene, gene in enumerate(read['data']):
+            del gene['metadata']
+        
+
+    json.dump([ data, net, arg_labels, taxa_info.values(), {"total_reads": len(read_length)}, metadata], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
