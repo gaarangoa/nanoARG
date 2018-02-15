@@ -8,7 +8,7 @@ import networkx as nx
 import conf
 
 from colour import Color
-import tqdm
+from tqdm import tqdm
 
 _coverage = 0.8
 _identity = 30
