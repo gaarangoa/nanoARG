@@ -215,4 +215,4 @@ def read_map(parameters = []):
     print('building network')
     net, arg_labels = network(data)
 
-    json.dump([ data, net, arg_labels, taxa_info.values(), {"total_reads": len(read_length)} ], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
+    json.dump([ net, arg_labels, taxa_info.values(), {"total_reads": len(read_length)} ], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
