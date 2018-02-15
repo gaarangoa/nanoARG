@@ -13,7 +13,7 @@ qsub = parameters['qsub_file']
 
 cmd = "\n".join([
         '#!/bin/bash',
-        '#PBS -l nodes=1:ppn=6:pmem=20gb',
+        '#PBS -l nodes=1:ppn=6,pmem=20gb',
         '#PBS -l walltime=20:00:00',
         # '#PBS -q open_q',
         '#PBS -q normal_q',
