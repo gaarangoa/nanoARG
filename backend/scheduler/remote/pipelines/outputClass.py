@@ -71,7 +71,7 @@ def network(data = {}):
     N = {}
     E = {}
     arg_labels = {}
-    for iread, read in enumerate(data):
+    for iread, read in tqdm(enumerate(data)):
         for ixgene, gene in enumerate(read['data']):
             # discard general functions
             if gene['origin'] == 3: 
