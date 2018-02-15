@@ -178,6 +178,16 @@ def read_map(parameters = []):
         _hasmrg = len([ k for k in x[i] if k['origin']==4 ])
 
         if _hasarg == 0 and _hasmge == 0 and _hasmrg == 0: continue
+        
+        try:
+            read_taxa = taxa_info[taxa_reads[i]['tax_id'] ]['name']
+            read_taxa_id = taxa_info[taxa_reads[i]['tax_id']]['tax_id']
+            read_taxa_rank = taxa_info[taxa_reads[i]['tax_id']]['tax_rank']
+        except:
+            read_taxa = "undefined"
+            read_taxa_id = "undefined"
+            read_taxa_rank = "undefined"
+
         read = {
             "len": read_length[i], 
             "color": 'black', 
@@ -188,9 +198,9 @@ def read_map(parameters = []):
             "mges": len([ k for k in x[i] if k['origin']==2 ]),
             "mrgs": len([ k for k in x[i] if k['origin']==4 ]),
             "fngs": len([ k for k in x[i] if k['origin']==3 ]),
-            "taxa": taxa_info[taxa_reads[i]['tax_id']]['name'],
-            "taxa_id": taxa_info[taxa_reads[i]['tax_id']]['tax_id'],
-            "taxa_rank": taxa_info[taxa_reads[i]['tax_id']]['tax_rank']
+            "taxa": read_taxa,
+            "taxa_id": read_taxa_id,
+            "taxa_rank": read_taxa_rank
         }
 
         item = {
