@@ -109,7 +109,7 @@ class RetrieveResults(luigi.Task):
     def run(self):
         # create output files
         par = json.loads(base64.b64decode(self.parameters))
-        os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+parameters + " " + " Retrieving-results" )
+        os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters + " " + " Retrieving-results" )
         read_map(parameters = par)
         os.system( "ssh newriver1.arc.vt.edu python "+par['remote_path']+"/observable.py "+self.parameters + " done" )
 
