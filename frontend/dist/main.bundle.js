@@ -2190,7 +2190,7 @@ var ViewSamplesComponent = (function () {
                 return false;
             }
             ;
-            // console.log(res);
+            console.log(res);
             _this.raw_reads = res[0];
             _this.filter_reads = _this.filter_data(res[0]);
             _this.network_data = res[1];
