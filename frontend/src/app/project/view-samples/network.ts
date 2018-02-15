@@ -40,7 +40,7 @@ export class Network {
                     'line-style': 'solid',
                     'line-color': 'black',
                     // 'edge-distances': 'control-point-weight',
-                    'opacity': 0.5,
+                    'opacity': 0.3,
                     'target-arrow-color': '#000',
                     'target-arrow-shape': 'triangle'
                   }
