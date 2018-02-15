@@ -55,8 +55,8 @@ export class Network {
                 avoidOverlap: true
               },
 
-              zoom: 0.5,
-              minZoom: 0.001,
+              zoom: 0,
+              minZoom: 0.01,
               maxZoom: 10,
               zoomingEnabled: true,
               boxSelectionEnabled: true,

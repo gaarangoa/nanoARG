@@ -1924,14 +1924,14 @@ var Network = (function () {
                         'font-family': '"Lato", sans-serif',
                         // 'shape': data(shape),
                         'padding': '30%',
-                        'height': 'mapData(size, 0, 10000, 5, 10)',
-                        'width': 'mapData(size, 0, 10000, 5, 10)'
+                        'height': 'mapData(size, 0, 10000, 5, 50)',
+                        'width': 'mapData(size, 0, 10000, 5, 50)'
                     }
                 },
                 {
                     selector: 'edge',
                     style: {
-                        'width': 'mapData(weight, 0, 20000, 1, 10)',
+                        'width': 'mapData(weight, 0, 20000, 1, 50)',
                         // 'curve-style': 'bezier',
                         'line-style': 'solid',
                         'line-color': 'data(color)',
@@ -1943,13 +1943,12 @@ var Network = (function () {
                 },
             ],
             layout: {
-                name: 'circle',
-                rows: 10,
+                name: 'concentric',
                 fit: true,
                 avoidOverlap: true
             },
-            zoom: 0.5,
-            minZoom: 0.001,
+            zoom: 0,
+            minZoom: 0.01,
             maxZoom: 10,
             zoomingEnabled: true,
             boxSelectionEnabled: true,
