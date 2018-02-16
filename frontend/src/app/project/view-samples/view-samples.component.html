@@ -83,27 +83,32 @@
             </p>
             <hr>
         </div>
-        <h5>Distribution of Mobile Genetic Elements (MGEs) and Metal Resistance Genes (MRGs)</h5>
-        <div class="col-md-6 text-center">
-            <chart style="width: 25%" [options]="mges_distribution_chart"></chart>
-        </div>
-
-        <div class="col-md-6 text-center">
-            <chart style="width: 25%" [options]="metal_distribution_chart"></chart>
-        </div>
 
         <div class="col-md-12">
+            <h5>Distribution of Mobile Genetic Elements (MGEs)</h5>
             <p class="small">
                 Annotations were classfied as mobile genetic elements (MGEs) based on matching metadata from protein sequences to one of the following keywords: transposase, transposon, conjugative, integrase, integron, recombinase, conjugal, mobilization, recombination,
                 plasmid (
                 <a href="https://www.nature.com/articles/nature13377">Forsberg et., al</a>). Protein sequences that matched those keywords were retrieved from the National Center for Biotechnology Information <a href="">NCBI</a>. Then, sequences with
                 an identity greater than 90% were clustered and the centroid sequence was substracted using <a href="">CD-HIT</a>. Nanopore reads are then screened against this customized set of MGEs using diamond with parameters (<code> --evalue 1e-10 --id 30 --coverage 80 </code>).
             </p>
+        </div>
+        <div class="col-md-6 text-center">
+            <chart style="width: 30%" [options]="mges_distribution_chart"></chart>
+        </div>
+
+
+
+        <div class="col-md-12">
+            <h5>Distribution of Metal Resistance Genes (MGEs)</h5>
             <p class="small">
                 Metal Resistane Genes (MRG) were downloaded from the <a href="http://bacmet.biomedicine.gu.se/">BacMet v1.0</a> database (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3965030/">Pal. et., al</a>) and screened agains the nanopore
                 reads using DIAMOND with parameters <code> --evalue 1e-10 --id 30 --coverage 80 </code>.
 
             </p>
+        </div>
+        <div class="col-md-6 text-center">
+            <chart style="width: 30%" [options]="metal_distribution_chart"></chart>
         </div>
 
     </div>

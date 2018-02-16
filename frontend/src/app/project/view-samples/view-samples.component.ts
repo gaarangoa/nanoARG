@@ -79,7 +79,7 @@ export class ViewSamplesComponent implements OnInit {
       this.network = new Network();
       this.taxonomy_visualization = new TaxonomyVisualization();
 
-      this.network_data = {};
+      this.network_data = {nodes:[], edges:[]};
       this.all_samples = [];
 
       this.selected_read = {
@@ -160,10 +160,10 @@ export class ViewSamplesComponent implements OnInit {
           this.taxonomy_sample_chart_species = this.taxonomy_visualization.render(this.taxonomy_data, 'species');
           // this.taxonomy_sample_chart_genus = this.taxonomy_visualization.render(this.taxonomy_data, 'genus');
 
-          this.antibiotic_distribution_chart = this.read_chart.genes_distribution(this.raw_reads, 1, 3);
-          this.args_distribution_chart = this.read_chart.genes_distribution(this.raw_reads, 1, 4);
-          this.mges_distribution_chart = this.read_chart.genes_distribution(this.raw_reads, 2, 3);
-          this.metal_distribution_chart = this.read_chart.genes_distribution(this.raw_reads, 4, 3);
+          this.antibiotic_distribution_chart = this.read_chart.genes_distribution(this.network_data, 1, 3, this.network_labels);
+          this.args_distribution_chart = this.read_chart.genes_distribution(this.network_data, 1, 4, this.network_labels);
+          this.mges_distribution_chart = this.read_chart.genes_distribution(this.network_data, 2, 3, this.network_labels);
+          this.metal_distribution_chart = this.read_chart.genes_distribution(this.network_data, 4, 3, this.network_labels);
 
 
           this.reads_table = this.filter_reads.map((i, ix) => {

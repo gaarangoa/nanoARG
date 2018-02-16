@@ -138,8 +138,8 @@ export class Genome {
 
 
     compare(a, b) {
-        if (a.data[0] < b.data[0]) { return 1; };
-        if (a.data[0] > b.data[0]) { return -1; };
+        if (a.data < b.data) { return 1; };
+        if (a.data > b.data) { return -1; };
         return 0;
     }
 
@@ -180,41 +180,43 @@ export class Genome {
         return arr;
     }
 
-    genes_distribution(data: any, option: number, section: number){
+    genes_distribution(data: any, origin: number, section: number, colors: any){
+        // option reffers to the type ARGs, MGEs or others, section reffers to the index in the metadata
+        // data are the nodes from the network that contains the necesary information
+        const dgenes  = [];
+        data.nodes.forEach(e => {
+            if (e.data.origin === origin){
+                dgenes[e.data.metadata[section]] = {data:0, name:e.data.metadata[section], color:e.data.color}
+            }
+        });
 
-        const genes = data.map((i, ix) => {
-            const itemx = [];
-            for (const item of i.data){
-                if ( item.origin === option ) {
-                    itemx.push(item.metadata[section]);
+        data.nodes.forEach(e => {
+            if (e.data.origin === origin){
+                try {
+                    dgenes[e.data.metadata[section]].data += e.data.size 
+                } catch (error) {
+                    dgenes[e.data.metadata[section]].data = e.data.size
                 }
             }
-            return itemx;
         });
-        const counts = {};
-        [].concat.apply([], genes).forEach(function(x) { counts[x] = (counts[x] || 0) + 1; });
 
-        const ob_counts = [];
-        Object.keys(counts).forEach( (key, index) => {
-            ob_counts.push({
-                name: key,
-                data: [counts[key]]
-            });
-        } );
+        const genes = Object.keys(dgenes).map(e =>{
+            return dgenes[e];
+        });
 
-        // console.log(ob_counts.sort(this.compare));
-
-        ob_counts.sort(this.compare);
-        const labels = ob_counts.map((i, ix) => { return i.name; });
-        const xdata = ob_counts.map((i, ix) => { return i.data[0]; });
-        // console.log(labels)
+        genes.sort(this.compare);
+        const labels = genes.map((i, ix) => { return i.name; });
+        // const xdata = genes.map((i, ix) => { return i.data; });
+        // console.log(xdata.map(e => {
+        //     return {y: e.data, color: e.color}
+        // }))
 
         return {
             chart: {
                 borderColor: '#000000',
                 borderWidith: 1,
                 type: 'bar',
-                height: '100%',
+                height: '110%',
             },
             
             title: {
@@ -222,7 +224,9 @@ export class Genome {
             },
 
             series: [{
-                data: xdata
+                data: genes.map(e => {
+                    return {y: e.data, color: e.color}
+                })
             }],
 
             legend: {
@@ -274,6 +278,8 @@ export class Genome {
         }
 
     }
+
+
 
     length_distribution(data: any){
 
