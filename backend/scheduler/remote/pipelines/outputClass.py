@@ -10,6 +10,8 @@ import conf
 from colour import Color
 from tqdm import tqdm
 
+import numpy as np
+
 _coverage = 0.8
 _identity = 30
 _evalue = 1e-10
@@ -59,7 +61,8 @@ def get_fasta_read_length(fi=""):
     lng = {}
     for record in SeqIO.parse(open(fi), "fasta"):
         lng[record.id] = len(record.seq)
-    return lng
+    distribution = np.histogram(np.array(lng.values()))
+    return lng, [distribution[0].tolist(), distribution[1].tolist()]
 
 def _get_id(gene):
     _id = gene['metadata'][3]
@@ -121,13 +124,13 @@ def network(data = {}):
     edges = [{"data":E[i]} for i in E]
 
     return [{ "nodes": nodes, "edges": edges }, arg_labels.values()]
-            
+           
 
 def read_map(parameters = []):
     os.system("cat "+parameters["storage_remote_dir"]+"/*.bestHit > "+parameters["storage_remote_dir"]+"/all.bestHit.txt")
     data = [i.split() for i in open( parameters["storage_remote_dir"]+"/all.bestHit.txt" )]
     print('loading read lengths')
-    read_length = get_fasta_read_length( parameters["remote_input_file"] )
+    read_length, read_length_distribution = get_fasta_read_length( parameters["remote_input_file"] )
     print('loading taxonomy file')
     # taxonomy files
     taxa = json.load(open(parameters["storage_remote_dir"]+"/taxa.json"))
@@ -215,7 +218,10 @@ def read_map(parameters = []):
     print('building network')
     net, arg_labels = network(data)
 
+    print('computing distributions')
+    
+
     filter_data = data[:10]
 
-    json.dump([ filter_data, net, arg_labels, taxa_info.values(), {"total_reads": len(read_length)} ], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
+    json.dump([ filter_data, net, arg_labels, taxa_info.values(), {"total_reads": len(read_length), "read_length_distribution": read_length_distribution} ], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
     json.dump([ data, net, arg_labels, taxa_info.values(), {"total_reads": len(read_length)} ], open(parameters["storage_remote_dir"]+"/complete.bestHit.json", "w"))
