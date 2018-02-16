@@ -277,23 +277,21 @@ export class Genome {
 
     length_distribution(data: any){
 
-        const reads_len = data.map((i, ix) => {
-            return [i.read[0]['len']];
-          });
-        
-        // console.log(reads_len);
-
         return {
             title : { text : null },
             chart: {
               type: 'column',
-            //   height: '100%',
-            //   width: '60%'
+            },
+            xAxis: {
+                categories: data[1],
+                labels: {
+                    format: '{value} k'
+                }
             },
             series: [{
                 name: 'Read-length',
                 type: 'column',
-                data: this.histogram(reads_len, 1000),
+                data: data[0],
                 pointPadding: 0,
                 groupPadding: 0,
                 pointPlacement: 'between'

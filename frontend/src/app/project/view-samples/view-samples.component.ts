@@ -57,6 +57,7 @@ export class ViewSamplesComponent implements OnInit {
   public all_samples: Array<{}>;
   public stacked: any;
   public alive: boolean;
+  public read_length: any;
   // public sample_list: any;
 
   constructor(
@@ -73,6 +74,7 @@ export class ViewSamplesComponent implements OnInit {
     ngOnInit() {
       this.stacked = {};
       this.alive = true;
+      this.read_length = [];
       this.read_chart = new Genome();
       this.network = new Network();
       this.taxonomy_visualization = new TaxonomyVisualization();
@@ -146,13 +148,14 @@ export class ViewSamplesComponent implements OnInit {
           this.network_data = res[1];
           this.network_labels = res[2];
           this.taxonomy_data = res[3];
+          this.read_length = res[4]['read_length_distribution'];
 
           this.selected_read = this.filter_reads[index].read[0];
 
           const item = document.getElementById('read_circle_map-1');
           item.innerHTML = '';
           this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
-          this.line_chart = this.read_chart.length_distribution(this.raw_reads);
+          this.line_chart = this.read_chart.length_distribution(this.read_length);
 
           this.taxonomy_sample_chart_species = this.taxonomy_visualization.render(this.taxonomy_data, 'species');
           // this.taxonomy_sample_chart_genus = this.taxonomy_visualization.render(this.taxonomy_data, 'genus');
