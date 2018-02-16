@@ -238,12 +238,13 @@ export class ViewSamplesComponent implements OnInit {
               res[1].nodes.forEach(item => {
                 item.data['sample'] = sample['name'];
                 item.data['rpm'] = (item['data'].size * 1000000 / res[4]['total_reads']).toFixed(1);
+                item.data['category'] = item['data']['metadata'][3];
                 this.all_samples.push(item.data);
               });
           });
         });
 
-        // console.log(this.all_samples);
+        console.log(this.all_samples);
 
         
 

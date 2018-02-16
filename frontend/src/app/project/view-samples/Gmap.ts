@@ -216,7 +216,8 @@ export class Genome {
                 borderColor: '#000000',
                 borderWidith: 1,
                 type: 'bar',
-                height: '110%',
+                height: genes.length*15+120,
+                position: 'absolute'
             },
             
             title: {
