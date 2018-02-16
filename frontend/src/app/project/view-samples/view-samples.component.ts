@@ -139,7 +139,7 @@ export class ViewSamplesComponent implements OnInit {
             return false;
           };
 
-          // console.log(res);
+          console.log(res);
 
           this.raw_reads = res[0];
           this.filter_reads = this.filter_data(res[0]);

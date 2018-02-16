@@ -19,14 +19,14 @@ cmd = "\n".join([
         '#PBS -q normal_q',
         '#PBS -A computeomics',
         '#PBS -W group_list=newriver\n',
-        'source /home/gustavo1/environments/nanopore/bin/activate',
+        'source /groups/metastorm_cscee/nanoARG/backend/scheduler/remote/environment/bin/activate',
         'module load gcc/5.2.0  openmpi/1.8.5 hmmer bedtools\n',
         'cd '+ parameters['storage_remote_dir'],
         'export PYTHONPATH=$PYTHONPATH:'+parameters['remote_path'],
         'export CENTRIFUGE_HOME='+parameters['remote_path']+'/bin/centrifuge-1.0.3-beta',
-        "~/.local/bin/luigid --background --logdir=logs",
+        "/groups/metastorm_cscee/nanoARG/backend/scheduler/remote/environment/bin/luigid --background --logdir=logs",
         'cd '+ parameters['remote_path'],
-        '~/.local/bin/luigi --module '+ parameters['pipeline'] + " RetrieveResults " + " --local-scheduler --parameters " + sys.argv[1],
+        '/groups/metastorm_cscee/nanoARG/backend/scheduler/remote/environment/bin/luigi --module '+ parameters['pipeline'] + " RetrieveResults " + " --local-scheduler --parameters " + sys.argv[1],
         'exit;'
         ]);
 
