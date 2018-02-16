@@ -61,7 +61,7 @@ def get_fasta_read_length(fi=""):
     lng = {}
     for record in SeqIO.parse(open(fi), "fasta"):
         lng[record.id] = len(record.seq)
-    distribution = np.histogram(np.array(lng.values()), bins=100)
+    distribution = np.histogram(np.array(lng.values()), bins='doane')
     return lng, [distribution[0].tolist(), [int(float(i)/1000) for i in distribution[1].tolist()[1:]] ]
 
 def _get_id(gene):
