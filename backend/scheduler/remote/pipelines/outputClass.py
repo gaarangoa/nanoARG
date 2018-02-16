@@ -221,6 +221,7 @@ def read_map(parameters = []):
     print('computing distributions')
     
     filter_data = [i for i in sorted(data, key=lambda k: k['read'][0]['args'], reverse=True) if i['read'][0]['args']>=1 ][:500]
+    filter_taxa = sorted(taxa_info.values(), key=lambda k: k['num_reads'], reverse=True)[:100]
 
-    json.dump([ filter_data, net, arg_labels, taxa_info.values(), {"total_reads": len(read_length), "read_length_distribution": read_length_distribution} ], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
+    json.dump([ filter_data, net, arg_labels, filter_taxa, {"total_reads": len(read_length), "read_length_distribution": read_length_distribution} ], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
     json.dump([ data, net, arg_labels, taxa_info.values(), {"total_reads": len(read_length)} ], open(parameters["storage_remote_dir"]+"/complete.bestHit.json", "w"))
