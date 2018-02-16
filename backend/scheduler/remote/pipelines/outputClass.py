@@ -25,7 +25,7 @@ origin_color = {
 
 def color_map():
     blue = Color('#009999')
-    red = Color('#6600ff')
+    red = Color('#21a83a')
     green = Color('#003300')
     # 
     mges_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/MGEs90.size")}
@@ -33,7 +33,7 @@ def color_map():
     args_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/deeparg.size")}
     # 
     mges_colors = [str(i) for i in list(blue.range_to(Color("#669999"), len(mges_data)))]
-    args_colors = [str(i) for i in list(red.range_to(Color("#ff9933"), len(args_data)))]
+    args_colors = [str(i) for i in list(red.range_to(Color("#aef28e"), len(args_data)))]
     mrgs_colors = [str(i) for i in list(green.range_to(Color("black"), len(mrgs_data)))]
     # 
     mges_c = { i:str(mges_colors[ix]) for ix,i in enumerate(mges_data) }
