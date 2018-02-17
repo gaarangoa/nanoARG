@@ -32,7 +32,8 @@ def color_map():
     mrgs_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/bacmet.size")}
     args_data = {i.split()[0].split('|')[2]:'0' for i in open(conf.data+"/deeparg.size")}
     # 
-    _args_color_list = list(Color('#4286f4').range_to(Color("#41f4df"), len(args_data)/2)) + list(Color('#41f47c').range_to(Color("#bef441"), len(args_data)/2)) + list(Color('#f46741').range_to(Color("#993f27"), len(args_data)/2))
+    # _args_color_list = list(Color('#4286f4').range_to(Color("#41f4df"), len(args_data)/2)) + list(Color('#41f47c').range_to(Color("#bef441"), len(args_data)/2)) + list(Color('#f46741').range_to(Color("#993f27"), len(args_data)/2))
+    _args_color_list = list(Color('green').range_to(Color("blue"), len(args_data)))
     random.seed(125450)
     random.shuffle(_args_color_list)
     mges_colors = [str(i) for i in list(_cmges.range_to(Color("#FFFFFF"), len(mges_data)))]
