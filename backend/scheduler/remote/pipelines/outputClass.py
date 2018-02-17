@@ -144,7 +144,7 @@ def read_map(parameters = []):
     taxa_info = taxa['taxo']
     print('processing best hits and computing abundance')
     color_gene = color_map()
-    print(color_gene)
+    # print(color_gene)
     # filter data according to the parameters
     x = {}
     for i in tqdm(data):
