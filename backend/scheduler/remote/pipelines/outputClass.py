@@ -49,7 +49,7 @@ def color_map():
     mges_c.update(args_c)
     return mges_c
 
-color_gene = color_map()
+
 
 
 def origin(string):
@@ -143,6 +143,8 @@ def read_map(parameters = []):
     taxa_reads = taxa['reads']
     taxa_info = taxa['taxo']
     print('processing best hits and computing abundance')
+    color_gene = color_map()
+    print(color_gene)
     # filter data according to the parameters
     x = {}
     for i in tqdm(data):
