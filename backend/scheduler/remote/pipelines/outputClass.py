@@ -37,7 +37,7 @@ def color_map():
     # print( [float(ix+20)/len(args_data)+50 for ix,i in enumerate(list(Color('green').range_to(Color("blue"), len(args_data))))] )
     random.seed(0)
     random.shuffle(_args_color_list)
-    print(_args_color_list)
+    # print(_args_color_list)
     mges_colors = [str(i) for i in list(_cmges.range_to(Color("#FFFFFF"), len(mges_data)))]
     args_colors = [str(i) for i in [str(k) for k in _args_color_list] ]
     mrgs_colors = [str(i) for i in list(_cmrgs.range_to(Color("#000000"), len(mrgs_data)))]
