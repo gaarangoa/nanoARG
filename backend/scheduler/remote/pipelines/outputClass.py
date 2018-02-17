@@ -30,7 +30,7 @@ def color_map():
     # 
     mges_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/MGEs90.size")}
     mrgs_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/bacmet.size")}
-    args_data = {i.split()[0].split('|')[2]:'0' for i in open(conf.data+"/deeparg.size")}
+    args_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/deeparg.size")}
     # 
     _args_color_list = list(Color('#4286f4').range_to(Color("#41f4df"), len(args_data)/2)) + list(Color('#41f47c').range_to(Color("#bef441"), len(args_data)/2)) + list(Color('#f46741').range_to(Color("#993f27"), len(args_data)/2))
     _args_color_list = [Color(i,luminance=float(ix+20)/(len(args_data)+50)) for ix,i in enumerate(_args_color_list)]
@@ -158,10 +158,10 @@ def read_map(parameters = []):
         doc[4] = doc[4].replace("_", " ").replace(".", " ")
 
         try:
-            if origin(i[3])==1: 
-                gcolor = color_gene[doc[2]]
-            else:
-                gcolor = color_gene[doc[3]]
+            # if origin(i[3])==1: 
+            #     gcolor = color_gene[doc[2]]
+            # else:
+            gcolor = color_gene[doc[3]]
         except:
             gcolor = '#93A661'
         # 
