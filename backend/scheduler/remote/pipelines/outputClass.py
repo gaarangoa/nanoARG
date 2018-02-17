@@ -4,7 +4,7 @@ import sys
 from Bio import SeqIO
 import json
 import networkx as nx
-
+import random
 import conf
 
 from colour import Color
@@ -24,17 +24,20 @@ origin_color = {
 }
 
 def color_map():
-    blue = Color('#009999')
-    red = Color('#0d1f60')
-    green = Color('#003300')
+    _cmges = Color('#000000')
+    _cargs = Color('#073a8c')
+    _cmrgs = Color('#FFFFFF')
     # 
     mges_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/MGEs90.size")}
     mrgs_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/bacmet.size")}
     args_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/deeparg.size")}
     # 
-    mges_colors = [str(i) for i in list(blue.range_to(Color("#669999"), len(mges_data)))]
-    args_colors = [str(i) for i in list(red.range_to(Color("#47c7ff"), len(args_data)))]
-    mrgs_colors = [str(i) for i in list(green.range_to(Color("black"), len(mrgs_data)))]
+    _args_color_list = list(_cargs.range_to(Color("#a31017"), len(args_data)))+list(_cargs.range_to(Color("#767f13"), len(args_data)))+list(_cargs.range_to(Color("#127f60"), len(args_data)))
+    random.seed(0)
+    random.shuffle(_args_color_list)
+    mges_colors = [str(i) for i in list(_cmges.range_to(Color("#000000"), len(mges_data)))]
+    args_colors = [str(i) for i in _args_color_list]
+    mrgs_colors = [str(i) for i in list(_cmrgs.range_to(Color("FFFFFF"), len(mrgs_data)))]
     # 
     mges_c = { i:str(mges_colors[ix]) for ix,i in enumerate(mges_data) }
     mrgs_c = { i:str(mrgs_colors[ix]) for ix,i in enumerate(mrgs_data) }
