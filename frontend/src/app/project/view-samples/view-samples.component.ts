@@ -141,7 +141,7 @@ export class ViewSamplesComponent implements OnInit {
             return false;
           };
 
-          console.log(res);
+          // console.log(res);
 
           this.raw_reads = res[0];
           this.filter_reads = this.filter_data(res[0]);
@@ -199,7 +199,8 @@ export class ViewSamplesComponent implements OnInit {
             header: 'Re-run sample',
             icon: 'fa fa-play',
             accept: () => {
-              
+                // console.log(sample)
+                // sample.status = 're-running';
                 this.sampleService.run(sample)
                   .subscribe(project => {
 
@@ -245,7 +246,7 @@ export class ViewSamplesComponent implements OnInit {
           });
         });
 
-        console.log(this.all_samples);
+        // console.log(this.all_samples);
 
         
 

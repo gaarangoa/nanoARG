@@ -2219,7 +2219,7 @@ var ViewSamplesComponent = (function () {
                 return false;
             }
             ;
-            console.log(res);
+            // console.log(res);
             _this.raw_reads = res[0];
             _this.filter_reads = _this.filter_data(res[0]);
             _this.network_data = res[1];
@@ -2264,6 +2264,8 @@ var ViewSamplesComponent = (function () {
             header: 'Re-run sample',
             icon: 'fa fa-play',
             accept: function () {
+                // console.log(sample)
+                // sample.status = 're-running';
                 _this.sampleService.run(sample)
                     .subscribe(function (project) {
                 });
@@ -2304,7 +2306,7 @@ var ViewSamplesComponent = (function () {
                 });
             });
         });
-        console.log(this.all_samples);
+        // console.log(this.all_samples);
     };
     ViewSamplesComponent.prototype.ngOnDestroy = function () {
         this.sub.unsubscribe();
