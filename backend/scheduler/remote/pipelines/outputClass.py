@@ -24,20 +24,20 @@ origin_color = {
 }
 
 def color_map():
-    _cmges = Color('#000000')
+    _cmges = Color('#FFFFFF')
     _cargs = Color('#073a8c')
-    _cmrgs = Color('#FFFFFF')
+    _cmrgs = Color('#000000')
     # 
     mges_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/MGEs90.size")}
     mrgs_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/bacmet.size")}
     args_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/deeparg.size")}
     # 
-    _args_color_list = list(_cargs.range_to(Color("#a31017"), len(args_data)))+list(_cargs.range_to(Color("#767f13"), len(args_data)))+list(_cargs.range_to(Color("#127f60"), len(args_data)))
+    _args_color_list = list(_cargs.range_to(Color("#a31017"), len(args_data))) + list(Color('28ba45').range_to(Color("#767f13"), len(args_data))) + list(Color('').range_to(Color("#d3d891"), len(args_data)))
     random.seed(0)
     random.shuffle(_args_color_list)
-    mges_colors = [str(i) for i in list(_cmges.range_to(Color("#000000"), len(mges_data)))]
+    mges_colors = [str(i) for i in list(_cmges.range_to(Color("#FFFFFF"), len(mges_data)))]
     args_colors = [str(i) for i in _args_color_list]
-    mrgs_colors = [str(i) for i in list(_cmrgs.range_to(Color("#FFFFFF"), len(mrgs_data)))]
+    mrgs_colors = [str(i) for i in list(_cmrgs.range_to(Color("#000000"), len(mrgs_data)))]
     # 
     mges_c = { i:str(mges_colors[ix]) for ix,i in enumerate(mges_data) }
     mrgs_c = { i:str(mrgs_colors[ix]) for ix,i in enumerate(mrgs_data) }
