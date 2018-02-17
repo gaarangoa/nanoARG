@@ -200,7 +200,7 @@ export class ViewSamplesComponent implements OnInit {
             icon: 'fa fa-play',
             accept: () => {
                 // console.log(sample)
-                // sample.status = 're-running';
+                sample.status = 're-running';
                 this.sampleService.run(sample)
                   .subscribe(project => {
 
