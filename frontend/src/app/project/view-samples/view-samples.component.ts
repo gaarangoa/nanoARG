@@ -199,6 +199,7 @@ export class ViewSamplesComponent implements OnInit {
             header: 'Re-run sample',
             icon: 'fa fa-play',
             accept: () => {
+              
                 this.sampleService.run(sample)
                   .subscribe(project => {
 
