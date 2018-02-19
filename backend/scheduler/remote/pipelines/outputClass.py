@@ -82,6 +82,8 @@ def network(data = {}):
     arg_labels = {}
     for iread, read in tqdm(enumerate(data)):
         # add taxonomy nodes
+        print(read)
+        break
         _taxa = read['read']['taxa']
         try:
             N[_taxa]+=1
