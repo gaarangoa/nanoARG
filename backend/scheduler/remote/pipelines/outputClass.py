@@ -116,8 +116,8 @@ def network(data = {}):
                 E[(_taxa+"_"+_id)]['weight']+=1
             except Exception as e:
                 E[(_taxa+"_"+_id)] = {
-                    "source": source_id,
-                    "target": target_id,
+                    "source": _taxa,
+                    "target": _id,
                     "id": _taxa + "_" + _id,
                     "weight": 1,
                     "color": 'blue'
