@@ -76,6 +76,7 @@ export class Network {
               layout: {
                 name: 'breadthfirst',
                 fit: true,
+                circle: true,
                 avoidOverlap: true,
                 animate: false,
                 componentSpacing: 40,
