@@ -23,9 +23,27 @@ origin_color = {
     4: "#F26D21"
 }
 
+pathogens = {
+    1352: 'Enterococcus faecium',
+    1280: 'Staphylococcus aureus',
+    573: 'Klebsiella pneumonia',
+    470: 'Acinetobacter baumannii',
+    287: 'Pseudomonas aeruginosa',
+    42895: 'Enterobacter spp.',
+    543: 'Enterobacteriaceae',
+    1352: 'Enterococcus faecium',
+    1280: 'Staphylococcus aureus',
+    210: 'Helicobacter pylori',
+    205: 'Campylobacter sp',
+    590: 'Salmonellae',
+    485: 'Neisseria gonorrhoeae',
+    1313: 'Streptococcus pneumoniae',
+    727: 'Haemophilus influenzae',
+    625: 'Shigella sp'
+}
+
 def color_map():
     _cmges = Color('#FFFFFF')
-    # _cargs = Color('#073a8c')
     _cmrgs = Color('#000000')
     # 
     mges_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/MGEs90.size")}
@@ -82,19 +100,24 @@ def network(data = {}):
     arg_labels = {}
     for iread, read in tqdm(enumerate(data)):
         # add taxonomy nodes
-        print(read)
+        # print(read)
         # break
         _taxa = read['read'][0]['taxa']
         try:
             N[_taxa]+=1
         except:
-            N[_taxa] = {
-                "id": _taxa,
-                "size": 1,
-                "origin": 9,
-                "color": 'white',
-                "metadata": read['read'][0]['taxa_id']
-            }
+            try:
+                pathogens[int(read['read'][0]['taxa_id'])]
+                N[_taxa] = {
+                    "id": _taxa,
+                    "size": 1,
+                    "origin": 9,
+                    "color": 'white',
+                    "metadata": read['read'][0]['taxa_id']
+                }
+            except Exception as e:
+                pass
+            
         for ixgene, gene in enumerate(read['data']):
             # discard general functions
             if gene['origin'] == 3: 
@@ -115,13 +138,17 @@ def network(data = {}):
             try:
                 E[(_taxa+"_"+_id)]['weight']+=1
             except Exception as e:
-                E[(_taxa+"_"+_id)] = {
-                    "source": _taxa,
-                    "target": _id,
-                    "id": _taxa + "_" + _id,
-                    "weight": 1,
-                    "color": 'blue'
-                }
+                try:
+                    pathogens[int(read['read'][0]['taxa_id'])]
+                    E[(_taxa+"_"+_id)] = {
+                        "source": _taxa,
+                        "target": _id,
+                        "id": _taxa + "_" + _id,
+                        "weight": 1,
+                        "color": 'blue'
+                    }
+                except:
+                    pass
             # aggregate nodes
             try:
                 N[_id]['size']+=1
@@ -259,7 +286,7 @@ def read_map(parameters = []):
     print('computing distributions')
     
     filter_data = [i for i in sorted(data, key=lambda k: k['read'][0]['args'], reverse=True) if i['read'][0]['args']>=1 ][:100]
-    filter_taxa = sorted(taxa_info.values(), key=lambda k: k['num_reads'], reverse=True)[:100]
+    filter_taxa = sorted(taxa_info.values(), key=lambda k: k['num_reads'], reverse=True)[:200]
 
     json.dump([ filter_data, net, arg_labels, filter_taxa, {"total_reads": len(read_length), "read_length_distribution": read_length_distribution} ], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
     json.dump([ data, net, arg_labels, taxa_info.values(), {"total_reads": len(read_length)} ], open(parameters["storage_remote_dir"]+"/complete.bestHit.json", "w"))
