@@ -33,14 +33,22 @@ export class Network {
                 {
                   selector: 'node',
                   style: {
-                    'background-color': function(e){if(e.data("origin") !== 9){return e.data('color')}else{return "yellow"}},
+                    'background-color': function(e){
+                      if(e.data("origin") === 9){
+                        return "yellow"
+                      }else if(e.data("origin") === 10){
+                        return "red"}
+                      else {
+                        return e.data('color')
+                      }
+                    },
                     'background-opacity': 1,
                     'border-color': '#000',
                     'border-width': 2,
                     'label': 'data(id)',
                     'font-size': 20,
                     'font-family': '"Lato", sans-serif',
-                    'shape': function(e){if(e.data("origin") === 9){return "star"}else{return "ellipse"}},
+                    'shape': function(e){if(e.data("origin") >= 9){return "star"}else{return "ellipse"}},
                     'padding': '30%',
                     'height': 'mapData(size, '+_min+', '+_max+', 30, 50)',
                     'width': 'mapData(size, '+_min+', '+_max+', 30, 50)'
