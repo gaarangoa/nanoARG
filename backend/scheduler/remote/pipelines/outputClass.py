@@ -99,7 +99,7 @@ def network(data = {}):
     E = {}
     arg_labels = {}
     for iread, read in tqdm(enumerate(data)):
-        if read['read'][0]['args']>=1: 
+        if read['read'][0]['args']>=1 and  read['read'][0]['taxa_id'] != 'undefined':
             pathogens.update({int(read['read'][0]['taxa_id']):True})
             # add taxonomy nodes
             # print(read)
