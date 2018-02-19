@@ -100,8 +100,8 @@ def network(data = {}):
     arg_labels = {}
     for iread, read in tqdm(enumerate(data)):
         norigin = 9
-        if read[0]['args']>=1: 
-            pathogens[int(read[0]['taxa_id'])] = True
+        if read['read'][0]['args']>=1: 
+            pathogens[int(read['read'][0]['taxa_id'])] = True
             norigin = 10
         # add taxonomy nodes
         # print(read)
