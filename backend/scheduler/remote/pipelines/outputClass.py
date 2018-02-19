@@ -99,8 +99,12 @@ def network(data = {}):
     E = {}
     arg_labels = {}
     for iread, read in tqdm(enumerate(data)):
-        if read['read'][0]['args']>=1 and  read['read'][0]['taxa_id'] != 'undefined':
-            pathogens.update({int(read['read'][0]['taxa_id']):True})
+        if read['read'][0]['args']>=1:
+            if read['read'][0]['taxa_id'] == 'undefined':
+                key = 0.01
+            else:
+                key = int(read['read'][0]['taxa_id'])
+            pathogens.update({key:True})
             # add taxonomy nodes
             # print(read)
             # break
@@ -110,7 +114,11 @@ def network(data = {}):
         except:
             try:
                 norigin = 9
-                if pathogens[int(read['read'][0]['taxa_id'])] == True:
+                if read['read'][0]['taxa_id'] == 'undefined':
+                    key = 0.01
+                else:
+                    key = int(read['read'][0]['taxa_id'])
+                if pathogens[key] == True:
                     norigin = 10
                 N[_taxa] = {
                     "id": _taxa,
