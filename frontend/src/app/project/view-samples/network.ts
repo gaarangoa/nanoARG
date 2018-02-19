@@ -36,11 +36,12 @@ export class Network {
                     'background-color': function(e){
                       if(e.data("origin") === 9){
                         return "yellow"
-                      }else if(e.data("origin") === 10){
+                      }else{
+                      if(e.data("origin") === 10){
                         return "red"}
                       else {
                         return e.data('color')
-                      }
+                      }}
                     },
                     'background-opacity': 1,
                     'border-color': '#000',

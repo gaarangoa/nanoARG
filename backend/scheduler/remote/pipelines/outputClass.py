@@ -106,21 +106,21 @@ def network(data = {}):
             # add taxonomy nodes
             # print(read)
             # break
-            _taxa = read['read'][0]['taxa']
+        _taxa = read['read'][0]['taxa']
+        try:
+            N[_taxa]+=1
+        except:
             try:
-                N[_taxa]+=1
-            except:
-                try:
-                    pathogens[int(read['read'][0]['taxa_id'])]
-                    N[_taxa] = {
-                        "id": _taxa,
-                        "size": 1,
-                        "origin": norigin,
-                        "color": "yellow",
-                        "metadata": read['read'][0]['taxa_id']
-                    }
-                except Exception as e:
-                    pass
+                pathogens[int(read['read'][0]['taxa_id'])]
+                N[_taxa] = {
+                    "id": _taxa,
+                    "size": 1,
+                    "origin": norigin,
+                    "color": "yellow",
+                    "metadata": read['read'][0]['taxa_id']
+                }
+            except Exception as e:
+                pass
             
         for ixgene, gene in enumerate(read['data']):
             # discard general functions
@@ -139,21 +139,21 @@ def network(data = {}):
             # process nodes
             _id = _get_id(gene)
             # aggregate taxonomy edges
-            if read['read'][0]['args']>=1: 
+            # if read['read'][0]['args']>=1: 
+            try:
+                E[(_taxa+"_"+_id)]['weight']+=1
+            except Exception as e:
                 try:
-                    E[(_taxa+"_"+_id)]['weight']+=1
-                except Exception as e:
-                    try:
-                        pathogens[int(read['read'][0]['taxa_id'])]
-                        E[(_taxa+"_"+_id)] = {
-                            "source": _taxa,
-                            "target": _id,
-                            "id": _taxa + "_" + _id,
-                            "weight": 1,
-                            "color": 'blue'
-                        }
-                    except:
-                        pass
+                    pathogens[int(read['read'][0]['taxa_id'])]
+                    E[(_taxa+"_"+_id)] = {
+                        "source": _taxa,
+                        "target": _id,
+                        "id": _taxa + "_" + _id,
+                        "weight": 1,
+                        "color": 'blue'
+                    }
+                except:
+                    pass
             # aggregate nodes
             try:
                 N[_id]['size']+=1
