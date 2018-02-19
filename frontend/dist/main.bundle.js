@@ -1961,7 +1961,7 @@ var Network = (function () {
                         'label': 'data(id)',
                         'font-size': 20,
                         'font-family': '"Lato", sans-serif',
-                        // 'shape': data(shape),
+                        'shape': 'function(e){if(e.origin==9){return "octagon"}else{return "ellipse"}}',
                         'padding': '30%',
                         'height': 'mapData(size, ' + _min + ', ' + _max + ', 30, 50)',
                         'width': 'mapData(size, ' + _min + ', ' + _max + ', 30, 50)'
@@ -2276,7 +2276,10 @@ var ViewSamplesComponent = (function () {
             icon: 'fa fa-play',
             accept: function () {
                 // console.log(sample)
-                sample.status = 're-running';
+                // sample.status = 're-running';
+                // *************************************
+                // TODO: create a service that updates the status of a sample given its ID !IMPORTANT
+                // *************************************
                 _this.sampleService.run(sample)
                     .subscribe(function (project) {
                 });

@@ -40,7 +40,7 @@ export class Network {
                     'label': 'data(id)',
                     'font-size': 20,
                     'font-family': '"Lato", sans-serif',
-                    // 'shape': data(shape),
+                    'shape': 'function(e){if(e.origin==9){return "octagon"}else{return "ellipse"}}',
                     'padding': '30%',
                     'height': 'mapData(size, '+_min+', '+_max+', 30, 50)',
                     'width': 'mapData(size, '+_min+', '+_max+', 30, 50)'
