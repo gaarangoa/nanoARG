@@ -288,7 +288,7 @@ var DashboardComponent = (function () {
     DashboardComponent.prototype.ngOnInit = function () {
         this.user = this.auth.credentials;
         // console.log(this.auth.credentials);
-        if (!this.auth.credentials['isLoggedIn']) {
+        if (this.auth.credentials['isLoggedIn'] === false) {
             this.router.navigate(['login']);
         }
     };
@@ -761,9 +761,9 @@ var LoginComponent = (function () {
             'email': [undefined, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required]],
             'password': [undefined, [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required]],
         });
-        if (this.session.get('isLoggedIn')) {
-            this.router.navigate(['dashboard']);
-        }
+        // if(this.authService.credentials['isLoggedIn']){
+        //   this.router.navigate(['dashboard']);
+        // }
     }
     LoginComponent.prototype.login = function () {
         var _this = this;
