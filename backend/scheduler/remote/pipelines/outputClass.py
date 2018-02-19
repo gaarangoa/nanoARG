@@ -99,7 +99,10 @@ def network(data = {}):
     E = {}
     arg_labels = {}
     for iread, read in tqdm(enumerate(data)):
-        if read[0]['args']>=1: pathogens[int(read[0]['taxa_id'])] = True
+        norigin = 9
+        if read[0]['args']>=1: 
+            pathogens[int(read[0]['taxa_id'])] = True
+            norigin = 10
         # add taxonomy nodes
         # print(read)
         # break
@@ -112,8 +115,8 @@ def network(data = {}):
                 N[_taxa] = {
                     "id": _taxa,
                     "size": 1,
-                    "origin": 9,
-                    "color": 'yellow',
+                    "origin": norigin,
+                    "color": "yellow",
                     "metadata": read['read'][0]['taxa_id']
                 }
             except Exception as e:
