@@ -41,14 +41,15 @@ export class AuthService {
           // this.session.putObject('user', this.credentials[0]);
           // console.log(this.session)
         }else{
-          this.session.removeAll();
+          // this.session.removeAll();
           this.credentials = [];
         }
       })
   }
 
   logout() {
-    this.session.removeAll();
+    // this.session.removeAll();
+    this.credentials = []
   }
 
   signup(data: Object){

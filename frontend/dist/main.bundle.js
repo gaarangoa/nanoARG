@@ -64,7 +64,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"navbar navbar-default navbar-fixed-top\">\n    <div class=\"container-fluid\">\n        <div class=\"navbar-header\">\n            <a routerLink=\"home\" class=\"navbar-brand\"><strong>ARG</strong> | nanopore </a>\n            <button class=\"navbar-toggle\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbar-main\">\n          </button>\n        </div>\n        <div class=\"navbar-collapse collapse\" id=\"navbar-main\">\n            <ul class=\"nav navbar-nav\">\n\n                <li *ngIf=\"authService.credentials['isLoggedIn']\">\n                    <a routerLink=\"dashboard\">Dashboard</a>\n                </li>\n                <li>\n                    <a routerLink=\"documentation\">Documentation</a>\n                </li>\n            </ul>\n\n            <ul class=\"nav navbar-nav navbar-right\">\n                <li *ngIf=\"!authService.credentials['isLoggedIn']\"><a routerLink=\"login\">LogIn</a></li>\n                <li *ngIf=\"authService.credentials['isLoggedIn']\"><a routerLink=\"login\" (click)=\"logout()\">LogOut</a></li>\n            </ul>\n\n        </div>\n    </div>\n</div>\n\n\n<br>\n<hr>\n\n<div class=\"container-fluid\">\n    <div class=\"wrapper\">\n        <router-outlet></router-outlet>\n    </div>\n</div>"
+module.exports = "<div class=\"navbar navbar-default navbar-fixed-top\">\n    <div class=\"container-fluid\">\n        <div class=\"navbar-header\">\n            <a routerLink=\"home\" class=\"navbar-brand\"><strong>ARG</strong> | nanopore </a>\n            <button class=\"navbar-toggle\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbar-main\">\n          </button>\n        </div>\n        <div class=\"navbar-collapse collapse\" id=\"navbar-main\">\n            <ul class=\"nav navbar-nav\">\n\n                <!-- <li *ngIf=\"authService.credentials['isLoggedIn']\"> -->\n                <li>\n                    <a routerLink=\"dashboard\">Dashboard</a>\n                </li>\n                <li>\n                    <a routerLink=\"documentation\">Documentation</a>\n                </li>\n            </ul>\n\n            <ul class=\"nav navbar-nav navbar-right\">\n                <li *ngIf=\"!authService.credentials['isLoggedIn']\"><a routerLink=\"login\">LogIn</a></li>\n                <li *ngIf=\"authService.credentials['isLoggedIn']\"><a routerLink=\"login\" (click)=\"logout()\">LogOut</a></li>\n            </ul>\n\n        </div>\n    </div>\n</div>\n\n\n<br>\n<hr>\n\n<div class=\"container-fluid\">\n    <div class=\"wrapper\">\n        <router-outlet></router-outlet>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -2426,13 +2426,14 @@ var AuthService = (function () {
                 _this.credentials['isLoggedIn'] = true;
             }
             else {
-                _this.session.removeAll();
+                // this.session.removeAll();
                 _this.credentials = [];
             }
         });
     };
     AuthService.prototype.logout = function () {
-        this.session.removeAll();
+        // this.session.removeAll();
+        this.credentials = [];
     };
     AuthService.prototype.signup = function (data) {
         var _this = this;
