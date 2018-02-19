@@ -74,7 +74,7 @@ export class Network {
               ],
             
               layout: {
-                name: 'cose',
+                name: 'breadthfirst',
                 fit: true,
                 avoidOverlap: true,
                 animate: false,
