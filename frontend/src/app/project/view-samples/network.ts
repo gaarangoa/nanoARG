@@ -35,10 +35,10 @@ export class Network {
                   style: {
                     'background-color': function(e){
                       if(e.data("origin") === 9){
-                        return "yellow"
+                        return "red"
                       }else{
                       if(e.data("origin") === 10){
-                        return "red"}
+                        return "yellow"}
                       else {
                         return e.data('color')
                       }}
