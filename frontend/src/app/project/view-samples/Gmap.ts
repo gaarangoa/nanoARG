@@ -16,33 +16,34 @@ export class Genome {
     public length_dist: any;
 
     constructor() {
-        this.width = 400;
+        this.width = 600;
         this.height = 400;
 
         this.conf1 = {
-            innerRadius: (this.height / 2.8) - 2,
+            innerRadius: (this.height / 2.8) - 1,
             outerRadius: this.height / 2.8,
             cornerRadius: 5,
+            color: 'rgba(200,0,0,0.5)',
             gap: 0.0, // in radian
             labels: {
               display: false,
               position: 'center',
               size: '1px',
-              color: '#000000',
+              color: 'rgba(200,0,0,0.5)',
               radialOffset: 0,
             },
             ticks: {
               display: true,
-              color: '#000000',
-              spacing: 1000,
+              color: 'rgba(0,0,0,0.5)',
+              spacing: 5000,
               labels: true,
               labelSpacing: 1,
               labelSuffix: 'k',
               labelDenominator: 1000,
               labelDisplay0: true,
-              labelSize: '1px',
-              labelColor: '#000000',
-              labelFont: '"Lato", sans-serif',
+              labelSize: '4em',
+              labelColor: 'rgba(10,30,20,0.8)',
+            //   labelFont: '"Lato", sans-serif',
               majorSpacing: 1,
               size: {
                 minor: 2,
@@ -60,6 +61,7 @@ export class Genome {
             color: function(d) { return d.color; },
             strokeColor: function(d) { return 'black'; },
             strokeWidth: function(d){return d.stroke_width;},
+            opacity: 0.7,
             // opacity: function(d) { if (d.origin === 1) { return d.opacity; }else { return 0; }},
             logScale: false,
             tooltipContent: function(d){ return d.value; },
@@ -74,6 +76,7 @@ export class Genome {
             color: function(d) { return d.color; },
             strokeColor: function(d) { return 'black'; },
             strokeWidth: function(d){return d.stroke_width;},
+            opacity: 0.7,
             // opacity: function(d) { if (d.origin === 4) { return d.opacity; }else { return 0; }},
             logScale: false,
             tooltipContent: function(d){ return d.value; },
@@ -88,6 +91,7 @@ export class Genome {
             color: function(d) { return d.color; },
             strokeColor: function(d) { return 'black'; },
             strokeWidth: function(d){return d.stroke_width;},
+            opacity: 0.7,
             // opacity: function(d) { if (d.origin === 3) { return d.opacity; }else { return 0; }},
             logScale: false,
             tooltipContent: function(d){ return d.value; },
@@ -102,6 +106,7 @@ export class Genome {
             color: function(d) { return d.color; },
             strokeColor: function(d) { return 'black'; },
             strokeWidth: function(d){return d.stroke_width;},
+            opacity: 0.7,
             // opacity: function(d) { if (d.origin === 4) { return d.opacity; }else { return 0; }},
             logScale: false,
             tooltipContent: function(d){ return d.value; },

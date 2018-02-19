@@ -81,6 +81,18 @@ def network(data = {}):
     E = {}
     arg_labels = {}
     for iread, read in tqdm(enumerate(data)):
+        # add taxonomy nodes
+        _taxa = read['read']['taxa']
+        try:
+            N[_taxa]+=1
+        except:
+            N[_taxa] = {
+                "id": _taxa,
+                "size": 1,
+                "origin": 9,
+                "color": 'white',
+                "metadata": read['read']['taxa_id']
+            }
         for ixgene, gene in enumerate(read['data']):
             # discard general functions
             if gene['origin'] == 3: 
@@ -97,6 +109,18 @@ def network(data = {}):
                 
             # process nodes
             _id = _get_id(gene)
+            # aggregate taxonomy edges
+            try:
+                E[(_taxa+"_"+_id)]['weight']+=1
+            except Exception as e:
+                E[(_taxa+"_"+_id)] = {
+                    "source": source_id,
+                    "target": target_id,
+                    "id": _taxa + "_" + _id,
+                    "weight": 1,
+                    "color": 'blue'
+                }
+            # aggregate nodes
             try:
                 N[_id]['size']+=1
             except:
@@ -108,6 +132,7 @@ def network(data = {}):
                     "metadata": gene['metadata']
                 }
             if ixgene == len(read['data']): continue
+            # now add the edges
             source = read['data'][ixgene]
             source_id = _get_id(source)
             for next_gene in range(ixgene+1, len(read['data'])):

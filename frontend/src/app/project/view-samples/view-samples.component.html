@@ -19,9 +19,9 @@
 
         <p-column header="Actions" styleClass="">
             <template let-sample="rowData" pTemplate="body">
-                <a class="  bg-red " (click)="removeSample(sample)" pButton icon="fa-trash" ></a>
-                <a class=" bg-blue " (click)="rerun(sample)" pButton icon="fa-play" ></a>
-                <a class="   bg-black" (click)="view(sample)" pButton icon="fa-eye" ></a>
+                <a class=" badge bg-red " (click)="removeSample(sample)"   > Remove</a>
+                <a class=" badge bg-blue " (click)="rerun(sample)"   >Run</a>
+                <a class=" badge bg-black" (click)="view(sample)"   >View</a>
                 <!-- <a class="   bg-green" (click)="edit(sample)" pButton icon="fa-pencil" ></a> -->
             </template>
         </p-column>
@@ -71,11 +71,11 @@
 
         <div class="col-md-6 text-center">
             <!-- <h5>Antibiotic Resistance Genes distribution</h5> -->
-            <chart style="width: 25%" [options]="args_distribution_chart"></chart>
+            <chart style="width: 30%" [options]="args_distribution_chart"></chart>
         </div>
         <div class="col-md-6 text-center">
             <!-- <h5>Antibiotic categories distribution</h5> -->
-            <chart style="width: 25%" [options]="antibiotic_distribution_chart"></chart>
+            <chart style="width: 30%" [options]="antibiotic_distribution_chart"></chart>
         </div>
         <div class="col-md-12">
             <p class="small">
@@ -95,7 +95,7 @@
             </p>
         </div>
         <div class="col-md-6 text-center">
-            <chart style="width: 30%" [options]="mges_distribution_chart"></chart>
+            <chart style="width: 50%" [options]="mges_distribution_chart"></chart>
         </div>
 
 
@@ -109,7 +109,7 @@
             </p>
         </div>
         <div class="col-md-6 text-center">
-            <chart style="width: 30%" [options]="metal_distribution_chart"></chart>
+            <chart style="width: 50%" [options]="metal_distribution_chart"></chart>
         </div>
 
     </div>
@@ -131,7 +131,7 @@
     <div class="box-body">
 
         <!-- read circular mapping -->
-        <div class="col-md-6">
+        <div class="col-md-6 col-md-offset-3">
             <div class="box box-solid text-center">
                 <h4> <strong> {{ selected_read.id }} </strong></h4>
                 <h5> <strong> (<i>{{ selected_read.taxa_rank }}</i> {{ selected_read.taxa }}) </strong> </h5>
@@ -141,9 +141,9 @@
 
         </div>
 
-        <div class="col-md-6 text-center">
-            <br><br><br><br>
-            <p-dataTable #reads_table_vis [value]="reads_table" [rows]="10" [paginator]="true" [pageLinks]="5" exportFilename="reads">
+        <div class="col-md-12 text-center">
+            <br>
+            <p-dataTable #reads_table_vis [value]="reads_table" [rows]="5" [paginator]="true" [pageLinks]="5" exportFilename="reads">
                 <p-column field='id' header='Read'>
 
                     <template let-column_data="rowData" pTemplate="body">
@@ -199,7 +199,7 @@
         </div>
         <div class="col-md-6">
             <div class="box-body text-center">
-                <p-dataTable #taxonomy_table [value]="taxonomy_data" [rows]="5" [paginator]="true" [pageLinks]="5" exportFilename="reads">
+                <p-dataTable #taxonomy_table [value]="taxonomy_data" [rows]="10" [paginator]="true" [pageLinks]="5" exportFilename="reads">
                     <p-column field='tax_id' header='Taxa ID'></p-column>
                     <p-column field='tax_rank' header='Taxa Rank'></p-column>
                     <p-column field='name' header='Name'></p-column>
@@ -211,7 +211,7 @@
         </div>
 
         <div class="col-md-6 text-center">
-            <chart [options]="taxonomy_sample_chart_species" style="width:25%"></chart>
+            <chart [options]="taxonomy_sample_chart_species" style="width:40%"></chart>
         </div>
 
 

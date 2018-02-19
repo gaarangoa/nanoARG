@@ -1,0 +1,9 @@
+@import "assets/css/boostwatch.css";
+@import "assets/css/AdminLTE.css";
+@import "assets/css/style.css";
+@import "assets/font-awesome/css/font-awesome.css";
+@import "../node_modules/primeng/resources/primeng.css";
+
+/* @import "../node_modules/primeng/resources/themes/omega/theme.css"; */
+
+@import "assets/css/primeng/theme.css";
