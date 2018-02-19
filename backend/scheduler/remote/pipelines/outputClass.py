@@ -83,8 +83,8 @@ def network(data = {}):
     for iread, read in tqdm(enumerate(data)):
         # add taxonomy nodes
         print(read)
-        break
-        _taxa = read['read']['taxa']
+        # break
+        _taxa = read['read'][0]['taxa']
         try:
             N[_taxa]+=1
         except:
@@ -93,7 +93,7 @@ def network(data = {}):
                 "size": 1,
                 "origin": 9,
                 "color": 'white',
-                "metadata": read['read']['taxa_id']
+                "metadata": read['read'][0]['taxa_id']
             }
         for ixgene, gene in enumerate(read['data']):
             # discard general functions
