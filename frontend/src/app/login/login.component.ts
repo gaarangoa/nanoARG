@@ -38,9 +38,9 @@ export class LoginComponent {
 
                   });
                 
-                if(this.session.get('isLoggedIn')){
-                  this.router.navigate(['dashboard']);
-                }
+                // if(this.authService.credentials['isLoggedIn']){
+                //   this.router.navigate(['dashboard']);
+                // }
                   
               }
 

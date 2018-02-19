@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
     this.user = this.auth.credentials;
     // console.log(this.auth.credentials);
 
-    if (!this.auth.credentials['isLoggedIn'] ) {
+    if (this.auth.credentials['isLoggedIn'] === false) {
       this.router.navigate(['login']);
     }
 
