@@ -125,7 +125,7 @@ def network(data = {}):
                     "size": 1,
                     "origin": norigin,
                     "color": "yellow",
-                    "metadata": read['read'][0]['taxa_id']
+                    "metadata": ['',read['read'][0]['taxa_id'], read['read'][0]['taxa'], read['read'][0]['taxa_rank']]
                 }
             except Exception as e:
                 pass
