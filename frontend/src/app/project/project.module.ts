@@ -22,10 +22,12 @@ export function highchartsFactory() {
 
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     SampleModule,
     ProjectRoutingModule,
     StepsModule,

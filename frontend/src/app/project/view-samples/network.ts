@@ -74,9 +74,10 @@ export class Network {
               ],
             
               layout: {
-                name: 'breadthfirst',
+                name: 'concentric',
                 fit: true,
-                circle: true,
+                circle: false,
+                directed: true,
                 avoidOverlap: true,
                 animate: false,
                 componentSpacing: 40,

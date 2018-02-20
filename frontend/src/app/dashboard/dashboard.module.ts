@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
+import { RouterModule } from '@angular/router';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
@@ -19,6 +19,7 @@ import { ConfirmDialogModule } from 'primeng/primeng';
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     DashboardRoutingModule,
     FormsModule,
     ReactiveFormsModule,

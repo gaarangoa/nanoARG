@@ -132,6 +132,7 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__project_sample_sample_module__ = __webpack_require__("../../../../../src/app/project/sample/sample.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__home_home_component__ = __webpack_require__("../../../../../src/app/home/home.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__documentation_documentation_component__ = __webpack_require__("../../../../../src/app/documentation/documentation.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__angular_router__ = __webpack_require__("../../../router/index.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -141,6 +142,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -169,6 +171,7 @@ var AppModule = (function () {
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
+                __WEBPACK_IMPORTED_MODULE_15__angular_router__["RouterModule"],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormsModule"],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["ReactiveFormsModule"],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* HttpModule */],
@@ -253,7 +256,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<br><br>\n<!--Profile and new project-->\n<div class=\"col-md-3\">\n  <div class=\"panel panel-default\">\n          <div class=\"panel-heading with-border text-center\">\n            <strong><h3 class=\"panel-title\"><strong>{{ user.fullname }}</strong></h3></strong>\n          </div>\n          <!-- /.box-header -->\n          <div class=\"panel-body\">\n            <strong><i class=\"fa fa-book margin-r-5\"></i> Education</strong>\n\n            <p class=\"text-muted \">\n              {{user.institution}}\n            </p>\n\n            <hr>\n\n            <strong><i class=\"fa fa-map-marker margin-r-5\"></i> Contact</strong>\n\n            <p class=\"text-muted\">{{user.email}}</p>\n\n            <hr>\n\n            <strong><i class=\"fa fa-pencil margin-r-5\"></i> Skills</strong>\n\n            <p>\n              <span class=\"label label-danger\">Nanopore</span>\n              <span class=\"label label-success\">Sequencing</span>\n            </p>\n\n            <hr>\n\n            <strong><i class=\"fa fa-file-text-o margin-r-5\"></i> Notes</strong>\n\n            <p></p>\n          </div>\n          <!-- /.box-body -->\n        </div>\n\n\n  \n</div>\n\n\n<!--Feed with the existing projects from user-->\n<div class=\"col-md-6\">\n  <app-my-projects></app-my-projects>\n</div>\n\n\n<!--Some updates about anything-->\n<div class=\"col-md-3\">\n  <div class=\"\">\n    <app-new-project></app-new-project>\n  </div>\n</div>\n\n"
+module.exports = "<br><br>\n<!--Profile and new project-->\n<div class=\"col-md-3\">\n    <div class=\"panel panel-default\">\n        <div class=\"panel-heading with-border text-center\">\n            <strong><h3 class=\"panel-title\"><strong>{{ user.fullname }}</strong></h3>\n            </strong>\n        </div>\n        <!-- /.box-header -->\n        <div class=\"panel-body\">\n            <strong><i class=\"fa fa-book margin-r-5\"></i> Education</strong>\n\n            <p class=\"text-muted \">\n                {{user.institution}}\n            </p>\n\n            <hr>\n\n            <strong><i class=\"fa fa-map-marker margin-r-5\"></i> Contact</strong>\n\n            <p class=\"text-muted\">{{user.email}}</p>\n\n            <hr>\n\n            <strong><i class=\"fa fa-pencil margin-r-5\"></i> Skills</strong>\n\n            <p>\n                <span class=\"label label-danger\">Nanopore</span>\n                <span class=\"label label-success\">Sequencing</span>\n            </p>\n\n            <hr>\n\n            <strong><i class=\"fa fa-file-text-o margin-r-5\"></i> Notes</strong>\n\n            <p></p>\n        </div>\n        <!-- /.box-body -->\n    </div>\n\n\n\n</div>\n\n\n<!--Feed with the existing projects from user-->\n<div class=\"col-md-6\">\n    <app-my-projects></app-my-projects>\n</div>\n\n\n<!--Some updates about anything-->\n<div class=\"col-md-3\">\n    <div class=\"\">\n        <app-new-project></app-new-project>\n    </div>\n</div>\n\n<router-outlet></router-outlet>"
 
 /***/ }),
 
@@ -315,13 +318,14 @@ var DashboardComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dashboard_routing_module__ = __webpack_require__("../../../../../src/app/dashboard/dashboard-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__new_project_new_project_component__ = __webpack_require__("../../../../../src/app/dashboard/new-project/new-project.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_project_project_service__ = __webpack_require__("../../../../../src/services/project/project.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__my_projects_my_projects_component__ = __webpack_require__("../../../../../src/app/dashboard/my-projects/my-projects.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_primeng_primeng__ = __webpack_require__("../../../../primeng/primeng.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_primeng_primeng___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_primeng_primeng__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dashboard_routing_module__ = __webpack_require__("../../../../../src/app/dashboard/dashboard-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__new_project_new_project_component__ = __webpack_require__("../../../../../src/app/dashboard/new-project/new-project.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_project_project_service__ = __webpack_require__("../../../../../src/services/project/project.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__my_projects_my_projects_component__ = __webpack_require__("../../../../../src/app/dashboard/my-projects/my-projects.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__ = __webpack_require__("../../../../primeng/primeng.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_primeng_primeng___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_primeng_primeng__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -340,6 +344,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var DashboardModule = (function () {
     function DashboardModule() {
     }
@@ -347,18 +352,19 @@ var DashboardModule = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
-                __WEBPACK_IMPORTED_MODULE_3__dashboard_routing_module__["a" /* DashboardRoutingModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_router__["RouterModule"],
+                __WEBPACK_IMPORTED_MODULE_4__dashboard_routing_module__["a" /* DashboardRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormsModule"],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["ReactiveFormsModule"],
-                __WEBPACK_IMPORTED_MODULE_8_primeng_primeng__["ConfirmDialogModule"]
+                __WEBPACK_IMPORTED_MODULE_9_primeng_primeng__["ConfirmDialogModule"]
             ],
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_4__dashboard_component__["a" /* DashboardComponent */],
-                __WEBPACK_IMPORTED_MODULE_5__new_project_new_project_component__["a" /* NewProjectComponent */],
-                __WEBPACK_IMPORTED_MODULE_7__my_projects_my_projects_component__["a" /* MyProjectsComponent */]
+                __WEBPACK_IMPORTED_MODULE_5__dashboard_component__["a" /* DashboardComponent */],
+                __WEBPACK_IMPORTED_MODULE_6__new_project_new_project_component__["a" /* NewProjectComponent */],
+                __WEBPACK_IMPORTED_MODULE_8__my_projects_my_projects_component__["a" /* MyProjectsComponent */]
             ],
             providers: [
-                __WEBPACK_IMPORTED_MODULE_6__services_project_project_service__["a" /* ProjectService */]
+                __WEBPACK_IMPORTED_MODULE_7__services_project_project_service__["a" /* ProjectService */]
             ]
         }), 
         __metadata('design:paramtypes', [])
@@ -980,6 +986,7 @@ var ProjectComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angular2_highcharts_dist_HighchartsService___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_angular2_highcharts_dist_HighchartsService__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__swimlane_ngx_charts__ = __webpack_require__("../../../../@swimlane/ngx-charts/release/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__swimlane_ngx_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__swimlane_ngx_charts__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__angular_router__ = __webpack_require__("../../../router/index.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1005,6 +1012,7 @@ function highchartsFactory() {
     return __webpack_require__("../../../../highcharts/highcharts.js");
 }
 
+
 var ProjectModule = (function () {
     function ProjectModule() {
     }
@@ -1012,6 +1020,7 @@ var ProjectModule = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
+                __WEBPACK_IMPORTED_MODULE_11__angular_router__["RouterModule"],
                 __WEBPACK_IMPORTED_MODULE_4__sample_sample_module__["a" /* SampleModule */],
                 __WEBPACK_IMPORTED_MODULE_2__project_routing_module__["a" /* ProjectRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_6_primeng_primeng__["StepsModule"],
@@ -1999,9 +2008,10 @@ var Network = (function () {
                 },
             ],
             layout: {
-                name: 'breadthfirst',
+                name: 'concentric',
                 fit: true,
-                circle: true,
+                circle: false,
+                directed: true,
                 avoidOverlap: true,
                 animate: false,
                 componentSpacing: 40,

@@ -1,16 +1,17 @@
 <br><br>
 <!--Profile and new project-->
 <div class="col-md-3">
-  <div class="panel panel-default">
-          <div class="panel-heading with-border text-center">
-            <strong><h3 class="panel-title"><strong>{{ user.fullname }}</strong></h3></strong>
-          </div>
-          <!-- /.box-header -->
-          <div class="panel-body">
+    <div class="panel panel-default">
+        <div class="panel-heading with-border text-center">
+            <strong><h3 class="panel-title"><strong>{{ user.fullname }}</strong></h3>
+            </strong>
+        </div>
+        <!-- /.box-header -->
+        <div class="panel-body">
             <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
 
             <p class="text-muted ">
-              {{user.institution}}
+                {{user.institution}}
             </p>
 
             <hr>
@@ -24,8 +25,8 @@
             <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
 
             <p>
-              <span class="label label-danger">Nanopore</span>
-              <span class="label label-success">Sequencing</span>
+                <span class="label label-danger">Nanopore</span>
+                <span class="label label-success">Sequencing</span>
             </p>
 
             <hr>
@@ -33,25 +34,26 @@
             <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
 
             <p></p>
-          </div>
-          <!-- /.box-body -->
         </div>
+        <!-- /.box-body -->
+    </div>
 
 
-  
+
 </div>
 
 
 <!--Feed with the existing projects from user-->
 <div class="col-md-6">
-  <app-my-projects></app-my-projects>
+    <app-my-projects></app-my-projects>
 </div>
 
 
 <!--Some updates about anything-->
 <div class="col-md-3">
-  <div class="">
-    <app-new-project></app-new-project>
-  </div>
+    <div class="">
+        <app-new-project></app-new-project>
+    </div>
 </div>
 
+<router-outlet></router-outlet>

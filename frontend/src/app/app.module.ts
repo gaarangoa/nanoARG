@@ -20,7 +20,7 @@ import { SampleModule } from './project/sample/sample.module';
 import { HomeComponent } from './home/home.component';
 import { DocumentationComponent } from './documentation/documentation.component';
 
-
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { DocumentationComponent } from './documentation/documentation.component'
   ],
   imports: [
     BrowserModule,
+    RouterModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
