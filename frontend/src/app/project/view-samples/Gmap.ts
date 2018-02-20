@@ -130,13 +130,18 @@ export class Genome {
         var d3 = this.data.reduce((init, current) => { if (current.origin === 3) {init.push(current); } return init; }, []);
         var d4 = this.data.reduce((init, current) => { if (current.origin === 4) {init.push(current); } return init; }, []);
 
+        console.log(d1)
+        d1.forEach(e => {
+            e.value = e.metadata[4]
+        });
+
         this.circos.layout(this.read, this.conf1);
         this.circos.highlight('ARGs', d1, this.origin_1);
         this.circos.highlight('MRGs', d4, this.origin_2);
         this.circos.highlight('MGEs', d2, this.origin_3);
         this.circos.highlight('Others', d3, this.origin_4);
         
-        // this.circos.text('MGEs', this.data, this.origin_2);
+        this.circos.text('ARGs_text', d1, this.origin_1);
 
         this.circos.render();
     };

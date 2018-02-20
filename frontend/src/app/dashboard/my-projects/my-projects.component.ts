@@ -16,11 +16,11 @@ export class MyProjectsComponent implements OnInit {
 
   constructor(  public router: Router, 
                 public projectService: ProjectService, 
-                private session: AuthService,
+                private session: Session,
                 private confirmationService: ConfirmationService,
                 ){
 
-                this.projectService.readProjectByUserId(this.session.credentials['_id'])
+                this.projectService.readProjectByUserId(this.session.get('user')['_id'])
                     .subscribe(()=>{
                         // console.log(this.projectService.projectsByUser)
                     })

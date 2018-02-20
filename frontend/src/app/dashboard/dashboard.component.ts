@@ -26,10 +26,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
 
-    this.user = this.auth.credentials;
+    this.user = this.session.get('user');
     // console.log(this.auth.credentials);
 
-    if (this.auth.credentials['isLoggedIn'] === false) {
+    if (this.session.get('isLoggedIn') === false) {
       this.router.navigate(['login']);
     }
 

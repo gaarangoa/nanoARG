@@ -18,8 +18,8 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li *ngIf="!authService.credentials['isLoggedIn']"><a routerLink="login">LogIn</a></li>
-                <li *ngIf="authService.credentials['isLoggedIn']"><a routerLink="login" (click)="logout()">LogOut</a></li>
+                <li *ngIf="!authService.session.get('isLoggedIn')"><a routerLink="login">LogIn</a></li>
+                <li *ngIf="authService.session.get('isLoggedIn')"><a routerLink="login" (click)="logout()">Logout</a></li>
             </ul>
 
         </div>

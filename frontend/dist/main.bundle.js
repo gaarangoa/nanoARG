@@ -64,7 +64,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"navbar navbar-default navbar-fixed-top\">\n    <div class=\"container-fluid\">\n        <div class=\"navbar-header\">\n            <a routerLink=\"home\" class=\"navbar-brand\"><strong>ARG</strong> | nanopore </a>\n            <button class=\"navbar-toggle\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbar-main\">\n          </button>\n        </div>\n        <div class=\"navbar-collapse collapse\" id=\"navbar-main\">\n            <ul class=\"nav navbar-nav\">\n\n                <!-- <li *ngIf=\"authService.credentials['isLoggedIn']\"> -->\n                <li>\n                    <a routerLink=\"dashboard\">Dashboard</a>\n                </li>\n                <li>\n                    <a routerLink=\"documentation\">Documentation</a>\n                </li>\n            </ul>\n\n            <ul class=\"nav navbar-nav navbar-right\">\n                <li *ngIf=\"!authService.credentials['isLoggedIn']\"><a routerLink=\"login\">LogIn</a></li>\n                <li *ngIf=\"authService.credentials['isLoggedIn']\"><a routerLink=\"login\" (click)=\"logout()\">LogOut</a></li>\n            </ul>\n\n        </div>\n    </div>\n</div>\n\n\n<br>\n<hr>\n\n<div class=\"container-fluid\">\n    <div class=\"wrapper\">\n        <router-outlet></router-outlet>\n    </div>\n</div>"
+module.exports = "<div class=\"navbar navbar-default navbar-fixed-top\">\n    <div class=\"container-fluid\">\n        <div class=\"navbar-header\">\n            <a routerLink=\"home\" class=\"navbar-brand\"><strong>ARG</strong> | nanopore </a>\n            <button class=\"navbar-toggle\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbar-main\">\n          </button>\n        </div>\n        <div class=\"navbar-collapse collapse\" id=\"navbar-main\">\n            <ul class=\"nav navbar-nav\">\n\n                <!-- <li *ngIf=\"authService.credentials['isLoggedIn']\"> -->\n                <li>\n                    <a routerLink=\"dashboard\">Dashboard</a>\n                </li>\n                <li>\n                    <a routerLink=\"documentation\">Documentation</a>\n                </li>\n            </ul>\n\n            <ul class=\"nav navbar-nav navbar-right\">\n                <li *ngIf=\"!authService.session.get('isLoggedIn')\"><a routerLink=\"login\">LogIn</a></li>\n                <li *ngIf=\"authService.session.get('isLoggedIn')\"><a routerLink=\"login\" (click)=\"logout()\">Logout</a></li>\n            </ul>\n\n        </div>\n    </div>\n</div>\n\n\n<br>\n<hr>\n\n<div class=\"container-fluid\">\n    <div class=\"wrapper\">\n        <router-outlet></router-outlet>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -289,9 +289,9 @@ var DashboardComponent = (function () {
         this.auth = auth;
     }
     DashboardComponent.prototype.ngOnInit = function () {
-        this.user = this.auth.credentials;
+        this.user = this.session.get('user');
         // console.log(this.auth.credentials);
-        if (this.auth.credentials['isLoggedIn'] === false) {
+        if (this.session.get('isLoggedIn') === false) {
             this.router.navigate(['login']);
         }
     };
@@ -408,9 +408,9 @@ module.exports = "<div class=\"col-md-12\" *ngFor=\"let item of projectService.p
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_project_project_service__ = __webpack_require__("../../../../../src/services/project/project.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__ = __webpack_require__("../../../../primeng/primeng.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_primeng_primeng___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_primeng_primeng__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_auth_auth_service__ = __webpack_require__("../../../../../src/services/auth/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_session_session_service__ = __webpack_require__("../../../../../src/services/session/session.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_primeng_primeng__ = __webpack_require__("../../../../primeng/primeng.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_primeng_primeng___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_primeng_primeng__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -431,7 +431,7 @@ var MyProjectsComponent = (function () {
         this.projectService = projectService;
         this.session = session;
         this.confirmationService = confirmationService;
-        this.projectService.readProjectByUserId(this.session.credentials['_id'])
+        this.projectService.readProjectByUserId(this.session.get('user')['_id'])
             .subscribe(function () {
             // console.log(this.projectService.projectsByUser)
         });
@@ -460,7 +460,7 @@ var MyProjectsComponent = (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/my-projects/my-projects.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/my-projects/my-projects.component.css")]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_project_project_service__["a" /* ProjectService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services_project_project_service__["a" /* ProjectService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__services_auth_auth_service__["a" /* AuthService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__services_auth_auth_service__["a" /* AuthService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["ConfirmationService"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3_primeng_primeng__["ConfirmationService"]) === 'function' && _d) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_project_project_service__["a" /* ProjectService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__services_project_project_service__["a" /* ProjectService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_session_session_service__["a" /* Session */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__services_session_session_service__["a" /* Session */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_primeng_primeng__["ConfirmationService"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4_primeng_primeng__["ConfirmationService"]) === 'function' && _d) || Object])
     ], MyProjectsComponent);
     return MyProjectsComponent;
     var _a, _b, _c, _d;
@@ -1745,12 +1745,16 @@ var Genome = (function () {
         var d4 = this.data.reduce(function (init, current) { if (current.origin === 4) {
             init.push(current);
         } return init; }, []);
+        console.log(d1);
+        d1.forEach(function (e) {
+            e.value = e.metadata[4];
+        });
         this.circos.layout(this.read, this.conf1);
         this.circos.highlight('ARGs', d1, this.origin_1);
         this.circos.highlight('MRGs', d4, this.origin_2);
         this.circos.highlight('MGEs', d2, this.origin_3);
         this.circos.highlight('Others', d3, this.origin_4);
-        // this.circos.text('MGEs', this.data, this.origin_2);
+        this.circos.text('ARGs_text', d1, this.origin_1);
         this.circos.render();
     };
     ;
@@ -2426,6 +2430,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_do___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_do__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_add_operator_delay__ = __webpack_require__("../../../../rxjs/add/operator/delay.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_rxjs_add_operator_delay___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_rxjs_add_operator_delay__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__encrypt__ = __webpack_require__("../../../../../src/services/auth/encrypt.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2443,6 +2448,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AuthService = (function () {
     function AuthService(http, session) {
         this.http = http;
@@ -2450,29 +2456,33 @@ var AuthService = (function () {
         // this._cookieService.removeAll();
         this.base_url = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].api_url;
         this.credentials = { "isLoggedIn": false };
+        this.encript = new __WEBPACK_IMPORTED_MODULE_8__encrypt__["a" /* Sha512 */]();
     }
     AuthService.prototype.login = function (username, password) {
         var _this = this;
+        // const hash_user = sha256(username);
+        password = this.encript.SHA512(password).toString();
         return this.http.post(this.base_url + '/auth/login/', { email: username, password: password })
             .map(function (res) {
             _this.credentials = res.json();
-            // console.log(this.credentials, username, password);
             if (_this.credentials) {
-                _this.credentials = _this.credentials[0];
-                _this.credentials['isLoggedIn'] = true;
+                // this.credentials = this.credentials[0];
+                // this.credentials['isLoggedIn'] = true;
+                _this.session.putObject('isLoggedIn', 1);
+                _this.session.putObject('user', _this.credentials[0]);
             }
             else {
-                // this.session.removeAll();
-                _this.credentials = [];
+                _this.session.removeAll();
             }
         });
     };
     AuthService.prototype.logout = function () {
-        // this.session.removeAll();
+        this.session.removeAll();
         this.credentials = [];
     };
     AuthService.prototype.signup = function (data) {
         var _this = this;
+        data['password'] = this.encript.SHA512(data['password']).toString();
         return this.http.post(this.base_url + '/auth/signup/', data)
             .map(function (res) {
             _this.credentials = res.json();
@@ -2494,6 +2504,26 @@ var AuthService = (function () {
     var _a, _b;
 }());
 //# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/auth.service.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/services/auth/encrypt.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Sha512; });
+var _sha512 = __webpack_require__("../../../../crypto-js/sha512.js");
+var Sha512 = (function () {
+    // _sha512: any;
+    function Sha512() {
+        // this._sha512 = new sha512()
+    }
+    Sha512.prototype.SHA512 = function (message) {
+        return _sha512(message);
+    };
+    return Sha512;
+}());
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/encrypt.js.map
 
 /***/ }),
 
