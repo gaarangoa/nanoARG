@@ -152,7 +152,11 @@ def network(data = {}):
                     E[(_taxa+"_"+_id)]['weight']+=1
                 except Exception as e:
                     try:
-                        pathogens[int(read['read'][0]['taxa_id'])]
+                        if read['read'][0]['taxa_id'] == 'undefined':
+                            key = 0.01
+                        else:
+                            key = int(read['read'][0]['taxa_id'])
+                        pathogens[key]
                         E[(_taxa+"_"+_id)] = {
                             "source": _taxa,
                             "target": _id,
