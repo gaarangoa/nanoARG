@@ -63,7 +63,7 @@ export class AuthService {
     return this.http.post(this.base_url+'/auth/signup/', data)
       .map(res => {
         this.credentials = res.json();
-        console.log(this.credentials)
+        // console.log(this.credentials)
         if(this.credentials){
           this.session.putObject('isLoggedIn', 1);
           this.session.putObject('user', this.credentials);

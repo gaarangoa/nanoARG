@@ -131,11 +131,12 @@
     <div class="box-body">
 
         <!-- read circular mapping -->
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-12 col-md-offset-0">
             <div class="box box-solid text-center">
                 <h4> <strong> {{ selected_read.id }} </strong></h4>
                 <h5> <strong> (<i>{{ selected_read.taxa_rank }}</i> {{ selected_read.taxa }}) </strong> </h5>
-                <div class="d-inline" id="read_circle_map-1"></div>
+                <!-- <div class="d-inline" id="read_circle_map-1"></div> -->
+                <div id="eventdrops-demo" style="width: 90%;"></div>
                 <!-- <div class="d-inline" id="read_circle_map-2"></div> -->
             </div>
 
@@ -248,8 +249,10 @@
 </div>
 
 
-<div class="col-md-12">
+
+
+<!-- <div class="col-md-12">
     <chart [options]="compare_samles_stacked_bar" style="width:60%;margin: 0 auto"></chart>
-</div>
+</div> -->
 
 <p-growl [(value)]="msgs" baseZIndex="99999" autoZIndex="false"></p-growl>

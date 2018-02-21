@@ -939,7 +939,7 @@ var ProjectComponent = (function () {
         console.log(this.route.params);
         this.SUB = this.route.params.subscribe(function (params) {
             // this.dt.reset();
-            console.log(params);
+            // console.log(params)
             _this.projectID = params['pid'];
             _this.projectService.getProjectById(params['pid'])
                 .subscribe(function (response) {
@@ -1623,6 +1623,109 @@ var UploadComponent = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/project/view-samples/EventDrops.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EventDrops; });
+var d3 = __webpack_require__("../../../../d3/build/d3.node.js");
+var eventDrops = __webpack_require__("../../../../event-drops/dist/index.js");
+var chart = eventDrops({ d3: d3 });
+var numberCommitsContainer = document.getElementById('numberCommits');
+var zoomStart = document.getElementById('zoomStart');
+var zoomEnd = document.getElementById('zoomEnd');
+var EventDrops = (function () {
+    function EventDrops() {
+    }
+    EventDrops.prototype.parse_data = function (data, origin) {
+        console.log(data);
+        var mydata = [];
+        data.data.forEach(function (e) {
+            for (var i = e.start; i <= e.end; i += 10) {
+                if (e.origin === origin) {
+                    mydata.push({ date: i, message: e.metadata[4], coverage: e.coverage, start: e.start, end: e.end, iden: e.identity, evalue: e.evalue, metadata: e.metadata, strand: e.strand, index: i, author: { name: 'ARGs', email: 'some' } });
+                }
+            }
+        });
+        return mydata;
+    };
+    EventDrops.prototype.render = function (data) {
+        var arg_reads = this.parse_data(data, 1);
+        var arg_data = { name: "ARGs", data: arg_reads }; // ARGs
+        var mges_reads = this.parse_data(data, 2);
+        var mges_data = { name: "MGEs", data: mges_reads }; // ARGs
+        var mrgs_reads = this.parse_data(data, 4);
+        var mrgs_data = { name: "MRGs", data: mrgs_reads }; // ARGs
+        var other_reads = this.parse_data(data, 3);
+        var other_data = { name: "Other genes", data: other_reads }; // ARGs
+        var c_data = [arg_data, mges_data, mrgs_data, other_data];
+        var updateCommitsInformation = function (chart) {
+        };
+        var tooltip = d3
+            .select('body')
+            .append('div')
+            .classed('tooltip', true)
+            .style('opacity', 0);
+        var chart = eventDrops({
+            d3: d3,
+            bound: {
+                format: d3.timeFormat('%s'),
+            },
+            axis: {
+                formats: {
+                    milliseconds: '',
+                    seconds: '',
+                    minutes: '',
+                    hours: '',
+                    days: '',
+                    weeks: '',
+                    months: '',
+                    year: '',
+                },
+            },
+            zoom: {
+                onZoomEnd: function () { return updateCommitsInformation(chart); },
+            },
+            drop: {
+                date: function (d) { return new Date(d.date); },
+                onMouseOver: function (commit) {
+                    tooltip
+                        .transition()
+                        .duration(200)
+                        .style('opacity', 1);
+                    tooltip
+                        .html("\n                            <div class=\"box box-solid\">\n                            <div class=\"box-body\">\n                            <hp><strong>Gene: </strong>" + commit.metadata[4] + "</hp>\n                            <p>" + commit.metadata[3] + "</p>                            \n                            <p><strong>Position</strong>: " + commit.start + " - " + commit.end + "</p>\n                            <p><strong>Identity</strong>: " + commit.iden + "</p>\n                            <p><strong>Coverage</strong>: " + commit.coverage + "</p>\n                            <p><strong>e-value</strong>: " + commit.evalue + "</p>\n                            <p><strong>Strand</strong>: " + commit.strand + " </p>\n                            </div>\n                            </div>\n                        ")
+                        .style('left', (d3.event.pageX - 30) + "px")
+                        .style('top', (d3.event.pageY + 20) + "px");
+                },
+                onMouseOut: function () {
+                    tooltip
+                        .transition()
+                        .duration(500)
+                        .style('opacity', 0);
+                },
+            },
+            range: {
+                start: 0,
+                end: data.read[0].len
+            },
+            label: {
+                padding: 20,
+                text: function (d) { return ("" + d.name); },
+                width: 150,
+            },
+        });
+        d3.select('#eventdrops-demo')
+            .data([c_data])
+            .call(chart);
+        updateCommitsInformation(chart);
+    };
+    return EventDrops;
+}());
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/EventDrops.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/project/view-samples/Gmap.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1745,7 +1848,7 @@ var Genome = (function () {
         var d4 = this.data.reduce(function (init, current) { if (current.origin === 4) {
             init.push(current);
         } return init; }, []);
-        console.log(d1);
+        // console.log(d1)
         d1.forEach(function (e) {
             e.value = e.metadata[4];
         });
@@ -2155,7 +2258,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/project/view-samples/view-samples.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<br>\n\n<div style=\"text-align:center\">\n    <p-dataTable #dt [value]=\"sampleService.samplesByProject\" [rows]=\"5\" [paginator]=\"true\" [pageLinks]=\"3\" exportFilename=\"metadata\">\n        <!-- <p-header> -->\n        <!-- <h4>Samples</h4> -->\n        <!-- <div class=\"ui-helper-clearfix\">\n                <button class='btn btn-xs btn-default' type=\"button\" label=\"metadata.csv\" (click)=\"dt.exportCSV()\" style=\"float:left\"><i class=\"fa fa-download\"></i> <strong>Metadata</strong></button>\n                <button class='btn btn-xs btn-default' type=\"button\" label=\"type.csv\" (click)=\"download_type('type_csv')\" style=\"float:left\"><i class=\"fa fa-download\"></i> <strong>ARG categories</strong></button>\n                <button class='btn btn-xs btn-default' type=\"button\" label=\"type.csv\" (click)=\"download_type('subtype_csv')\" style=\"float:left\"><i class=\"fa fa-download\"></i> <strong>ARG Groups</strong></button>\n            </div> -->\n\n        <!-- </p-header> -->\n        <p-column field='name' header='Sample Name'></p-column>\n        <p-column field='primary-group' header='Biome'></p-column>\n        <!-- <p-column field='secondary-group' header='Secondary Group'></p-column> -->\n        <!-- <p-column field='date' header='Createion Date'></p-column> -->\n        <p-column field='status' header='Status'></p-column>\n\n        <p-column header=\"Actions\" styleClass=\"\">\n            <template let-sample=\"rowData\" pTemplate=\"body\">\n                <a class=\" badge bg-red \" (click)=\"removeSample(sample)\"   > Remove</a>\n                <a class=\" badge bg-blue \" (click)=\"rerun(sample)\"   >Run</a>\n                <a class=\" badge bg-black\" (click)=\"view(sample)\"   >View</a>\n                <!-- <a class=\"   bg-green\" (click)=\"edit(sample)\" pButton icon=\"fa-pencil\" ></a> -->\n            </template>\n        </p-column>\n\n        <!--<p-column styleClass=\"col-button\">\n            <template let-sample=\"rowData\" pTemplate=\"body\">\n                <button type=\"text\" (click)=\"reRun(sample)\" pButton icon=\"fa-play\" label=\"Run\"></button>\n            </template>\n        </p-column>-->\n\n    </p-dataTable>\n\n    <hr>\n\n    <p-growl [value]=\"msgs\"></p-growl>\n    <p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" width=\"425\"></p-confirmDialog>\n\n\n\n</div>\n\n\n\n\n<div class=\"box box-solid\">\n    <!-- <div class=\"box-header\"> -->\n    <!-- <h3>Results</h3> -->\n    <!-- </div> -->\n\n    <div class=\"box-body\">\n        <p>This section shows the primary statistics of the sample including read length distribution of the reads that contain at least one ARG and any other functional genes including: MGEs, MRG. Here also the distribution and taxonomy is shown.</p>\n        <!-- <br> -->\n        <h4>Read length distribution</h4>\n        <p class=\"small\">This graph shows the distribution of the read length that contains at least one ARG. The length is represented in kilo basepairs. each position represents the number of sequences withing a length 1000kbp range. The data used in this graph corresponds\n            to the reads that contain at least one ARG.</p>\n        <div class=\"col-md-12 text-center\">\n            <chart [options]=\"line_chart\"></chart>\n        </div>\n        <hr>\n        <h4>Source hits distribution</h4>\n        <p class=\"small\">The graph below displays the number of genes dicovered in the reads from the different databases (ARGs, MGEs, MRGs, others). The bars represent the number of genes from each specific category found in the sample.</p>\n\n\n        <h5>Antibiotc resistance genes annotation</h5>\n\n\n\n        <div class=\"col-md-6 text-center\">\n            <!-- <h5>Antibiotic Resistance Genes distribution</h5> -->\n            <chart style=\"width: 30%\" [options]=\"args_distribution_chart\"></chart>\n        </div>\n        <div class=\"col-md-6 text-center\">\n            <!-- <h5>Antibiotic categories distribution</h5> -->\n            <chart style=\"width: 30%\" [options]=\"antibiotic_distribution_chart\"></chart>\n        </div>\n        <div class=\"col-md-12\">\n            <p class=\"small\">\n                ARGs are computed using deepARG: a deep learning approach to predict antibiotic resistance genes in metagenomes (<a href=\"https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-018-0401-z\">Arango-Argoty et., al.</a>). Because\n                of the high error rate of nanopore reads, the deepARG-LS v1.0 was run with permisive identity parameters (<code> --iden 30 --cov 80 --evalue 1e-10 --prob 0.8 </code>) to guarantee the correctness of the classifications.\n            </p>\n            <hr>\n        </div>\n\n        <div class=\"col-md-12\">\n            <h5>Distribution of Mobile Genetic Elements (MGEs)</h5>\n            <p class=\"small\">\n                Annotations were classfied as mobile genetic elements (MGEs) based on matching metadata from protein sequences to one of the following keywords: transposase, transposon, conjugative, integrase, integron, recombinase, conjugal, mobilization, recombination,\n                plasmid (\n                <a href=\"https://www.nature.com/articles/nature13377\">Forsberg et., al</a>). Protein sequences that matched those keywords were retrieved from the National Center for Biotechnology Information <a href=\"\">NCBI</a>. Then, sequences with\n                an identity greater than 90% were clustered and the centroid sequence was substracted using <a href=\"\">CD-HIT</a>. Nanopore reads are then screened against this customized set of MGEs using diamond with parameters (<code> --evalue 1e-10 --id 30 --coverage 80 </code>).\n            </p>\n        </div>\n        <div class=\"col-md-6 text-center\">\n            <chart style=\"width: 50%\" [options]=\"mges_distribution_chart\"></chart>\n        </div>\n\n\n\n        <div class=\"col-md-12\">\n            <h5>Distribution of Metal Resistance Genes (MGEs)</h5>\n            <p class=\"small\">\n                Metal Resistane Genes (MRG) were downloaded from the <a href=\"http://bacmet.biomedicine.gu.se/\">BacMet v1.0</a> database (<a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3965030/\">Pal. et., al</a>) and screened agains the nanopore\n                reads using DIAMOND with parameters <code> --evalue 1e-10 --id 30 --coverage 80 </code>.\n\n            </p>\n        </div>\n        <div class=\"col-md-6 text-center\">\n            <chart style=\"width: 50%\" [options]=\"metal_distribution_chart\"></chart>\n        </div>\n\n    </div>\n\n</div>\n\n\n\n\n\n\n<div class=\"box box-solid\">\n    <div class=\"box-header\">\n        <h4>ARGs, MGEs, MRGs patterns</h4>\n        <p class=\"small\">This section shows a circular representation of the nanopore reads with the detected ARGs and neighboring genes. It can help to identify common ARG patterns (the visualization contains only reads with antibiotic resistance genes). <a href=\"\"> UniRef90</a>            was used to screen the nanopore to a broad set of functional genes using <a href=\"\">diamond</a> with parameters <code> --evalue 1e-10 --id 30 --coverage 80 </code>. By using this set of functional genes, it is possible to identify the components\n            of each nanopore read. The order of the inner circles indicates: ARGS, MRGs, MGEs, and other functional genes.\n        </p>\n    </div>\n    <div class=\"box-body\">\n\n        <!-- read circular mapping -->\n        <div class=\"col-md-6 col-md-offset-3\">\n            <div class=\"box box-solid text-center\">\n                <h4> <strong> {{ selected_read.id }} </strong></h4>\n                <h5> <strong> (<i>{{ selected_read.taxa_rank }}</i> {{ selected_read.taxa }}) </strong> </h5>\n                <div class=\"d-inline\" id=\"read_circle_map-1\"></div>\n                <!-- <div class=\"d-inline\" id=\"read_circle_map-2\"></div> -->\n            </div>\n\n        </div>\n\n        <div class=\"col-md-12 text-center\">\n            <br>\n            <p-dataTable #reads_table_vis [value]=\"reads_table\" [rows]=\"5\" [paginator]=\"true\" [pageLinks]=\"5\" exportFilename=\"reads\">\n                <p-column field='id' header='Read'>\n\n                    <template let-column_data=\"rowData\" pTemplate=\"body\">\n                            <a class=\"small\" (click)=\"render_read_circular_map(column_data)\" > {{ column_data.id }}  </a>\n                        </template>\n\n                </p-column>\n\n                <p-column field='len' header='Read Length'></p-column>\n                <p-column field='genes' header='Genes'></p-column>\n                <p-column field='args' header='ARGs'></p-column>\n            </p-dataTable>\n        </div>\n\n    </div>\n</div>\n\n\n<div class=\"box box-solid\">\n    <div class=\"box-header\">\n        <h4>Co-occurrence of MGEs, ARGs and MRGs</h4>\n        <p class=\"small\">\n            This visualization shows the ARGs, MGEs and MRGs patterns in the sample. Nodes (genes) are connected in the network as long as they are place within the same nanopore read. Node size represent the number of genes, shape represents the different groups\n            (MGEs, ARGs, MRGs), colors represents the different category, e.g., antibiotic resistance genes. The thickness of the edges represent the extent of the pair is found in the sample.\n        </p>\n        <p>\n            Nodes with star shape represent different species. Note that <span class=\"badge bg-red\"> red </span> nodes represent antibiotic ressistance \"priority pathogens\" defined by the World Health Organization (WHO) (<a href=\"http://www.who.int/mediacentre/news/releases/2017/bacteria-antibiotics-needed/en/\">see details here</a>)\n            and the ESKAPE pathogens (<a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4871955/\">Santajit., et al</a>)\n        </p>\n    </div>\n    <div class=\"box-body\">\n        <div id=\"network\"> </div>\n        <div class=\"text-center\">\n            <span class=\"small\" *ngFor=\"let item of network_labels\">\n                <i [style.color]=\"item.color\" class=\"fa fa-circle\" aria-hidden=\"true\"></i> {{ item.id }}\n            </span>\n        </div>\n    </div>\n</div>\n\n\n\n<div class=\"box box-solid\">\n    <div class=\"box-header\">\n        <h4>Taxonomy Annotation</h4>\n        <p class=\"small\">\n            The bar charts show the distribution of the <i>species</i> taxonomy rank. Taxonomy distribution is computed using a rapid, accurate and sensitive microbial community classification program called <a href=\"https://ccb.jhu.edu/software/centrifuge/manual.shtml\">centrifuge</a>            <a href=\"http://genome.cshlp.org/content/early/2016/11/16/gr.210641.116.abstract\">(Kim. et., al.)</a>. Reads are screened against the index for Bacteria, Aarchaea, Viruses and Human genomes, using default parameters. The graph displays the\n            top 10 <i>species</i> ranked by the number of reads.\n        </p>\n    </div>\n    <div class=\"box-body\">\n        <!-- <div class=\"col-md-6 text-center\">\n            <chart [options]=\"taxonomy_sample_chart_genus\" style=\"width:25%\"></chart>\n        </div> -->\n        <div class=\"ui-helper-clearfix\">\n            <button class='btn btn-xs btn-default' type=\"button\" label=\"taxonomy.csv\" (click)=\"taxonomy_table.exportCSV()\" style=\"float:right\"><i class=\"fa fa-download\"></i> <strong>download table</strong></button>\n        </div>\n        <div class=\"col-md-6\">\n            <div class=\"box-body text-center\">\n                <p-dataTable #taxonomy_table [value]=\"taxonomy_data\" [rows]=\"10\" [paginator]=\"true\" [pageLinks]=\"5\" exportFilename=\"reads\">\n                    <p-column field='tax_id' header='Taxa ID'></p-column>\n                    <p-column field='tax_rank' header='Taxa Rank'></p-column>\n                    <p-column field='name' header='Name'></p-column>\n                    <p-column field='num_reads' header='Reads'></p-column>\n                    <!-- <p-column field='rpm' header='RPM'></p-column> -->\n                    <!-- download link -->\n                </p-dataTable>\n            </div>\n        </div>\n\n        <div class=\"col-md-6 text-center\">\n            <chart [options]=\"taxonomy_sample_chart_species\" style=\"width:40%\"></chart>\n        </div>\n\n\n\n    </div>\n</div>\n\n\n<div class=\"box box-solid\">\n    <div class=\"box-header\">\n        <h3>Multiple Sample Comparison</h3>\n        <p class=\"small\">\n            The table below contains the results for all the samples. Including, sample name, gene category, gene name, number of hits in the sample.\n        </p>\n    </div>\n    <div class=\"ui-helper-clearfix\">\n        <button class='btn btn-xs btn-default' type=\"button\" label=\"data.csv\" (click)=\"reads_table_vis_comparison.exportCSV()\" style=\"float:right\"><i class=\"fa fa-download\"></i> <strong>download table</strong></button>\n    </div>\n    <div class=\"box-body text-center\">\n        <p-dataTable #reads_table_vis_comparison [value]=\"all_samples\" [rows]=\"10\" [paginator]=\"true\" [pageLinks]=\"5\" exportFilename=\"reads\">\n            <p-column field='sample' header='Sample'></p-column>\n            <p-column field='origin' header='Section'></p-column>\n            <p-column field='category' header='Category'></p-column>\n            <p-column field='id' header='Gene'></p-column>\n            <p-column field='size' header='Hits'></p-column>\n            <p-column field='rpm' header='RPM'></p-column>\n            <!-- download link -->\n        </p-dataTable>\n    </div>\n</div>\n\n\n<div class=\"col-md-12\">\n    <chart [options]=\"compare_samles_stacked_bar\" style=\"width:60%;margin: 0 auto\"></chart>\n</div>\n\n<p-growl [(value)]=\"msgs\" baseZIndex=\"99999\" autoZIndex=\"false\"></p-growl>"
+module.exports = "<br>\n\n<div style=\"text-align:center\">\n    <p-dataTable #dt [value]=\"sampleService.samplesByProject\" [rows]=\"5\" [paginator]=\"true\" [pageLinks]=\"3\" exportFilename=\"metadata\">\n        <!-- <p-header> -->\n        <!-- <h4>Samples</h4> -->\n        <!-- <div class=\"ui-helper-clearfix\">\n                <button class='btn btn-xs btn-default' type=\"button\" label=\"metadata.csv\" (click)=\"dt.exportCSV()\" style=\"float:left\"><i class=\"fa fa-download\"></i> <strong>Metadata</strong></button>\n                <button class='btn btn-xs btn-default' type=\"button\" label=\"type.csv\" (click)=\"download_type('type_csv')\" style=\"float:left\"><i class=\"fa fa-download\"></i> <strong>ARG categories</strong></button>\n                <button class='btn btn-xs btn-default' type=\"button\" label=\"type.csv\" (click)=\"download_type('subtype_csv')\" style=\"float:left\"><i class=\"fa fa-download\"></i> <strong>ARG Groups</strong></button>\n            </div> -->\n\n        <!-- </p-header> -->\n        <p-column field='name' header='Sample Name'></p-column>\n        <p-column field='primary-group' header='Biome'></p-column>\n        <!-- <p-column field='secondary-group' header='Secondary Group'></p-column> -->\n        <!-- <p-column field='date' header='Createion Date'></p-column> -->\n        <p-column field='status' header='Status'></p-column>\n\n        <p-column header=\"Actions\" styleClass=\"\">\n            <template let-sample=\"rowData\" pTemplate=\"body\">\n                <a class=\" badge bg-red \" (click)=\"removeSample(sample)\"   > Remove</a>\n                <a class=\" badge bg-blue \" (click)=\"rerun(sample)\"   >Run</a>\n                <a class=\" badge bg-black\" (click)=\"view(sample)\"   >View</a>\n                <!-- <a class=\"   bg-green\" (click)=\"edit(sample)\" pButton icon=\"fa-pencil\" ></a> -->\n            </template>\n        </p-column>\n\n        <!--<p-column styleClass=\"col-button\">\n            <template let-sample=\"rowData\" pTemplate=\"body\">\n                <button type=\"text\" (click)=\"reRun(sample)\" pButton icon=\"fa-play\" label=\"Run\"></button>\n            </template>\n        </p-column>-->\n\n    </p-dataTable>\n\n    <hr>\n\n    <p-growl [value]=\"msgs\"></p-growl>\n    <p-confirmDialog header=\"Confirmation\" icon=\"fa fa-question-circle\" width=\"425\"></p-confirmDialog>\n\n\n\n</div>\n\n\n\n\n<div class=\"box box-solid\">\n    <!-- <div class=\"box-header\"> -->\n    <!-- <h3>Results</h3> -->\n    <!-- </div> -->\n\n    <div class=\"box-body\">\n        <p>This section shows the primary statistics of the sample including read length distribution of the reads that contain at least one ARG and any other functional genes including: MGEs, MRG. Here also the distribution and taxonomy is shown.</p>\n        <!-- <br> -->\n        <h4>Read length distribution</h4>\n        <p class=\"small\">This graph shows the distribution of the read length that contains at least one ARG. The length is represented in kilo basepairs. each position represents the number of sequences withing a length 1000kbp range. The data used in this graph corresponds\n            to the reads that contain at least one ARG.</p>\n        <div class=\"col-md-12 text-center\">\n            <chart [options]=\"line_chart\"></chart>\n        </div>\n        <hr>\n        <h4>Source hits distribution</h4>\n        <p class=\"small\">The graph below displays the number of genes dicovered in the reads from the different databases (ARGs, MGEs, MRGs, others). The bars represent the number of genes from each specific category found in the sample.</p>\n\n\n        <h5>Antibiotc resistance genes annotation</h5>\n\n\n\n        <div class=\"col-md-6 text-center\">\n            <!-- <h5>Antibiotic Resistance Genes distribution</h5> -->\n            <chart style=\"width: 30%\" [options]=\"args_distribution_chart\"></chart>\n        </div>\n        <div class=\"col-md-6 text-center\">\n            <!-- <h5>Antibiotic categories distribution</h5> -->\n            <chart style=\"width: 30%\" [options]=\"antibiotic_distribution_chart\"></chart>\n        </div>\n        <div class=\"col-md-12\">\n            <p class=\"small\">\n                ARGs are computed using deepARG: a deep learning approach to predict antibiotic resistance genes in metagenomes (<a href=\"https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-018-0401-z\">Arango-Argoty et., al.</a>). Because\n                of the high error rate of nanopore reads, the deepARG-LS v1.0 was run with permisive identity parameters (<code> --iden 30 --cov 80 --evalue 1e-10 --prob 0.8 </code>) to guarantee the correctness of the classifications.\n            </p>\n            <hr>\n        </div>\n\n        <div class=\"col-md-12\">\n            <h5>Distribution of Mobile Genetic Elements (MGEs)</h5>\n            <p class=\"small\">\n                Annotations were classfied as mobile genetic elements (MGEs) based on matching metadata from protein sequences to one of the following keywords: transposase, transposon, conjugative, integrase, integron, recombinase, conjugal, mobilization, recombination,\n                plasmid (\n                <a href=\"https://www.nature.com/articles/nature13377\">Forsberg et., al</a>). Protein sequences that matched those keywords were retrieved from the National Center for Biotechnology Information <a href=\"\">NCBI</a>. Then, sequences with\n                an identity greater than 90% were clustered and the centroid sequence was substracted using <a href=\"\">CD-HIT</a>. Nanopore reads are then screened against this customized set of MGEs using diamond with parameters (<code> --evalue 1e-10 --id 30 --coverage 80 </code>).\n            </p>\n        </div>\n        <div class=\"col-md-6 text-center\">\n            <chart style=\"width: 50%\" [options]=\"mges_distribution_chart\"></chart>\n        </div>\n\n\n\n        <div class=\"col-md-12\">\n            <h5>Distribution of Metal Resistance Genes (MGEs)</h5>\n            <p class=\"small\">\n                Metal Resistane Genes (MRG) were downloaded from the <a href=\"http://bacmet.biomedicine.gu.se/\">BacMet v1.0</a> database (<a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3965030/\">Pal. et., al</a>) and screened agains the nanopore\n                reads using DIAMOND with parameters <code> --evalue 1e-10 --id 30 --coverage 80 </code>.\n\n            </p>\n        </div>\n        <div class=\"col-md-6 text-center\">\n            <chart style=\"width: 50%\" [options]=\"metal_distribution_chart\"></chart>\n        </div>\n\n    </div>\n\n</div>\n\n\n\n\n\n\n<div class=\"box box-solid\">\n    <div class=\"box-header\">\n        <h4>ARGs, MGEs, MRGs patterns</h4>\n        <p class=\"small\">This section shows a circular representation of the nanopore reads with the detected ARGs and neighboring genes. It can help to identify common ARG patterns (the visualization contains only reads with antibiotic resistance genes). <a href=\"\"> UniRef90</a>            was used to screen the nanopore to a broad set of functional genes using <a href=\"\">diamond</a> with parameters <code> --evalue 1e-10 --id 30 --coverage 80 </code>. By using this set of functional genes, it is possible to identify the components\n            of each nanopore read. The order of the inner circles indicates: ARGS, MRGs, MGEs, and other functional genes.\n        </p>\n    </div>\n    <div class=\"box-body\">\n\n        <!-- read circular mapping -->\n        <div class=\"col-md-12 col-md-offset-0\">\n            <div class=\"box box-solid text-center\">\n                <h4> <strong> {{ selected_read.id }} </strong></h4>\n                <h5> <strong> (<i>{{ selected_read.taxa_rank }}</i> {{ selected_read.taxa }}) </strong> </h5>\n                <!-- <div class=\"d-inline\" id=\"read_circle_map-1\"></div> -->\n                <div id=\"eventdrops-demo\" style=\"width: 90%;\"></div>\n                <!-- <div class=\"d-inline\" id=\"read_circle_map-2\"></div> -->\n            </div>\n\n        </div>\n\n        <div class=\"col-md-12 text-center\">\n            <br>\n            <p-dataTable #reads_table_vis [value]=\"reads_table\" [rows]=\"5\" [paginator]=\"true\" [pageLinks]=\"5\" exportFilename=\"reads\">\n                <p-column field='id' header='Read'>\n\n                    <template let-column_data=\"rowData\" pTemplate=\"body\">\n                            <a class=\"small\" (click)=\"render_read_circular_map(column_data)\" > {{ column_data.id }}  </a>\n                        </template>\n\n                </p-column>\n\n                <p-column field='len' header='Read Length'></p-column>\n                <p-column field='genes' header='Genes'></p-column>\n                <p-column field='args' header='ARGs'></p-column>\n            </p-dataTable>\n        </div>\n\n    </div>\n</div>\n\n\n<div class=\"box box-solid\">\n    <div class=\"box-header\">\n        <h4>Co-occurrence of MGEs, ARGs and MRGs</h4>\n        <p class=\"small\">\n            This visualization shows the ARGs, MGEs and MRGs patterns in the sample. Nodes (genes) are connected in the network as long as they are place within the same nanopore read. Node size represent the number of genes, shape represents the different groups\n            (MGEs, ARGs, MRGs), colors represents the different category, e.g., antibiotic resistance genes. The thickness of the edges represent the extent of the pair is found in the sample.\n        </p>\n        <p>\n            Nodes with star shape represent different species. Note that <span class=\"badge bg-red\"> red </span> nodes represent antibiotic ressistance \"priority pathogens\" defined by the World Health Organization (WHO) (<a href=\"http://www.who.int/mediacentre/news/releases/2017/bacteria-antibiotics-needed/en/\">see details here</a>)\n            and the ESKAPE pathogens (<a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4871955/\">Santajit., et al</a>)\n        </p>\n    </div>\n    <div class=\"box-body\">\n        <div id=\"network\"> </div>\n        <div class=\"text-center\">\n            <span class=\"small\" *ngFor=\"let item of network_labels\">\n                <i [style.color]=\"item.color\" class=\"fa fa-circle\" aria-hidden=\"true\"></i> {{ item.id }}\n            </span>\n        </div>\n    </div>\n</div>\n\n\n\n<div class=\"box box-solid\">\n    <div class=\"box-header\">\n        <h4>Taxonomy Annotation</h4>\n        <p class=\"small\">\n            The bar charts show the distribution of the <i>species</i> taxonomy rank. Taxonomy distribution is computed using a rapid, accurate and sensitive microbial community classification program called <a href=\"https://ccb.jhu.edu/software/centrifuge/manual.shtml\">centrifuge</a>            <a href=\"http://genome.cshlp.org/content/early/2016/11/16/gr.210641.116.abstract\">(Kim. et., al.)</a>. Reads are screened against the index for Bacteria, Aarchaea, Viruses and Human genomes, using default parameters. The graph displays the\n            top 10 <i>species</i> ranked by the number of reads.\n        </p>\n    </div>\n    <div class=\"box-body\">\n        <!-- <div class=\"col-md-6 text-center\">\n            <chart [options]=\"taxonomy_sample_chart_genus\" style=\"width:25%\"></chart>\n        </div> -->\n        <div class=\"ui-helper-clearfix\">\n            <button class='btn btn-xs btn-default' type=\"button\" label=\"taxonomy.csv\" (click)=\"taxonomy_table.exportCSV()\" style=\"float:right\"><i class=\"fa fa-download\"></i> <strong>download table</strong></button>\n        </div>\n        <div class=\"col-md-6\">\n            <div class=\"box-body text-center\">\n                <p-dataTable #taxonomy_table [value]=\"taxonomy_data\" [rows]=\"10\" [paginator]=\"true\" [pageLinks]=\"5\" exportFilename=\"reads\">\n                    <p-column field='tax_id' header='Taxa ID'></p-column>\n                    <p-column field='tax_rank' header='Taxa Rank'></p-column>\n                    <p-column field='name' header='Name'></p-column>\n                    <p-column field='num_reads' header='Reads'></p-column>\n                    <!-- <p-column field='rpm' header='RPM'></p-column> -->\n                    <!-- download link -->\n                </p-dataTable>\n            </div>\n        </div>\n\n        <div class=\"col-md-6 text-center\">\n            <chart [options]=\"taxonomy_sample_chart_species\" style=\"width:40%\"></chart>\n        </div>\n\n\n\n    </div>\n</div>\n\n\n<div class=\"box box-solid\">\n    <div class=\"box-header\">\n        <h3>Multiple Sample Comparison</h3>\n        <p class=\"small\">\n            The table below contains the results for all the samples. Including, sample name, gene category, gene name, number of hits in the sample.\n        </p>\n    </div>\n    <div class=\"ui-helper-clearfix\">\n        <button class='btn btn-xs btn-default' type=\"button\" label=\"data.csv\" (click)=\"reads_table_vis_comparison.exportCSV()\" style=\"float:right\"><i class=\"fa fa-download\"></i> <strong>download table</strong></button>\n    </div>\n    <div class=\"box-body text-center\">\n        <p-dataTable #reads_table_vis_comparison [value]=\"all_samples\" [rows]=\"10\" [paginator]=\"true\" [pageLinks]=\"5\" exportFilename=\"reads\">\n            <p-column field='sample' header='Sample'></p-column>\n            <p-column field='origin' header='Section'></p-column>\n            <p-column field='category' header='Category'></p-column>\n            <p-column field='id' header='Gene'></p-column>\n            <p-column field='size' header='Hits'></p-column>\n            <p-column field='rpm' header='RPM'></p-column>\n            <!-- download link -->\n        </p-dataTable>\n    </div>\n</div>\n\n\n\n\n<!-- <div class=\"col-md-12\">\n    <chart [options]=\"compare_samles_stacked_bar\" style=\"width:60%;margin: 0 auto\"></chart>\n</div> -->\n\n<p-growl [(value)]=\"msgs\" baseZIndex=\"99999\" autoZIndex=\"false\"></p-growl>"
 
 /***/ }),
 
@@ -2178,6 +2281,7 @@ module.exports = "<br>\n\n<div style=\"text-align:center\">\n    <p-dataTable #d
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_rxjs_observable_TimerObservable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_rxjs_observable_TimerObservable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_rxjs_add_operator_takeWhile__ = __webpack_require__("../../../../rxjs/add/operator/takeWhile.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_rxjs_add_operator_takeWhile___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_rxjs_add_operator_takeWhile__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__EventDrops__ = __webpack_require__("../../../../../src/app/project/view-samples/EventDrops.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2187,6 +2291,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -2218,6 +2323,7 @@ var ViewSamplesComponent = (function () {
         this.read_length = [];
         this.read_chart = new __WEBPACK_IMPORTED_MODULE_6__Gmap__["a" /* Genome */]();
         this.network = new __WEBPACK_IMPORTED_MODULE_7__network__["a" /* Network */]();
+        this.event_drops = new __WEBPACK_IMPORTED_MODULE_11__EventDrops__["a" /* EventDrops */]();
         this.taxonomy_visualization = new __WEBPACK_IMPORTED_MODULE_8__taxonomy__["a" /* TaxonomyVisualization */]();
         this.network_data = { nodes: [], edges: [] };
         this.all_samples = [];
@@ -2231,14 +2337,7 @@ var ViewSamplesComponent = (function () {
                 .takeWhile(function () { return _this.alive; })
                 .subscribe(function () {
                 _this.sampleService.getSamplesByProject(_this.projectComponent.projectID)
-                    .subscribe(function (response) {
-                    // var samples = this.sampleService.samplesByProject;
-                    // // traverse the files, check if any of the samples are still running
-                    // samples.forEach(item => {
-                    //   if(item['status'] != 'done') {
-                    //   }
-                    // });
-                });
+                    .subscribe(function (response) { });
             });
             _this.sampleService.getSamplesByProject(_this.projectComponent.projectID)
                 .subscribe(function (response) {
@@ -2275,21 +2374,28 @@ var ViewSamplesComponent = (function () {
             _this.taxonomy_data = res[3];
             _this.read_length = res[4]['read_length_distribution'];
             _this.selected_read = _this.filter_reads[index].read[0];
-            var item = document.getElementById('read_circle_map-1');
-            item.innerHTML = '';
-            _this.read_chart.render('#read_circle_map-1', _this.filter_reads[index]['read'], _this.filter_reads[index]['data']);
+            // length distribution
             _this.line_chart = _this.read_chart.length_distribution(_this.read_length);
-            _this.taxonomy_sample_chart_species = _this.taxonomy_visualization.render(_this.taxonomy_data, 'species');
-            // this.taxonomy_sample_chart_genus = this.taxonomy_visualization.render(this.taxonomy_data, 'genus');
+            // Genes distribution
             _this.antibiotic_distribution_chart = _this.read_chart.genes_distribution(_this.network_data, 1, 3, _this.network_labels);
             _this.args_distribution_chart = _this.read_chart.genes_distribution(_this.network_data, 1, 4, _this.network_labels);
             _this.mges_distribution_chart = _this.read_chart.genes_distribution(_this.network_data, 2, 3, _this.network_labels);
             _this.metal_distribution_chart = _this.read_chart.genes_distribution(_this.network_data, 4, 3, _this.network_labels);
+            // render read map //
+            // const item = document.getElementById('read_circle_map-1');
+            // item.innerHTML = '';
+            // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
+            _this.event_drops.render(_this.filter_reads[index]);
+            // co-occurrence network
+            _this.network.render('network', _this.network_data);
+            // barchart witht he species abundances //
+            _this.taxonomy_sample_chart_species = _this.taxonomy_visualization.render(_this.taxonomy_data, 'species');
+            // this.taxonomy_sample_chart_genus = this.taxonomy_visualization.render(this.taxonomy_data, 'genus');
+            // table for the species abundances //
             _this.reads_table = _this.filter_reads.map(function (i, ix) {
                 i.read[0]['index'] = ix;
                 return i.read[0];
             });
-            _this.network.render('network', _this.network_data);
             // this.network.render('network_labels', this.network_data[1], 'grid', false);
             // console.log(this.reads_table)
         });
@@ -2297,9 +2403,10 @@ var ViewSamplesComponent = (function () {
     ViewSamplesComponent.prototype.render_read_circular_map = function (data) {
         var index = data.index;
         this.selected_read = this.filter_reads[index].read[0];
-        var item = document.getElementById('read_circle_map-1');
+        var item = document.getElementById('eventdrops-demo');
         item.innerHTML = '';
-        this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
+        this.event_drops.render(this.filter_reads[index]);
+        // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
     };
     ViewSamplesComponent.prototype.view = function (sample) {
         this.get_sample_results(sample['_id'], 5);
@@ -2486,7 +2593,7 @@ var AuthService = (function () {
         return this.http.post(this.base_url + '/auth/signup/', data)
             .map(function (res) {
             _this.credentials = res.json();
-            console.log(_this.credentials);
+            // console.log(this.credentials)
             if (_this.credentials) {
                 _this.session.putObject('isLoggedIn', 1);
                 _this.session.putObject('user', _this.credentials);

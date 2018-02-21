@@ -130,7 +130,7 @@ export class Genome {
         var d3 = this.data.reduce((init, current) => { if (current.origin === 3) {init.push(current); } return init; }, []);
         var d4 = this.data.reduce((init, current) => { if (current.origin === 4) {init.push(current); } return init; }, []);
 
-        console.log(d1)
+        // console.log(d1)
         d1.forEach(e => {
             e.value = e.metadata[4]
         });

@@ -45,7 +45,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
     this.SUB = this.route.params.subscribe(
         params => {
           // this.dt.reset();
-          console.log(params)
+          // console.log(params)
           this.projectID = params['pid'];
           this.projectService.getProjectById(params['pid'])
             .subscribe(response =>{

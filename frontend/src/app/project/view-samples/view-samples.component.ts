@@ -20,6 +20,8 @@ import { Observable } from "rxjs";
 import { TimerObservable } from "rxjs/observable/TimerObservable";
 import 'rxjs/add/operator/takeWhile';
 
+import { EventDrops } from './EventDrops';
+
 @Component({
   // selector: 'app-view-samples',
   templateUrl: './view-samples.component.html',
@@ -58,6 +60,7 @@ export class ViewSamplesComponent implements OnInit {
   public stacked: any;
   public alive: boolean;
   public read_length: any;
+  public event_drops: any;
   // public sample_list: any;
 
   constructor(
@@ -77,6 +80,8 @@ export class ViewSamplesComponent implements OnInit {
       this.read_length = [];
       this.read_chart = new Genome();
       this.network = new Network();
+      this.event_drops = new EventDrops()
+
       this.taxonomy_visualization = new TaxonomyVisualization();
 
       this.network_data = {nodes:[], edges:[]};
@@ -95,17 +100,7 @@ export class ViewSamplesComponent implements OnInit {
           .takeWhile(() => this.alive)
           .subscribe(() => {
             this.sampleService.getSamplesByProject(this.projectComponent.projectID)
-            .subscribe(response => {
-              
-              // var samples = this.sampleService.samplesByProject;
-              // // traverse the files, check if any of the samples are still running
-              // samples.forEach(item => {
-              //   if(item['status'] != 'done') {
-
-              //   }
-              // });
-
-            });
+            .subscribe(response => {});
           });
           
           this.sampleService.getSamplesByProject(this.projectComponent.projectID)
@@ -152,26 +147,34 @@ export class ViewSamplesComponent implements OnInit {
 
           this.selected_read = this.filter_reads[index].read[0];
 
-          const item = document.getElementById('read_circle_map-1');
-          item.innerHTML = '';
-          this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
+          // length distribution
           this.line_chart = this.read_chart.length_distribution(this.read_length);
 
-          this.taxonomy_sample_chart_species = this.taxonomy_visualization.render(this.taxonomy_data, 'species');
-          // this.taxonomy_sample_chart_genus = this.taxonomy_visualization.render(this.taxonomy_data, 'genus');
-
+          // Genes distribution
           this.antibiotic_distribution_chart = this.read_chart.genes_distribution(this.network_data, 1, 3, this.network_labels);
           this.args_distribution_chart = this.read_chart.genes_distribution(this.network_data, 1, 4, this.network_labels);
           this.mges_distribution_chart = this.read_chart.genes_distribution(this.network_data, 2, 3, this.network_labels);
           this.metal_distribution_chart = this.read_chart.genes_distribution(this.network_data, 4, 3, this.network_labels);
 
+          // render read map //
+          // const item = document.getElementById('read_circle_map-1');
+          // item.innerHTML = '';
+          // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
+          this.event_drops.render(this.filter_reads[index]);
 
+          // co-occurrence network
+          this.network.render('network', this.network_data);
+
+          // barchart witht he species abundances //
+          this.taxonomy_sample_chart_species = this.taxonomy_visualization.render(this.taxonomy_data, 'species');
+          // this.taxonomy_sample_chart_genus = this.taxonomy_visualization.render(this.taxonomy_data, 'genus');
+
+          // table for the species abundances //
           this.reads_table = this.filter_reads.map((i, ix) => {
             i.read[0]['index'] = ix;
             return i.read[0];
           });
           
-          this.network.render('network', this.network_data);
           // this.network.render('network_labels', this.network_data[1], 'grid', false);
           // console.log(this.reads_table)
 
@@ -182,9 +185,12 @@ export class ViewSamplesComponent implements OnInit {
     render_read_circular_map(data: any){
       const index = data.index;
       this.selected_read = this.filter_reads[index].read[0];
-      const item = document.getElementById('read_circle_map-1');
+      
+      const item = document.getElementById('eventdrops-demo');
       item.innerHTML = '';
-      this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
+      this.event_drops.render(this.filter_reads[index]);
+      
+      // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
       
     }
 
