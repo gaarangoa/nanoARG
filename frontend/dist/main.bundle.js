@@ -1638,12 +1638,12 @@ var EventDrops = (function () {
     function EventDrops() {
     }
     EventDrops.prototype.parse_data = function (data, origin) {
-        console.log(data);
+        // console.log(data);
         var mydata = [];
         data.data.forEach(function (e) {
             for (var i = e.start; i <= e.end; i += 10) {
                 if (e.origin === origin) {
-                    mydata.push({ date: i, message: e.metadata[4], coverage: e.coverage, start: e.start, end: e.end, iden: e.identity, evalue: e.evalue, metadata: e.metadata, strand: e.strand, index: i, author: { name: 'ARGs', email: 'some' } });
+                    mydata.push({ date: i, message: e.metadata[4], coverage: e.coverage, color: e.color, start: e.start, end: e.end, iden: e.identity, evalue: e.evalue, metadata: e.metadata, strand: e.strand, index: i, author: { name: 'ARGs', email: 'some' } });
                 }
             }
         });
@@ -1692,6 +1692,7 @@ var EventDrops = (function () {
             },
             drop: {
                 radius: 4,
+                color: function (d) { return d.color; },
                 date: function (d) { return new Date(d.date); },
                 onMouseOver: function (commit) {
                     tooltip

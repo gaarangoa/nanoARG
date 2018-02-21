@@ -15,14 +15,14 @@ export class EventDrops {
     }
 
     parse_data(data: any, origin: number){
-        console.log(data);
+        // console.log(data);
         
         var mydata = []
         data.data.forEach(e => {
             
             for(let i=e.start; i<=e.end; i+=10){
                 if (e.origin === origin){
-                    mydata.push( {date: i, message:e.metadata[4], coverage:e.coverage, start: e.start, end: e.end, iden:e.identity, evalue:e.evalue, metadata:e.metadata, strand:e.strand, index: i, author:{name: 'ARGs', email: 'some'}} );
+                    mydata.push( {date: i, message:e.metadata[4], coverage:e.coverage, color:e.color, start: e.start, end: e.end, iden:e.identity, evalue:e.evalue, metadata:e.metadata, strand:e.strand, index: i, author:{name: 'ARGs', email: 'some'}} );
                 }
             }
         });
@@ -82,6 +82,7 @@ export class EventDrops {
             },
             drop: {
                 radius: 4,
+                color: d => {return d.color},
                 date: d => new Date(d.date),
                 onMouseOver: commit => {
                     tooltip
