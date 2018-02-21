@@ -1671,6 +1671,10 @@ var EventDrops = (function () {
             bound: {
                 format: d3.timeFormat('%s'),
             },
+            metaballs: {
+                blurDeviation: 2,
+                colorMatrix: '1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 50 -10',
+            },
             axis: {
                 formats: {
                     milliseconds: '',
@@ -1687,6 +1691,7 @@ var EventDrops = (function () {
                 onZoomEnd: function () { return updateCommitsInformation(chart); },
             },
             drop: {
+                radius: 4,
                 date: function (d) { return new Date(d.date); },
                 onMouseOver: function (commit) {
                     tooltip
@@ -1713,6 +1718,10 @@ var EventDrops = (function () {
                 padding: 20,
                 text: function (d) { return ("" + d.name); },
                 width: 150,
+            },
+            line: {
+                color: function (_, index) { return d3.schemeCategory10[index]; },
+                height: 40,
             },
         });
         d3.select('#eventdrops-demo')

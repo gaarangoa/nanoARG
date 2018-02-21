@@ -60,7 +60,10 @@ export class EventDrops {
             bound: {
                 format: d3.timeFormat('%s'),
             },
-
+            metaballs: {
+                blurDeviation: 2,
+                colorMatrix: '1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 50 -10',
+            },
             axis: {
                 formats: {
                     milliseconds: '',
@@ -78,6 +81,7 @@ export class EventDrops {
                 onZoomEnd: () => updateCommitsInformation(chart),
             },
             drop: {
+                radius: 4,
                 date: d => new Date(d.date),
                 onMouseOver: commit => {
                     tooltip
@@ -119,6 +123,10 @@ export class EventDrops {
                 padding: 20,
                 text: d => `${d.name}`,
                 width: 150,
+            },
+            line: {
+                color: (_, index) => d3.schemeCategory10[index],
+                height: 40,
             },
 
 
