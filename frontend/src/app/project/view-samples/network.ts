@@ -10,6 +10,7 @@ export class Network {
     constructor(){
     
     }
+    
     render(placeholder: string, data: any){
       var _max = 0;
       var _min = 9999999999999;
