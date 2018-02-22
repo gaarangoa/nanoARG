@@ -75,7 +75,9 @@ export class Chords {
             opacity: function(d){ return (  (d.source.id === "ARGs" || d.target.id == "ARGs") && (d.source.id === 'ARGs' || d.source.id !== "Bacteria") && (d.target.id === "ARGs" || d.target !== "Bacteria") ) ? 0.9 : 0.2 } ,
             // opacity: function(d) { if (d.origin === 4) { return d.opacity; }else { return 0; }},
             logScale: false,
-            tooltipContent: function(d){},
+            tooltipContent: function(d){
+                return `${d.source.name} to ${d.target.name}`;
+            },
             events: {
                 'click': function(d, i, n, event){
                     // d['color'] = 'black'
@@ -170,13 +172,15 @@ export class Chords {
                         id: circos_nodes_dict[e.data.source].block_id,
                         start: circos_nodes_dict[e.data.source].start,
                         end: circos_nodes_dict[e.data.source].end, 
-                        color: circos_nodes_dict[e.data.source].color 
+                        color: circos_nodes_dict[e.data.source].color,
+                        name:  circos_nodes_dict[e.data.source].id
                     },
                     target: {
                         id: circos_nodes_dict[e.data.target].block_id,
                         start: circos_nodes_dict[e.data.target].start,
                         end: circos_nodes_dict[e.data.target].end,
-                        color: circos_nodes_dict[e.data.target].color 
+                        color: circos_nodes_dict[e.data.target].color,
+                        name:  circos_nodes_dict[e.data.target].id
                     }
                 });
             // }

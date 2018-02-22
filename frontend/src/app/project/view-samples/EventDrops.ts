@@ -133,7 +133,7 @@ export class EventDrops {
 
         });
 
-        d3.select('#eventdrops-demo')
+        d3.select('#gene_organization')
             .data([c_data])
             .call(chart);
         

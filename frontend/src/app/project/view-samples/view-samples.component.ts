@@ -164,6 +164,8 @@ export class ViewSamplesComponent implements OnInit {
           // render read map //
           
           // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
+          const gene_organization_div = document.getElementById('gene_organization');
+          gene_organization_div.innerHTML = '';
           this.event_drops.render( this.filter_reads[index]);
           
 
@@ -205,7 +207,8 @@ export class ViewSamplesComponent implements OnInit {
 
     view(sample: any) {
       this.selected_sample = sample
-      this.get_sample_results(sample['_id'], 5);
+      this.get_sample_results(sample['_id'], 0);
+
     }
 
     rerun(sample: any){
