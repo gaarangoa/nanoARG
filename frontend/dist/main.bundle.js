@@ -2613,7 +2613,7 @@ var ViewSamplesComponent = (function () {
     ViewSamplesComponent.prototype.render_read_circular_map = function (data) {
         var index = data.index;
         this.selected_read = this.filter_reads[index].read[0];
-        var item = document.getElementById('eventdrops-demo');
+        var item = document.getElementById('gene_organization');
         item.innerHTML = '';
         this.event_drops.render(this.filter_reads[index]);
         // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);

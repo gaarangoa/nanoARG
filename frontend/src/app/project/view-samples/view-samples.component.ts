@@ -197,7 +197,7 @@ export class ViewSamplesComponent implements OnInit {
       const index = data.index;
       this.selected_read = this.filter_reads[index].read[0];
       
-      const item = document.getElementById('eventdrops-demo');
+      const item = document.getElementById('gene_organization');
       item.innerHTML = '';
       this.event_drops.render(this.filter_reads[index]);
 
