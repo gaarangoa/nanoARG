@@ -40,7 +40,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    console.log(this.route.params)
+    // console.log(this.route.params)
 
     this.SUB = this.route.params.subscribe(
         params => {

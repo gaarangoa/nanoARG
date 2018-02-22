@@ -13,6 +13,7 @@ import { ProjectComponent } from '../project.component';
 import * as FileSaver from 'file-saver';
 
 import { Genome } from './Gmap';
+import { Chords } from './chords';
 import { Network } from './network';
 import { TaxonomyVisualization } from './taxonomy';
 
@@ -61,6 +62,8 @@ export class ViewSamplesComponent implements OnInit {
   public alive: boolean;
   public read_length: any;
   public event_drops: any;
+  public selected_sample: any;
+  public co_occurrence_chords: any;
   // public sample_list: any;
 
   constructor(
@@ -81,11 +84,12 @@ export class ViewSamplesComponent implements OnInit {
       this.read_chart = new Genome();
       this.network = new Network();
       this.event_drops = new EventDrops()
-
       this.taxonomy_visualization = new TaxonomyVisualization();
-
+      this.selected_sample = {name:''}
       this.network_data = {nodes:[], edges:[]};
       this.all_samples = [];
+
+      this.co_occurrence_chords = new Chords()
 
       this.selected_read = {
         id: 0,
@@ -106,6 +110,7 @@ export class ViewSamplesComponent implements OnInit {
           this.sampleService.getSamplesByProject(this.projectComponent.projectID)
             .subscribe(response => {
               const samples = this.sampleService.samplesByProject;
+              this.selected_sample = samples[0]
               this.get_sample_results(samples[0]['_id'], 5);
               this.sample_comparison();
             });
@@ -139,7 +144,7 @@ export class ViewSamplesComponent implements OnInit {
           // console.log(res);
 
           this.raw_reads = res[0];
-          this.filter_reads = this.filter_data(res[0]);
+          this.filter_reads = res[0];
           this.network_data = res[1];
           this.network_labels = res[2];
           this.taxonomy_data = res[3];
@@ -157,13 +162,17 @@ export class ViewSamplesComponent implements OnInit {
           this.metal_distribution_chart = this.read_chart.genes_distribution(this.network_data, 4, 3, this.network_labels);
 
           // render read map //
-          // const item = document.getElementById('read_circle_map-1');
-          // item.innerHTML = '';
+          
           // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
-          this.event_drops.render(this.filter_reads[index]);
+          this.event_drops.render( this.filter_reads[index]);
+          
 
           // co-occurrence network
           this.network.render('network', this.network_data);
+          // co-occurrence chords
+          const item = document.getElementById('co_occurrence_chords');
+          item.innerHTML = '';
+          this.co_occurrence_chords.render('#co_occurrence_chords', this.network_data);
 
           // barchart witht he species abundances //
           this.taxonomy_sample_chart_species = this.taxonomy_visualization.render(this.taxonomy_data, 'species');
@@ -189,12 +198,13 @@ export class ViewSamplesComponent implements OnInit {
       const item = document.getElementById('eventdrops-demo');
       item.innerHTML = '';
       this.event_drops.render(this.filter_reads[index]);
-      
+
       // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
       
     }
 
     view(sample: any) {
+      this.selected_sample = sample
       this.get_sample_results(sample['_id'], 5);
     }
 
@@ -254,12 +264,8 @@ export class ViewSamplesComponent implements OnInit {
               });
           });
         });
-
         // console.log(this.all_samples);
-
-        
-
-      }
+    }
 
       
 

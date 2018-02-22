@@ -41,7 +41,7 @@ export class EventDrops {
         const mrgs_data = {name: "MRGs", data: mrgs_reads} // ARGs
 
         let other_reads = this.parse_data(data, 3)
-        const other_data = {name: "Other genes", data: other_reads} // ARGs
+        const other_data = {name: "UniRef-90", data: other_reads} // ARGs
 
         const c_data = [arg_data, mges_data, mrgs_data, other_data]
 
@@ -58,7 +58,7 @@ export class EventDrops {
         const chart = eventDrops({
             d3,
             bound: {
-                format: d3.timeFormat('%s'),
+                format: d3.timeFormat(''),
             },
             metaballs: {
                 blurDeviation: 2,
@@ -121,7 +121,7 @@ export class EventDrops {
                 end: data.read[0].len
             },
             label: {
-                padding: 20,
+                padding: 0,
                 text: d => `${d.name}`,
                 width: 150,
             },

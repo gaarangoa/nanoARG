@@ -227,7 +227,8 @@ export class Genome {
                 borderWidith: 1,
                 type: 'bar',
                 height: genes.length*15+120,
-                position: 'absolute'
+                position: 'absolute',
+                width: null
             },
             
             title: {
@@ -298,6 +299,9 @@ export class Genome {
             title : { text : null },
             chart: {
               type: 'column',
+              width: null,
+              height: 300,
+            //   borderColor: "#000"
             },
             xAxis: {
                 categories: data[1],

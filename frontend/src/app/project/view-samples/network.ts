@@ -15,7 +15,7 @@ export class Network {
       var _max = 0;
       var _min = 9999999999999;
       data.nodes.forEach(e => {
-        e.data.size = Math.log(e.data.size)
+        e.data.size = Math.log(e.data.size+1)
         if( e.data.size < _min ) {_min = e.data.size}
         if( e.data.size > _max ) {_max = e.data.size}
       });
@@ -23,7 +23,7 @@ export class Network {
       var _emax = 0;
       var _emin = 999999999999; 
       data.edges.forEach(e => {
-        e.data.weight = Math.log(e.data.weight)
+        e.data.weight = Math.log(e.data.weight+1)
         if( e.data.weight < _emin ) {_emin = e.data.weight}
         if( e.data.weight > _emax ) {_emax = e.data.weight}
       });
