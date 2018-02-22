@@ -43,7 +43,7 @@ pathogens = {
 }
 
 def color_map():
-    _cmges = Color('#FFFFFF')
+    _cmges = Color('#edf3ff')
     _cmrgs = Color('#000000')
     # 
     mges_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/MGEs90.size")}

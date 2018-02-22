@@ -166,7 +166,7 @@ export class Chords {
         edges.forEach(e => {
             // if(e.data.source !== e.data.target){
                 var color = circos_nodes_dict[e.data.source].color
-                if(color === 'white') color='red'
+                // if(color === 'white') color='red'
                 if(circos_nodes_dict[e.data.source].block_id === 'ARGs' || circos_nodes_dict[e.data.target].block_id === 'ARGs' ){
                     _chords.push({
                         color: color,
