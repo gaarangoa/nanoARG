@@ -3,7 +3,7 @@ from tools.bestLocalHitClass import BestLocalHit as BestHit
 import conf
 
 _IDEN = 30
-_EVALUE = 1e-10
+_EVALUE = 1e-5
 _COVERAGE = 0.0
 _BITSCORE = 50
 class MGEs():
@@ -21,7 +21,7 @@ class MGEs():
         parameters= {
             "--id":30,
             "-k": 1000,
-            "--evalue": 1e-10
+            "--evalue": 1e-5
         }
         self.aligner.align(self.input, self.reference, self.alignment_file, parameters)
 

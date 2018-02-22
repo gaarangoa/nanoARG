@@ -12,9 +12,9 @@ from tqdm import tqdm
 
 import numpy as np
 
-_coverage = 0.8
+_coverage = 0.4
 _identity = 30
-_evalue = 1e-10
+_evalue = 1e-5
 
 origin_color = {
     1: "#107896",

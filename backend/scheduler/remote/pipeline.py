@@ -14,7 +14,7 @@ utils.mkdir_p(output);
 
 _IDEN = 0
 _EVALUE = 1e-10
-_COVERAGE = 0.5
+_COVERAGE = 0.4
 _BITSCORE = 50
 
 

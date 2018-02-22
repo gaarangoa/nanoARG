@@ -11,7 +11,7 @@ class MGEs():
         parameters= {
             "--id":30,
             "-k":500,
-            "--evalue": 1e-10
+            "--evalue": 1e-5
         }
         self.output = query+".mge.aln"
         self.aligner.align(query, self.reference, self.output, parameters)
