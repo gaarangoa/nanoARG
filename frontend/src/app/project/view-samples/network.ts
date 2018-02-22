@@ -23,6 +23,7 @@ export class Network {
       var _emax = 0;
       var _emin = 999999999999; 
       data.edges.forEach(e => {
+        e.data.counts = e.data.weight
         e.data.weight = Math.log(e.data.weight+1)
         if( e.data.weight < _emin ) {_emin = e.data.weight}
         if( e.data.weight > _emax ) {_emax = e.data.weight}

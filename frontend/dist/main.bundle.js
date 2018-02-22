@@ -2191,28 +2191,31 @@ var Chords = (function () {
         // console.log(circos_nodes_dict, edges)
         // traverse the edges
         var _chords = [];
+        // const min_counts = 2;
         edges.forEach(function (e) {
             // if(e.data.source !== e.data.target){
             var color = circos_nodes_dict[e.data.source].color;
             if (color === 'white')
                 color = 'red';
-            _chords.push({
-                color: color,
-                source: {
-                    id: circos_nodes_dict[e.data.source].block_id,
-                    start: circos_nodes_dict[e.data.source].start,
-                    end: circos_nodes_dict[e.data.source].end,
-                    color: circos_nodes_dict[e.data.source].color,
-                    name: circos_nodes_dict[e.data.source].id
-                },
-                target: {
-                    id: circos_nodes_dict[e.data.target].block_id,
-                    start: circos_nodes_dict[e.data.target].start,
-                    end: circos_nodes_dict[e.data.target].end,
-                    color: circos_nodes_dict[e.data.target].color,
-                    name: circos_nodes_dict[e.data.target].id
-                }
-            });
+            if (circos_nodes_dict[e.data.source].block_id === 'ARGs' || circos_nodes_dict[e.data.target].block_id === 'ARGs') {
+                _chords.push({
+                    color: color,
+                    source: {
+                        id: circos_nodes_dict[e.data.source].block_id,
+                        start: circos_nodes_dict[e.data.source].start,
+                        end: circos_nodes_dict[e.data.source].end,
+                        color: circos_nodes_dict[e.data.source].color,
+                        name: circos_nodes_dict[e.data.source].id
+                    },
+                    target: {
+                        id: circos_nodes_dict[e.data.target].block_id,
+                        start: circos_nodes_dict[e.data.target].start,
+                        end: circos_nodes_dict[e.data.target].end,
+                        color: circos_nodes_dict[e.data.target].color,
+                        name: circos_nodes_dict[e.data.target].id
+                    }
+                });
+            }
             // }
         });
         // console.log(_chords);
@@ -2254,6 +2257,7 @@ var Network = (function () {
         var _emax = 0;
         var _emin = 999999999999;
         data.edges.forEach(function (e) {
+            e.data.counts = e.data.weight;
             e.data.weight = Math.log(e.data.weight + 1);
             if (e.data.weight < _emin) {
                 _emin = e.data.weight;
