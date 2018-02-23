@@ -13,7 +13,7 @@ from tqdm import tqdm
 import numpy as np
 
 _coverage = 0.4
-_identity = 30
+_identity = 20
 _evalue = 1e-5
 
 origin_color = {

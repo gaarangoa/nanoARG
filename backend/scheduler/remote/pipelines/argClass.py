@@ -21,9 +21,9 @@ class ARGs():
     def align(self):
         # Sequence Alignment
         parameters= {
-            "--id":30,
+            "--id":20,
             "--evalue": 1e-5,
-            "-k": 10000
+            "-k": 15000
         }
         self.aligner.align(self.input, self.reference, self.alignment_file, parameters)
 
@@ -31,8 +31,8 @@ class ARGs():
         parameters= {
             "--iden":20,
             "--evalue": 1e-5,
-            "--nk": 10000,
-            "--prob": 0.8,
+            "--nk": 15000,
+            "--prob": 0.7,
             "--coverage": 0.0
         }
 
