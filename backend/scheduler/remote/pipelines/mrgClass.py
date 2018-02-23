@@ -9,8 +9,8 @@ class MGEs():
     
     def align(self, query):
         parameters= {
-            "--id":30,
-            "-k":500,
+            "--id":20,
+            "-k":1000,
             "--evalue": 1e-5
         }
         self.output = query+".mge.aln"

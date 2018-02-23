@@ -2,7 +2,7 @@ from tools.diamondClass import diamond as ALIGNER
 from tools.bestLocalHitClass import BestLocalHit as BestHit
 import conf
 
-_IDEN = 30
+_IDEN = 20
 _EVALUE = 1e-5
 _COVERAGE = 0.0
 _BITSCORE = 50
@@ -19,7 +19,7 @@ class MGEs():
     
     def align(self):
         parameters= {
-            "--id":30,
+            "--id":20,
             "-k": 1000,
             "--evalue": 1e-5
         }

@@ -16,7 +16,7 @@ class Taxonomy():
     def align(self):
         parameters= {
             "-f":"",
-            "--min-hitlen":"22",
+            "--min-hitlen":"25",
             "-k":"50"
         }
 
