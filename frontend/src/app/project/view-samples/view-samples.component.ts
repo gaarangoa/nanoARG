@@ -267,7 +267,7 @@ export class ViewSamplesComponent implements OnInit {
     sample_comparison() {
       // load the first sample
       const samples = this.sampleService.samplesByProject;
-      
+      console.log(samples);
       samples.forEach( (sample, index) => {
         // console.log(sample);
         this.sampleService.get_sample_results(sample['_id']).
@@ -284,7 +284,7 @@ export class ViewSamplesComponent implements OnInit {
               });
           });
         });
-        console.log(this.all_samples);
+        // console.log(this.all_samples);
     }
 
       
