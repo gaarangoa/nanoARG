@@ -80,6 +80,7 @@
             <div class="col-md-12">
                 <div class="col-md-4 bg-green">
                     <h3>Antibiotic resistance hits distribution</h3>
+                    <h4>({{ general_info.ARGs.counts }} Hits)</h4>
                     <p class="small">
                         ARGs are computed using our <strong> newly </strong> developed deepARG: a deep learning approach to predict antibiotic resistance genes in metagenomes <a class="badge bg-black" href="https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-018-0401-z">(Arango-Argoty et., al.)</a>.
                         Because of the high error rate of nanopore reads, the deepARG-LS v1.0 was run with permisive identity parameters (<strong> --iden 30 --cov 80 --evalue 1e-10 --prob 0.8 </strong>) to guarantee the correctness of the classifications.
@@ -102,6 +103,7 @@
         <div class="col-md-12">
             <div class="col-md-4 bg-blue">
                 <h3>Distribution of Mobile Genetic Elements (MGEs)</h3>
+                <h4>({{ general_info.MGEs.counts }} Hits)</h4>
                 <p class="small">
                     Annotations were classfied as mobile genetic elements (MGEs) based on matching metadata from protein sequences to one of the following keywords: transposase, transposon, conjugative, integrase, integron, recombinase, conjugal, mobilization, recombination,
                     plasmid (
@@ -123,6 +125,7 @@
         <div class="col-md-12">
             <div class="col-md-4 bg-black">
                 <h3>Distribution of Metal Resistance Genes (MRGs)</h3>
+                <h4>({{ general_info.MRGs.counts }} Hits)</h4>
                 <p class="small">
                     Metal Resistane Genes (MRG) were downloaded from the <a class="badge bg-black" href="http://bacmet.biomedicine.gu.se/">BacMet v1.0</a> database (<a class="badge bg-black" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3965030/">Pal. et., al</a>)
                     and screened agains the nanopore reads using DIAMOND with parameters <strong> --evalue 1e-10 --id 30 --coverage 80 </strong>.
@@ -255,8 +258,8 @@
             </div>
         </div>
 
-        <div class="col-md-6 text-center">
-            <chart [options]="taxonomy_sample_chart_species"></chart>
+        <div class="col-md-6">
+            <chart class="col-md-12" [options]="taxonomy_sample_chart_species"></chart>
         </div>
 
 

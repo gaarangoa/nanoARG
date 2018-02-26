@@ -22,6 +22,7 @@ import { TimerObservable } from "rxjs/observable/TimerObservable";
 import 'rxjs/add/operator/takeWhile';
 
 import { EventDrops } from './EventDrops';
+import { Stats } from './OverallStats'
 
 @Component({
   // selector: 'app-view-samples',
@@ -64,6 +65,8 @@ export class ViewSamplesComponent implements OnInit {
   public event_drops: any;
   public selected_sample: any;
   public co_occurrence_chords: any;
+  public stats: any;
+  public general_info: any;
   // public sample_list: any;
 
   constructor(
@@ -79,15 +82,23 @@ export class ViewSamplesComponent implements OnInit {
 
     ngOnInit() {
       this.stacked = {};
+      this.general_info = {
+        ARGs:{counts: 0},
+        MGEs:{counts: 0},
+        MRGs:{counts: 0},
+      };
       this.alive = true;
       this.read_length = [];
       this.read_chart = new Genome();
       this.network = new Network();
       this.event_drops = new EventDrops()
+      this.stats = new Stats();
+
       this.taxonomy_visualization = new TaxonomyVisualization();
       this.selected_sample = {name:''}
       this.network_data = {nodes:[], edges:[]};
       this.all_samples = [];
+      
 
       this.co_occurrence_chords = new Chords()
 
@@ -131,6 +142,8 @@ export class ViewSamplesComponent implements OnInit {
       return filtered_data;
     }
 
+   
+
     get_sample_results(sample_id: string, index: number) {
       
       this.sampleService.get_sample_results(sample_id).
@@ -151,6 +164,10 @@ export class ViewSamplesComponent implements OnInit {
           this.read_length = res[4]['read_length_distribution'];
 
           this.selected_read = this.filter_reads[index].read[0];
+
+          // variable with general statistics
+          this.general_info = this.stats.overall_abundances(this.network_data);
+          // console.log(this.general_info);
 
           // length distribution
           this.line_chart = this.read_chart.length_distribution(this.read_length);

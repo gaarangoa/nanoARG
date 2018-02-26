@@ -46,7 +46,7 @@ export class Network {
       });
 
       const mydata = {nodes: nodes, edges: edges}
-      console.log(mydata)
+      // console.log(mydata)
 
         this.network = new cytoscape({
 

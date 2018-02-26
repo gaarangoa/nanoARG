@@ -14,10 +14,19 @@ export class Chords {
     public width: any;
     public height: any;
     public length_dist: any;
+    public kind: any;
 
     constructor() {
         this.width = 600;
         this.height = 600;
+        this.kind = {
+            1: 'ARGs',
+            2: 'MGEs',
+            3: 'UniRef',
+            4: 'MRGs',
+            9: 'Pathogens',
+            10: 'Bacteria'
+        }
 
         this.conf1 = {
             innerRadius: (this.height / 2.8) - 2,
@@ -72,7 +81,7 @@ export class Chords {
             color: function(d) { return (d.target.id === "ARGs") ? d.target.color : d.source.color },
             strokeColor: function(d) { return 'black'; },
             strokeWidth: function(d){return 1;},
-            opacity: function(d){ return (  (d.source.id === "ARGs" || d.target.id == "ARGs") && (d.source.id === 'ARGs' || d.source.id !== "Bacteria") && (d.target.id === "ARGs" || d.target !== "Bacteria") ) ? 0.9 : 0.2 } ,
+            opacity: function(d){ return (  (d.source.id === "ARGs" || d.target.id == "ARGs") && (d.source.id === 'ARGs' || d.source.id !== "Bacteria") && (d.target.id === "ARGs" || d.target !== "Bacteria") ) ? 0.6 : 0.2 } ,
             // opacity: function(d) { if (d.origin === 4) { return d.opacity; }else { return 0; }},
             logScale: false,
             tooltipContent: function(d){
@@ -115,16 +124,9 @@ export class Chords {
             height: this.height
         });
 
-        const kind = {
-            1: 'ARGs',
-            2: 'MGEs',
-            3: 'UniRef',
-            4: 'MRGs',
-            9: 'Pathogens',
-            10: 'Bacteria'
-        }
+        const kind = this.kind;
 
-        console.log(data)
+        // console.log(data)
         const nodes = data.nodes
         const edges = data.edges
 
@@ -153,7 +155,7 @@ export class Chords {
         // remove bacteria and pathogens
         delete main_layout['Pathogens'];
         delete main_layout['Bacteria'];
-        
+
         var circos_nodes = d1.concat(d2).concat(d3) //.concat(d4).concat(d5)
         // main_layout['MGEs'].color = 'red'
         const layout_data = Object.keys(main_layout).map(e => { return main_layout[e] })

@@ -1,5 +1,5 @@
 <div class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
+    <div class="container">
         <div class="navbar-header">
             <a routerLink="home" class="navbar-brand"><strong>ARG</strong> | nanopore </a>
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
@@ -30,8 +30,13 @@
 <br>
 <hr>
 
-<div class="container-fluid">
-    <div class="wrapper">
-        <router-outlet></router-outlet>
+<div class="container">
+    <div class="row-fluid">
+        <div class="span2"></div>
+        <div class="span10">
+            <div class="wrapper">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
     </div>
 </div>
