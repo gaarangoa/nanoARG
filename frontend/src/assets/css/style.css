@@ -11,6 +11,22 @@ body {
  * Placeholder dashboard ideas
  */
 
+.line-separator,
+.x-axis {
+    stroke: rgba(0, 0, 0, 0.6);
+    fill: none;
+    stroke-width: 1px;
+}
+
+.drop-line:last-child .line-separator {
+    display: none;
+}
+
+text {
+    stroke: none;
+    /* fill: black; */
+}
+
 .placeholders {
     margin-bottom: 30px;
     text-align: center;
