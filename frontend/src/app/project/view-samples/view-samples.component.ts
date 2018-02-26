@@ -284,7 +284,7 @@ export class ViewSamplesComponent implements OnInit {
               });
           });
         });
-        // console.log(this.all_samples);
+        console.log(this.all_samples);
     }
 
       
