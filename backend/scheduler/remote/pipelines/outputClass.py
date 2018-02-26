@@ -180,9 +180,11 @@ def network(data = {}):
             if ixgene == len(read['data']): continue
             # now add the edges
             source = read['data'][ixgene]
+            source_origin = source['origin']
             source_id = _get_id(source)
             for next_gene in range(ixgene+1, len(read['data'])):
                 target = read['data'][next_gene]
+                target_origin = target['origin']
                 if target['origin'] == 3: continue
                 target_id = _get_id(target)
                 if target_id == source_id: continue
@@ -192,6 +194,8 @@ def network(data = {}):
                     E[(source_id+"_"+target_id)] = {
                         "source": source_id,
                         "target": target_id,
+                        "source_origin": source_origin,
+                        "target_origin": target_origin,
                         "id": source_id + "_" + target_id,
                         "weight": 1,
                         "color": source['color']

@@ -12,27 +12,46 @@ export class Network {
     }
     
     render(placeholder: string, data: any){
+
+
+
       var _max = 0;
       var _min = 9999999999999;
+      const nodes = [];
       data.nodes.forEach(e => {
+        e.data.counts = e.data.size
         e.data.size = Math.log(e.data.size+1)
         if( e.data.size < _min ) {_min = e.data.size}
         if( e.data.size > _max ) {_max = e.data.size}
+
+        if(e.data.origin <= 10){
+          nodes.push(e);
+        }
+      
       });
 
       var _emax = 0;
       var _emin = 999999999999; 
+      const edges = []
       data.edges.forEach(e => {
         e.data.counts = e.data.weight
         e.data.weight = Math.log(e.data.weight+1)
         if( e.data.weight < _emin ) {_emin = e.data.weight}
         if( e.data.weight > _emax ) {_emax = e.data.weight}
+        
+        if(e.data.counts > 1){
+          edges.push(e);
+        }
+
       });
+
+      const mydata = {nodes: nodes, edges: edges}
+      console.log(mydata)
 
         this.network = new cytoscape({
 
             container: document.getElementById(placeholder),
-            elements: data,
+            elements: mydata,
               style: [ // the stylesheet for the graph
                 {
                   selector: 'node',

@@ -100,7 +100,7 @@ export class ViewSamplesComponent implements OnInit {
         params => {
           // this.dt.reset();
           
-          TimerObservable.create(0, 15000)
+          TimerObservable.create(0, 2000)
           .takeWhile(() => this.alive)
           .subscribe(() => {
             this.sampleService.getSamplesByProject(this.projectComponent.projectID)
