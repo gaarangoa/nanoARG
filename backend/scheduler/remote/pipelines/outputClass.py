@@ -43,7 +43,7 @@ pathogens = {
 }
 
 def color_map():
-    _cmges = Color('#edf3ff')
+    _cmges = Color('#42f47a')
     _cmrgs = Color('#000000')
     # 
     mges_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/MGEs90.size")}
@@ -56,7 +56,7 @@ def color_map():
     random.seed(0)
     random.shuffle(_args_color_list)
     # print(_args_color_list)
-    mges_colors = [str(i) for i in list(_cmges.range_to(Color("#FFFFFF"), len(mges_data)))]
+    mges_colors = [str(i) for i in list(_cmges.range_to(Color("#42f47a"), len(mges_data)))]
     args_colors = [str(i) for i in [str(k) for k in _args_color_list] ]
     mrgs_colors = [str(i) for i in list(_cmrgs.range_to(Color("#000000"), len(mrgs_data)))]
     # 
