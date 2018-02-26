@@ -267,11 +267,13 @@ export class ViewSamplesComponent implements OnInit {
     sample_comparison() {
       // load the first sample
       const samples = this.sampleService.samplesByProject;
-      console.log(samples);
+      // console.log(samples);
+      this.all_samples = [];
       samples.forEach( (sample, index) => {
         // console.log(sample);
         this.sampleService.get_sample_results(sample['_id']).
           subscribe( res => {
+            console.log(res);
             if (res === false) {
               this.msgs.push({severity: 'info', summary: 'Sample: ' + sample['name'], detail: 'Still Running'});
               return false;

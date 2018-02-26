@@ -2720,11 +2720,13 @@ var ViewSamplesComponent = (function () {
         var _this = this;
         // load the first sample
         var samples = this.sampleService.samplesByProject;
-        console.log(samples);
+        // console.log(samples);
+        this.all_samples = [];
         samples.forEach(function (sample, index) {
             // console.log(sample);
             _this.sampleService.get_sample_results(sample['_id']).
                 subscribe(function (res) {
+                console.log(res);
                 if (res === false) {
                     _this.msgs.push({ severity: 'info', summary: 'Sample: ' + sample['name'], detail: 'Still Running' });
                     return false;
