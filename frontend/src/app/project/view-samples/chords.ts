@@ -132,26 +132,32 @@ export class Chords {
         // main layout with the 
         var main_layout = {}
         nodes.forEach(e => { 
-            var key = kind[e.data.origin];
-            main_layout[key] = {
-                len: 0,
-                color: e.data.color,
-                label: key, 
-                id: key
-            }
+            // if(e.data.origin < 9) {
+                var key = kind[e.data.origin];
+                main_layout[key] = {
+                    len: 0,
+                    color: e.data.color,
+                    label: key, 
+                    id: key
+                }
+            // }
         });
         nodes.forEach(e => { main_layout[kind[e.data.origin]].len += 1 });
         
         var d1 = this.subtract_nodes(nodes, kind, 1); //1-ARGs
         var d2 = this.subtract_nodes(nodes, kind, 2); //2-MGEs
         var d3 = this.subtract_nodes(nodes, kind, 4); //4-MRGs
-        var d4 = this.subtract_nodes(nodes, kind, 9); //9-PATH
-        var d5 = this.subtract_nodes(nodes, kind, 10); //10-BAC
+        // var d4 = this.subtract_nodes(nodes, kind, 9); //9-PATH
+        // var d5 = this.subtract_nodes(nodes, kind, 10); //10-BAC
 
-        var circos_nodes = d1.concat(d2).concat(d3).concat(d4).concat(d5)
-        main_layout['MGEs'].color = 'red'
-        const layout_data = Object.keys(main_layout).map(e => { return main_layout[e] })
+        // remove bacteria and pathogens
+        delete main_layout['Pathogens'];
+        delete main_layout['Bacteria'];
         
+        var circos_nodes = d1.concat(d2).concat(d3) //.concat(d4).concat(d5)
+        // main_layout['MGEs'].color = 'red'
+        const layout_data = Object.keys(main_layout).map(e => { return main_layout[e] })
+
         // console.log(circos_nodes);
         // create a dict with the info from the nodes, this is useful when parsing the edges, so I can get right away the data from each node.
         const circos_nodes_dict = {}
@@ -164,7 +170,7 @@ export class Chords {
         const _chords = []
         // const min_counts = 2;
         edges.forEach(e => {
-            // if(e.data.source !== e.data.target){
+            if(e.data.source_origin < 9 || e.data.target_origin < 9){
                 var color = circos_nodes_dict[e.data.source].color
                 // if(color === 'white') color='red'
                 if(circos_nodes_dict[e.data.source].block_id === 'ARGs' || circos_nodes_dict[e.data.target].block_id === 'ARGs' ){
@@ -186,7 +192,7 @@ export class Chords {
                         }
                     });
                 }
-            // }
+            }
         });
 
         // console.log(_chords);

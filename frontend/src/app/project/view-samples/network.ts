@@ -24,7 +24,7 @@ export class Network {
         if( e.data.size < _min ) {_min = e.data.size}
         if( e.data.size > _max ) {_max = e.data.size}
 
-        if(e.data.origin <= 10){
+        if(e.data.origin < 9 && e.data.counts >= 1){
           nodes.push(e);
         }
       
@@ -39,7 +39,7 @@ export class Network {
         if( e.data.weight < _emin ) {_emin = e.data.weight}
         if( e.data.weight > _emax ) {_emax = e.data.weight}
         
-        if(e.data.counts > 1){
+        if( (e.data.source_origin < 9 || e.data.target_origin < 9) && e.data.counts >= 1 ){
           edges.push(e);
         }
 
