@@ -2726,16 +2726,16 @@ var ViewSamplesComponent = (function () {
             // console.log(sample);
             _this.sampleService.get_sample_results(sample['_id']).
                 subscribe(function (res) {
-                console.log(sample['_id']);
+                // console.log(sample['_id']);
                 if (res === false) {
                     _this.msgs.push({ severity: 'info', summary: 'Sample: ' + sample['name'], detail: 'Still Running' });
                     return false;
                 }
                 ;
-                console.log(_this.all_samples.length);
+                // console.log(this.all_samples.length)
                 res[1].nodes.forEach(function (item) {
                     item.data['sample'] = sample['name'];
-                    item.data['rel_abn'] = (item['data'].size * 1 / res[4]['total_arg_reads']).toFixed(5);
+                    item.data['rel_abn'] = (item['data'].size * 1 / res[4]['total_functional_reads']).toFixed(5);
                     item.data['category'] = item['data']['metadata'][3];
                     _this.all_samples.push(item.data);
                 });
