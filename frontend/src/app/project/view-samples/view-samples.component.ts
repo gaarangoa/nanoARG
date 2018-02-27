@@ -273,6 +273,7 @@ export class ViewSamplesComponent implements OnInit {
         // console.log(sample);
         this.sampleService.get_sample_results(sample['_id']).
           subscribe( res => {
+            // console.log(res);
             // console.log(sample['_id']);
             if (res === false) {
               this.msgs.push({severity: 'info', summary: 'Sample: ' + sample['name'], detail: 'Still Running'});
@@ -281,7 +282,7 @@ export class ViewSamplesComponent implements OnInit {
             // console.log(this.all_samples.length)
               res[1].nodes.forEach(item => {
                 item.data['sample'] = sample['name'];
-                item.data['rel_abn'] = (item['data'].size * 1 / res[4]['total_functional_reads']).toFixed(5);
+                item.data['rel_abn'] = (item['data'].size * 1 / res[4]['total_unique_genomes']).toFixed(5);
                 item.data['category'] = item['data']['metadata'][3];
                 this.all_samples.push(item.data);
               });

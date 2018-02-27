@@ -307,10 +307,19 @@ def read_map(parameters = []):
     print('computing distributions')
     
     filter_data = [i for i in sorted(data, key=lambda k: k['read'][0]['args'], reverse=True) if i['read'][0]['args']>=1 ][:500]
-    filter_taxa = sorted(taxa_info.values(), key=lambda k: k['num_reads'], reverse=True)[:800]
+    filter_taxa = [i for i in sorted(taxa_info.values(), key=lambda k: k['num_reads'], reverse=True) if i['num_reads']>100]
 
     total_arg_reads = sum([i['read'][0]['args'] for i in data])
     total_functional_reads = sum([i['read'][0]['fngs'] for i in data])
 
-    json.dump([ filter_data, net, arg_labels, filter_taxa, {"total_reads": len(read_length), "total_functional_reads": total_functional_reads, "total_arg_reads": total_arg_reads, "read_length_distribution": read_length_distribution} ], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
-    json.dump([ data, net, arg_labels, taxa_info.values(), {"total_reads": len(read_length), "total_arg_reads": total_arg_reads} ], open(parameters["storage_remote_dir"]+"/complete.bestHit.json", "w"))
+    info = {
+        "total_reads": len(read_length), 
+        "total_functional_reads": total_functional_reads, 
+        "total_arg_reads": total_arg_reads, 
+        "read_length_distribution": read_length_distribution,
+        "total_unique_genomes": len(filter_taxa)
+    }
+
+    json.dump([ filter_data, net, arg_labels, filter_taxa, info ], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
+
+    # json.dump([ data, net, arg_labels, taxa_info.values(), {"total_reads": len(read_length), "total_arg_reads": total_arg_reads} ], open(parameters["storage_remote_dir"]+"/complete.bestHit.json", "w"))
