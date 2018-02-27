@@ -273,12 +273,12 @@ export class ViewSamplesComponent implements OnInit {
         // console.log(sample);
         this.sampleService.get_sample_results(sample['_id']).
           subscribe( res => {
-            console.log(sample['_id']);
+            // console.log(sample['_id']);
             if (res === false) {
               this.msgs.push({severity: 'info', summary: 'Sample: ' + sample['name'], detail: 'Still Running'});
               return false;
             };
-            console.log(this.all_samples.length)
+            // console.log(this.all_samples.length)
               res[1].nodes.forEach(item => {
                 item.data['sample'] = sample['name'];
                 item.data['rel_abn'] = (item['data'].size * 1 / res[4]['total_arg_reads']).toFixed(5);
