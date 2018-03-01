@@ -12,9 +12,9 @@ from tqdm import tqdm
 
 import numpy as np
 
-from ete3 import NCBITaxa
+# from ete3 import NCBITaxa
 
-ncbi = NCBITaxa()
+# ncbi = NCBITaxa()
 
 _coverage = 0.4
 _identity = 20
