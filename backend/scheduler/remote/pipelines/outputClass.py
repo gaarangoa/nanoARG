@@ -12,6 +12,10 @@ from tqdm import tqdm
 
 import numpy as np
 
+from ete3 import NCBITaxa
+
+ncbi = NCBITaxa()
+
 _coverage = 0.4
 _identity = 20
 _evalue = 1e-5
@@ -307,7 +311,22 @@ def read_map(parameters = []):
     print('computing distributions')
     
     filter_data = [i for i in sorted(data, key=lambda k: k['read'][0]['args'], reverse=True) if i['read'][0]['args']>=1 ][:500]
+
     filter_taxa = [i for i in sorted(taxa_info.values(), key=lambda k: k['num_reads'], reverse=True) if i['num_reads']>100]
+
+    # get full lineage of taxa
+    # phylum_taxa = {}
+    # for i in taxa_info.values():
+    #     _taxa_id = i['tax_id']
+    #     _lineage = ncbi.get_lineage(_taxa_id)
+    #     _ranks = ncbi.get_rank(_lineage)
+    #     _ranks = {_ranks[ii]:ii for ii in _ranks}
+    #     _names = ncbi.get_taxid_translator(_lineage)
+    #     try:
+    #         phylum_taxa[]
+    #     except Exception as e:
+    #         raise e
+
 
     total_arg_reads = sum([i['read'][0]['args'] for i in data])
     total_functional_reads = sum([i['read'][0]['fngs'] for i in data])

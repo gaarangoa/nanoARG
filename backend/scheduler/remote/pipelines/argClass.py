@@ -3,10 +3,10 @@ from tools.bestLocalHitClass import BestLocalHit as BestHit
 from tools.deepARGClass import DeepARG 
 import conf
 
-_IDEN = 30
+_IDEN = 20
 _EVALUE = 1e-5
 _COVERAGE = 0
-_BITSCORE = 10
+_BITSCORE = 0
 class ARGs():
     def __init__(self, input):
         self.info=""
@@ -31,8 +31,8 @@ class ARGs():
         parameters= {
             "--iden":20,
             "--evalue": 1e-5,
-            "--nk": 15000,
-            "--prob": 0.7,
+            "--nk": 1500,
+            "--prob": 0.5,
             "--coverage": 0.0
         }
 
