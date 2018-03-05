@@ -310,7 +310,7 @@ def read_map(parameters = []):
 
     print('computing distributions')
     
-    filter_data = [i for i in sorted(data, key=lambda k: k['read'][0]['args'], reverse=True) if i['read'][0]['args']>=1 ][:500]
+    filter_data = [i for i in sorted(data, key=lambda k: k['read'][0]['args'], reverse=True) if i['read'][0]['args']>=1 ]
 
     filter_taxa = [i for i in sorted(taxa_info.values(), key=lambda k: k['num_reads'], reverse=True) if i['num_reads']>100]
 
@@ -336,7 +336,8 @@ def read_map(parameters = []):
         "total_functional_reads": total_functional_reads, 
         "total_arg_reads": total_arg_reads, 
         "read_length_distribution": read_length_distribution,
-        "total_unique_genomes": len(filter_taxa)
+        "total_unique_genomes": len(filter_taxa),
+        "total_mapped_ARG_reads": len(filter_data)
     }
 
     json.dump([ filter_data, net, arg_labels, filter_taxa, info ], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
