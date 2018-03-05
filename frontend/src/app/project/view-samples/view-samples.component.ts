@@ -284,7 +284,7 @@ export class ViewSamplesComponent implements OnInit {
                 item.data['sample'] = sample['name'];
                 item.data['rel_abn_args'] = (item['data'].size * 1 / res[4]['total_mapped_ARG_reads']).toFixed(5);
                 item.data['rel_abn_total_genes'] = (item['data'].size * 1 / res[4]['total_functional_reads']).toFixed(5); 
-                item.data['rel_abn_total_reads'] = (item['data'].size * 1 / res[4]['total_reads']).toFixed(10);
+                item.data['rel_abn_total_reads'] = (item['data'].size * 10000 / res[4]['total_reads']).toFixed(5);
                 item.data['rel_abn_unique_strains'] = (item['data'].size * 1 / res[4]['total_unique_genomes']).toFixed(5);
                 item.data['category'] = item['data']['metadata'][3];
                 this.all_samples.push(item.data);
