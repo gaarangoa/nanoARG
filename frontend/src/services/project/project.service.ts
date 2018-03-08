@@ -53,5 +53,12 @@ export class ProjectService {
       });
   }
 
+  shareProject(fields: Object){
+    // console.log(fields)
+    return this.http.post(this.base_url+'/project/share/', fields)
+      .map( res=> {
+        
+      });
+  }
 
 }

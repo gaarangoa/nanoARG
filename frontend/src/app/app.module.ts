@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from '../services/auth/auth.service';
 import {Session} from '../services/session/session.service';
 import {CookieService} from 'angular2-cookie/core';
+import { UserService } from '../services/user/user.service';
 
 // modules
 import { AppRoutingModule } from './app-routing.module';
@@ -43,7 +44,8 @@ import { RouterModule } from '@angular/router';
   providers: [
     AuthService,
     Session,
-    CookieService
+    CookieService,
+    UserService
     ],
   bootstrap: [AppComponent]
 })

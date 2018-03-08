@@ -71,6 +71,9 @@ class CONSUMER:
 
         self.channel.start_consuming()
 
+# start luigid
+os.system("luigid --background")
+
 while True:
     try:
         consumer = CONSUMER("consumer")

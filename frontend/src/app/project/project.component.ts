@@ -9,6 +9,7 @@ import { MenuItem } from 'primeng/primeng';
 // services
 import { ProjectService } from '../../services/project/project.service';
 import { SampleService } from '../../services/sample/sample.service'
+import { UserService } from '../../services/user/user.service'
 import { Session } from '../../services/session/session.service';
 import { ConfirmationService } from 'primeng/primeng';
 
@@ -25,6 +26,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
   private SUB: any;
   public projectID: string;
   public projectInfo: Object;
+  public shared_user_id: string;
   
   constructor(
     private router: Router,
@@ -32,7 +34,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
     private projectService: ProjectService,
     private confirmationService: ConfirmationService,
     public session: Session, 
-    private sampleService: SampleService
+    private sampleService: SampleService,
+    private userService: UserService
   ) {
 
   }
@@ -41,7 +44,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     // console.log(this.route.params)
-
+    this.shared_user_id = '1A0';
     this.SUB = this.route.params.subscribe(
         params => {
           // this.dt.reset();
@@ -60,6 +63,22 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
 
+  }
+
+  share_project(user_to_share: string){
+    // get user_id f
+    this.userService.get_user_id_from_username(user_to_share)
+      .subscribe( res => {
+        this.shared_user_id = res.user_id
+        
+        this.projectService.shareProject({project_id: this.projectInfo['_id'], to_user_id: this.shared_user_id})
+          .subscribe( res => {
+
+        });
+
+      });
+
+    
   }
 
 }

@@ -12,6 +12,13 @@
             <p>{{projectInfo.date}}</p>
             <strong><i class="fa fa-codepen margin-r-5"></i> Project ID</strong>
             <p>{{ projectInfo._id }}</p>
+            <strong><i class="fa fa-share-alt margin-r-5"></i> Share project: </strong>
+            <br>
+            <p class="small">Inser the user email to share the project</p>
+            <input #box_share>
+            <button (click)="share_project(box_share.value)">Add</button>
+            <br>
+
         </div>
 
 
