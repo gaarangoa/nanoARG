@@ -2296,18 +2296,25 @@ var Chords = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Network; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_cytoscape_dist_cytoscape_js__ = __webpack_require__("../../../../cytoscape/dist/cytoscape.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_cytoscape_dist_cytoscape_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_cytoscape_dist_cytoscape_js__);
-
+// declare var cytoscape: any;
+// declare var jquery: any;
+// declare var panzoom: any;
+// var jquery = require('jquery/jquery.js');
+var cytoscape = __webpack_require__("../../../../cytoscape/dist/cytoscape.js");
+// register extension
+// contextMenus( cytoscape, jquery );
+// panzoom( cytoscape )
 var Network = (function () {
     function Network() {
     }
     Network.prototype.render = function (placeholder, data) {
+        console.log(data);
         var _max = 0;
         var _min = 9999999999999;
         var nodes = [];
         data.nodes.forEach(function (e) {
             e.data.counts = e.data.size;
+            e.data.parent = e.data.metadata[2];
             e.data.size = Math.log(e.data.size + 1);
             if (e.data.size < _min) {
                 _min = e.data.size;
@@ -2408,6 +2415,15 @@ var Network = (function () {
             boxSelectionEnabled: true,
             motionBlur: true,
             motionBlurOpacity: 0.1,
+        });
+        this.network.on('grab', function (e) {
+            var ele = e.target;
+            // console.log(ele)
+            ele.connectedEdges().style({ 'line-color': 'blue' });
+        });
+        this.network.on('free', function (e) {
+            var ele = e.target;
+            ele.connectedEdges().style({ 'line-color': "#b8c1db" });
         });
     };
     return Network;

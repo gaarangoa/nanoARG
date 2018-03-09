@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import {CookieService} from 'angular2-cookie/core';
+// import {CookieService} from 'angular2-cookie/core';
 import { Session } from '../session/session.service'
 
 import { environment } from '../../environments/environment';

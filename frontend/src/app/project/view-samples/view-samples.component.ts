@@ -10,7 +10,7 @@ import { ProjectComponent } from '../project.component';
 
 // import { AbsoluteAbundance } from '../../../classes/abundance.class';
 
-import * as FileSaver from 'file-saver';
+// import * as FileSaver from 'file-saver';
 
 import { Genome } from './Gmap';
 import { Chords } from './chords';
