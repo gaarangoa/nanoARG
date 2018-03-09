@@ -2308,13 +2308,15 @@ var Network = (function () {
     function Network() {
     }
     Network.prototype.render = function (placeholder, data) {
-        console.log(data);
+        // console.log(data);
         var _max = 0;
         var _min = 9999999999999;
         var nodes = [];
+        // var parents = [];
         data.nodes.forEach(function (e) {
             e.data.counts = e.data.size;
-            e.data.parent = e.data.metadata[2];
+            e.data.group = e.data.metadata[2];
+            // parents.push(e.data.parent);
             e.data.size = Math.log(e.data.size + 1);
             if (e.data.size < _min) {
                 _min = e.data.size;
@@ -2326,6 +2328,24 @@ var Network = (function () {
                 nodes.push(e);
             }
         });
+        // parents = parents.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
+        // parents.forEach(e => {
+        //   nodes.push({
+        //     data:{
+        //       id: e,
+        //       counts: 1,
+        //       // position: {x: 1, y: 2},
+        //       // size: 20,
+        //       origin: 1,
+        //       color: 'rgba(0,0,0,0.1)',
+        //       metadata: 'some|here|I|do',
+        //       size: 0.1,
+        //       start: 1, 
+        //       end: 2
+        //     }
+        //   })
+        // });
+        // console.log(data.nodes)
         var _emax = 0;
         var _emin = 999999999999;
         var edges = [];
@@ -2343,7 +2363,7 @@ var Network = (function () {
             }
         });
         var mydata = { nodes: nodes, edges: edges };
-        // console.log(mydata)
+        console.log(mydata);
         this.network = new cytoscape({
             container: document.getElementById(placeholder),
             elements: mydata,
