@@ -210,17 +210,25 @@
                         and the ESKAPE pathogens (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4871955/">Santajit., et al</a>)
                     </p>
                 </div>
-                <div class="col-md-6">
-                    <div id="network"></div>
-                    <div class="text-center">
-                        <span class="small" *ngFor="let item of network_labels">
+
+                <p-tabView>
+                    <p-tabPanel header="co-occurrence network">
+                        <div class="col-md-12">
+                            <div id="network"></div>
+                            <div class="text-center">
+                                <span class="small" *ngFor="let item of network_labels">
                         <i [style.color]="item.color" class="fa fa-circle" aria-hidden="true"></i> {{ item.id }}
                     </span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div id="co_occurrence_chords"></div>
-                </div>
+                            </div>
+                        </div>
+                    </p-tabPanel>
+
+                    <p-tabPanel header="co-occurrence map">
+                        <div class="col-md-12">
+                            <div id="co_occurrence_chords"></div>
+                        </div>
+                    </p-tabPanel>
+                </p-tabView>
             </div>
         </div>
 

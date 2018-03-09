@@ -24,6 +24,8 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 import { RouterModule } from '@angular/router';
 
+import {TabViewModule} from 'primeng/primeng';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { RouterModule } from '@angular/router';
     ConfirmDialogModule,
     BrowserModule,
     ChartModule,
-    NgxChartsModule
+    NgxChartsModule,
+    TabViewModule
     // NgxChartsModule,
     // BrowserModule
   ],
