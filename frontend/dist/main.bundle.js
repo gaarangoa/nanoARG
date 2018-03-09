@@ -2390,9 +2390,12 @@ var Network = (function () {
                 circle: false,
                 directed: true,
                 avoidOverlap: true,
-                animate: true,
+                animate: false,
                 componentSpacing: 40,
                 nodeRepulsion: function (node) { return 120000 * node.data('size'); },
+                idealEdgeLength: function (edge) { return 100 / edge.data('weight'); },
+                graviti: 9.8,
+                numIter: 5000,
                 nodeOverlap: 200,
                 padding: 100
             },
