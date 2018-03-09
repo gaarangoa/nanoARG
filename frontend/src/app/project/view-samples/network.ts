@@ -97,12 +97,12 @@ export class Network {
               ],
             
               layout: {
-                name: 'concentric',
+                name: 'cose',
                 fit: true,
                 circle: false,
                 directed: true,
                 avoidOverlap: true,
-                animate: false,
+                animate: true,
                 componentSpacing: 40,
                 nodeRepulsion: function( node ){ return 120000*node.data('size'); },
                 nodeOverlap: 200,
