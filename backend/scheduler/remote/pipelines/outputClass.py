@@ -338,6 +338,7 @@ def read_map(parameters = []):
 
     total_arg_reads = sum([i['read'][0]['args'] for i in data])
     total_functional_reads = sum([i['read'][0]['fngs'] for i in data])
+    total_bp_counts = sum([i['read'][0]['len'] for i in data ])
 
     info = {
         "total_reads": len(read_length),
@@ -345,7 +346,8 @@ def read_map(parameters = []):
         "total_arg_reads": total_arg_reads,
         "read_length_distribution": read_length_distribution,
         "total_unique_genomes": len(filter_taxa),
-        "total_mapped_ARG_reads": len(filter_data)
+        "total_mapped_ARG_reads": len(filter_data),
+        "total_bp_counts": total_bp_counts
     }
 
     json.dump([ filter_data, net, arg_labels, filter_taxa, info ], open(parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
