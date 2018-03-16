@@ -49,11 +49,11 @@ pathogens = {
 def color_map():
     _cmges = Color('#42f47a')
     _cmrgs = Color('#000000')
-    # 
+    #
     mges_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/MGEs90.size")}
     mrgs_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/bacmet.size")}
     args_data = {i.split()[0].split('|')[3]:'0' for i in open(conf.data+"/deeparg.size")}
-    # 
+    #
     _args_color_list = list(Color('#4286f4').range_to(Color("#41f4df"), len(args_data)/2)) + list(Color('#41f47c').range_to(Color("#bef441"), len(args_data)/2)) + list(Color('#f46741').range_to(Color("#993f27"), len(args_data)/2))
     _args_color_list = [Color(i,luminance=float(ix+20)/(len(args_data)+50)) for ix,i in enumerate(_args_color_list)]
     # print( [float(ix+20)/len(args_data)+50 for ix,i in enumerate(list(Color('green').range_to(Color("blue"), len(args_data))))] )
@@ -63,7 +63,7 @@ def color_map():
     mges_colors = [str(i) for i in list(_cmges.range_to(Color("#42f47a"), len(mges_data)))]
     args_colors = [str(i) for i in [str(k) for k in _args_color_list] ]
     mrgs_colors = [str(i) for i in list(_cmrgs.range_to(Color("#000000"), len(mrgs_data)))]
-    # 
+    #
     mges_c = { i:str(mges_colors[ix]) for ix,i in enumerate(mges_data) }
     mrgs_c = { i:str(mrgs_colors[ix]) for ix,i in enumerate(mrgs_data) }
     args_c = { i:str(args_colors[ix]) for ix,i in enumerate(args_data) }
@@ -82,7 +82,7 @@ def origin(string):
     if "ACLAME" in string: return 2
     if "MGEs" in string: return 2
     if "BACMET" in string: return 4
-    
+
     return 4
 
 def get_fasta_read_length(fi=""):
@@ -94,7 +94,7 @@ def get_fasta_read_length(fi=""):
 
 def _get_id(gene):
     _id = gene['metadata'][3]
-    if gene['origin'] == 1: 
+    if gene['origin'] == 1:
         _id = gene['metadata'][4]
     return _id
 
@@ -133,13 +133,13 @@ def network(data = {}):
                 }
             except Exception as e:
                 pass
-            
+
         for ixgene, gene in enumerate(read['data']):
             # discard general functions
-            if gene['origin'] == 3: 
+            if gene['origin'] == 3:
                 continue
             # for labels to type only consider args
-            if gene['origin'] == 1: 
+            if gene['origin'] == 1:
                 arg_labels.update({
                     gene['metadata'][3]:{
                         "color": gene['color'],
@@ -147,11 +147,11 @@ def network(data = {}):
                         "size": 1
                     }
                 })
-                
+
             # process nodes
             _id = _get_id(gene)
             # aggregate taxonomy edges
-            # if read['read'][0]['args']>=1: 
+            # if read['read'][0]['args']>=1:
             try:
                 E[(_taxa+"_"+_id)]['weight']+=1
             except Exception as e:
@@ -179,7 +179,10 @@ def network(data = {}):
                     "size": 1,
                     "origin": gene["origin"],
                     "color": gene['color'],
-                    "metadata": gene['metadata']
+                    "metadata": gene['metadata'],
+                    "evalue": gene['evalue'],
+                    "identity": gene['identity'],
+                    "coverage": gene['coverage']
                 }
             if ixgene == len(read['data']): continue
             # now add the edges
@@ -209,7 +212,7 @@ def network(data = {}):
     edges = [{"data":E[i]} for i in E]
 
     return [{ "nodes": nodes, "edges": edges }, arg_labels.values()]
-           
+
 
 def read_map(parameters = []):
     os.system("cat "+parameters["storage_remote_dir"]+"/*.bestHit > "+parameters["storage_remote_dir"]+"/all.bestHit.txt")
@@ -231,19 +234,19 @@ def read_map(parameters = []):
         if par[1] > _evalue: continue
         if par[2] < _identity: continue
         if par[3] < _coverage: continue
-        # 
+        #
         doc = i[3].split("|")
         doc[3] = doc[3].replace("_", " ").replace(".", " ")
         doc[4] = doc[4].replace("_", " ").replace(".", " ")
 
         try:
-            # if origin(i[3])==1: 
+            # if origin(i[3])==1:
             #     gcolor = color_gene[doc[2]]
             # else:
             gcolor = color_gene[doc[3]]
         except:
             gcolor = '#93A661'
-        # 
+        #
         item = {
             "block_id": i[0],
             "start": int(i[1]),
@@ -260,7 +263,7 @@ def read_map(parameters = []):
             "metadata": doc,
             "total_reads": len(read_length)
         }
-        # 
+        #
         try:
             x[i[0]].append(item)
         except Exception as e:
@@ -273,7 +276,7 @@ def read_map(parameters = []):
         _hasmrg = len([ k for k in x[i] if k['origin']==4 ])
 
         if _hasarg == 0 and _hasmge == 0 and _hasmrg == 0: continue
-        
+
         try:
             read_taxa = taxa_info[taxa_reads[i]['tax_id'] ]['name']
             read_taxa_id = taxa_info[taxa_reads[i]['tax_id']]['tax_id']
@@ -284,12 +287,12 @@ def read_map(parameters = []):
             read_taxa_rank = "undefined"
 
         read = {
-            "len": read_length[i], 
-            "color": 'black', 
-            "label": i, 
-            "id": i, 
-            "genes": len(x[i]), 
-            "args": len([ k for k in x[i] if k['origin']==1 ]), 
+            "len": read_length[i],
+            "color": 'black',
+            "label": i,
+            "id": i,
+            "genes": len(x[i]),
+            "args": len([ k for k in x[i] if k['origin']==1 ]),
             "mges": len([ k for k in x[i] if k['origin']==2 ]),
             "mrgs": len([ k for k in x[i] if k['origin']==4 ]),
             "fngs": len([ k for k in x[i] if k['origin']==3 ]),
@@ -304,12 +307,12 @@ def read_map(parameters = []):
         }
 
         data.append(item)
-    
+
     print('building network')
     net, arg_labels = network(data)
 
     print('computing distributions')
-    
+
     filter_data = [i for i in sorted(data, key=lambda k: k['read'][0]['args'], reverse=True) if i['read'][0]['args']>=1 ]
 
     filter_taxa = [i for i in sorted(taxa_info.values(), key=lambda k: k['num_reads'], reverse=True) if i['num_reads']>100]
@@ -332,9 +335,9 @@ def read_map(parameters = []):
     total_functional_reads = sum([i['read'][0]['fngs'] for i in data])
 
     info = {
-        "total_reads": len(read_length), 
-        "total_functional_reads": total_functional_reads, 
-        "total_arg_reads": total_arg_reads, 
+        "total_reads": len(read_length),
+        "total_functional_reads": total_functional_reads,
+        "total_arg_reads": total_arg_reads,
         "read_length_distribution": read_length_distribution,
         "total_unique_genomes": len(filter_taxa),
         "total_mapped_ARG_reads": len(filter_data)

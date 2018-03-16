@@ -71,7 +71,7 @@ export class ViewSamplesComponent implements OnInit {
 
   constructor(
     public router: Router,
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     public sampleService: SampleService,
     private confirmationService: ConfirmationService,
     private session: Session,
@@ -98,7 +98,7 @@ export class ViewSamplesComponent implements OnInit {
       this.selected_sample = {name:''}
       this.network_data = {nodes:[], edges:[]};
       this.all_samples = [];
-      
+
 
       this.co_occurrence_chords = new Chords()
 
@@ -110,14 +110,14 @@ export class ViewSamplesComponent implements OnInit {
       this.sub = this.route.params.subscribe(
         params => {
           // this.dt.reset();
-          
+
           TimerObservable.create(0, 2000)
           .takeWhile(() => this.alive)
           .subscribe(() => {
             this.sampleService.getSamplesByProject(this.projectComponent.projectID)
             .subscribe(response => {});
           });
-          
+
           this.sampleService.getSamplesByProject(this.projectComponent.projectID)
             .subscribe(response => {
               const samples = this.sampleService.samplesByProject;
@@ -126,7 +126,7 @@ export class ViewSamplesComponent implements OnInit {
               this.sample_comparison();
             });
 
-          
+
 
         }
       );
@@ -142,10 +142,10 @@ export class ViewSamplesComponent implements OnInit {
       return filtered_data;
     }
 
-   
+
 
     get_sample_results(sample_id: string, index: number) {
-      
+
       this.sampleService.get_sample_results(sample_id).
         subscribe( res => {
 
@@ -154,7 +154,7 @@ export class ViewSamplesComponent implements OnInit {
             return false;
           };
 
-          // console.log(res);
+          console.log(res);
 
           this.raw_reads = res[0];
           this.filter_reads = res[0];
@@ -179,12 +179,12 @@ export class ViewSamplesComponent implements OnInit {
           this.metal_distribution_chart = this.read_chart.genes_distribution(this.network_data, 4, 3, this.network_labels);
 
           // render read map //
-          
+
           // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
           const gene_organization_div = document.getElementById('gene_organization');
           gene_organization_div.innerHTML = '';
           this.event_drops.render( this.filter_reads[index]);
-          
+
 
           // co-occurrence network
           this.network.render('network', this.network_data);
@@ -202,7 +202,7 @@ export class ViewSamplesComponent implements OnInit {
             i.read[0]['index'] = ix;
             return i.read[0];
           });
-          
+
           // this.network.render('network_labels', this.network_data[1], 'grid', false);
           // console.log(this.reads_table)
 
@@ -213,13 +213,13 @@ export class ViewSamplesComponent implements OnInit {
     render_read_circular_map(data: any){
       const index = data.index;
       this.selected_read = this.filter_reads[index].read[0];
-      
+
       const item = document.getElementById('gene_organization');
       item.innerHTML = '';
       this.event_drops.render(this.filter_reads[index]);
 
       // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
-      
+
     }
 
     view(sample: any) {
@@ -283,7 +283,7 @@ export class ViewSamplesComponent implements OnInit {
               res[1].nodes.forEach(item => {
                 item.data['sample'] = sample['name'];
                 item.data['rel_abn_args'] = (item['data'].size * 1 / res[4]['total_mapped_ARG_reads']).toFixed(5);
-                item.data['rel_abn_total_genes'] = (item['data'].size * 10000 / res[4]['total_functional_reads']).toFixed(5); 
+                item.data['rel_abn_total_genes'] = (item['data'].size * 10000 / res[4]['total_functional_reads']).toFixed(5);
                 item.data['rel_abn_total_reads'] = (item['data'].size * 10000 / res[4]['total_reads']).toFixed(5);
                 item.data['rel_abn_unique_strains'] = (item['data'].size * 1 / res[4]['total_unique_genomes']).toFixed(5);
                 item.data['category'] = item['data']['metadata'][3];
@@ -294,7 +294,7 @@ export class ViewSamplesComponent implements OnInit {
         // console.log(this.all_samples);
     }
 
-      
+
 
     ngOnDestroy() {
       this.sub.unsubscribe();

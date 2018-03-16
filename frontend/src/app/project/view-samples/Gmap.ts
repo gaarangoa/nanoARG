@@ -140,7 +140,7 @@ export class Genome {
         this.circos.highlight('MRGs', d4, this.origin_2);
         this.circos.highlight('MGEs', d2, this.origin_3);
         this.circos.highlight('Others', d3, this.origin_4);
-        
+
         this.circos.text('ARGs_text', d1, this.origin_1);
 
         this.circos.render();
@@ -185,7 +185,7 @@ export class Genome {
         arr.sort(function (a, b) {
             return a[0] - b[0];
         });
-        
+
         // console.log(arr);
         return arr;
     }
@@ -203,7 +203,7 @@ export class Genome {
         data.nodes.forEach(e => {
             if (e.data.origin === origin){
                 try {
-                    dgenes[e.data.metadata[section]].data += e.data.size 
+                    dgenes[e.data.metadata[section]].data += e.data.size
                 } catch (error) {
                     dgenes[e.data.metadata[section]].data = e.data.size
                 }
@@ -230,7 +230,7 @@ export class Genome {
                 position: 'absolute',
                 width: null
             },
-            
+
             title: {
                 text: null
             },
@@ -275,7 +275,7 @@ export class Genome {
                 startOnTick: true,
                 minorGridLineWidth: 1,
                 majorGridLineWidth: 1,
-                
+
                 gridLineWidth: 1,
                 labels: {
                     enabled: true
