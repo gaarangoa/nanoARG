@@ -134,11 +134,15 @@ def network(data = {}):
             except Exception as e:
                 pass
 
+        # traverse all each one of the genes in the read and add them as nodes and edges
+        # this function consider all genes, except the general functions. This will contain
+        # full set of genes
+
         for ixgene, gene in enumerate(read['data']):
             # discard general functions
             if gene['origin'] == 3:
                 continue
-            # for labels to type only consider args
+            # format the metadata to match the type of ARG (class)
             if gene['origin'] == 1:
                 arg_labels.update({
                     gene['metadata'][3]:{
@@ -170,6 +174,7 @@ def network(data = {}):
                     }
                 except:
                     pass
+
             # aggregate nodes
             try:
                 N[_id]['size']+=1
