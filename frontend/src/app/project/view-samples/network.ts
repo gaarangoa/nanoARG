@@ -73,9 +73,9 @@ export class Network {
         if( e.data.weight < _emin ) {_emin = e.data.weight}
         if( e.data.weight > _emax ) {_emax = e.data.weight}
 
-        // if( (e.data.source_origin < 9 || e.data.target_origin < 9) && e.data.counts >= 1 ){
+        if( (e.data.source_origin < 9 || e.data.target_origin < 9) && e.data.counts >= 1 ){
           edges.push(e);
-        // }
+        }
 
       });
       const mydata = {nodes: nodes, edges: edges}

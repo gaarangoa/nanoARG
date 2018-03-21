@@ -114,7 +114,8 @@ export class ViewSamplesComponent implements OnInit {
 
       this.selected_read = {
         id: 0,
-        taxa: 0
+        taxa: 0,
+        link: '50,150,2_1,MY+300,400,3_3,DOMAIN+50,150,2_2,MY2+300,400,4_4,DOMAIN2&len=700'
       };
 
       this.sub = this.route.params.subscribe(
@@ -200,7 +201,7 @@ export class ViewSamplesComponent implements OnInit {
       this.parameters.coverage = Number(_coverage_input.value);
       this.parameters.evalue = Number(_evalue_input.value);
 
-      console.log(this.parameters);
+      // console.log(this.parameters);
 
       this.antibiotic_distribution_chart = this.read_chart.genes_distribution(this.network_data, 1, 3, this.network_labels,
         this.parameters);
@@ -218,6 +219,21 @@ export class ViewSamplesComponent implements OnInit {
 
       //
 
+    }
+
+    generate_gene_arrangement_image(data: any) {
+      console.log(data);
+      let _text = '';
+
+      data.data.forEach(element => {
+        const shape = element.strand === '+' ? '3' : '4';
+        const _start = Math.floor(element.start / 10);
+        const _end = Math.floor(element.end / 10);
+        const _category = element._category === 'ARGs' ?  element._gene_name : element._category;
+        _text += _start.toString() + ',' + _end.toString() + ',' + shape + '_' + element.origin + ',' + _category + '+';
+
+      });
+      return _text.slice(0, -1) + '&hscale=1&len=' + Math.floor(data.read[0].len / 10);
     }
 
     get_sample_results(sample_id: string, index: number) {
@@ -263,9 +279,10 @@ export class ViewSamplesComponent implements OnInit {
           this.args_on_reads = this.condense_genes_reads(this.filter_reads);
 
           // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
-          const gene_organization_div = document.getElementById('gene_organization');
-          gene_organization_div.innerHTML = '';
-          this.event_drops.render( this.filter_reads[index]);
+          // const gene_organization_div = document.getElementById('gene_organization');
+          // gene_organization_div.innerHTML = '';
+          // this.event_drops.render( this.filter_reads[index]);
+          this.selected_read.link = this.generate_gene_arrangement_image(this.filter_reads[index]);
 
 
           // co-occurrence network
@@ -296,10 +313,10 @@ export class ViewSamplesComponent implements OnInit {
     render_read_circular_map(data: any){
       const index = data.index;
       this.selected_read = this.filter_reads[index].read[0];
-
-      const item = document.getElementById('gene_organization');
-      item.innerHTML = '';
-      this.event_drops.render(this.filter_reads[index]);
+      this.selected_read.link = this.generate_gene_arrangement_image(this.filter_reads[index]);
+      // const item = document.getElementById('gene_organization');
+      // item.innerHTML = '';
+      // this.event_drops.render(this.filter_reads[index]);
 
       // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
 

@@ -235,13 +235,16 @@
     <div class="box-body">
 
         <!-- read circular mapping -->
-        <div class="col-md-8 col-md-offset-2">
-            <div class="text-center" style="border-style: solid; border-width: 1px; border-color:rgba(0,0,0,0.1)">
+        <div class="col-md-12 col-md-offset-0">
+            <div class="text-center">
                 <h4> <strong> {{ selected_read.id }} </strong></h4>
                 <h5> <strong> (<i>{{ selected_read.taxa_rank }}</i> {{ selected_read.taxa }}) </strong> </h5>
                 <!-- <div class="d-inline" id="read_circle_map-1"></div> -->
-                <div id="gene_organization" style="width: 90%;"></div>
+                <!-- <div id="gene_organization" style="width: 90%;"></div> -->
+                <br>
+                <img [src]="'https://prosite.expasy.org/cgi-bin/prosite/PSImage.cgi?hit='+selected_read.link+'&hscale=0.8'" alt="">
                 <!-- <div class="d-inline" id="read_circle_map-2"></div> -->
+                <br>
             </div>
 
         </div>
