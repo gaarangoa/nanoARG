@@ -2770,13 +2770,13 @@ var ViewSamplesComponent = (function () {
         //
     };
     ViewSamplesComponent.prototype.generate_gene_arrangement_image = function (data) {
-        // console.log(data);
+        console.log(data);
         var _text = {};
         data.data.forEach(function (element) {
             var shape = element.strand === '+' ? '3' : '4';
             var _start = Math.floor((element.start) / 10);
             var _end = Math.floor((element.end) / 10);
-            var _category = element._category === 'ARGs' ? element._gene_name : element._category;
+            var _category = element._category === 'ARGs' ? element._gene_name : element._class_name;
             if (_text[element._category]) {
                 _text[element._category] += _start.toString() + ',' + _end.toString() + ',' + shape + '_' + element.origin + ',' + _category + '+';
             }

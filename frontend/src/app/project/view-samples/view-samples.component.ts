@@ -222,14 +222,15 @@ export class ViewSamplesComponent implements OnInit {
     }
 
     generate_gene_arrangement_image(data: any) {
-      // console.log(data);
+      console.log(data);
       const _text = {};
 
       data.data.forEach(element => {
         const shape = element.strand === '+' ? '3' : '4';
         const _start = Math.floor( (element.start ) / 10);
         const _end = Math.floor( (element.end) / 10);
-        const _category = element._category === 'ARGs' ?  element._gene_name : element._category;
+        const _category = element._category === 'ARGs' ?  element._gene_name : element._class_name;
+
 
 
         if (_text[element._category]) {
