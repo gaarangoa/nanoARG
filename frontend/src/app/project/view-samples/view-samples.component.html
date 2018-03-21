@@ -242,7 +242,9 @@
                 <!-- <div class="d-inline" id="read_circle_map-1"></div> -->
                 <!-- <div id="gene_organization" style="width: 90%;"></div> -->
                 <br>
-                <img [src]="'https://prosite.expasy.org/cgi-bin/prosite/PSImage.cgi?hit='+selected_read.link+'&hscale=0.8'" alt="">
+                <div *ngFor="let r of selected_read.link">
+                    <img [src]="'https://prosite.expasy.org/cgi-bin/prosite/PSImage.cgi?hit='+r+''" alt="">
+                </div>
                 <!-- <div class="d-inline" id="read_circle_map-2"></div> -->
                 <br>
             </div>

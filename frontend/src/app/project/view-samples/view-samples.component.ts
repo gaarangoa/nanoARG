@@ -115,7 +115,7 @@ export class ViewSamplesComponent implements OnInit {
       this.selected_read = {
         id: 0,
         taxa: 0,
-        link: '50,150,2_1,MY+300,400,3_3,DOMAIN+50,150,2_2,MY2+300,400,4_4,DOMAIN2&len=700'
+        link: ['50,150,2_1,MY+300,400,3_3,DOMAIN+50,150,2_2,MY2+300,400,4_4,DOMAIN2&len=700']
       };
 
       this.sub = this.route.params.subscribe(
@@ -222,18 +222,32 @@ export class ViewSamplesComponent implements OnInit {
     }
 
     generate_gene_arrangement_image(data: any) {
-      console.log(data);
-      let _text = '';
+      // console.log(data);
+      const _text = {};
 
       data.data.forEach(element => {
         const shape = element.strand === '+' ? '3' : '4';
-        const _start = Math.floor(element.start / 10);
-        const _end = Math.floor(element.end / 10);
+        const _start = Math.floor( (element.start ) / 10);
+        const _end = Math.floor( (element.end) / 10);
         const _category = element._category === 'ARGs' ?  element._gene_name : element._category;
-        _text += _start.toString() + ',' + _end.toString() + ',' + shape + '_' + element.origin + ',' + _category + '+';
+
+
+        if (_text[element._category]) {
+          _text[element._category] += _start.toString() + ',' + _end.toString() + ',' + shape + '_' + element.origin + ',' + _category + '+';
+        } else {
+          _text[element._category] = _start.toString() + ',' + _end.toString() + ',' + shape + '_' + element.origin + ',' + _category + '+';
+        }
 
       });
-      return _text.slice(0, -1) + '&hscale=1&len=' + Math.floor(data.read[0].len / 10);
+
+      const _my_text = [];
+      Object.keys(_text).forEach(e => {
+        // console.log(e)
+        _my_text.push( _text[e].slice(0, -1) + '&hscale=1&len=' + Math.floor( (data.read[0].len) / 10) );
+      });
+
+      // console.log(_my_text);
+      return _my_text;
     }
 
     get_sample_results(sample_id: string, index: number) {
@@ -283,6 +297,7 @@ export class ViewSamplesComponent implements OnInit {
           // gene_organization_div.innerHTML = '';
           // this.event_drops.render( this.filter_reads[index]);
           this.selected_read.link = this.generate_gene_arrangement_image(this.filter_reads[index]);
+          // console.log(this.selected_read);
 
 
           // co-occurrence network
