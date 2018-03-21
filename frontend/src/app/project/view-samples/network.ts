@@ -18,9 +18,9 @@ export class Network {
     public network: any;
 
     constructor(){
-    
+
     }
-    
+
     render(placeholder: string, data: any){
 
       // console.log(data);
@@ -41,7 +41,7 @@ export class Network {
         if(e.data.origin < 9 && e.data.counts >= 1){
           nodes.push(e);
         }
-      
+
       });
 
       // parents = parents.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
@@ -56,7 +56,7 @@ export class Network {
       //       color: 'rgba(0,0,0,0.1)',
       //       metadata: 'some|here|I|do',
       //       size: 0.1,
-      //       start: 1, 
+      //       start: 1,
       //       end: 2
       //     }
       //   })
@@ -65,21 +65,21 @@ export class Network {
       // console.log(data.nodes)
 
       var _emax = 0;
-      var _emin = 999999999999; 
+      var _emin = 999999999999;
       const edges = []
       data.edges.forEach(e => {
         e.data.counts = e.data.weight
         e.data.weight = Math.log(e.data.weight+1)
         if( e.data.weight < _emin ) {_emin = e.data.weight}
         if( e.data.weight > _emax ) {_emax = e.data.weight}
-        
-        if( (e.data.source_origin < 9 || e.data.target_origin < 9) && e.data.counts >= 1 ){
+
+        // if( (e.data.source_origin < 9 || e.data.target_origin < 9) && e.data.counts >= 1 ){
           edges.push(e);
-        }
+        // }
 
       });
       const mydata = {nodes: nodes, edges: edges}
-      console.log(mydata)
+      // console.log(mydata)
 
       this.network = new cytoscape({
         container: document.getElementById(placeholder),
@@ -110,7 +110,7 @@ export class Network {
                 'width': 'mapData(size, '+_min+', '+_max+', 20, 50)'
               }
             },
-        
+
             {
               selector: 'edge',
               style: {
@@ -127,7 +127,7 @@ export class Network {
 
 
           ],
-        
+
           layout: {
             name: 'cose',
             fit: true,
@@ -156,13 +156,13 @@ export class Network {
 
 
     this.network.on('grab', function (e) {
-        
+
         var ele = e.target;
         // console.log(ele)
         ele.connectedEdges().style({ 'line-color': 'blue' });
     });
-    
-    
+
+
     this.network.on('free', function (e) {
         var ele = e.target;
         ele.connectedEdges().style({ 'line-color': "#b8c1db" });

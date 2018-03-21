@@ -67,6 +67,8 @@ export class ViewSamplesComponent implements OnInit {
   public co_occurrence_chords: any;
   public stats: any;
   public general_info: any;
+  public args_on_reads: any;
+  public parameters: any;
   // public sample_list: any;
 
   constructor(
@@ -81,7 +83,15 @@ export class ViewSamplesComponent implements OnInit {
    }
 
     ngOnInit() {
+      this.parameters = {
+        identity: 25,
+        coverage: 40,
+        evalue: (1e-5).toExponential(),
+        prob: 0.5
+      };
+
       this.stacked = {};
+      this.args_on_reads = [];
       this.general_info = {
         ARGs:{counts: 0},
         MGEs:{counts: 0},
@@ -142,23 +152,94 @@ export class ViewSamplesComponent implements OnInit {
       return filtered_data;
     }
 
+    origin2category(index){
+      if ( index === 1 ) { return 'ARGs'; }
+      if ( index === 2 ) { return 'MGEs'; }
+      if ( index === 3 ) { return 'Other'; }
+      if ( index === 4 ) { return 'MRGs'; }
+      if ( index === 9 ) { return 'Taxa'; }
+      if ( index === 10 ) { return 'Taxa'; }
+    }
 
+    condense_genes_reads(data: any){
+      const mydata = [];
+
+      data.forEach(element => {
+        element.data.forEach(entry => {
+            entry['_gene_id'] = entry.metadata[0];
+            entry['_class_name'] = entry.metadata[3];
+            entry['_gene_name'] = entry.metadata[4];
+            entry['_category'] = this.origin2category(entry.origin);
+            entry['_taxa'] = element.read[0].taxa;
+            entry['_taxa_id'] = element.read[0].taxa_id;
+            entry.coverage = 100 * entry.coverage.toFixed(2);
+            entry.evalue = entry.evalue.toExponential();
+            mydata.push(entry);
+        });
+      });
+
+      return mydata;
+    }
+
+    pass_filter(data, p) {
+      // console.log(data, p);
+      if (
+          data.coverage < p.coverage / 100
+          || data.identity < p.identity
+          || data.evalue >  p.evalue
+      ) {
+          return false;
+      } else {
+          return true;
+      }
+  }
+
+    on_update_parameters(_identity_input, _coverage_input, _evalue_input) {
+
+      this.parameters.identity = Number(_identity_input.value);
+      this.parameters.coverage = Number(_coverage_input.value);
+      this.parameters.evalue = Number(_evalue_input.value);
+
+      console.log(this.parameters);
+
+      this.antibiotic_distribution_chart = this.read_chart.genes_distribution(this.network_data, 1, 3, this.network_labels,
+        this.parameters);
+      this.args_distribution_chart = this.read_chart.genes_distribution(this.network_data, 1, 4, this.network_labels, this.parameters);
+      this.mges_distribution_chart = this.read_chart.genes_distribution(this.network_data, 2, 3, this.network_labels, this.parameters);
+      this.metal_distribution_chart = this.read_chart.genes_distribution(this.network_data, 4, 3, this.network_labels, this.parameters);
+
+      //
+      // this.args_on_reads = this.condense_genes_reads(this.filter_reads);
+
+      // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
+
+      // co-occurrence network
+      // this.network.render('network', this.network_data);
+
+      //
+
+    }
 
     get_sample_results(sample_id: string, index: number) {
+
+      console.log(this.parameters);
 
       this.sampleService.get_sample_results(sample_id).
         subscribe( res => {
 
           if (res === false) {
-            this.msgs.push({severity:'info', summary:'Info Message', detail:'Processing sample'});
+            this.msgs.push({severity: 'info', summary: 'Info Message', detail: 'Processing sample'});
             return false;
           };
 
-          console.log(res);
+          // console.log(res);
 
-          this.raw_reads = res[0];
+          // this.raw_reads = res[0];
           this.filter_reads = res[0];
           this.network_data = res[1];
+
+          // console.log(res);
+
           this.network_labels = res[2];
           this.taxonomy_data = res[3];
           this.read_length = res[4]['read_length_distribution'];
@@ -173,12 +254,13 @@ export class ViewSamplesComponent implements OnInit {
           this.line_chart = this.read_chart.length_distribution(this.read_length);
 
           // Genes distribution
-          this.antibiotic_distribution_chart = this.read_chart.genes_distribution(this.network_data, 1, 3, this.network_labels);
-          this.args_distribution_chart = this.read_chart.genes_distribution(this.network_data, 1, 4, this.network_labels);
-          this.mges_distribution_chart = this.read_chart.genes_distribution(this.network_data, 2, 3, this.network_labels);
-          this.metal_distribution_chart = this.read_chart.genes_distribution(this.network_data, 4, 3, this.network_labels);
+          this.antibiotic_distribution_chart = this.read_chart.genes_distribution(this.network_data, 1, 3, this.network_labels, this.parameters);
+          this.args_distribution_chart = this.read_chart.genes_distribution(this.network_data, 1, 4, this.network_labels, this.parameters);
+          this.mges_distribution_chart = this.read_chart.genes_distribution(this.network_data, 2, 3, this.network_labels, this.parameters);
+          this.metal_distribution_chart = this.read_chart.genes_distribution(this.network_data, 4, 3, this.network_labels, this.parameters);
 
-          // render read map //
+          // reads with ARGs //
+          this.args_on_reads = this.condense_genes_reads(this.filter_reads);
 
           // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
           const gene_organization_div = document.getElementById('gene_organization');
@@ -188,10 +270,11 @@ export class ViewSamplesComponent implements OnInit {
 
           // co-occurrence network
           this.network.render('network', this.network_data);
+
           // co-occurrence chords
-          const item = document.getElementById('co_occurrence_chords');
-          item.innerHTML = '';
-          this.co_occurrence_chords.render('#co_occurrence_chords', this.network_data);
+          // const item = document.getElementById('co_occurrence_chords');
+          // item.innerHTML = '';
+          // this.co_occurrence_chords.render('#co_occurrence_chords', this.network_data);
 
           // barchart witht he species abundances //
           this.taxonomy_sample_chart_species = this.taxonomy_visualization.render(this.taxonomy_data, 'species');
@@ -223,7 +306,7 @@ export class ViewSamplesComponent implements OnInit {
     }
 
     view(sample: any) {
-      this.selected_sample = sample
+      this.selected_sample = sample;
       this.get_sample_results(sample['_id'], 0);
 
     }
@@ -284,7 +367,7 @@ export class ViewSamplesComponent implements OnInit {
                 item.data['sample'] = sample['name'];
                 item.data['rel_abn_args'] = (item['data'].size * 1 / res[4]['total_mapped_ARG_reads']).toFixed(5);
                 item.data['rel_abn_total_genes'] = (item['data'].size * 10000 / res[4]['total_functional_reads']).toFixed(5);
-                item.data['rel_abn_total_reads'] = (item['data'].size * 10000 / res[4]['total_reads']).toFixed(5);
+                item.data['rel_abn_total_reads'] = (item['data'].size * 14000000 / res[4]['total_bp_counts']).toFixed(5);
                 item.data['rel_abn_unique_strains'] = (item['data'].size * 1 / res[4]['total_unique_genomes']).toFixed(5);
                 item.data['category'] = item['data']['metadata'][3];
                 this.all_samples.push(item.data);

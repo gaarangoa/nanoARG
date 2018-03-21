@@ -190,22 +190,39 @@ export class Genome {
         return arr;
     }
 
-    genes_distribution(data: any, origin: number, section: number, colors: any){
+    pass_filter(data, p) {
+        // console.log(data, p);
+        if (
+            data.coverage < p.coverage / 100
+            || data.identity < p.identity
+            || data.evalue >  p.evalue
+        ) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    genes_distribution(data: any, origin: number, section: number, colors: any, parameters: any) {
         // option reffers to the type ARGs, MGEs or others, section reffers to the index in the metadata
         // data are the nodes from the network that contains the necesary information
+        // console.log(parameters);
+
         const dgenes  = [];
+
         data.nodes.forEach(e => {
-            if (e.data.origin === origin){
+            // console.log(this.pass_filter(e.data, parameters))
+            if (e.data.origin === origin && this.pass_filter(e.data, parameters)) {
                 dgenes[e.data.metadata[section]] = {data:0, name:e.data.metadata[section], color:e.data.color}
             }
         });
 
         data.nodes.forEach(e => {
-            if (e.data.origin === origin){
+            if (e.data.origin === origin && this.pass_filter(e.data, parameters) ) {
                 try {
-                    dgenes[e.data.metadata[section]].data += e.data.size
+                    dgenes[e.data.metadata[section]].data += e.data.size;
                 } catch (error) {
-                    dgenes[e.data.metadata[section]].data = e.data.size
+                    dgenes[e.data.metadata[section]].data = e.data.size;
                 }
             }
         });
@@ -220,6 +237,8 @@ export class Genome {
         // console.log(xdata.map(e => {
         //     return {y: e.data, color: e.color}
         // }))
+
+        // console.log(dgenes);
 
         return {
             chart: {
