@@ -222,7 +222,7 @@ export class ViewSamplesComponent implements OnInit {
     }
 
     generate_gene_arrangement_image(data: any) {
-      console.log(data);
+      // console.log(data);
       const _text = {};
 
       data.data.forEach(element => {
