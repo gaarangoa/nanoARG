@@ -7,10 +7,19 @@
 /* @import "../node_modules/primeng/resources/themes/omega/theme.css"; */
 
 @import "assets/css/primeng/theme.css";
+@import "assets/vendor/icon-line/css/simple-line-icons.css";
+@import "assets/vendor/icon-etlinefont/style.css";
+@import "assets/vendor/icon-hs/style.css";
+@import "assets/vendor/dzsparallaxer/dzsparallaxer.css";
+@import "assets/vendor/dzsparallaxer/dzsscroller/scroller.css";
+@import "assets/vendor/dzsparallaxer/advancedscroller/plugin.css";
+@import "assets/vendor/animate.css";
+@import "assets/vendor/fancybox/jquery.fancybox.min.css";
+@import "assets/vendor/slick-carousel/slick/slick.css";
+@import "assets/vendor/typedjs/typed.css";
+@import "assets/vendor/hs-megamenu/src/hs.megamenu.css";
+@import "assets/vendor/hamburgers/hamburgers.min.css";
 @import "assets/css/unify-components.css";
 @import "assets/css/unify-core.css";
 @import "assets/css/unify-globals.css";
-
-/* @import "assets/css/unify-style-switcher.css"; */
-
 @import "assets/css/unify.css";

@@ -5,20 +5,19 @@ import { Router, NavigationExtras } from '@angular/router';
 import { Session } from '../services/session/session.service';
 import { AuthService } from '../services/auth/auth.service';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  
+
   constructor(public session: Session, private authService: AuthService){
-    
+
   }
 
   logout(){
-    this.authService.logout(); 
+    this.authService.logout();
   }
 
 

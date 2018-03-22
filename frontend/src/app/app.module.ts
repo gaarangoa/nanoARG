@@ -23,12 +23,20 @@ import { DocumentationComponent } from './documentation/documentation.component'
 
 import { RouterModule } from '@angular/router';
 
+// import { TypedModule } from '@kuflink/angular-typed';
+
+
+import { TypingAnimationDirective } from 'angular-typing-animation'
+
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
     DocumentationComponent,
+    TypingAnimationDirective,
+
   ],
   imports: [
     BrowserModule,
@@ -40,6 +48,7 @@ import { RouterModule } from '@angular/router';
     ProjectModule,
     DashboardModule,
     AppRoutingModule,
+    // TypedModule
   ],
   providers: [
     AuthService,
