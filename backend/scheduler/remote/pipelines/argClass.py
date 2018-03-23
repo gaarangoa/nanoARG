@@ -32,7 +32,7 @@ class ARGs():
             "--iden":20,
             "--evalue": 1e-5,
             "--nk": 1500,
-            "--prob": 0.4,
+            "--prob": 0.4, #very permisive parameters
             "--coverage": 0.0
         }
 
