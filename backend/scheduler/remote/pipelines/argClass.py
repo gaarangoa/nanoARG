@@ -25,7 +25,7 @@ class ARGs():
             "--evalue": 1e-5,
             "-k": 15000
         }
-        self.aligner.align(self.input, self.reference, self.alignment_file, parameters)
+        # self.aligner.align(self.input, self.reference, self.alignment_file, parameters)
 
         # DeepARG
         parameters= {
@@ -43,5 +43,5 @@ class ARGs():
 
     def postprocess(self):
         annotation = BestHit(conf.data+self.database_name+".size", _IDEN, _EVALUE, _COVERAGE, _BITSCORE)
-        annotation.quant(self.alignment_file, self.database_name)
+        annotation.quant(self.alignment_file+'.dl.tmp', self.database_name)
 
