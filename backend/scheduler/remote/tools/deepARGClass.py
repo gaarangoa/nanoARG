@@ -56,7 +56,7 @@ class DeepARG():
             if "#" in i[0]: continue
             i = i.split()
             j = map_aln[ (i[3], i[5]) ]
-            item = "\t".join( [ i[3].split("_cluster_")[0], i[5], i[7] ]+j[2:])+"\n"
+            item = "\t".join( [ i[3].split("_cluster_")[0] ]+j[2:])+"\n"
             fo.write( item )
         os.system("mv " + input_file+".dl.tmp " + input_file)
 
