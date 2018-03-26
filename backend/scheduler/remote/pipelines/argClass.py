@@ -25,7 +25,7 @@ class ARGs():
             "--evalue": 1e-5,
             "-k": 15000
         }
-        # self.aligner.align(self.input, self.reference, self.alignment_file, parameters)
+        self.aligner.align(self.input, self.reference, self.alignment_file, parameters)
 
         # DeepARG
         parameters= {
