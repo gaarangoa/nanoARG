@@ -37,7 +37,7 @@ class ARGs():
         }
 
         self.deeparg = DeepARG()
-        self.deeparg.preprocess(self.alignment_file)
+        self.deeparg.preprocess(self.alignment_file, conf.data+self.database_name+".size")
         self.deeparg.predict(self.alignment_file, self.reference, self.alignment_file+".dl", parameters)
         self.deeparg.postprocess(self.alignment_file)
 

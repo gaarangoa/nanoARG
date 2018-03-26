@@ -1,5 +1,6 @@
 import sys, os
 import conf
+from validation.blast2bed import blast2bed
 class DeepARG():
     def __init__(self):
         self.bin = conf.tools
@@ -27,14 +28,21 @@ class DeepARG():
             os.system('echo "'+str(inst)+" >> "+ output)
         return True
 
-    def preprocess(self, input_file):
+    def preprocess(self, input_file, arglen_file):
         fo = open(input_file+".tmp", "w")
+
+        fi = blast2bed(input_file, arglen_file, 20, 1e-5, 0.0, 40)
+
+        # sort by start and end usin betools the generated bed file
+        cmd = 'sort -k1,1 -k2,2n '+fi+'|'+'bedtools cluster -s -d 10 >'+fi+'.clusters'
+        os.system(cmd)
+
         for ix,i in enumerate(open(input_file)):
             i = i.split()
             i[0] = str(ix)+"---"+i[0]+"---"+"---".join(i[3:10])
             fo.write("\t".join(i)+"\n")
         fo.close()
-        os.system("cp "+input_file+".tmp"+" "+input_file)
+        os.system("mv "+input_file+".tmp"+" "+input_file)
 
     def postprocess(self, input_file):
         fo = open(input_file+".dl.tmp", "w")
@@ -44,6 +52,6 @@ class DeepARG():
             j = i[3].split("---")
             item = "\t".join( [ j[1], i[5], i[7], j[2], j[3], j[4], j[5], j[6], j[7], j[8], i[10], i[9] ])+"\n"
             fo.write( item )
-        os.system("cp " + input_file+".dl.tmp " + input_file)
+        os.system("mv " + input_file+".dl.tmp " + input_file)
 
 
