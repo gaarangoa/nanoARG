@@ -15,7 +15,7 @@ class ARGs():
         self.aligner = ALIGNER()
         self.reference = conf.data+self.database_name+".dmnd"
         self.alignment_file = input+"."+self.database_name+".aln"
-        self.observable_file = input+"."+self.database_name+".aln.bed.clusters.bestHit.annotated."+self.database_name+".json"
+        self.observable_file = input+"."+self.database_name+".aln.dl.tmp.bed.clusters.bestHit.annotated."+self.database_name+".json"
         self.postprocess_file = input+"."+self.database_name+".alg.annotated."+self.database_name+".json"
 
     def align(self):
