@@ -34,8 +34,8 @@ class DeepARG():
             i[0] = str(ix)+"---"+i[0]+"---"+"---".join(i[3:10])
             fo.write("\t".join(i)+"\n")
         fo.close()
-        os.system("mv "+input_file+".tmp"+" "+input_file)
-    
+        os.system("cp "+input_file+".tmp"+" "+input_file)
+
     def postprocess(self, input_file):
         fo = open(input_file+".dl.tmp", "w")
         for i in open(input_file+".dl.ARG"):
@@ -44,6 +44,6 @@ class DeepARG():
             j = i[3].split("---")
             item = "\t".join( [ j[1], i[5], i[7], j[2], j[3], j[4], j[5], j[6], j[7], j[8], i[10], i[9] ])+"\n"
             fo.write( item )
-        os.system("mv " + input_file+".dl.tmp " + input_file)
-            
-            
+        os.system("cp " + input_file+".dl.tmp " + input_file)
+
+

@@ -1,5 +1,5 @@
 # This script takes an input of clustered sequences from bedtools and select the best hit of each clustered
-# What I've observed is that actually there are not mixed ARGs and the locations are very consistent. 
+# What I've observed is that actually there are not mixed ARGs and the locations are very consistent.
 
 # sort -k1,1 -k2,2n bacteria.ARGs.daa.tsv.P.bed | bedtools cluster -s -d 0 -i > bacteria.ARGs.daa.tsv.bed.clusters
 
@@ -19,7 +19,7 @@ def quant(fi, arglen, iden, evalue, cov, bitscore, database):
     fi = blast2bed(fi, arglen, iden, evalue, cov, bitscore);
 
     # sort by start and end usin betools the generated bed file
-    cmd = 'sort -k1,1 -k2,2n '+fi+'|'+'bedtools cluster -s -d 0 >'+fi+'.clusters'
+    cmd = 'sort -k1,1 -k2,2n '+fi+'|'+'bedtools cluster -s -d 10 >'+fi+'.clusters'
     os.system(cmd)
 
     # get best hit of each cluster:
@@ -31,10 +31,9 @@ def quant(fi, arglen, iden, evalue, cov, bitscore, database):
     absoluteAbundance(fi+'.clusters.bestHit', database)
 
 
-
 # cmd = 'bedtools getfasta -s -fi /groups/metastorm_cscee/ARGpore/data/bacterial_genomes/Reference/bacteria.fa -bed '+fi+'.bestHit ' + '-fo '+ fi+'bestHit.fasta'
 
-# os.system(cmd)  
+# os.system(cmd)
 
-# 
+#
 # bedtools getfasta -s -fi ../../Reference/bacteria.fa -bed bacteria.ARGs.daa.tsv.bed.clusters.bestHit -fo bacteria.ARGs.daa.tsv.bed.clusters.bestHit.fasta
