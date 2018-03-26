@@ -49,7 +49,7 @@ class DeepARG():
 
     def postprocess(self, input_file):
         print(input_file)
-        map_aln = {(i.split()[0], i.split()[1]):i.split() for i in open(input_file)}
+        map_aln = {(i.split()[0], i.split()[1]):i.split() for i in open(input_file+'.tmp')}
         #
         fo = open(input_file+".dl.tmp", "w")
         for i in open(input_file+".dl.ARG"):
