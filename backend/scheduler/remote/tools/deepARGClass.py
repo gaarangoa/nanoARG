@@ -50,14 +50,14 @@ class DeepARG():
     def postprocess(self, input_file):
         print(input_file)
         map_aln = {(i.split()[0], i.split()[1]):i.split() for i in open(input_file+'.tmp')}
-        #
+        # convert map file to blast output file
         fo = open(input_file+".dl.tmp", "w")
         for i in open(input_file+".dl.ARG"):
             if "#" in i[0]: continue
             i = i.split()
             j = map_aln[ (i[3], i[5]) ]
-            item = "\t".join( [ i[3].split("_cluster_")[0], i[5], i[7], j[2], j[3], j[4], j[5], j[6], j[7], j[8], i[10], i[9] ])+"\n"
+            item = "\t".join( [ i[3].split("_cluster_")[0], i[5], i[7] ]+j[2:])+"\n"
             fo.write( item )
-        os.system("mv " + input_file+".dl.tmp " + input_file+'.post')
+        os.system("mv " + input_file+".dl.tmp " + input_file)
 
 
