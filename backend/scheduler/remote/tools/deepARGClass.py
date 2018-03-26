@@ -37,10 +37,11 @@ class DeepARG():
         cmd = 'sort -k1,1 -k2,2n '+fi+'|'+'bedtools cluster -s -d 0 >'+fi+'.pre.clusters'
         os.system(cmd)
 
-        for ix,i in enumerate(open(input_file)):
+        for ix,i in enumerate(open(fi+".pre.clusters")):
             i = i.split()
-            i[0] = str(ix)+"---"+i[0]+"---"+"---".join(i[3:10])
-            fo.write("\t".join(i)+"\n")
+            j = i[-2].split("_")
+            item = [i[0]+"_cluster_"+i[-1], i[3], j[2], j[0], j[7], j[8], i[1], i[2], j[5], j[6], j[1], i[4]]
+            fo.write("\t".join(item)+"\n")
         fo.close()
         os.system("mv "+input_file+".tmp"+" "+input_file)
 
