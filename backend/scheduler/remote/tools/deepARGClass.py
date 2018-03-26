@@ -42,8 +42,10 @@ class DeepARG():
             j = i[-2].split("_")
             item = [i[0]+"_cluster_"+i[-1], i[3], j[2], j[0], j[7], j[8], i[1], i[2], j[5], j[6], j[1], i[4]]
             fo.write("\t".join(item)+"\n")
+
         fo.close()
-        os.system("cp "+input_file+".tmp"+" "+input_file)
+        os.system("mv "+input_file+" "+input_file+".input")
+        os.system("mv "+input_file+".tmp"+" "+input_file)
 
     def postprocess(self, input_file):
         fo = open(input_file+".dl.tmp", "w")
@@ -53,6 +55,6 @@ class DeepARG():
             j = i[3].split("---")
             item = "\t".join( [ j[1], i[5], i[7], j[2], j[3], j[4], j[5], j[6], j[7], j[8], i[10], i[9] ])+"\n"
             fo.write( item )
-        os.system("cp " + input_file+".dl.tmp " + input_file)
+        os.system("mv " + input_file+".dl.tmp " + input_file)
 
 
