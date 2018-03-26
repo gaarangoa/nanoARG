@@ -19,7 +19,7 @@ def quant(fi, arglen, iden, evalue, cov, bitscore, database):
     fi = blast2bed(fi, arglen, iden, evalue, cov, bitscore);
 
     # sort by start and end usin betools the generated bed file
-    cmd = 'sort -k1,1 -k2,2n '+fi+'|'+'bedtools cluster -s -d 10 >'+fi+'.clusters'
+    cmd = 'sort -k1,1 -k2,2n '+fi+'|'+'bedtools cluster -s -d 0 >'+fi+'.clusters'
     os.system(cmd)
 
     # get best hit of each cluster:

@@ -34,7 +34,7 @@ class DeepARG():
         fi = blast2bed(input_file, arglen_file, 20, 1e-5, 0.0, 40)
 
         # sort by start and end usin betools the generated bed file
-        cmd = 'sort -k1,1 -k2,2n '+fi+'|'+'bedtools cluster -s -d 10 >'+fi+'.clusters'
+        cmd = 'sort -k1,1 -k2,2n '+fi+'|'+'bedtools cluster -s -d 0 >'+fi+'.pre.clusters'
         os.system(cmd)
 
         for ix,i in enumerate(open(input_file)):
