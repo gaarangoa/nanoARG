@@ -40,7 +40,12 @@ class DeepARG():
         for ix,i in enumerate(open(fi+".pre.clusters")):
             i = i.split()
             j = i[-2].split("_")
-            item = [i[0]+"_cluster_"+i[-1], i[3], j[2], j[0], j[7], j[8], i[1], i[2], j[5], j[6], j[1], i[4]]
+            start = i[1]
+            end = i[2]
+            if i[5] == "_":
+                start = i[2]
+                end = i[1]
+            item = [i[0]+"_cluster_"+i[-1], i[3], j[2], j[0], j[7], j[8], start, end, j[5], j[6], j[1], i[4]]
             fo.write("\t".join(item)+"\n")
 
         fo.close()
