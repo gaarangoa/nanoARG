@@ -65,7 +65,7 @@ class DeepARG():
                 item = "\t".join( [ i[3].split("_cluster_")[0], i[5] ]+j[2:])+"\n"
                 fo.write( item )
             except Exception as e:
-                print('deepARG: log error: '+"\t".join(i) )
+                print('deepARG: this read does not have a proper best hit '+"\t".join(i) )
 
         # os.system("mv " + input_file+".dl.tmp " + input_file)
 
