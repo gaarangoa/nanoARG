@@ -9,8 +9,8 @@ import { LoginComponent } from './login/login.component';
 
 // Services
 import { AuthService } from '../services/auth/auth.service';
-import {Session} from '../services/session/session.service';
-import {CookieService} from 'angular2-cookie/core';
+import { Session } from '../services/session/session.service';
+import { CookieService } from 'angular2-cookie/core';
 import { UserService } from '../services/user/user.service';
 
 // modules
@@ -25,18 +25,15 @@ import { RouterModule } from '@angular/router';
 
 // import { TypedModule } from '@kuflink/angular-typed';
 
-
-import { TypingAnimationDirective } from 'angular-typing-animation'
-
+// import { TypingAnimationDirective } from 'angular-typing-animation';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    DocumentationComponent,
-    TypingAnimationDirective,
-
+    DocumentationComponent
+    // TypingAnimationDirective
   ],
   imports: [
     BrowserModule,
@@ -47,16 +44,10 @@ import { TypingAnimationDirective } from 'angular-typing-animation'
     SampleModule,
     ProjectModule,
     DashboardModule,
-    AppRoutingModule,
+    AppRoutingModule
     // TypedModule
   ],
-  providers: [
-    AuthService,
-    Session,
-    CookieService,
-    UserService
-    ],
+  providers: [AuthService, Session, CookieService, UserService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
-
+export class AppModule {}

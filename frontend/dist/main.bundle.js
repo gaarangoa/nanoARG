@@ -134,7 +134,6 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__home_home_component__ = __webpack_require__("../../../../../src/app/home/home.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__documentation_documentation_component__ = __webpack_require__("../../../../../src/app/documentation/documentation.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__angular_router__ = __webpack_require__("../../../router/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angular_typing_animation__ = __webpack_require__("../../../../angular-typing-animation/index.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -161,7 +160,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
+// import { TypedModule } from '@kuflink/angular-typed';
+// import { TypingAnimationDirective } from 'angular-typing-animation';
 var AppModule = (function () {
     function AppModule() {
     }
@@ -171,8 +171,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_5__login_login_component__["a" /* LoginComponent */],
                 __WEBPACK_IMPORTED_MODULE_14__home_home_component__["a" /* HomeComponent */],
-                __WEBPACK_IMPORTED_MODULE_15__documentation_documentation_component__["a" /* DocumentationComponent */],
-                __WEBPACK_IMPORTED_MODULE_17_angular_typing_animation__["a" /* TypingAnimationDirective */],
+                __WEBPACK_IMPORTED_MODULE_15__documentation_documentation_component__["a" /* DocumentationComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
@@ -183,14 +182,9 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_13__project_sample_sample_module__["a" /* SampleModule */],
                 __WEBPACK_IMPORTED_MODULE_12__project_project_module__["a" /* ProjectModule */],
                 __WEBPACK_IMPORTED_MODULE_11__dashboard_dashboard_module__["a" /* DashboardModule */],
-                __WEBPACK_IMPORTED_MODULE_10__app_routing_module__["a" /* AppRoutingModule */],
+                __WEBPACK_IMPORTED_MODULE_10__app_routing_module__["a" /* AppRoutingModule */]
             ],
-            providers: [
-                __WEBPACK_IMPORTED_MODULE_6__services_auth_auth_service__["a" /* AuthService */],
-                __WEBPACK_IMPORTED_MODULE_7__services_session_session_service__["a" /* Session */],
-                __WEBPACK_IMPORTED_MODULE_8_angular2_cookie_core__["CookieService"],
-                __WEBPACK_IMPORTED_MODULE_9__services_user_user_service__["a" /* UserService */]
-            ],
+            providers: [__WEBPACK_IMPORTED_MODULE_6__services_auth_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_7__services_session_session_service__["a" /* Session */], __WEBPACK_IMPORTED_MODULE_8_angular2_cookie_core__["CookieService"], __WEBPACK_IMPORTED_MODULE_9__services_user_user_service__["a" /* UserService */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
         }), 
         __metadata('design:paramtypes', [])
