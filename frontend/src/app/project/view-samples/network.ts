@@ -12,162 +12,183 @@ import { max } from 'rxjs/operator/max';
 // contextMenus( cytoscape, jquery );
 // panzoom( cytoscape )
 
-
 export class Network {
+  public network: any;
 
-    public network: any;
+  constructor() {}
 
-    constructor(){
+  render(placeholder: string, data: any, conditions: any) {
+    console.log(data);
 
-    }
+    // conditions is a vector with the id of the data to be analyzed.
+    conditions = [4, 1]; // this example would only show the genes ARGs and MGEs
+    const linked_nodes = {};
 
-    render(placeholder: string, data: any){
+    // traverse edges and get only the ones that are of interest
+    let _emax = 0;
+    let _emin = 999999999999;
+    const edges = [];
+    data.edges.forEach(e => {
+      e.data.counts = e.data.weight;
+      e.data.weight = Math.log(e.data.weight + 1);
+      if (e.data.weight < _emin) {
+        _emin = e.data.weight;
+      }
+      if (e.data.weight > _emax) {
+        _emax = e.data.weight;
+      }
 
-      // console.log(data);
-
-      var _max = 0;
-      var _min = 9999999999999;
-      const nodes = [];
-      // var parents = [];
-      data.nodes.forEach(e => {
-        e.data.counts = e.data.size;
-        e.data.group = e.data.metadata[2];
-        // parents.push(e.data.parent);
-
-        e.data.size = Math.log(e.data.size+1)
-        if( e.data.size < _min ) {_min = e.data.size}
-        if( e.data.size > _max ) {_max = e.data.size}
-
-        if(e.data.origin < 9 && e.data.counts >= 1){
-          nodes.push(e);
-        }
-
-      });
-
-      // parents = parents.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
-      // parents.forEach(e => {
-      //   nodes.push({
-      //     data:{
-      //       id: e,
-      //       counts: 1,
-      //       // position: {x: 1, y: 2},
-      //       // size: 20,
-      //       origin: 1,
-      //       color: 'rgba(0,0,0,0.1)',
-      //       metadata: 'some|here|I|do',
-      //       size: 0.1,
-      //       start: 1,
-      //       end: 2
-      //     }
-      //   })
-      // });
-
-      // console.log(data.nodes)
-
-      var _emax = 0;
-      var _emin = 999999999999;
-      const edges = []
-      data.edges.forEach(e => {
-        e.data.counts = e.data.weight
-        e.data.weight = Math.log(e.data.weight+1)
-        if( e.data.weight < _emin ) {_emin = e.data.weight}
-        if( e.data.weight > _emax ) {_emax = e.data.weight}
-
-        if( (e.data.source_origin < 9 || e.data.target_origin < 9) && e.data.counts >= 1 ){
-          edges.push(e);
-        }
-
-      });
-      const mydata = {nodes: nodes, edges: edges}
-      // console.log(mydata)
-
-      this.network = new cytoscape({
-        container: document.getElementById(placeholder),
-        elements: mydata,
-          style: [ // the stylesheet for the graph
-            {
-              selector: 'node',
-              style: {
-                'background-color': function(e){
-                  if(e.data("origin") === 9){
-                    return "red"
-                  }else{
-                  if(e.data("origin") === 10){
-                    return "yellow"}
-                  else {
-                    return e.data('color')
-                  }}
-                },
-                'background-opacity': 1,
-                'border-color': '#000',
-                'border-width': 1,
-                'label': 'data(id)',
-                'font-size': 20,
-                'font-family': '"Lato", sans-serif',
-                'shape': function(e){if(e.data("origin") >= 9){return "star"}else{return "ellipse"}},
-                'padding': '30%',
-                'height': 'mapData(size, '+_min+', '+_max+', 20, 50)',
-                'width': 'mapData(size, '+_min+', '+_max+', 20, 50)'
-              }
-            },
-
-            {
-              selector: 'edge',
-              style: {
-                'width': 'mapData(weight, '+_emin+', '+_emax+', 1, 30)',
-                'curve-style': 'unbundled-bezier',
-                'line-style': 'solid',
-                'line-color': '#b8c1db',
-                // 'edge-distances': 'control-point-weight',
-                'opacity': 0.5,
-                // 'target-arrow-color': '#000',
-                // 'target-arrow-shape': 'triangle'
-              }
-            },
-
-
-          ],
-
-          layout: {
-            name: 'cose',
-            fit: true,
-            circle: false,
-            directed: true,
-            avoidOverlap: true,
-            animate: false,
-            componentSpacing: 40,
-            nodeRepulsion: function( node ){ return 120000*node.data('size'); },
-            idealEdgeLength: function( edge ){ return 100/edge.data('weight'); },
-            graviti: 9.8,
-            numIter: 5000,
-            nodeOverlap: 200,
-            padding: 100
-          },
-
-          zoom: 0,
-          minZoom: 0.4,
-          maxZoom: 10,
-          zoomingEnabled: true,
-          boxSelectionEnabled: true,
-          motionBlur: true,
-          motionBlurOpacity: 0.1,
-
-      });
-
-
-    this.network.on('grab', function (e) {
-
-        var ele = e.target;
-        // console.log(ele)
-        ele.connectedEdges().style({ 'line-color': 'blue' });
+      if (
+        conditions.indexOf(e.data.source_origin) > -1 &&
+        conditions.indexOf(e.data.target_origin) > -1
+      ) {
+        edges.push(e);
+        linked_nodes[e.data.source] = true;
+        linked_nodes[e.data.target] = true;
+      }
     });
 
+    console.log(linked_nodes);
+    // traverse nodes and get the ones that are of interest
+    // Here make sure to select only the nodes that contain at least one edge. Singletons are discarded.
 
-    this.network.on('free', function (e) {
-        var ele = e.target;
-        ele.connectedEdges().style({ 'line-color': "#b8c1db" });
+    let _max = 0;
+    let _min = 9999999999999;
+    const nodes = [];
+    // var parents = [];
+    data.nodes.forEach(e => {
+      e.data.counts = e.data.size;
+      e.data.group = e.data.metadata[2];
+      // parents.push(e.data.parent);
+
+      e.data.size = Math.log(e.data.size + 1);
+      if (e.data.size < _min) {
+        _min = e.data.size;
+      }
+      if (e.data.size > _max) {
+        _max = e.data.size;
+      }
+
+      // filter genes that are not in the conditions list
+      if (conditions.indexOf(e.data.origin) > -1 && linked_nodes[e.data.id]) {
+        nodes.push(e);
+      }
     });
 
-    }
+    // parents = parents.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
+    // parents.forEach(e => {
+    //   nodes.push({
+    //     data:{
+    //       id: e,
+    //       counts: 1,
+    //       // position: {x: 1, y: 2},
+    //       // size: 20,
+    //       origin: 1,
+    //       color: 'rgba(0,0,0,0.1)',
+    //       metadata: 'some|here|I|do',
+    //       size: 0.1,
+    //       start: 1,
+    //       end: 2
+    //     }
+    //   })
+    // });
 
+    // console.log(data.nodes)
+
+    const mydata = { nodes: nodes, edges: edges };
+    // console.log(mydata)
+
+    this.network = new cytoscape({
+      container: document.getElementById(placeholder),
+      elements: mydata,
+      style: [
+        // the stylesheet for the graph
+        {
+          selector: 'node',
+          style: {
+            'background-color': function(e) {
+              if (e.data('origin') === 9) {
+                return 'red';
+              } else {
+                if (e.data('origin') === 10) {
+                  return 'yellow';
+                } else {
+                  return e.data('color');
+                }
+              }
+            },
+            'background-opacity': 1,
+            'border-color': '#000',
+            'border-width': 1,
+            label: 'data(id)',
+            'font-size': 20,
+            'font-family': '"Lato", sans-serif',
+            shape: function(e) {
+              if (e.data('origin') >= 9) {
+                return 'star';
+              } else {
+                return 'ellipse';
+              }
+            },
+            padding: '30%',
+            height: 'mapData(size, ' + _min + ', ' + _max + ', 20, 50)',
+            width: 'mapData(size, ' + _min + ', ' + _max + ', 20, 50)'
+          }
+        },
+
+        {
+          selector: 'edge',
+          style: {
+            width: 'mapData(weight, ' + _emin + ', ' + _emax + ', 1, 30)',
+            'curve-style': 'unbundled-bezier',
+            'line-style': 'solid',
+            'line-color': '#b8c1db',
+            // 'edge-distances': 'control-point-weight',
+            opacity: 0.5
+            // 'target-arrow-color': '#000',
+            // 'target-arrow-shape': 'triangle'
+          }
+        }
+      ],
+
+      layout: {
+        name: 'cose',
+        fit: true,
+        circle: false,
+        directed: true,
+        avoidOverlap: true,
+        animate: false,
+        componentSpacing: 20,
+        nodeRepulsion: function(node) {
+          return 120000 * node.data('size');
+        },
+        idealEdgeLength: function(edge) {
+          return 0.1 * edge.data('weight');
+        },
+        graviti: 0.8,
+        numIter: 5000,
+        nodeOverlap: 200,
+        padding: 100
+      },
+
+      zoom: 2,
+      minZoom: 0.01,
+      maxZoom: 10,
+      zoomingEnabled: true,
+      boxSelectionEnabled: true,
+      motionBlur: true,
+      motionBlurOpacity: 0.1
+    });
+
+    this.network.on('grab', function(e) {
+      var ele = e.target;
+      // console.log(ele)
+      ele.connectedEdges().style({ 'line-color': 'blue' });
+    });
+
+    this.network.on('free', function(e) {
+      var ele = e.target;
+      ele.connectedEdges().style({ 'line-color': '#b8c1db' });
+    });
+  }
 }

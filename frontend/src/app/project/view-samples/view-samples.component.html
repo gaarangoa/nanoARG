@@ -300,6 +300,10 @@
                 <!-- <p-tabView> -->
                 <!-- <p-tabPanel header="co-occurrence network"> -->
                 <div class="col-md-12">
+                    <h3>Co-occurrence parameters</h3>
+                    <p-checkbox [(ngModel)]="value" binary="true"></p-checkbox>
+                </div>
+                <div class="col-md-12">
                     <div id="network"></div>
                     <div class="text-center">
                         <span *ngFor="let item of network_labels">

@@ -187,7 +187,8 @@ def network(data = {}):
                     "metadata": gene['metadata'],
                     "evalue": gene['evalue'],
                     "identity": gene['identity'],
-                    "coverage": gene['coverage']
+                    "coverage": gene['coverage'],
+                    # "bitscore": gene['bitscore']
                 }
             if ixgene == len(read['data']): continue
             # now add the edges
