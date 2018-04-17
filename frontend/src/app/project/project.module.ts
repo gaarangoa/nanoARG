@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ProjectRoutingModule } from './project-routing.module';
 import { ProjectComponent } from './project.component';
 
@@ -23,7 +24,7 @@ export function highchartsFactory() {
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { RouterModule } from '@angular/router';
 import { TabViewModule } from 'primeng/primeng';
-
+import { CheckboxModule } from 'primeng/primeng';
 @NgModule({
   imports: [
     CommonModule,
@@ -38,7 +39,9 @@ import { TabViewModule } from 'primeng/primeng';
     BrowserModule,
     ChartModule,
     NgxChartsModule,
-    TabViewModule
+    TabViewModule,
+    CheckboxModule,
+    FormsModule
     // NgxChartsModule,
     // BrowserModule
   ],

@@ -21,7 +21,7 @@ export class Network {
     console.log(data);
 
     // conditions is a vector with the id of the data to be analyzed.
-    conditions = [4, 1]; // this example would only show the genes ARGs and MGEs
+    // conditions = [4, 1]; // this example would only show the genes ARGs and MGEs
     const linked_nodes = {};
 
     // traverse edges and get only the ones that are of interest

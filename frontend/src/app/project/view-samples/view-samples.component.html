@@ -300,8 +300,21 @@
                 <!-- <p-tabView> -->
                 <!-- <p-tabPanel header="co-occurrence network"> -->
                 <div class="col-md-12">
-                    <h3>Co-occurrence parameters</h3>
-                    <p-checkbox [(ngModel)]="value" binary="true"></p-checkbox>
+
+                    <fieldset data-type="horizontal" class="text-small">
+                        <h4>Co-occurrence parameters</h4>
+                        <p-checkbox name="group2" value="ARGs" label="ARGs" [(ngModel)]="network_parameters" inputId="ARGs"></p-checkbox>
+                        <p-checkbox name="group2" value="MGEs" label="MGEs" [(ngModel)]="network_parameters" inputId="MGEs"></p-checkbox>
+                        <p-checkbox name="group2" value="MRGs" label="MRGs" [(ngModel)]="network_parameters" inputId="MRGs"></p-checkbox>
+                        <p-checkbox name="group2" value="Pathogens" label="Pathogens" [(ngModel)]="network_parameters" inputId="Pathogens"></p-checkbox>
+                        <p-checkbox name="group2" value="Species" label="Species" [(ngModel)]="network_parameters" inputId="Species"></p-checkbox>
+                        <a class="btn btn-success btn-xs" (click)="render_network(sample)"> <strong> Render </strong></a>
+                    </fieldset>
+
+                    <fieldset>
+                        <h4>Layout parameters</h4>
+                    </fieldset>
+
                 </div>
                 <div class="col-md-12">
                     <div id="network"></div>

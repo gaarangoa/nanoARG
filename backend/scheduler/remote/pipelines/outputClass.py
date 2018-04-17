@@ -170,7 +170,9 @@ def network(data = {}):
                         "target": _id,
                         "id": _taxa + "_" + _id,
                         "weight": 1,
-                        "color": 'blue'
+                        "color": 'blue',
+                        "source_origin": norigin,
+                        "target_origin": gene['origin']
                     }
                 except:
                     pass
