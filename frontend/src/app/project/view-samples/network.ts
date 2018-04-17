@@ -22,7 +22,7 @@ export class Network {
   constructor() {}
 
   render(placeholder: string, data: any, conditions: any) {
-    console.log(data);
+    // console.log(data);
 
     // conditions is a vector with the id of the data to be analyzed.
     // conditions = [4, 1]; // this example would only show the genes ARGs and MGEs
@@ -79,10 +79,41 @@ export class Network {
       });
     });
 
+    // if ARGs are selected
+    if (conditions.indexOf(1) > -1) {
+      let _arg_categories = [];
+      data.nodes.forEach(e => {
+        if (e.data.origin === 1) {
+          _arg_categories.push(e.data.metadata[3]);
+        }
+        return [e.data.metadata[3], e.data.origin];
+      });
+
+      _arg_categories = Array.from(new Set(_arg_categories));
+
+      // create the nodes for the arg_categories
+      _arg_categories.forEach(e => {
+        nodes.push({
+          data: {
+            id: e,
+            counts: 1,
+            origin: 1,
+            color: 'rgba(255,255,255,0.9)',
+            metadata: 'some|here|I|do'
+          }
+        });
+      });
+    }
+
     data.nodes.forEach(e => {
       e.data.counts = e.data.size;
       // e.data.group = e.data.metadata[2];
-      e.data.parent = e.data.origin;
+      if (e.data.origin === 1) {
+        e.data.parent = e.data.metadata[3];
+      } else {
+        e.data.parent = e.data.origin;
+      }
+
       // parents.push(e.data.parent);
 
       e.data.size = Math.log(e.data.size + 1);
@@ -200,7 +231,7 @@ export class Network {
     this.network.on('grab', function(e) {
       var ele = e.target;
       // console.log(ele)
-      ele.connectedEdges().style({ 'line-color': 'blue' });
+      ele.connectedEdges().style({ 'line-color': 'rgba(0,0,0,0.3)' });
     });
 
     this.network.on('free', function(e) {
