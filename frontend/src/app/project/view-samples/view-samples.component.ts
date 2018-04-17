@@ -301,7 +301,7 @@ export class ViewSamplesComponent implements OnInit {
   }
 
   get_sample_results(sample_id: string, index: number) {
-    console.log(this.parameters);
+    // console.log(this.parameters);
 
     this.sampleService.get_sample_results(sample_id).subscribe(res => {
       if (res === false) {

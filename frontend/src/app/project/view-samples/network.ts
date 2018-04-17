@@ -2,7 +2,11 @@
 // declare var jquery: any;
 // declare var panzoom: any;
 // var jquery = require('jquery/jquery.js');
-var cytoscape = require('cytoscape/dist/cytoscape.js');
+const cytoscape = require('cytoscape/dist/cytoscape.js');
+const cytoscape_cose = require('cytoscape-cose-bilkent/cytoscape-cose-bilkent.js');
+
+cytoscape.use(cytoscape_cose);
+
 // var contextMenus = require('cytoscape-context-menus/cytoscape-context-menus.js');
 // import 'cytoscape-panzoom';
 
@@ -48,7 +52,7 @@ export class Network {
       }
     });
 
-    console.log(linked_nodes);
+    // console.log(linked_nodes);
     // traverse nodes and get the ones that are of interest
     // Here make sure to select only the nodes that contain at least one edge. Singletons are discarded.
 
@@ -56,9 +60,29 @@ export class Network {
     let _min = 9999999999999;
     const nodes = [];
     // var parents = [];
+
+    // add parent nodes
+    conditions.forEach(e => {
+      nodes.push({
+        data: {
+          id: e,
+          counts: 1,
+          // position: {x: 1, y: 2},
+          // size: 20,
+          origin: 1,
+          color: 'rgba(255,255,255,0.9)',
+          metadata: 'some|here|I|do'
+          // size: 0.1,
+          // start: 1,
+          // end: 2
+        }
+      });
+    });
+
     data.nodes.forEach(e => {
       e.data.counts = e.data.size;
-      e.data.group = e.data.metadata[2];
+      // e.data.group = e.data.metadata[2];
+      e.data.parent = e.data.origin;
       // parents.push(e.data.parent);
 
       e.data.size = Math.log(e.data.size + 1);
@@ -75,23 +99,9 @@ export class Network {
       }
     });
 
+    console.log(nodes);
+
     // parents = parents.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
-    // parents.forEach(e => {
-    //   nodes.push({
-    //     data:{
-    //       id: e,
-    //       counts: 1,
-    //       // position: {x: 1, y: 2},
-    //       // size: 20,
-    //       origin: 1,
-    //       color: 'rgba(0,0,0,0.1)',
-    //       metadata: 'some|here|I|do',
-    //       size: 0.1,
-    //       start: 1,
-    //       end: 2
-    //     }
-    //   })
-    // });
 
     // console.log(data.nodes)
 
@@ -148,27 +158,34 @@ export class Network {
             // 'target-arrow-color': '#000',
             // 'target-arrow-shape': 'triangle'
           }
+        },
+        {
+          selector: ':parent',
+          style: {
+            'background-opacity': 0.333
+          }
         }
       ],
 
       layout: {
-        name: 'cose',
-        fit: true,
-        circle: false,
-        directed: true,
-        avoidOverlap: true,
-        animate: false,
-        componentSpacing: 20,
-        nodeRepulsion: function(node) {
-          return 120000 * node.data('size');
-        },
-        idealEdgeLength: function(edge) {
-          return 0.1 * edge.data('weight');
-        },
-        graviti: 0.8,
-        numIter: 5000,
-        nodeOverlap: 200,
-        padding: 100
+        name: 'cose-bilkent',
+        animate: false
+        // fit: true,
+        // circle: false,
+        // directed: true,
+        // avoidOverlap: true,
+        // animate: false,
+        // componentSpacing: 20,
+        // nodeRepulsion: function(node) {
+        //   return 120000 * node.data('size');
+        // },
+        // idealEdgeLength: function(edge) {
+        //   return 0.1 * edge.data('weight');
+        // },
+        // graviti: 0.8,
+        // numIter: 5000,
+        // nodeOverlap: 200,
+        // padding: 100
       },
 
       zoom: 2,
