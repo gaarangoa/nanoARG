@@ -25,15 +25,15 @@ import { RouterModule } from '@angular/router';
 
 // import { TypedModule } from '@kuflink/angular-typed';
 
-// import { TypingAnimationDirective } from 'angular-typing-animation';
+import { TypingAnimationDirective } from 'angular-typing-animation';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    DocumentationComponent
-    // TypingAnimationDirective
+    DocumentationComponent,
+    TypingAnimationDirective
   ],
   imports: [
     BrowserModule,

@@ -134,6 +134,7 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__home_home_component__ = __webpack_require__("../../../../../src/app/home/home.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__documentation_documentation_component__ = __webpack_require__("../../../../../src/app/documentation/documentation.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__angular_router__ = __webpack_require__("../../../router/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angular_typing_animation__ = __webpack_require__("../../../../angular-typing-animation/index.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -160,8 +161,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// import { TypedModule } from '@kuflink/angular-typed';
-// import { TypingAnimationDirective } from 'angular-typing-animation';
+
 var AppModule = (function () {
     function AppModule() {
     }
@@ -171,7 +171,8 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_5__login_login_component__["a" /* LoginComponent */],
                 __WEBPACK_IMPORTED_MODULE_14__home_home_component__["a" /* HomeComponent */],
-                __WEBPACK_IMPORTED_MODULE_15__documentation_documentation_component__["a" /* DocumentationComponent */]
+                __WEBPACK_IMPORTED_MODULE_15__documentation_documentation_component__["a" /* DocumentationComponent */],
+                __WEBPACK_IMPORTED_MODULE_17_angular_typing_animation__["a" /* TypingAnimationDirective */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
