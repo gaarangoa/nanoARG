@@ -201,7 +201,12 @@ export class Network {
 
       layout: {
         name: 'cose-bilkent',
-        animate: false
+        animate: false,
+        nodeDimensionsIncludeLabels: false,
+        refresh: 30,
+        tile: true,
+        numIter: 500,
+        padding: 1
         // fit: true,
         // circle: false,
         // directed: true,

@@ -2497,7 +2497,12 @@ var Network = (function () {
             ],
             layout: {
                 name: 'cose-bilkent',
-                animate: false
+                animate: false,
+                nodeDimensionsIncludeLabels: false,
+                refresh: 30,
+                tile: true,
+                numIter: 500,
+                padding: 1
             },
             zoom: 2,
             minZoom: 0.01,
