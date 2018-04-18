@@ -334,9 +334,8 @@ def read_map(parameters=[]):
             read_taxa = taxa_info[taxa_reads[i]['tax_id']]['name']
             read_taxa_id = taxa_info[taxa_reads[i]['tax_id']]['tax_id']
             read_taxa_rank = taxa_info[taxa_reads[i]['tax_id']]['tax_rank']
-            read_taxa_score = taxa_info[taxa_reads[i]['tax_id']]['score']
-            read_taxa_match_length = taxa_info[taxa_reads[i]
-                                               ['tax_id']]['hlength']
+            read_taxa_score = taxa_reads[i]['score']
+            read_taxa_match_length = taxa_reads[i]['hlength']
             filter_read = False
         except:
             read_taxa = "undefined"
