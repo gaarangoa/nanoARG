@@ -436,6 +436,10 @@ export class ViewSamplesComponent implements OnInit {
         this.sampleService.run(sample).subscribe(project => {});
       }
     });
+
+    this.sampleService
+      .set_sample_status(sample['_id'], sample['projectID'], 'running')
+      .subscribe(r => {});
   }
 
   removeSample(sample: any) {
