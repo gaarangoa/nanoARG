@@ -4,6 +4,7 @@
 // var jquery = require('jquery/jquery.js');
 const cytoscape = require('cytoscape/dist/cytoscape.js');
 const cytoscape_cose = require('cytoscape-cose-bilkent/cytoscape-cose-bilkent.js');
+// const cytoscape_expand_collapse = require('cytoscape-expand-collapse/cytoscape-expand-collapse.js');
 
 cytoscape.use(cytoscape_cose);
 
@@ -130,7 +131,7 @@ export class Network {
       }
     });
 
-    console.log(nodes);
+    // console.log(nodes);
 
     // parents = parents.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
 
@@ -158,7 +159,7 @@ export class Network {
                 }
               }
             },
-            'background-opacity': 1,
+            'background-opacity': 0.8,
             'border-color': '#000',
             'border-width': 1,
             label: 'data(id)',
@@ -180,12 +181,12 @@ export class Network {
         {
           selector: 'edge',
           style: {
-            width: 'mapData(weight, ' + _emin + ', ' + _emax + ', 1, 30)',
+            width: 'mapData(weight, ' + _emin + ', ' + _emax + ', 1, 10)',
             'curve-style': 'unbundled-bezier',
             'line-style': 'solid',
             'line-color': '#b8c1db',
             // 'edge-distances': 'control-point-weight',
-            opacity: 0.5
+            opacity: 0.6
             // 'target-arrow-color': '#000',
             // 'target-arrow-shape': 'triangle'
           }
