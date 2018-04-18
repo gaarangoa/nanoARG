@@ -115,17 +115,17 @@ def _get_id(gene):
 def _get_taxa_level(taxa_id, level):
     if taxa_id == "undefined":
         return taxa_id
-    lineage = ncbi.get_lineage(taxa_id)
-    names = ncbi.get_taxid_translator(lineage)
-    rank = ncbi.get_rank(lineage)
-    lng = {rank[taxid]: names[taxid] for taxid in lineage}
     try:
+        lineage = ncbi.get_lineage(taxa_id)
+        names = ncbi.get_taxid_translator(lineage)
+        rank = ncbi.get_rank(lineage)
+        lng = {rank[taxid]: names[taxid] for taxid in lineage}
         return lng[level]
     except:
         try:
             return lineage[0]
         except:
-            return "unknown"
+            return taxa_id
 
 
 def network(data={}):
