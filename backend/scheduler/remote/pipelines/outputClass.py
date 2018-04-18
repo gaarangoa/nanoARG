@@ -143,8 +143,10 @@ def network(data={}):
             # print(read)
             # break
         _taxa = read['read'][0]['taxa']
+        _filter_read = read['read'][0]['filter_read']
         try:
-            N[_taxa] += 1
+            if not _filter_read:
+                N[_taxa] += 1
         except:
             try:
                 norigin = 9
@@ -154,13 +156,14 @@ def network(data={}):
                     key = int(read['read'][0]['taxa_id'])
                 if pathogens[key] == True:
                     norigin = 10
-                N[_taxa] = {
-                    "id": _taxa,
-                    "size": 1,
-                    "origin": norigin,
-                    "color": "yellow",
-                    "metadata": ['', read['read'][0]['taxa_id'], read['read'][0]['taxa'], read['read'][0]['taxa_rank']]
-                }
+                if not _filter_read:
+                    N[_taxa] = {
+                        "id": _taxa,
+                        "size": 1,
+                        "origin": norigin,
+                        "color": "yellow",
+                        "metadata": ['', read['read'][0]['taxa_id'], read['read'][0]['taxa'], read['read'][0]['taxa_rank']]
+                    }
             except Exception as e:
                 pass
 
@@ -187,7 +190,8 @@ def network(data={}):
             # aggregate taxonomy edges
             # if read['read'][0]['args']>=1:
             try:
-                E[(_taxa+"_"+_id)]['weight'] += 1
+                if not _filter_read:
+                    E[(_taxa+"_"+_id)]['weight'] += 1
             except Exception as e:
                 try:
                     if read['read'][0]['taxa_id'] == 'undefined':
@@ -195,15 +199,16 @@ def network(data={}):
                     else:
                         key = int(read['read'][0]['taxa_id'])
                     pathogens[key]
-                    E[(_taxa+"_"+_id)] = {
-                        "source": _taxa,
-                        "target": _id,
-                        "id": _taxa + "_" + _id,
-                        "weight": 1,
-                        "color": 'blue',
-                        "source_origin": norigin,
-                        "target_origin": gene['origin']
-                    }
+                    if not _filter_read:
+                        E[(_taxa+"_"+_id)] = {
+                            "source": _taxa,
+                            "target": _id,
+                            "id": _taxa + "_" + _id,
+                            "weight": 1,
+                            "color": 'blue',
+                            "source_origin": norigin,
+                            "target_origin": gene['origin']
+                        }
                 except:
                     pass
 
@@ -329,10 +334,20 @@ def read_map(parameters=[]):
             read_taxa = taxa_info[taxa_reads[i]['tax_id']]['name']
             read_taxa_id = taxa_info[taxa_reads[i]['tax_id']]['tax_id']
             read_taxa_rank = taxa_info[taxa_reads[i]['tax_id']]['tax_rank']
+            read_taxa_score = taxa_info[taxa_reads[i]['tax_id']]['score']
+            read_taxa_match_length = taxa_info[taxa_reads[i]
+                                               ['tax_id']]['hlength']
+            filter_read = False
         except:
             read_taxa = "undefined"
             read_taxa_id = "undefined"
             read_taxa_rank = "undefined"
+            read_taxa_score = 0
+            read_taxa_match_length = 0
+            filter_read = True
+
+        if read_taxa_match_length <= 50 or read_taxa_score <= 300:
+            filter_read = True
 
         read = {
             "len": read_length[i],
@@ -347,7 +362,10 @@ def read_map(parameters=[]):
             "taxa": _get_taxa_level(read_taxa_id, "phylum"),
             "taxa_id": read_taxa_id,
             "taxa_rank": read_taxa_rank,
-            "taxa_species": read_taxa
+            "taxa_species": read_taxa,
+            "taxa_score": read_taxa_score,
+            "taxa_match_length": read_taxa_match_length,
+            "filter_read": filter_read
         }
 
         item = {
