@@ -22,8 +22,10 @@ class Taxonomy():
             # "-k":"50"
         }
 
-        self.aligner.align(self.input, self.reference,
-                           self.alignment_file, parameters)
+        # self.aligner.align(
+        #     self.input, self.reference,
+        #     self.alignment_file, parameters
+        # )
 
     def postprocess(self):
 
