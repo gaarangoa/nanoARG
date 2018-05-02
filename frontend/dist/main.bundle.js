@@ -2342,7 +2342,7 @@ var Network = (function () {
     function Network() {
     }
     Network.prototype.render = function (placeholder, data, conditions) {
-        // console.log(data);
+        console.log(data);
         // conditions is a vector with the id of the data to be analyzed.
         // conditions = [4, 1]; // this example would only show the genes ARGs and MGEs
         var linked_nodes = {};
@@ -3054,7 +3054,7 @@ var ViewSamplesComponent = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
 var environment = {
     production: true,
-    api_url: 'http://bench.cs.vt.edu/api/nanoarg',
+    api_url: 'https://bench.cs.vt.edu/api/nanoarg',
     upload_dir: ''
 };
 //# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/environment.js.map

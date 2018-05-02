@@ -23,7 +23,7 @@ export class Network {
   constructor() {}
 
   render(placeholder: string, data: any, conditions: any) {
-    // console.log(data);
+    console.log(data);
 
     // conditions is a vector with the id of the data to be analyzed.
     // conditions = [4, 1]; // this example would only show the genes ARGs and MGEs
