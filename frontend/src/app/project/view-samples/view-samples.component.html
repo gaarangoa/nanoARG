@@ -227,7 +227,7 @@
     </button>
     </div>
     <div class="box-body text-center">
-        <p-dataTable [csvSeparator]="\t" [style.width]="'50px'" #reads_genes_table [value]="args_on_reads" [rows]="5" [paginator]="true" [pageLinks]="5" exportFilename="reads">
+        <p-dataTable [csvSeparator]="'\t'" [style.width]="'50px'" #reads_genes_table [value]="args_on_reads" [rows]="5" [paginator]="true" [pageLinks]="5" exportFilename="reads">
             <p-column field='block_id' header='Read'></p-column>
             <p-column field='_category' header='Group'></p-column>
             <p-column field='_gene_name' header='Gene name'></p-column>
