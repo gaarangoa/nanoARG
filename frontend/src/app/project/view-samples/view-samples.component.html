@@ -221,13 +221,13 @@
         <p>The data can be downloaded as a csv file, just click on the download button.</p>
     </div>
     <div class="ui-helper-clearfix">
-        <button class='btn btn-xs btn-default' type="button" label="data.csv" (click)="reads_genes_table.exportCSV()" style="float:right">
+        <button class='btn btn-xs btn-default' type="button" label="data.tsv" (click)="reads_genes_table.exportCSV()" style="float:right">
       <i class="fa fa-download"></i>
       <strong>download table</strong>
     </button>
     </div>
     <div class="box-body text-center">
-        <p-dataTable [style.width]="'50px'" #reads_genes_table [value]="args_on_reads" [rows]="5" [paginator]="true" [pageLinks]="5" exportFilename="reads">
+        <p-dataTable [csvSeparator]="\t" [style.width]="'50px'" #reads_genes_table [value]="args_on_reads" [rows]="5" [paginator]="true" [pageLinks]="5" exportFilename="reads">
             <p-column field='block_id' header='Read'></p-column>
             <p-column field='_category' header='Group'></p-column>
             <p-column field='_gene_name' header='Gene name'></p-column>
