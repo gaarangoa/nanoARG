@@ -178,6 +178,7 @@ export class ViewSamplesComponent implements OnInit {
         entry['_gene_name'] = entry.metadata[4];
         entry['_category'] = this.origin2category(entry.origin);
         entry['_taxa'] = element.read[0].taxa;
+        entry['_taxa_species'] = element.read[0].taxa_species;
         entry['_taxa_id'] = element.read[0].taxa_id;
         entry.coverage = 100 * entry.coverage.toFixed(2);
         entry.evalue = entry.evalue.toExponential();

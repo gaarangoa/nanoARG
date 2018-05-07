@@ -132,7 +132,7 @@
                     <a class="" href="https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-018-0401-z">(Arango-Argoty et., al.)</a>. Because of the high error rate of nanopore reads, the deepARG-LS v1.0 was run with permisive identity parameters
                     (
                     <strong> --iden {{ parameters.identity }} --cov {{parameters.coverage}} --evalue {{parameters.evalue}} --prob {{parameters.prob}}
-            </strong>) to guarantee the correctness of the classifications.
+          </strong>) to guarantee the correctness of the classifications.
                 </p>
                 <!-- </div> -->
                 <br>
@@ -256,7 +256,7 @@
         </h3>
         <p>This section shows a linear representation of the nanopore reads with the detected ARGs and neighboring genes. It can help to identify common ARG patterns (the visualization contains only reads with antibiotic resistance genes).
             <a href="">
-      UniRef90</a> was used to screen the nanopore to a broad set of functional genes using
+        UniRef90</a> was used to screen the nanopore to a broad set of functional genes using
             <a href="">diamond</a> with parameters
             <code> --evalue {{parameters.evalue}} --id {{parameters.identity}} --coverage {{parameters.coverage}} </code>. By using this set of functional genes, it is possible to identify the components of each nanopore read. The order of the inner circles
             indicates: ARGS, MRGs, MGEs, and other functional genes.
