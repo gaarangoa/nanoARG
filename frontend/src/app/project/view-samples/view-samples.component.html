@@ -1,7 +1,7 @@
 <br>
 
 <div style="text-align:center">
-    <p-dataTable #dt [value]="sampleService.samplesByProject" [rows]="5" [paginator]="true" [pageLinks]="3" exportFilename="metadata">
+    <p-dataTable [csvSeparator]="'\t'" #dt [value]="sampleService.samplesByProject" [rows]="5" [paginator]="true" [pageLinks]="3" exportFilename="metadata">
         <!-- <p-header> -->
         <!-- <h4>Samples</h4> -->
         <!-- <div class="ui-helper-clearfix">
@@ -288,7 +288,7 @@
 
         <div class="col-md-12 text-center">
             <br>
-            <p-dataTable #reads_table_vis [value]="reads_table" [rows]="5" [paginator]="true" [pageLinks]="5" exportFilename="reads">
+            <p-dataTable [csvSeparator]="'\t'" #reads_table_vis [value]="reads_table" [rows]="5" [paginator]="true" [pageLinks]="5" exportFilename="reads">
                 <p-column field='id' header='Read'>
 
                     <template let-column_data="rowData" pTemplate="body">
@@ -407,7 +407,7 @@
         </div>
         <div class="col-md-6">
             <div class="box-body text-center">
-                <p-dataTable #taxonomy_table [value]="taxonomy_data" [rows]="10" [paginator]="true" [pageLinks]="5" exportFilename="reads">
+                <p-dataTable [csvSeparator]="'\t'" #taxonomy_table [value]="taxonomy_data" [rows]="10" [paginator]="true" [pageLinks]="5" exportFilename="reads">
                     <p-column field='tax_id' header='Taxa ID'></p-column>
                     <p-column field='tax_rank' header='Taxa Rank'></p-column>
                     <p-column field='name' header='Name'></p-column>
@@ -447,7 +447,7 @@
     </button>
     </div>
     <div class="box-body text-center">
-        <p-dataTable #reads_table_vis_comparison [value]="all_samples" [rows]="10" [paginator]="true" [pageLinks]="5" exportFilename="reads">
+        <p-dataTable [csvSeparator]="'\t'" #reads_table_vis_comparison [value]="all_samples" [rows]="10" [paginator]="true" [pageLinks]="5" exportFilename="reads">
             <p-column field='sample' header='Sample'></p-column>
             <p-column field='origin' header='Section'></p-column>
             <p-column field='category' header='Category'></p-column>
