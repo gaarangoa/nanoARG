@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./documentation.component.css']
 })
 export class DocumentationComponent implements OnInit {
+  public service: string;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
+    this.service = 'NanoARG';
   }
-
 }

@@ -73,7 +73,7 @@
                     corresponds to the reads that contain at least one ARG.</p>
                 <!-- </div> -->
                 <br>
-                <p>The sample size is {{total_bp_counts}}bp</p>
+                <p>The sample size is {{ total_bp_counts.toLocaleString() }} bp</p>
                 <div class="col-md-6 col-md-offset-3 text-center">
                     <chart class="col-md-12" [options]="line_chart"></chart>
                 </div>
@@ -151,33 +151,7 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <!-- <div class="col-md-4 bg-blue"> -->
-                <h3>
-                    <strong> Distribution of Mobile Genetic Elements (MGEs)</strong>
-                </h3>
-                <h4>({{ general_info.MGEs.counts }} Hits)</h4>
-                <p>
-                    Annotations were classfied as mobile genetic elements (MGEs) based on matching metadata from protein sequences to one of the following keywords: transposase, transposon, conjugative, integrase, integron, recombinase, conjugal, mobilization, recombination,
-                    plasmid (
-                    <a class="" href="https://www.nature.com/articles/nature13377">Forsberg et., al</a>). Protein sequences that matched those keywords were retrieved from the National Center for Biotechnology Information
-                    <a class="" href="">NCBI</a>. Then, sequences with an identity greater than 90% were clustered and the centroid sequence was substracted using
-                    <a class="" href="">CD-HIT</a>. Nanopore reads are then screened against this customized set of MGEs using diamond with parameters (
-                    <strong> --evalue {{parameters.evalue}} --id {{parameters.identity}} --coverage {{parameters.coverage}} </strong>).
-                </p>
-                <!-- </div> -->
-                <br>
 
-                <div class="col-md-6  col-md-offset-3 text-center">
-                    <chart class="col-md-12" [options]="mges_distribution_chart"></chart>
-                </div>
-
-                <div class="col-md-12">
-                    <hr>
-                </div>
-            </div>
-        </div>
 
         <div class="row">
             <div class="col-md-12">
@@ -197,6 +171,34 @@
                 <br>
                 <div class="col-md-6 col-md-offset-3 text-center">
                     <chart class="col-md-12" [options]="metal_distribution_chart"></chart>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- <div class="col-md-4 bg-blue"> -->
+                <h3>
+                    <strong> Distribution of Mobile Genetic Elements (MGEs)</strong>
+                </h3>
+                <h4>({{ general_info.MGEs.counts }} Hits)</h4>
+                <p>
+                    Annotations were classfied as mobile genetic elements (MGEs) based on matching metadata from protein sequences to one of the following keywords: transposase, transposon, conjugative, integrase, integron, recombinase, conjugal, mobilization, recombination,
+                    plasmid (
+                    <a class="" href="https://www.nature.com/articles/nature13377">Forsberg et., al</a>). Protein sequences that matched those keywords were retrieved from the National Center for Biotechnology Information
+                    <a class="" href="">NCBI</a>. Then, sequences with an identity greater than 90% were clustered and the centroid sequence was substracted using
+                    <a class="" href="">CD-HIT</a>. Nanopore reads are then screened against this customized set of MGEs using diamond with parameters (
+                    <strong> --evalue {{parameters.evalue}} --id {{parameters.identity}} --coverage {{parameters.coverage}} </strong>).
+                </p>
+                <!-- </div> -->
+                <!-- <br> -->
+
+                <div class="col-md-6  col-md-offset-3 text-center">
+                    <chart class="col-md-12" [options]="mges_distribution_chart"></chart>
+                </div>
+
+                <div class="col-md-12">
+                    <hr>
                 </div>
             </div>
         </div>
@@ -346,7 +348,7 @@
                         <p-checkbox name="group2" value="MGEs" label="MGEs" [(ngModel)]="network_parameters" inputId="MGEs"></p-checkbox>
                         <p-checkbox name="group2" value="MRGs" label="MRGs" [(ngModel)]="network_parameters" inputId="MRGs"></p-checkbox>
                         <p-checkbox name="group2" value="Pathogens" label="Pathogens" [(ngModel)]="network_parameters" inputId="Pathogens"></p-checkbox>
-                        <p-checkbox name="group2" value="Species" label="Species" [(ngModel)]="network_parameters" inputId="Species"></p-checkbox>
+                        <p-checkbox name="group2" value="Species" label="Phylum" [(ngModel)]="network_parameters" inputId="Species"></p-checkbox>
                         <a class="btn btn-success btn-xs" (click)="render_network(sample)">
                             <strong> Render </strong>
                         </a>
@@ -365,6 +367,7 @@
                     </span>
                     </div> -->
                 </div>
+                <br><br>
                 <!-- </p-tabPanel> -->
 
                 <!-- <p-tabPanel header="co-occurrence map">

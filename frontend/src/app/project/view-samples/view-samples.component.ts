@@ -404,6 +404,12 @@ export class ViewSamplesComponent implements OnInit {
 
       // this.network.render('network_labels', this.network_data[1], 'grid', false);
       // console.log(this.reads_table)
+
+      this.msgs.push({
+        severity: 'success',
+        summary: 'Info Message',
+        detail: 'Sample loaded'
+      });
     });
   }
 
@@ -421,6 +427,11 @@ export class ViewSamplesComponent implements OnInit {
   }
 
   view(sample: any) {
+    this.msgs.push({
+      severity: 'info',
+      summary: 'Info Message',
+      detail: 'Loading sample ...'
+    });
     this.selected_sample = sample;
     this.get_sample_results(sample['_id'], 0);
   }
