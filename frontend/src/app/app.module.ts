@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 // Components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -47,7 +48,13 @@ import { TypingAnimationDirective } from 'angular-typing-animation';
     AppRoutingModule
     // TypedModule
   ],
-  providers: [AuthService, Session, CookieService, UserService],
+  providers: [
+    AuthService,
+    Session,
+    CookieService,
+    UserService,
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
