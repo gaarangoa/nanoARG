@@ -67,6 +67,7 @@ export class ViewSamplesComponent implements OnInit {
   public args_on_reads: any;
   public parameters: any;
   public network_parameters: string[];
+  public total_bp_counts: any;
   // public sample_list: any;
 
   constructor(
@@ -85,6 +86,7 @@ export class ViewSamplesComponent implements OnInit {
       evalue: (1e-5).toExponential(),
       prob: 0.5
     };
+    this.total_bp_counts = 0;
     this.network_parameters = ['ARGs'];
     this.stacked = {};
     this.args_on_reads = [];
@@ -398,6 +400,8 @@ export class ViewSamplesComponent implements OnInit {
         return i.read[0];
       });
 
+      this.total_bp_counts = res[4]['total_bp_counts'];
+
       // this.network.render('network_labels', this.network_data[1], 'grid', false);
       // console.log(this.reads_table)
     });
@@ -487,7 +491,7 @@ export class ViewSamplesComponent implements OnInit {
           ).toFixed(5);
           item.data['rel_abn_total_reads'] = (
             item['data'].size *
-            14000000 /
+            1000000000 /
             res[4]['total_bp_counts']
           ).toFixed(5);
           item.data['rel_abn_unique_strains'] = (
