@@ -438,8 +438,9 @@
             The table below contains the results for all the samples. Including, sample name, gene category, gene name, number of hits in the sample.
         </p>
         <p>
-            The relative abundance is computed respect the total copy number of ARGs.
+            The relative abundance is computed respect the total library size in Giga base pairs (Gbp).
         </p>
+
     </div>
     <div class="ui-helper-clearfix">
         <button class='btn btn-xs btn-default' type="button" label="data.csv" (click)="reads_table_vis_comparison.exportCSV()" style="float:right">
@@ -454,8 +455,8 @@
             <p-column field='category' header='Category'></p-column>
             <p-column field='id' header='Gene'></p-column>
             <p-column field='size' header='Hits'></p-column>
-            <p-column field='rel_abn_args' header='per ARGs'></p-column>
-            <p-column field='rel_abn_total_reads' header='PPM'></p-column>
+            <!-- <p-column field='rel_abn_args' header='counts/ARGs'></p-column> -->
+            <p-column field='rel_abn_total_reads' header='counts/Gbp'></p-column>
             <!-- <p-column field='rel_abn_total_genes' header='RA 10K #Genes'></p-column> -->
             <!-- <p-column field='rel_abn_unique_strains' header='RA #Strains'></p-column> -->
 
