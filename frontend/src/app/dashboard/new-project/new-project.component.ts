@@ -1,9 +1,10 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup} from '@angular/forms';
 
 // services
-import { Session }      from '../../../services/session/session.service';
+import { Session } from '../../../services/session/session.service';
 import { ProjectService } from '../../../services/project/project.service'
 import { AuthService } from '../../../services/auth/auth.service';
 
@@ -20,10 +21,9 @@ export class NewProjectComponent implements OnInit {
   timestamp: Date;
 
   constructor(
-      public router: Router, 
-      private projectService: 
-      ProjectService, 
-      private session: AuthService,
+      public router: Router,
+      private projectService: ProjectService,
+      private session: Session,
       public fb: FormBuilder ){
 
       this.newProjectForm = this.fb.group({
@@ -35,23 +35,27 @@ export class NewProjectComponent implements OnInit {
       this.newProjectForm.valueChanges.subscribe(() => {
         this.formValid = this.newProjectForm.valid;
       });
+
   }
 
 
   create(){
+
+      // console.log(this.session.get('user')['_id']);
+
       this.timestamp = new Date();
       this.fields = this.newProjectForm.value
-      this.fields['userID'] = this.session.credentials['_id']
+      this.fields['userID'] = this.session.get('user')['_id']
       this.fields['timestamp'] = this.timestamp.getTime();
       this.fields['date'] = this.timestamp.toString();
 
-      this.projectService.create(this.fields) 
+      this.projectService.create(this.fields)
         .subscribe(project => {
           // this.projectService.projectsByUser.unshift(this.projectService.projectInfo);
           this.newProjectForm.reset();
           // console.log(this.projectService.projectsByUser)
         })
-      
+
     }
 
   ngOnInit() {

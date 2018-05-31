@@ -511,8 +511,8 @@ module.exports = "<div class=\"box box-warning \">\n    <div class=\"box-header 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_project_project_service__ = __webpack_require__("../../../../../src/services/project/project.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_auth_auth_service__ = __webpack_require__("../../../../../src/services/auth/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_session_session_service__ = __webpack_require__("../../../../../src/services/session/session.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_project_project_service__ = __webpack_require__("../../../../../src/services/project/project.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -545,10 +545,11 @@ var NewProjectComponent = (function () {
         });
     }
     NewProjectComponent.prototype.create = function () {
+        // console.log(this.session.get('user')['_id']);
         var _this = this;
         this.timestamp = new Date();
         this.fields = this.newProjectForm.value;
-        this.fields['userID'] = this.session.credentials['_id'];
+        this.fields['userID'] = this.session.get('user')['_id'];
         this.fields['timestamp'] = this.timestamp.getTime();
         this.fields['date'] = this.timestamp.toString();
         this.projectService.create(this.fields)
@@ -566,7 +567,7 @@ var NewProjectComponent = (function () {
             template: __webpack_require__("../../../../../src/app/dashboard/new-project/new-project.component.html"),
             styles: [__webpack_require__("../../../../../src/app/dashboard/new-project/new-project.component.css")]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__services_project_project_service__["a" /* ProjectService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__services_project_project_service__["a" /* ProjectService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__services_auth_auth_service__["a" /* AuthService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__services_auth_auth_service__["a" /* AuthService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormBuilder"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormBuilder"]) === 'function' && _d) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["Router"]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__services_project_project_service__["a" /* ProjectService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__services_project_project_service__["a" /* ProjectService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__services_session_session_service__["a" /* Session */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__services_session_session_service__["a" /* Session */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormBuilder"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormBuilder"]) === 'function' && _d) || Object])
     ], NewProjectComponent);
     return NewProjectComponent;
     var _a, _b, _c, _d;
@@ -3271,6 +3272,7 @@ var ProjectService = (function () {
     }
     ProjectService.prototype.create = function (fields) {
         var _this = this;
+        console.log(fields);
         return this.http.post(this.base_url + '/project/create/', fields)
             .map(function (res) {
             _this.projectInfo = res.json()[0];

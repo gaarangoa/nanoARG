@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ProjectService {
-  
+
   projectInfo: Object;
   projectsByUser: Array<Object>;
   removed: Boolean;
@@ -23,6 +23,7 @@ export class ProjectService {
   }
 
   create(fields: Object) {
+    console.log(fields)
     return this.http.post(this.base_url+'/project/create/', fields)
       .map(res => {
         this.projectInfo = res.json()[0];
@@ -57,7 +58,7 @@ export class ProjectService {
     // console.log(fields)
     return this.http.post(this.base_url+'/project/share/', fields)
       .map( res=> {
-        
+
       });
   }
 
