@@ -24,6 +24,8 @@ import 'rxjs/add/operator/takeWhile';
 import { EventDrops } from './EventDrops';
 import { Stats } from './OverallStats';
 
+import { environment } from '../../../environments/environment';
+
 @Component({
   // selector: 'app-view-samples',
   templateUrl: './view-samples.component.html',
@@ -31,6 +33,7 @@ import { Stats } from './OverallStats';
 })
 export class ViewSamplesComponent implements OnInit {
   private sub: any;
+  public api_url: any;
   msgs: Message[] = [];
   public rel_abn_type = [];
   public rel_abn_subtype = [];
@@ -86,6 +89,7 @@ export class ViewSamplesComponent implements OnInit {
       evalue: (1e-5).toExponential(),
       prob: 0.5
     };
+    this.api_url = environment.api_url;
     this.total_bp_counts = 0;
     this.network_parameters = ['ARGs'];
     this.stacked = {};
