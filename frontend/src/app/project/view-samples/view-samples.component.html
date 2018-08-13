@@ -220,14 +220,15 @@
         <h3>
             <strong> Genes mapped to nanopore reads </strong>
         </h3>
-        <p>This table contains all the ARGs mapped to the nanopore reads. Particularly, for those reads that contain ARGs, the MGEs, MRGs, Taxonomy and other functional genes are reported. This table is useful to find co-occurrence patterns. </p>
-        <p>The data can be downloaded as a csv file, just click on the download button.</p>
+        <p>This table contains a sample of the ARGs mapped to the nanopore reads. Particularly, for those reads that contain ARGs, the MGEs, MRGs, Taxonomy and other functional genes are reported. This table is useful to find co-occurrence patterns.
+        </p>
+        <p>The full data can be downloaded as a json file. This file can be easily processed in python, R or any other software to customize the results. just click on the download button.</p>
     </div>
     <div class="ui-helper-clearfix">
-        <button class='btn btn-xs btn-default' type="button" label="data.tsv" (click)="reads_genes_table.exportCSV()" style="float:right">
-      <i class="fa fa-download"></i>
-      <strong>download table</strong>
-    </button>
+        <a class='btn btn-xs btn-default' href="http://localhost:27856/sample/read/results/download/5a721cf246429d00115ceb24" style="float:right">
+            <i class="fa fa-download"></i>
+            <strong>download table</strong>
+        </a>
     </div>
     <div class="box-body text-center">
         <p-dataTable [csvSeparator]="'\t'" [style.width]="'50px'" #reads_genes_table [value]="args_on_reads" [rows]="5" [paginator]="true" [pageLinks]="5" exportFilename="mapping.tsv">
@@ -367,7 +368,8 @@
                     </span>
                     </div> -->
                 </div>
-                <br><br>
+                <br>
+                <br>
                 <!-- </p-tabPanel> -->
 
                 <!-- <p-tabPanel header="co-occurrence map">

@@ -46,6 +46,17 @@ router.get('/read/results/:sample_id', function(req, res, next) {
         );
 });
 
+router.get('/read/results/download/:sample_id', function(req, res, next) {
+    var sample_id = req.params.sample_id;
+    sample.readElementByID(sample_id)
+        .then(
+            function(response) {
+                // console.log(response)
+                var fi = '/src/data/' + response[0].projectID + '_' + sample_id + '.json';
+                res.download(fi);
+            }
+        );
+});
 
 router.get('/project/:projectID', function(req, res, next) {
     var sampleID = req.params['projectID'];
