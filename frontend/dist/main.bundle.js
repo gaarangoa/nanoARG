@@ -39,7 +39,7 @@ var router = [
     { path: 'dashboard/project/:pid', redirectTo: 'project/:pid', pathMatch: 'full', data: { type: 'project' } } // The project button inside the dashboard
 ];
 var AppRoutingModule = __WEBPACK_IMPORTED_MODULE_0__angular_router__["RouterModule"].forRoot(router);
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/app-routing.module.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/app-routing.module.js.map
 
 /***/ }),
 
@@ -107,7 +107,7 @@ var AppComponent = (function () {
     return AppComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/app.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/app.component.js.map
 
 /***/ }),
 
@@ -200,7 +200,7 @@ var AppModule = (function () {
     ], AppModule);
     return AppModule;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/app.module.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/app.module.js.map
 
 /***/ }),
 
@@ -240,7 +240,7 @@ var DashboardRoutingModule = (function () {
     ], DashboardRoutingModule);
     return DashboardRoutingModule;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/dashboard-routing.module.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/dashboard-routing.module.js.map
 
 /***/ }),
 
@@ -315,7 +315,7 @@ var DashboardComponent = (function () {
     return DashboardComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/dashboard.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/dashboard.component.js.map
 
 /***/ }),
 
@@ -380,7 +380,7 @@ var DashboardModule = (function () {
     ], DashboardModule);
     return DashboardModule;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/dashboard.module.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/dashboard.module.js.map
 
 /***/ }),
 
@@ -474,7 +474,7 @@ var MyProjectsComponent = (function () {
     return MyProjectsComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/my-projects.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/my-projects.component.js.map
 
 /***/ }),
 
@@ -572,7 +572,7 @@ var NewProjectComponent = (function () {
     return NewProjectComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/new-project.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/new-project.component.js.map
 
 /***/ }),
 
@@ -633,7 +633,7 @@ var DocumentationComponent = (function () {
     ], DocumentationComponent);
     return DocumentationComponent;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/documentation.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/documentation.component.js.map
 
 /***/ }),
 
@@ -714,7 +714,7 @@ var HomeComponent = (function () {
     ], HomeComponent);
     return HomeComponent;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/home.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/home.component.js.map
 
 /***/ }),
 
@@ -826,7 +826,7 @@ var LoginComponent = (function () {
     return LoginComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/login.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/login.component.js.map
 
 /***/ }),
 
@@ -893,7 +893,7 @@ var ProjectRoutingModule = (function () {
     ], ProjectRoutingModule);
     return ProjectRoutingModule;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/project-routing.module.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/project-routing.module.js.map
 
 /***/ }),
 
@@ -1012,7 +1012,7 @@ var ProjectComponent = (function () {
     return ProjectComponent;
     var _a, _b, _c, _d, _e, _f, _g;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/project.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/project.component.js.map
 
 /***/ }),
 
@@ -1103,7 +1103,7 @@ var ProjectModule = (function () {
     ], ProjectModule);
     return ProjectModule;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/project.module.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/project.module.js.map
 
 /***/ }),
 
@@ -1186,7 +1186,7 @@ var ExecuteComponent = (function () {
     return ExecuteComponent;
     var _a, _b, _c, _d, _e;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/execute.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/execute.component.js.map
 
 /***/ }),
 
@@ -1304,7 +1304,7 @@ var MetadataComponent = (function () {
     return MetadataComponent;
     var _a, _b, _c, _d, _e, _f, _g;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/metadata.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/metadata.component.js.map
 
 /***/ }),
 
@@ -1382,7 +1382,7 @@ var ParametersComponent = (function () {
     return ParametersComponent;
     var _a, _b, _c, _d, _e;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/parameters.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/parameters.component.js.map
 
 /***/ }),
 
@@ -1418,7 +1418,7 @@ var SampleRoutingModule = (function () {
     ], SampleRoutingModule);
     return SampleRoutingModule;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/sample-routing.module.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/sample-routing.module.js.map
 
 /***/ }),
 
@@ -1526,7 +1526,7 @@ var SampleComponent = (function () {
     return SampleComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/sample.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/sample.component.js.map
 
 /***/ }),
 
@@ -1594,7 +1594,7 @@ var SampleModule = (function () {
     ], SampleModule);
     return SampleModule;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/sample.module.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/sample.module.js.map
 
 /***/ }),
 
@@ -1677,7 +1677,7 @@ var UploadComponent = (function () {
     return UploadComponent;
     var _a, _b, _c, _d, _e, _f;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/upload.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/upload.component.js.map
 
 /***/ }),
 
@@ -1790,7 +1790,7 @@ var EventDrops = (function () {
     };
     return EventDrops;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/EventDrops.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/EventDrops.js.map
 
 /***/ }),
 
@@ -2113,7 +2113,7 @@ var Genome = (function () {
     ;
     return Genome;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/Gmap.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/Gmap.js.map
 
 /***/ }),
 
@@ -2148,7 +2148,7 @@ var Stats = (function () {
     };
     return Stats;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/OverallStats.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/OverallStats.js.map
 
 /***/ }),
 
@@ -2340,7 +2340,7 @@ var Chords = (function () {
     ;
     return Chords;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/chords.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/chords.js.map
 
 /***/ }),
 
@@ -2364,7 +2364,7 @@ var Network = (function () {
     function Network() {
     }
     Network.prototype.render = function (placeholder, data, conditions) {
-        console.log(data);
+        // console.log(data);
         // conditions is a vector with the id of the data to be analyzed.
         // conditions = [4, 1]; // this example would only show the genes ARGs and MGEs
         var linked_nodes = {};
@@ -2546,7 +2546,7 @@ var Network = (function () {
     };
     return Network;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/network.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/network.js.map
 
 /***/ }),
 
@@ -2642,7 +2642,7 @@ var TaxonomyVisualization = (function () {
     return TaxonomyVisualization;
 }());
 ;
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/taxonomy.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/taxonomy.js.map
 
 /***/ }),
 
@@ -3078,7 +3078,7 @@ var ViewSamplesComponent = (function () {
     return ViewSamplesComponent;
     var _a, _b, _c, _d, _e, _f;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/view-samples.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/view-samples.component.js.map
 
 /***/ }),
 
@@ -3092,7 +3092,7 @@ var environment = {
     api_url: 'https://bench.cs.vt.edu/api/nanoarg',
     upload_dir: ''
 };
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/environment.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/environment.js.map
 
 /***/ }),
 
@@ -3113,7 +3113,7 @@ if (__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment *
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["enableProdMode"])();
 }
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_3__app_app_module__["a" /* AppModule */]);
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/main.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/main.js.map
 
 /***/ }),
 
@@ -3207,7 +3207,7 @@ var AuthService = (function () {
     return AuthService;
     var _a, _b;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/auth.service.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/auth.service.js.map
 
 /***/ }),
 
@@ -3227,7 +3227,7 @@ var Sha512 = (function () {
     };
     return Sha512;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/encrypt.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/encrypt.js.map
 
 /***/ }),
 
@@ -3316,7 +3316,7 @@ var ProjectService = (function () {
     return ProjectService;
     var _a;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/project.service.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/project.service.js.map
 
 /***/ }),
 
@@ -3405,7 +3405,7 @@ var SampleService = (function () {
         var _this = this;
         return this.http.post(this.base_url + '/analysis/run', fields).map(function (res) {
             _this.analysisSample = res.json();
-            console.log('RUNNING');
+            console.log('running');
         });
     };
     SampleService.prototype.get_sample_results = function (sample_id) {
@@ -3440,7 +3440,7 @@ var SampleService = (function () {
     return SampleService;
     var _a;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/sample.service.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/sample.service.js.map
 
 /***/ }),
 
@@ -3495,7 +3495,7 @@ var Session = (function () {
     return Session;
     var _a;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/session.service.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/session.service.js.map
 
 /***/ }),
 
@@ -3550,7 +3550,7 @@ var UserService = (function () {
     return UserService;
     var _a;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanopore/frontend/src/user.service.js.map
+//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/user.service.js.map
 
 /***/ }),
 

@@ -22,7 +22,7 @@ router.get('/:sampleID', function(req, res, next) {
         );
 });
 
-// read json file with results 
+// read json file with results
 router.get('/read/results/:sample_id', function(req, res, next) {
     var sample_id = req.params['sample_id'];
     // console.log(sampleID)
@@ -37,6 +37,7 @@ router.get('/read/results/:sample_id', function(req, res, next) {
                         res.json(false);
                     } else {
                         obj = JSON.parse(data);
+                        obj[0] = obj[0].slice(1, 100);
                         res.json(obj);
                     }
                 });
@@ -61,9 +62,13 @@ router.get('/project/:projectID', function(req, res, next) {
 router.post('/update/status', function(req, res, next) {
     var sampleID = req.body._id;
     var status = req.body.status;
-    sample.updateElementByID(sampleID, { "status": status })
+    sample.updateElementByID(sampleID, {
+        "status": status
+    })
 
-    res.json({ request: "success" })
+    res.json({
+        request: "success"
+    })
 
 });
 
@@ -74,10 +79,14 @@ router.post('/update/results', function(req, res, next) {
     var analysis = req.body.analysis
 
     if (analysis == "ARG") {
-        sample.updateElementByID(sampleID, { "ARG": JSON.parse(results) })
+        sample.updateElementByID(sampleID, {
+            "ARG": JSON.parse(results)
+        })
     }
 
-    res.json({ request: "success" })
+    res.json({
+        request: "success"
+    })
 
 });
 
@@ -103,7 +112,9 @@ router.post('/remove/', function(req, res, next) {
     sample.removeElementByID(req.body['_id'])
         .then(
             function(response) {
-                res.json({ removed: true })
+                res.json({
+                    removed: true
+                })
             }
         );
 });
@@ -113,7 +124,9 @@ router.get('/status/:sample_id/:project_id/:status', function(req, res) {
     if (req.params.status != "done") {
         // update the status
         console.log('updating sample' + req.params.sample_id, req.params.status);
-        sample.updateElementByID(req.params.sample_id, { "status": req.params.status });
+        sample.updateElementByID(req.params.sample_id, {
+            "status": req.params.status
+        });
         res.json(req.params);
     } else {
         // when the process is done retrieve the results
@@ -122,7 +135,7 @@ router.get('/status/:sample_id/:project_id/:status', function(req, res) {
 
         var dir = exec(cmd, function(err, stdout, stderr) {
             if (err) {
-                // should have err.code here?  
+                // should have err.code here?
                 // sample.updateElementByID(req.params.sample_id, { "status": "error retrieving results" });
                 // res.json(false);
                 console.log('error retrieving file');
@@ -133,11 +146,13 @@ router.get('/status/:sample_id/:project_id/:status', function(req, res) {
         dir.on('exit', function(code) {
             // exit code is code
             console.log('updating sample' + req.params.sample_id, req.params.status);
-            sample.updateElementByID(req.params.sample_id, { "status": req.params.status });
+            sample.updateElementByID(req.params.sample_id, {
+                "status": req.params.status
+            });
             res.json(req.params);
         });
     }
 });
 
-// export the module 
+// export the module
 module.exports = router;

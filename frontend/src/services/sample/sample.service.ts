@@ -73,7 +73,7 @@ export class SampleService {
   run(fields: Object) {
     return this.http.post(this.base_url + '/analysis/run', fields).map(res => {
       this.analysisSample = res.json();
-      console.log('RUNNING');
+      console.log('running');
     });
   }
 
