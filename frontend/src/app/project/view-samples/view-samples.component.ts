@@ -26,6 +26,8 @@ import { Stats } from './OverallStats';
 
 import { environment } from '../../../environments/environment';
 
+// import { Domain } from './domains/domain';
+
 @Component({
   // selector: 'app-view-samples',
   templateUrl: './view-samples.component.html',
@@ -71,6 +73,10 @@ export class ViewSamplesComponent implements OnInit {
   public parameters: any;
   public network_parameters: string[];
   public total_bp_counts: any;
+  public sample_info: any;
+  public domain_draw: any;
+  public arg_height_plot: any;
+  public arg_height_plot_btn: any;
   // public sample_list: any;
 
   constructor(
@@ -83,12 +89,18 @@ export class ViewSamplesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
+    // this.domain_draw = new Domain();
+
     this.parameters = {
       identity: 25,
       coverage: 40,
       evalue: (1e-5).toExponential(),
       prob: 0.5
     };
+    this.arg_height_plot = 100;
+    this.arg_height_plot_btn = 'More';
+    this.sample_info = {};
     this.api_url = environment.api_url;
     this.total_bp_counts = 0;
     this.network_parameters = ['ARGs'];
@@ -107,7 +119,7 @@ export class ViewSamplesComponent implements OnInit {
     this.stats = new Stats();
 
     this.taxonomy_visualization = new TaxonomyVisualization();
-    this.selected_sample = { name: '' };
+    this.selected_sample = { name: '', _id: ''};
     this.network_data = { nodes: [], edges: [] };
     this.all_samples = [];
 
@@ -325,8 +337,8 @@ export class ViewSamplesComponent implements OnInit {
       // this.raw_reads = res[0];
       this.filter_reads = res[0];
       this.network_data = res[1];
-
-      // console.log(res);
+      this.sample_info = res[4];
+      console.log(res);
 
       this.network_labels = res[2];
       this.taxonomy_data = res[3];
@@ -532,8 +544,22 @@ export class ViewSamplesComponent implements OnInit {
     this.network.render('network', this.network_data, _sel_option_render);
   }
 
+  //
+
+  open_box() {
+    if (this.arg_height_plot_btn === 'More') {
+      this.arg_height_plot = '100%';
+      this.arg_height_plot_btn = 'Less';
+    } else {
+      this.arg_height_plot = '500px';
+      this.arg_height_plot_btn = 'More';
+    }
+  }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
     this.alive = false;
   }
+
+
 }

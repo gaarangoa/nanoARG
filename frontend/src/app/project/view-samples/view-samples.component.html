@@ -1,5 +1,6 @@
 <br>
 
+<!-- Table with project info -->
 <div style="text-align:center">
     <p-dataTable [csvSeparator]="'\t'" #dt [value]="sampleService.samplesByProject" [rows]="5" [paginator]="true" [pageLinks]="3" exportFilename="metadata">
         <!-- <p-header> -->
@@ -44,41 +45,62 @@
 
 </div>
 
-
-
-
+<!-- Info of the sample -->
 <div class="box box-solid">
+
+
     <!-- <div class="box-header"> -->
     <!-- <h3>Results</h3> -->
     <!-- </div> -->
-    <div class="box-header">
-        <h1>
-            <i class="fa fa-cubes"></i> {{ selected_sample.name }} </h1>
-    </div>
     <div class="box-body">
 
         <div class="row">
-            <div class="col-md-12">
-                <p>This section shows the primary statistics of the sample
-                    <span class="badge bg-blue"> {{ selected_sample.name }} </span>
-                    <strong> ( {{selected_sample._id}} ) </strong> including read length distribution of the reads that contain at least one ARG and any other functional genes including: MGEs, MRG. Additionaly, taxonomy annotation is provided for each
-                    one of the reads in the sample.</p>
-                <br>
-                <br>
+            <div class="col-md-4">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h1>
+                            <i class="fa fa-cubes"></i> {{ selected_sample.name }}
+                        </h1>
+                    </div>
 
-                <!-- <div class="col-md-4 bg-blue"> -->
-                <h3>
-                    <strong>Read length distribution</strong>
-                </h3>
-                <p>This graph shows the distribution of the read length that contains at least one ARG. The length is represented in kilo basepairs. each position represents the number of sequences withing a length 1000kbp range. The data used in this graph
-                    corresponds to the reads that contain at least one ARG.</p>
-                <!-- </div> -->
-                <br>
-                <p>The sample size is {{ total_bp_counts.toLocaleString() }} bp</p>
-                <div class="col-md-6 col-md-offset-3 text-center">
-                    <chart class="col-md-12" [options]="line_chart"></chart>
+                    <div class="box-body">
+                        <p>Sample ID:
+                            <strong> {{selected_sample._id}} </strong> contains a total of {{ sample_info.total_reads}}. From those, {{sample_info.total_mapped_ARG_reads}} reads contain at least one ARG. The size of the sample in base pairs corresponds
+                            to {{ total_bp_counts.toLocaleString() }} bp (useful for sample normalization).
+                        </p>
+                        <p>
+                            This section contains analysis of the sample including read length distribution of the reads that contain at least one ARG and any other functional genes including: MGEs, MRG. Additionaly, taxonomy annotation is provided for each one of the reads in the
+                            sample.
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="col-md-8">
+
+                <div class="box box-solid box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">
+                            <strong>Read length distribution</strong>
+                        </h3>
+
+                    </div>
+                    <div class="box-body">
+                        <p>
+                            This graph shows the distribution of the read length that contains at least one ARG. The length is represented in kilo basepairs. Each position represents the number of sequences withing a length 1000kbp range. The data used in this graph corresponds
+                            to the reads that contain at least one ARG.
+                        </p>
+                        <br>
+                        <div class="col-md-12 col-md-offset-0 text-center">
+                            <chart class="col-md-12" [options]="line_chart"></chart>
+                        </div>
+
+                    </div>
                 </div>
             </div>
+
             <div class="col-md-12">
                 <!-- <hr> -->
             </div>
@@ -129,22 +151,57 @@
                 </h3>
                 <h4>({{ general_info.ARGs.counts }} Hits)</h4>
                 <p>
-                    ARGs are computed using our
-                    <strong> newly </strong> developed deepARG: a deep learning approach to predict antibiotic resistance genes in metagenomes
-                    <a class="" href="https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-018-0401-z">(Arango-Argoty et., al.)</a>. Because of the high error rate of nanopore reads, the deepARG-LS v1.0 was run with permisive identity parameters
-                    (
+                    ARGs are computed using our deep learning-based approach to predict antibiotic resistance genes in metagenomes (deepARG)
+                    <a class="" href="https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-018-0401-z">(Arango-Argoty et., al.)</a>. Because of the high error rate of nanopore reads, the deepARG-LS v1.0 was run with permisive parameter
+                    cutoffs (
                     <strong> --iden {{ parameters.identity }} --cov {{parameters.coverage}} --evalue {{parameters.evalue}} --prob {{parameters.prob}}
           </strong>) to guarantee the correctness of the classifications.
                 </p>
                 <!-- </div> -->
                 <br>
-                <div [style.overflow]='"scroll"' class="col-md-6 text-center">
-                    <!-- <h5>Antibiotic Resistance Genes distribution</h5> -->
-                    <chart class="col-md-12" [options]="args_distribution_chart"></chart>
+                <div class="col-md-6">
+                    <div class="box box-solid box-success">
+                        <div class="box-header text-center">
+                            <h3 class="box-title">
+                                <strong> Antibiotic Resistance Genes (ARGs) </strong>
+                            </h3>
+                        </div>
+                        <div class="box-body box-content" [style.maxHeight]='arg_height_plot'>
+                            <br>
+                            <p>
+                                This plot shows the ARGs that were discovered in the sample and the number of reads for each ARG. Click more to see the full distribution.
+                            </p>
+
+                            <br>
+
+                            <chart class="col-md-12" [options]="args_distribution_chart"></chart>
+
+                        </div>
+                        <div class="box-footer text-center">
+                            <a (click)="open_box()" class="collapsible">{{ arg_height_plot_btn }}</a>
+                        </div>
+
+
+                    </div>
                 </div>
-                <div class="col-md-6 text-center">
-                    <!-- <h5>Antibiotic categories distribution</h5> -->
-                    <chart class="col-md-12" [options]="antibiotic_distribution_chart"></chart>
+                <div class="col-md-6 ">
+
+                    <div class="box box-solid box-success">
+                        <div class="box-header text-center">
+                            <h3 class="box-title">
+                                <strong> Antibiotic Categories </strong>
+                            </h3>
+                        </div>
+                        <div class="box-body">
+                            <br>
+                            <p>
+                                This plot shows the distribution of antibiotic categories in terms of the number of nanopore reads.
+                            </p>
+                            <br>
+                            <chart class="col-md-12" [options]="antibiotic_distribution_chart"></chart>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="col-md-12">
                     <hr>
@@ -156,63 +213,102 @@
 
         <div class="row">
             <div class="col-md-12">
-                <!-- <div class="col-md-4 bg-black"> -->
-                <h3>
-                    <strong> Distribution of Metal Resistance Genes (MRGs) </strong>
-                </h3>
-                <h4>({{ general_info.MRGs.counts }} Hits)</h4>
-                <p>
-                    Metal Resistane Genes (MRG) were downloaded from the
-                    <a class="" href="http://bacmet.biomedicine.gu.se/">BacMet v1.0</a> database (
-                    <a class="" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3965030/">Pal. et., al</a>) and screened agains the nanopore reads using DIAMOND with parameters
-                    <strong> --evalue {{parameters.evalue}} --id {{parameters.identity}} --coverage {{parameters.evalue}} </strong>.
+                <div class="col-md-6">
+                    <div class="box box-solid">
+                        <div class="box-header">
+                            <h3>
+                                <strong> Distribution of Metal Resistance Genes (MRGs) </strong>
+                            </h3>
+                        </div>
+                        <div class="box-body">
+                            <p>
+                                Metal Resistane Genes (MRG) were downloaded from the
+                                <a class="" href="http://bacmet.biomedicine.gu.se/">BacMet v1.0</a> database (
+                                <a class="" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3965030/">Pal. et., al</a>) and screened agains the nanopore reads using DIAMOND with parameters
+                                <strong> --evalue {{parameters.evalue}} --id {{parameters.identity}} --coverage {{parameters.evalue}} </strong>.
 
-                </p>
-                <!-- </div> -->
-                <br>
-                <div class="col-md-6 col-md-offset-3 text-center">
-                    <chart class="col-md-12" [options]="metal_distribution_chart"></chart>
+                            </p>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="col-md-6 col-md-offset-0 text-center">
+
+                    <div class="box box-solid box-primary">
+                        <div class="box-header">
+                            <h3 class="box-title">
+                                <strong> Metal Resistance Genes </strong>
+                            </h3>
+                        </div>
+                        <div class="box-body">
+                            <p>There are a total of {{ general_info.MRGs.counts }} Metal Resistance Genes identified in the
+                                <i>{{ selected_sample.name }}</i> sample.</p>
+                            <chart class="col-md-12" [options]="metal_distribution_chart"></chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <hr>
             </div>
         </div>
 
+
         <div class="row">
             <div class="col-md-12">
-                <!-- <div class="col-md-4 bg-blue"> -->
-                <h3>
-                    <strong> Distribution of Mobile Genetic Elements (MGEs)</strong>
-                </h3>
-                <h4>({{ general_info.MGEs.counts }} Hits)</h4>
-                <p>
-                    Annotations were classfied as mobile genetic elements (MGEs) based on matching metadata from protein sequences to one of the following keywords: transposase, transposon, conjugative, integrase, integron, recombinase, conjugal, mobilization, recombination,
-                    plasmid (
-                    <a class="" href="https://www.nature.com/articles/nature13377">Forsberg et., al</a>). Protein sequences that matched those keywords were retrieved from the National Center for Biotechnology Information
-                    <a class="" href="">NCBI</a>. Then, sequences with an identity greater than 90% were clustered and the centroid sequence was substracted using
-                    <a class="" href="">CD-HIT</a>. Nanopore reads are then screened against this customized set of MGEs using diamond with parameters (
-                    <strong> --evalue {{parameters.evalue}} --id {{parameters.identity}} --coverage {{parameters.coverage}} </strong>).
-                </p>
-                <!-- </div> -->
-                <!-- <br> -->
 
-                <div class="col-md-6  col-md-offset-3 text-center">
-                    <chart class="col-md-12" [options]="mges_distribution_chart"></chart>
+              <div class="col-md-6">
+
+                <div class="box box-solid">
+                    <div class="box-header">
+                        <h3>
+                            <strong> Distribution of Mobile Genetic Elements (MGEs)</strong>
+                        </h3>
+                    </div>
+                    <div class="box-body">
+
+                        <p>
+                            Discovered genes were classfied as mobile<strong>-derived</strong> genetic elements (MGEs) based on alignment parameters (
+                              <strong> --evalue {{parameters.evalue}} --id {{parameters.identity}} --coverage {{parameters.coverage}} </strong>).
+                        </p>
+                        <p>
+                            To build the mobile<strong>-derived</strong> genetic elements (MGEs) database, sequences on NCBI where its metadata from protein sequences match to one or more of the following keywords: transposase, transposon, conjugative, integrase, integron, recombinase, conjugal, mobilization, recombination,
+                            plasmid as described by
+                            <a class="" href="https://www.nature.com/articles/nature13377">Forsberg et., al</a>. Protein sequences that matched those keywords were retrieved from the National Center for Biotechnology Information
+                            <a class="" href="">NCBI</a>. Then, sequences with an identity greater than 90% were clustered and the centroid sequence was substracted using
+                            <a class="" href="">CD-HIT</a>. Nanopore reads are then screened against this customized set of MGEs using diamond with parameters ().
+                        </p>
+                    </div>
+                </div>
+              </div>
+
+                <div class="col-md-6  col-md-offset-0 text-center">
+                    <div class="box box-solid box-primary">
+                        <div class="box-header">
+                            <h3 class="box-title">
+                                <strong> Mobile-derived Genetic Elements </strong>
+                            </h3>
+                        </div>
+                        <div class="box-body">
+                            <p>In the sample
+                                <i>{{ selected_sample.name }}</i> were identified {{ general_info.MGEs.counts }} genes derived of mobile genetic elements
+                            </p>
+                            <chart class="col-md-12" [options]="mges_distribution_chart"></chart>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="col-md-12">
                     <hr>
                 </div>
-            </div>
+
         </div>
 
 
     </div>
 
 </div>
-
-
-
-
-
 
 <div class="box box-solid">
 
@@ -223,8 +319,7 @@
         </h3>
         <p>This table contains a sample of the ARGs mapped to the nanopore reads. Particularly, for those reads that contain ARGs, the MGEs, MRGs, Taxonomy and other functional genes are reported. This table is useful to find co-occurrence patterns.
         </p>
-        <p>The full data can be downloaded as a json file. This file can be easily processed in python, R or any other software to customize the results. just click on the
-            <a class="badge" bg='green'> results </a> button in the table with the sample names.</p>
+        <p>Click <a [href]='api_url+"/sample/read/results/download/"+selected_sample._id'>here</a> to download full table in JSON format.</p>
     </div>
     <div class="ui-helper-clearfix">
 
@@ -314,6 +409,8 @@
     </div>
 </div>
 
+
+<!-- Annotation of ARGS, MGEs and MRGs -->
 <!-- <div class="col-md-12 col-md-offset-0"> -->
 <div class="">
     <!-- <div class="box-header">
@@ -472,7 +569,9 @@
 </div>
 
 
+<div class="col-md-12" [style.height]='"300px"'>
 
+</div>
 
 <!-- <div class="col-md-12">
     <chart [options]="compare_samles_stacked_bar" style="width:60%;margin: 0 auto"></chart>

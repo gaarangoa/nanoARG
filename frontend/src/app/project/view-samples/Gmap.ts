@@ -274,7 +274,7 @@ export class Genome {
                     stacking: 'normal',
                     borderColor: '#000',
                     borderWidth: 1
-                }
+              }
             },
 
             xAxis: {
