@@ -280,6 +280,7 @@ def read_map(parameters=[]):
     x = {}
     for i in tqdm(open(parameters["storage_remote_dir"] + "/all.bestHit.txt")):
         i = i.strip().split('\t')
+        print(i)
         par = [float(k) for k in i[6].split("_")]
         if par[1] > _evalue:
             continue
