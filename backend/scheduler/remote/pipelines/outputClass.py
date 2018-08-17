@@ -225,7 +225,8 @@ def network(data={}):
                     "evalue": gene['evalue'],
                     "identity": gene['identity'],
                     "coverage": gene['coverage'],
-                    # "bitscore": gene['bitscore']
+                    "score": gene['score'],
+
                 }
             if ixgene == len(read['data']):
                 continue
@@ -263,8 +264,7 @@ def network(data={}):
 def read_map(parameters=[]):
     os.system("cat "+parameters["storage_remote_dir"]+"/*.bestHit > " +
               parameters["storage_remote_dir"]+"/all.bestHit.txt")
-    data = [i.split()
-            for i in open(parameters["storage_remote_dir"]+"/all.bestHit.txt")]
+
     print('loading read lengths')
     read_length, read_length_distribution = get_fasta_read_length(
         parameters["remote_input_file"])
@@ -278,7 +278,8 @@ def read_map(parameters=[]):
     # print(color_gene)
     # filter data according to the parameters
     x = {}
-    for i in tqdm(data):
+    for i in tqdm(open(parameters["storage_remote_dir"] + "/all.bestHit.txt")):
+        i = i.strip().split('\t')
         par = [float(k) for k in i[6].split("_")]
         if par[1] > _evalue:
             continue
@@ -313,7 +314,9 @@ def read_map(parameters=[]):
             "origin": origin(i[3]),
             "stroke_width": 1,
             "metadata": doc,
-            "total_reads": len(read_length)
+            "total_reads": len(read_length),
+            "score": par[-1],
+            "bitscore": float(i[4])
         }
         #
         try:
