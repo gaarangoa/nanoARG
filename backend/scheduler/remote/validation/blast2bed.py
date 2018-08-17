@@ -32,7 +32,7 @@ def blast2bed(input, arglen, iden, evalue, cov, bitscore):
             end = i[7]
 
         # TODO: make sure that the last term of the list does not affect other process!
-        extra = "_".join([i[3], i[-2], i[2], str(coverage),
+        extra = "_".join([i[3], i[10], i[2], str(coverage),
                           str(ARGLen[i[1].split('|')[0]]), i[8], i[9], i[4], i[5], i[-1]])
 
         # read qstart qend reference bitscore strand Alignment-length__Evalue__Identity__Coverage__Reference-gene-length_sstart_send_mismatch_gapopen_probability
