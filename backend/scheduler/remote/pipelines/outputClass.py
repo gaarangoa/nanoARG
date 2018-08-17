@@ -280,7 +280,7 @@ def read_map(parameters=[]):
     x = {}
     for i in tqdm(open(parameters["storage_remote_dir"] + "/all.bestHit.txt")):
         i = i.strip().split('\t')
-        print(i)
+
         par = [float(k) for k in i[6].split("_")]
         if par[1] > _evalue:
             continue
@@ -320,6 +320,7 @@ def read_map(parameters=[]):
             "bitscore": float(i[4])
         }
         #
+        print(json.dumps(item, indent=2))
         try:
             x[i[0]].append(item)
         except Exception as e:
