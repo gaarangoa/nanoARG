@@ -19,7 +19,7 @@ cmd = "\n".join([
     '#PBS -q normal_q',
     '#PBS -A computeomics',
     '#PBS -W group_list=newriver\n',
-    'module load gcc/5.2.0  openmpi/1.8.5 hmmer bedtools\n',
+    'module load jdk/1.8.0 cuda/7.0.28 python/2.7.10 gcc/5.2.0  openmpi/1.8.5 hmmer bedtools\n',
     'cd ' + parameters['storage_remote_dir'],
     'export PYTHONPATH=$PYTHONPATH:'+parameters['remote_path'],
     'export CENTRIFUGE_HOME=' + \
