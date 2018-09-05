@@ -13,7 +13,7 @@ class DeepARG():
 
     def align(self, query, reference, output, parameters):
         options = " ".join([i+" "+str(parameters[i]) for i in parameters])
-        cmd = "source /groups/metastorm_cscee/deeparg/venv/bin/activate && " + \
+        cmd = "source /groups/metastorm_cscee/deeparg/environments/deeparg/bin/activate && " + \
             " python /groups/metastorm_cscee/deeparg/deeparg-ss/deepARG.py  --align --genes --type nucl --input " + \
             query+" --output "+output+"  " + options
         print("running deepARG:", cmd)
@@ -25,7 +25,7 @@ class DeepARG():
 
     def predict(self, query, reference, output, parameters):
         options = " ".join([i+" "+str(parameters[i]) for i in parameters])
-        cmd = "source /groups/metastorm_cscee/deeparg/venv/bin/activate && " + \
+        cmd = "source /groups/metastorm_cscee/deeparg/environments/deeparg/bin/activate && " + \
             " python /groups/metastorm_cscee/deeparg/deeparg-ss/deepARG.py  --predict --genes --type nucl --input " + \
             query+".tmp --output "+output+"  " + options
         print("running deepARG:", cmd)
