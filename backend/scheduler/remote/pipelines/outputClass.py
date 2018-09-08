@@ -387,8 +387,12 @@ def read_map(parameters=[]):
     filter_data = [i for i in sorted(
         data, key=lambda k: k['read'][0]['args'], reverse=True) if i['read'][0]['args'] >= 1]
 
-    filter_taxa = [i for i in sorted(taxa_info.values(
-    ), key=lambda k: k['num_reads'], reverse=True) if i['num_reads'] > 100]
+    filter_taxap = sorted(taxa_info.values(), key=lambda k: k['num_reads'], reverse=True)
+
+    filter_taxa = [i for i in filter_taxap if i['num_reads']>100]
+
+    if not filter_taxa:
+        filter_taxa = filter_taxap[:500]
 
     # get full lineage of taxa
     # phylum_taxa = {}
@@ -416,6 +420,8 @@ def read_map(parameters=[]):
         "total_mapped_ARG_reads": len(filter_data),
         "total_bp_counts": total_bp_counts
     }
+
+
 
     json.dump([filter_data, net, arg_labels, filter_taxa, info], open(
         parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
