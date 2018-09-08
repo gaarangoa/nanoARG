@@ -25,9 +25,9 @@ cmd = "\n".join([
     'export CENTRIFUGE_HOME=' + \
     parameters['remote_path']+'/bin/centrifuge-1.0.3-beta',
     'source /groups/metastorm_cscee/nanoARG/backend/scheduler/remote/env/nanoarg/bin/activate',
-    "/groups/metastorm_cscee/nanoARG/backend/scheduler/remote/env/nanoarg/bin/luigid --background --logdir=logs",
+    "       /groups/metastorm_cscee/nanoARG/backend/scheduler/remote/env/nanoarg/bin/luigid --background --logdir=logs",
     'cd ' + parameters['remote_path'],
-    '/groups/metastorm_cscee/nanoARG/backend/scheduler/remote/env/nanoarg/bin/luigi --module ' + \
+    '       /groups/metastorm_cscee/nanoARG/backend/scheduler/remote/env/nanoarg/bin/luigi --module ' + \
     parameters['pipeline'] + " RetrieveResults " + \
     " --local-scheduler --parameters " + sys.argv[1],
     'exit;'
