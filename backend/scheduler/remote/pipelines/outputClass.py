@@ -316,7 +316,7 @@ def read_map(parameters=[]):
             "bitscore": float(i[4])
         }
         #
-        print(json.dumps(item, indent=2))
+        # print(json.dumps(item, indent=2))
         try:
             x[i[0]].append(item)
         except Exception as e:
