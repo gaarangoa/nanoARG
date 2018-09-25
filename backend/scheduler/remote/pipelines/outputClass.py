@@ -81,18 +81,14 @@ def color_map():
 def origin(string):
     if "UNIREF90" in string:
         return 3
-    if "CARD" in string:
-        return 1
-    if "ARDB" in string:
-        return 1
-    if "UNIPROT" in string:
-        return 1
-    if "ACLAME" in string:
+    elif "ACLAME" in string:
         return 2
-    if "MGEs" in string:
+    elif "MGEs" in string:
         return 2
-    if "BACMET" in string:
+    elif "BACMET" in string:
         return 4
+    else:
+        return 1
 
     return 4
 
@@ -387,9 +383,10 @@ def read_map(parameters=[]):
     filter_data = [i for i in sorted(
         data, key=lambda k: k['read'][0]['args'], reverse=True) if i['read'][0]['args'] >= 1]
 
-    filter_taxap = sorted(taxa_info.values(), key=lambda k: k['num_reads'], reverse=True)
+    filter_taxap = sorted(taxa_info.values(),
+                          key=lambda k: k['num_reads'], reverse=True)
 
-    filter_taxa = [i for i in filter_taxap if i['num_reads']>100]
+    filter_taxa = [i for i in filter_taxap if i['num_reads'] > 100]
 
     if not filter_taxa:
         filter_taxa = filter_taxap[:500]
@@ -420,8 +417,6 @@ def read_map(parameters=[]):
         "total_mapped_ARG_reads": len(filter_data),
         "total_bp_counts": total_bp_counts
     }
-
-
 
     json.dump([filter_data, net, arg_labels, filter_taxa, info], open(
         parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
