@@ -2,7 +2,7 @@ version: '3'
 services:
 
   database:
-    image: mongo
+    image: mongo:3.6
     environment:
       - MONGO_DATA_DIR=./backend/database
       - MONGO_LOG_DIR=./backend/database
@@ -54,7 +54,7 @@ services:
       - 27859:5672
 
   consumer:
-    image: python
+    image: python:2.7
     depends_on:
       - scheduler
     build:

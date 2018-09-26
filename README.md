@@ -15,3 +15,4 @@ add the line to the ~/.bashrc
 ng build --base-href /nanoarg/ --prod --env=prod
 
 <!-- export PYTHONPATH=$PYTHONPATH:/groups/metastorm_cscee/nanoARG/backend/scheduler/remote/ -->
+<!-- Use 27857 as port for frontend -->
