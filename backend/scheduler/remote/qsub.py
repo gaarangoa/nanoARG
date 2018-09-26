@@ -18,8 +18,9 @@ cmd = "\n".join([
     # '#PBS -q open_q',
     '#PBS -q normal_q',
     '#PBS -A computeomics',
-    '#PBS -W group_list=newriver\n',
-    'module load jdk/1.8.0 gcc/5.2.0 openmpi/1.8.5 hmmer atlas bowtie2 samtools bedtools\n',
+    '#PBS -W group_list=cascades\n',
+    # 'module load jdk/1.8.0 gcc/5.2.0 openmpi/1.8.5 hmmer atlas bowtie2 samtools bedtools\n',
+    'module load jdk/1.8.0 gcc gsl/2.4  atlas bowtie2 samtools bedtools\n',
     'cd ' + parameters['storage_remote_dir'],
     'export PYTHONPATH=$PYTHONPATH:'+parameters['remote_path'],
     'export CENTRIFUGE_HOME=' + \
