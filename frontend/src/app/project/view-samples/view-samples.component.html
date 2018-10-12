@@ -45,6 +45,44 @@
 
 </div>
 
+<!-- setup parameters -->
+<!-- <div class="box box-solid">
+    <div class="box-header">
+        <div class="box-title">
+            <h3>Parameters</h3>
+        </div>
+    </div>
+
+    <div class="box-body">
+
+        <div class="col-md-6">
+
+            <p>
+                In this section you can modify the default parameters used to analyze the nanopore reads.
+            </p>
+            <div class="ui-inputgroup">
+
+                <input #_identity_input type="text" pInputText [(value)]="parameters.identity">
+                <strong><span>% Identity</span></strong>
+                <br>
+
+                <input #_coverage_input type="text" pInputText [(value)]="parameters.coverage">
+                <strong><span>% Coverage</span></strong>
+                <br>
+
+                <input #_evalue_input type="text" pInputText [(value)]="parameters.evalue">
+                <strong><span>E-value</span></strong>
+
+                <hr>
+                <div class="col-md-12 text-center">
+                    <button (click)="on_update_parameters(_identity_input, _coverage_input, _evalue_input)" class="btn btn-primary btn-small"> Update </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div> -->
+
 <!-- Info of the sample -->
 <div class="box box-solid">
 
@@ -52,9 +90,51 @@
     <!-- <div class="box-header"> -->
     <!-- <h3>Results</h3> -->
     <!-- </div> -->
+
     <div class="box-body">
 
         <div class="row">
+
+            <!-- parameters -->
+            <!-- <div class="col-md-12">
+                <div class="col-md-6 box box-solid">
+                    <div id="blast-options">
+
+                        <div class="field">
+                            <p class="label"><span class="context-help tooltipped-click html tipId-4" data-tippy="">
+                                    <span class="toolTipContent" style="display:none"></span>Coverage</span>
+                            </p>
+                            <p class="builder">
+                                <input #_evalue_input type="text" pInputText [(value)]="parameters.evalue">
+                            </p>
+                        </div>
+
+                        <div class="field">
+                            <p class="label"><span class="context-help tooltipped-click html tipId-4" data-tippy="">
+                                    <span class="toolTipContent" style="display:none"></span>Identity</span>
+                            </p>
+                            <p class="builder">
+                                <input #_evalue_input type="text" pInputText [(value)]="parameters.evalue">
+                            </p>
+                        </div>
+
+                        <div class="field">
+                            <p class="label"><span class="context-help tooltipped-click html tipId-4" data-tippy="">
+                            <span class="toolTipContent" style="display:none"></span>E-Threshold</span>
+                            </p>
+                            <p class="builder">
+                                <input #_evalue_input type="text" pInputText [(value)]="parameters.evalue">
+                            </p>
+                        </div>
+                    </div>
+                    <br>
+                    <button (click)="on_update_parameters(_identity_input, _coverage_input, _evalue_input)" class="btn btn-info btn"> Update </button>
+
+                    <br><br><br>
+                </div>
+            </div> -->
+
+
             <div class="col-md-4">
                 <div class="box box-primary">
                     <div class="box-header">
@@ -106,40 +186,7 @@
             </div>
         </div>
 
-        <!-- setup parameters -->
-        <!-- <div class="row">
-            <div class="col-md-12">
 
-
-                <div class="col-md-6">
-                    <div class="col-md-12 text-center">
-                        <h3> <strong> Parameters </strong> </h3>
-                    </div>
-                    <p >
-                        In this section you can modify the default parameters used to analyze the nanopore reads.
-                    </p>
-                    <div class="ui-inputgroup">
-
-                        <input #_identity_input type="text" pInputText [(value)]="parameters.identity">
-                        <strong><span>% Identity</span></strong>
-                        <br>
-
-                        <input #_coverage_input type="text" pInputText [(value)]="parameters.coverage">
-                        <strong><span>% Coverage</span></strong>
-                        <br>
-
-                        <input #_evalue_input type="text" pInputText [(value)]="parameters.evalue">
-                        <strong><span>E-value</span></strong>
-
-                        <hr>
-                        <div class="col-md-12 text-center">
-                            <button (click)="on_update_parameters(_identity_input, _coverage_input, _evalue_input)" class="btn btn-primary btn-small"> Update </button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div> -->
 
 
         <div class="row">

@@ -7,6 +7,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 // Components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { TutorialsComponent } from './tutorials/tutorials.component';
 
 // Services
 import { AuthService } from '../services/auth/auth.service';
@@ -24,37 +25,47 @@ import { DocumentationComponent } from './documentation/documentation.component'
 
 import { RouterModule } from '@angular/router';
 
+// import { PlotlyModule } from 'angular-plotly.js';
+
 // import { TypedModule } from '@kuflink/angular-typed';
 
 import { TypingAnimationDirective } from 'angular-typing-animation';
+import { RelativeAbundanceComponent } from './tutorials/relative_abundance/relative_abundance.component';
+import { ProcessOutputComponent } from './tutorials/process_output/process_output.component';
+import { RunCanuComponent } from './tutorials/run_canu/run_canu.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    HomeComponent,
-    DocumentationComponent,
-    TypingAnimationDirective
-  ],
-  imports: [
-    BrowserModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpModule,
-    SampleModule,
-    ProjectModule,
-    DashboardModule,
-    AppRoutingModule
-    // TypedModule
-  ],
-  providers: [
-    AuthService,
-    Session,
-    CookieService,
-    UserService,
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
-  ],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		LoginComponent,
+		HomeComponent,
+		DocumentationComponent,
+		TypingAnimationDirective,
+		TutorialsComponent,
+		RelativeAbundanceComponent,
+		ProcessOutputComponent,
+		RunCanuComponent
+	],
+	imports: [
+		BrowserModule,
+		RouterModule,
+		FormsModule,
+		ReactiveFormsModule,
+		HttpModule,
+		SampleModule,
+		ProjectModule,
+		DashboardModule,
+		AppRoutingModule
+		// PlotlyModule
+		// TypedModule
+	],
+	providers: [
+		AuthService,
+		Session,
+		CookieService,
+		UserService,
+		{ provide: LocationStrategy, useClass: HashLocationStrategy }
+	],
+	bootstrap: [ AppComponent ]
 })
 export class AppModule {}
