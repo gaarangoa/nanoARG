@@ -72,10 +72,10 @@ export class Network {
           // size: 20,
           origin: 1,
           color: 'rgba(255,255,255,0.9)',
-          metadata: 'some|here|I|do'
+          metadata: false,
           // size: 0.1,
           // start: 1,
-          // end: 2
+          // end: 2,
         }
       });
     });
@@ -93,19 +93,22 @@ export class Network {
       _arg_categories = Array.from(new Set(_arg_categories));
 
       // create the nodes for the arg_categories
-      _arg_categories.forEach(e => {
+    _arg_categories.forEach(e => {
+
+
         nodes.push({
           data: {
             id: e,
             counts: 1,
             origin: 1,
             color: 'rgba(255,255,255,0.9)',
-            metadata: 'some|here|I|do'
+            metadata: false,
           }
         });
       });
     }
 
+    let parents = []
     data.nodes.forEach(e => {
       e.data.counts = e.data.size;
       // e.data.group = e.data.metadata[2];
@@ -115,7 +118,7 @@ export class Network {
         e.data.parent = e.data.origin;
       }
 
-      // parents.push(e.data.parent);
+    //   parents.push(e.data.parent);
 
       e.data.size = Math.log(e.data.size + 1);
       if (e.data.size < _min) {
@@ -129,13 +132,16 @@ export class Network {
       if (conditions.indexOf(e.data.origin) > -1 && linked_nodes[e.data.id]) {
         nodes.push(e);
       }
+
     });
 
-    // console.log(nodes);
+    var filtered_nodes = nodes.filter(function(value, index, arr){
 
-    // parents = parents.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
+        if (value['data']['metadata'] != false) {
+            return value;
+        }
 
-    // console.log(data.nodes)
+    });
 
     const mydata = { nodes: nodes, edges: edges };
     // console.log(mydata)
@@ -234,15 +240,38 @@ export class Network {
       motionBlurOpacity: 0.1
     });
 
-    this.network.on('grab', function(e) {
-      var ele = e.target;
-      // console.log(ele)
-      ele.connectedEdges().style({ 'line-color': 'rgba(0,0,0,0.3)' });
+    this.network.on('click', function (e) {
+        var ele = e.target;
+
+        e.cy.nodes().style({ 'background-opacity': 0.1 })
+        e.cy.nodes().style({ 'border-opacity': 0.1 })
+        e.cy.nodes().style({ 'text-opacity': 0.1 })
+        e.cy.edges().style({ 'opacity': 0.1 })
+
+        if (ele.connectedEdges().style()['line-color'] == '#b8c1db') {
+
+            ele.outgoers().style({ 'background-opacity': 1.0 });
+            ele.incomers().style({ 'background-opacity': 1.0 });
+            ele.outgoers().style({ 'border-opacity': 1.0 });
+            ele.incomers().style({ 'border-opacity': 1.0 });
+            ele.outgoers().style({ 'text-opacity': 1.0 });
+            ele.incomers().style({ 'text-opacity': 1.0 });
+            ele.style({ 'text-opacity': 1.0 })
+            ele.style({ 'border-opacity': 1.0 })
+            ele.style({ 'background-opacity': 1.0 })
+
+            ele.connectedEdges().style({ 'line-color': '#b8c1dc', 'opacity': 1.0 });
+
+        } else {
+            e.cy.nodes().style({ 'background-opacity': 0.9 })
+            e.cy.nodes().style({ 'border-opacity': 0.9 })
+            e.cy.nodes().style({ 'text-opacity': 0.9 })
+            e.cy.edges().style({ 'opacity': 0.9 })
+
+            ele.connectedEdges().style({ 'line-color': '#b8c1db' });
+
+    }
     });
 
-    this.network.on('free', function(e) {
-      var ele = e.target;
-      ele.connectedEdges().style({ 'line-color': '#b8c1db' });
-    });
   }
 }

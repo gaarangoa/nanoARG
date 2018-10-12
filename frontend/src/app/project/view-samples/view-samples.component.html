@@ -359,8 +359,7 @@
                 <a href="">
           UniRef90</a> was used to screen the nanopore to a broad set of functional genes using
                 <a href="">diamond</a> with parameters
-                <code> --evalue {{parameters.evalue}} --id {{parameters.identity}} --coverage {{parameters.coverage}} </code>. By using this set of functional genes, it is possible to identify the components of each nanopore read. The order of the inner
-                circles indicates: ARGS, MRGs, MGEs, and other functional genes.
+                <code> --evalue {{parameters.evalue}} --id {{parameters.identity}} --coverage {{parameters.coverage}} </code>. By using this set of functional genes, it is possible to identify the components of each nanopore read.
             </p>
         </div>
         <div class="box-body">
@@ -450,7 +449,7 @@
                             <p-checkbox name="group2" value="MRGs" label="MRGs" [(ngModel)]="network_parameters" inputId="MRGs"></p-checkbox>
                             <p-checkbox name="group2" value="Pathogens" label="Pathogens" [(ngModel)]="network_parameters" inputId="Pathogens"></p-checkbox>
                             <p-checkbox name="group2" value="Species" label="Phylum" [(ngModel)]="network_parameters" inputId="Species"></p-checkbox>
-                            <a class="btn btn-success btn-xs" (click)="render_network(sample)">
+                            <a class="btn btn-success btn-s" (click)="render_network(sample)">
                                 <strong> Render </strong>
                             </a>
                         </fieldset>
