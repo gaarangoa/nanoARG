@@ -10,7 +10,7 @@ from pipelines.mgeClass import MGEs
 from pipelines.argClass import ARGs
 from pipelines.TaxonomyClass import Taxonomy
 
-ssh_server = 'cascades1.arc.vt.edu'
+ssh_server = 'cascades2.arc.vt.edu'
 
 
 class MobileGenetiElements(luigi.Task):
