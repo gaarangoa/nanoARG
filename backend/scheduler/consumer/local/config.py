@@ -1,6 +1,6 @@
 
 remote_tools = '/groups/metastorm_cscee/nanoARG/backend/scheduler/remote/'
-ssh_host = "gustavo1@cascades1.arc.vt.edu"
+ssh_host = "gustavo1@cascades2.arc.vt.edu"
 local_host = "gustavo1@bench.cs.vt.edu"
 database_link = "http://api:3000"
 local_storage = "/data/"
