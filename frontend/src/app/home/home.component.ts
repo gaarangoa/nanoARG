@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 
@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
     this.messages = [
       'AMR is an increasingly serious threat to global public health'
     ];
-    this.message = this.messages[this._cont];
+    // this.message = this.messages[this._cont];
   }
 
   onComplete() {

@@ -7,20 +7,21 @@
   },
   "dependencies": {
     "amqplib": "^0.5.2",
-    "body-parser": "~1.15.2",
-    "connect-busboy": "~0.02",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.2.0",
+    "body-parser": "^1.15.2",
+    "connect-busboy": "0.0.2",
+    "cookie-parser": "^1.4.3",
+    "debug": "^2.2.0",
     "ejs": "~2.5.2",
-    "express": "~4.14.0",
-    "morgan": "~1.7.0",
+    "express": "^4.14.1",
+    "morgan": "^1.7.0",
     "nodemon": "^1.14.11",
+    "promise": "^8.0.2",
     "serve-favicon": "~2.3.0"
   },
   "description": "// How to use the CRUD operations",
   "main": ".config.js",
   "devDependencies": {
-    "mongojs": "^2.4.1"
+    "mongojs": "^2.6.0"
   },
   "repository": {
     "type": "git",

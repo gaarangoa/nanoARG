@@ -51,7 +51,7 @@ var router = [
     { path: 'dashboard/project/:pid', redirectTo: 'project/:pid', pathMatch: 'full', data: { type: 'project' } } // The project button inside the dashboard
 ];
 var AppRoutingModule = __WEBPACK_IMPORTED_MODULE_0__angular_router__["RouterModule"].forRoot(router);
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/app-routing.module.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/app-routing.module.js.map
 
 /***/ }),
 
@@ -76,7 +76,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"navbar navbar-default navbar-fixed-top\">\n    <div class=\"container\">\n        <div class=\"navbar-header\">\n            <a routerLink=\"home\" class=\"navbar-brand\"><strong>ARG</strong> | nanopore </a>\n            <button class=\"navbar-toggle\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbar-main\">\n      </button>\n        </div>\n        <div class=\"navbar-collapse collapse\" id=\"navbar-main\">\n            <ul class=\"nav navbar-nav\">\n\n                <!-- <li *ngIf=\"authService.credentials['isLoggedIn']\"> -->\n                <li>\n                    <a routerLink=\"dashboard\">Dashboard</a>\n                </li>\n                <li>\n                    <a routerLink=\"documentation\">Documentation</a>\n                </li>\n                <li>\n                    <a routerLink=\"tutorials\">Tutorials</a>\n                </li>\n            </ul>\n\n            <ul class=\"nav navbar-nav navbar-right\">\n                <li *ngIf=\"!authService.session.get('isLoggedIn')\"><a routerLink=\"login\">LogIn</a></li>\n                <li *ngIf=\"authService.session.get('isLoggedIn')\"><a routerLink=\"login\" (click)=\"logout()\">Logout</a></li>\n            </ul>\n\n        </div>\n    </div>\n</div>\n\n<br><br>\n<!-- <div class=\"container\">\n    <div class=\"row-fluid\">\n        <div class=\"span2\"></div>\n        <div class=\"span10\"> -->\n<!-- <div class=\"wrapper\"> -->\n<router-outlet></router-outlet>\n<!-- </div> -->\n<!-- </div> -->\n<!-- </div> -->\n<!-- </div> -->"
+module.exports = "<div class=\"navbar navbar-default navbar-fixed-top\">\n    <div class=\"container\">\n        <div class=\"navbar-header\">\n            <a routerLink=\"home\" class=\"navbar-brand\"><strong>ARG</strong> | nanopore </a>\n            <button class=\"navbar-toggle\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbar-main\">\n            </button>\n        </div>\n        <div class=\"navbar-collapse collapse\" id=\"navbar-main\">\n            <ul class=\"nav navbar-nav\">\n\n                <!-- <li *ngIf=\"authService.credentials['isLoggedIn']\"> -->\n                <li>\n                    <a routerLink=\"dashboard\">Dashboard</a>\n                </li>\n                <li>\n                    <a routerLink=\"documentation\">Documentation</a>\n                </li>\n                <li>\n                    <a routerLink=\"tutorials\">Tutorials</a>\n                </li>\n                <li>\n                    <a href=\"https://bench.cs.vt.edu/argminer/#/forum/selected_question;id=1547661017164\" target=\"_blank\">\n                        News and Updates\n                        <span class=\"badge bg-yellow\">New</span>\n                    </a>\n                </li>\n            </ul>\n\n            <ul class=\"nav navbar-nav navbar-right\">\n                <li *ngIf=\"!authService.session.get('isLoggedIn')\"><a routerLink=\"login\">LogIn</a></li>\n                <li *ngIf=\"authService.session.get('isLoggedIn')\"><a routerLink=\"login\" (click)=\"logout()\">Logout</a></li>\n            </ul>\n\n        </div>\n    </div>\n</div>\n\n<br><br>\n<!-- <div class=\"container\">\n    <div class=\"row-fluid\">\n        <div class=\"span2\"></div>\n        <div class=\"span10\"> -->\n<!-- <div class=\"wrapper\"> -->\n<router-outlet></router-outlet>\n<!-- </div> -->\n<!-- </div> -->\n<!-- </div> -->\n<!-- </div> -->"
 
 /***/ }),
 
@@ -119,7 +119,7 @@ var AppComponent = (function () {
     return AppComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/app.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/app.component.js.map
 
 /***/ }),
 
@@ -224,7 +224,7 @@ var AppModule = (function () {
     ], AppModule);
     return AppModule;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/app.module.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/app.module.js.map
 
 /***/ }),
 
@@ -264,7 +264,7 @@ var DashboardRoutingModule = (function () {
     ], DashboardRoutingModule);
     return DashboardRoutingModule;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/dashboard-routing.module.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/dashboard-routing.module.js.map
 
 /***/ }),
 
@@ -339,7 +339,7 @@ var DashboardComponent = (function () {
     return DashboardComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/dashboard.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/dashboard.component.js.map
 
 /***/ }),
 
@@ -404,7 +404,7 @@ var DashboardModule = (function () {
     ], DashboardModule);
     return DashboardModule;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/dashboard.module.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/dashboard.module.js.map
 
 /***/ }),
 
@@ -498,7 +498,7 @@ var MyProjectsComponent = (function () {
     return MyProjectsComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/my-projects.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/my-projects.component.js.map
 
 /***/ }),
 
@@ -596,7 +596,7 @@ var NewProjectComponent = (function () {
     return NewProjectComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/new-project.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/new-project.component.js.map
 
 /***/ }),
 
@@ -657,7 +657,7 @@ var DocumentationComponent = (function () {
     ], DocumentationComponent);
     return DocumentationComponent;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/documentation.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/documentation.component.js.map
 
 /***/ }),
 
@@ -683,7 +683,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Promo Block -->\n<section>\n\n    <div class=\"g-py-200 jumbotron-1\">\n        <div class=\"container\">\n            <div class=\"row\">\n                <div class=\"col-md-6\">\n                    <h3 class=\"g-color-white g-font-weight-400 g-font-size-40 g-line-height-1_2 mb-4\">Antimicrobial Resistance<br> analysis for nanopore reads\n                    </h3>\n                    <span class=\"d-block g-color-white g-font-size-16 mb-5\">NanoARG is an free web resource for the analysis of antibiotic resistance genes in metagenomes from environmental samples using the MinION nanopore sequencing technology.</span>\n\n                    <!-- <a class=\"js-fancybox u-link-v5 g-color-black\" href=\"https://vimeo.com/167434033\" title=\"Single Image\">\n                    <span class=\"align-middle u-icon-v3 u-block-hover--scale g-bg-white g-color-black g-color-primary--hover g-rounded-50x g-cursor-pointer mr-2\">\n                        <i class=\"g-font-size-18 g-pos-rel g-left-2 fa fa-play\"></i>\n                      </span> 3:00 min\n                </a> -->\n                </div>\n            </div>\n        </div>\n    </div>\n\n</section>\n<!-- End Promo Block -->\n\n<!-- Icon Blocks -->\n<section class=\"g-py-100\">\n    <div class=\"container\">\n        <div class=\"row no-gutters\">\n            <div class=\"col-lg-4 g-px-40 g-mb-50 g-mb-0--lg\">\n                <!-- Icon Blocks -->\n                <div class=\"text-center\">\n                    <!-- <span class=\"d-inline-block u-icon-v3 u-icon-size--xl g-bg-primary g-color-white rounded-circle g-mb-30\"> -->\n                    <!-- <i class=\"icon-finance-086 u-line-icon-pro\"></i> -->\n                    <!-- </span> -->\n                    <h3 class=\"h5 g-color-gray-dark-v2 g-font-weight-600 text-uppercase mb-3\">Antimicrobial Resistance</h3>\n                    <p class=\"mb-0\">Antibiotic / Antimicrobial resistance is the ability of microbes to resist the effects of drugs – that is, the germs are not killed, and their growth is not stopped.</p>\n                </div>\n                <!-- End Icon Blocks -->\n            </div>\n\n            <div class=\"col-lg-4 g-brd-left--lg g-brd-gray-light-v4 g-px-40 g-mb-50 g-mb-0--lg\">\n                <!-- Icon Blocks -->\n                <div class=\"text-center\">\n                    <!-- <span class=\"d-inline-block u-icon-v3 u-icon-size--xl g-bg-primary g-color-white rounded-circle g-mb-30\"> -->\n                    <!-- <i class=\"icon-finance-196 u-line-icon-pro\"></i> -->\n                    <!-- </span> -->\n                    <h3 class=\"h5 g-color-gray-dark-v2 g-font-weight-600 text-uppercase mb-3\">Nanopore Sequencing</h3>\n                    <p class=\"mb-0\">WOxford Nanopore Technologies has developed the MinION, considered a 3rd generation sequencing technology.</p>\n                </div>\n                <!-- End Icon Blocks -->\n            </div>\n\n            <div class=\"col-lg-4 g-brd-left--lg g-brd-gray-light-v4 g-px-40\">\n                <!-- Icon Blocks -->\n                <div class=\"text-center\">\n                    <!-- <span class=\"d-inline-block u-icon-v3 u-icon-size--xl g-bg-primary g-color-white rounded-circle g-mb-30\"> -->\n                    <!-- <i class=\"icon-finance-147 u-line-icon-pro\"></i> -->\n                    <!-- </span> -->\n                    <h3 class=\"h5 g-color-gray-dark-v2 g-font-weight-600 text-uppercase mb-3\">Big data</h3>\n                    <p class=\"mb-0\">Nanopore sequencing generates millions of DNA base pairs that need to be analyzed efficiently.</p>\n                </div>\n                <!-- End Icon Blocks -->\n            </div>\n        </div>\n    </div>\n</section>\n<!-- End Icon Blocks -->\n\n<hr class=\"g-brd-gray-light-v4 my-0\">\n\n<section class=\"1g-bg-secondary g-py-100\">\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-lg-6 align-self-center g-mb-100 g-mb-0--lg\">\n                <header class=\"u-heading-v2-3--bottom g-brd-primary g-mb-20\">\n                    <h2 class=\"h4 u-heading-v2__title g-color-gray-dark-v2 g-font-weight-600 text-uppercase\">About nanoARG</h2>\n                </header>\n\n                <p class=\"g-font-size-16 g-mb-30\">An online pipeline for the analysis of antimicrobial resistance. That includes to screen the nanopore reads agains Antibiotic Resistance Genes (ARGs), Metal Resistance Genes (MRGs), Mobile Genetic Elements (MGEs) that help to the spread\n                    of ARGs/MGEs, and taxonomy annotation that allows to understand the context of the nanopore reads.</p>\n\n                <ul class=\"list-unstyled g-color-gray-dark-v4 mb-0\">\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> DeepARG is used to annotate ARGs\n                    </li>\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> A set of collected MGEs from NCBI\n                    </li>\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> BacMet for the metal resistance profiling\n                    </li>\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> Centrifuge is used to infer the taxonomy of each nanopore read\n                    </li>\n                </ul>\n            </div>\n\n            <div class=\"col-lg-6 g-bg-img-hero g-pos-rel\" style=\"background-image: url(assets/img/map3.png);\">\n                <div class=\"text-center w-100 g-px-40\">\n                    <h2 typingAnimation [hideCursorOnComplete]=\"true\" [typeSpeed]=\"50\" [startDelay]=\"2000\" (complete)=\"onComplete()\" class=\"h1 g-color-gray-light-v2 g-font-weight-600 g-letter-spacing-0_5\"> {{ message }}\n                        <span class=\"u-text-animation u-text-animation--typing\"></span>\n                    </h2>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>\n<!-- End About Our Company -->\n\n<hr class=\"g-brd-gray-light-v4 my-0\">\n\n\n<section class=\"1g-bg-secondary g-py-100\">\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-lg-6 g-bg-img-hero g-pos-rel\">\n                <div class=\"text-center w-100 g-px-40\">\n\n                    <img height=\"350\" width=\"350\" src=\"assets/img/projects.png\" type=\"image/svg+xml\">\n\n                </div>\n\n            </div>\n\n            <div class=\"col-lg-6 align-self-center g-mb-100 g-mb-0--lg\">\n                <header class=\"u-heading-v2-3--bottom g-brd-primary g-mb-20\">\n                    <h2 class=\"h4 u-heading-v2__title g-color-gray-dark-v2 g-font-weight-600 text-uppercase\"> Our recent projects </h2>\n                </header>\n\n                <p class=\"g-font-size-16 g-mb-30\">We have been actively developing bioinformatics solutions. Particularly for the analysis of antimicrobial resistance on Metagenomes. Here there is a list of our recent developed tools. </p>\n\n                <ul class=\"list-unstyled g-color-gray-dark-v4 mb-0\">\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> DeepARG: A deep learning approach to predict antibiotic resistance on metagenomes.\n                    </li>\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> ARGminer: A crowdsourcing based approach for the annotation and inspection of antibiotic resistance genes\n                    </li>\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> MetaStorm: A public webservice for the analysis of metagenomes.\n                    </li>\n                </ul>\n            </div>\n\n\n        </div>\n    </div>\n</section>\n\n<hr class=\"g-brd-gray-light-v4 my-0\">\n\n<section class=\"1g-bg-secondary g-py-100\">\n    <div class=\"container\">\n        <div class=\"row\">\n\n\n            <div class=\"col-lg-6 align-self-center g-mb-100 g-mb-0--lg\">\n                <header class=\"u-heading-v2-3--bottom g-brd-primary g-mb-20\">\n                    <h2 class=\"h4 u-heading-v2__title g-color-gray-dark-v2 g-font-weight-600 text-uppercase\"> Funding </h2>\n                </header>\n\n                <!-- <p class=\"g-font-size-16 g-mb-30\">nanoARG is currenlty funded by: </p> -->\n\n                <ul class=\"list-unstyled g-color-gray-dark-v4 mb-0\">\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> PIRE: Halting Environmental Antimicrobial Resistance Dissemination (HEARD)\n                    </li>\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> Nacional Science Fundation (NSF)\n                    </li>\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> Virginia Polytechnic Institute and State University\n                    </li>\n\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> The authors acknowledge Advanced Research Computing at Virginia Tech for providing computational resources and technical support that have contributed to the development\n                        of this project (<a href=\"http://www.arc.vt.edu\">more</a>)\n                    </li>\n\n                </ul>\n            </div>\n\n            <div class=\"col-lg-6 g-bg-img-hero g-pos-rel\">\n                <br><br><br>\n                <div class=\"text-center w-100 g-px-40\">\n\n                    <img height=\"180\" width=\"350\" src=\"assets/img/funding.png\">\n\n                </div>\n            </div>\n\n        </div>\n    </div>\n</section>\n\n\n\n<hr class=\"g-brd-gray-light-v4 my-0\">\n\n<section class=\"1g-bg-secondary g-py-100\">\n    <div class=\"container\">\n        <div class=\"row\">\n\n\n            <div class=\"col-lg-12 align-self-center g-mb-100 g-mb-0--lg\">\n                <header class=\"u-heading-v2-3--bottom g-brd-primary g-mb-20\">\n                    <h2 class=\"h4 u-heading-v2__title g-color-gray-dark-v2 g-font-weight-600 text-uppercase\"> How to cite us </h2>\n                </header>\n\n                <p class=\"g-font-size-16 g-mb-30\">\n                    <strong>Identification of antimicrobial resistance from low coverage nanopore environmental metagenomes </strong> G. A. Arango-Argoty, D. Dai, A. Pruden, P. Vikesland, L. S. Heath, and L. Zhang ( <i> In preparation </i>)\n                </p>\n\n            </div>\n        </div>\n    </div>\n</section>"
+module.exports = "<!-- Promo Block -->\n<section>\n\n    <div class=\"g-py-200 jumbotron-1\">\n        <div class=\"container\">\n            <div class=\"row\">\n                <div class=\"col-md-6\">\n                    <h3 class=\"g-color-white g-font-weight-400 g-font-size-40 g-line-height-1_2 mb-4\">Antimicrobial Resistance<br> analysis for nanopore reads\n                    </h3>\n                    <span class=\"d-block g-color-white g-font-size-16 mb-5\">NanoARG is an free web resource for the analysis of antibiotic resistance genes in metagenomes from environmental samples using the MinION nanopore sequencing technology.</span>\n\n                    <!-- <a class=\"js-fancybox u-link-v5 g-color-black\" href=\"https://vimeo.com/167434033\" title=\"Single Image\">\n                    <span class=\"align-middle u-icon-v3 u-block-hover--scale g-bg-white g-color-black g-color-primary--hover g-rounded-50x g-cursor-pointer mr-2\">\n                        <i class=\"g-font-size-18 g-pos-rel g-left-2 fa fa-play\"></i>\n                      </span> 3:00 min\n                </a> -->\n                </div>\n            </div>\n        </div>\n    </div>\n\n</section>\n<!-- End Promo Block -->\n\n<!-- Icon Blocks -->\n<section class=\"g-py-100\">\n    <div class=\"container\">\n        <div class=\"row no-gutters\">\n            <div class=\"col-lg-4 g-px-40 g-mb-50 g-mb-0--lg\">\n                <!-- Icon Blocks -->\n                <div class=\"text-center\">\n                    <!-- <span class=\"d-inline-block u-icon-v3 u-icon-size--xl g-bg-primary g-color-white rounded-circle g-mb-30\"> -->\n                    <!-- <i class=\"icon-finance-086 u-line-icon-pro\"></i> -->\n                    <!-- </span> -->\n                    <h3 class=\"h5 g-color-gray-dark-v2 g-font-weight-600 text-uppercase mb-3\">Antimicrobial Resistance</h3>\n                    <p class=\"mb-0\">Antibiotic / Antimicrobial resistance is the ability of microbes to resist the effects of drugs – that is, the germs are not killed, and their growth is not stopped.</p>\n                </div>\n                <!-- End Icon Blocks -->\n            </div>\n\n            <div class=\"col-lg-4 g-brd-left--lg g-brd-gray-light-v4 g-px-40 g-mb-50 g-mb-0--lg\">\n                <!-- Icon Blocks -->\n                <div class=\"text-center\">\n                    <!-- <span class=\"d-inline-block u-icon-v3 u-icon-size--xl g-bg-primary g-color-white rounded-circle g-mb-30\"> -->\n                    <!-- <i class=\"icon-finance-196 u-line-icon-pro\"></i> -->\n                    <!-- </span> -->\n                    <h3 class=\"h5 g-color-gray-dark-v2 g-font-weight-600 text-uppercase mb-3\">Nanopore Sequencing</h3>\n                    <p class=\"mb-0\">WOxford Nanopore Technologies has developed the MinION, considered a 3rd generation sequencing technology.</p>\n                </div>\n                <!-- End Icon Blocks -->\n            </div>\n\n            <div class=\"col-lg-4 g-brd-left--lg g-brd-gray-light-v4 g-px-40\">\n                <!-- Icon Blocks -->\n                <div class=\"text-center\">\n                    <!-- <span class=\"d-inline-block u-icon-v3 u-icon-size--xl g-bg-primary g-color-white rounded-circle g-mb-30\"> -->\n                    <!-- <i class=\"icon-finance-147 u-line-icon-pro\"></i> -->\n                    <!-- </span> -->\n                    <h3 class=\"h5 g-color-gray-dark-v2 g-font-weight-600 text-uppercase mb-3\">Big data</h3>\n                    <p class=\"mb-0\">Nanopore sequencing generates millions of DNA base pairs that need to be analyzed efficiently.</p>\n                </div>\n                <!-- End Icon Blocks -->\n            </div>\n        </div>\n    </div>\n</section>\n<!-- End Icon Blocks -->\n\n<hr class=\"g-brd-gray-light-v4 my-0\">\n\n<section class=\"1g-bg-secondary g-py-100\">\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-lg-6 align-self-center g-mb-100 g-mb-0--lg\">\n                <header class=\"u-heading-v2-3--bottom g-brd-primary g-mb-20\">\n                    <h2 class=\"h4 u-heading-v2__title g-color-gray-dark-v2 g-font-weight-600 text-uppercase\">About nanoARG</h2>\n                </header>\n\n                <p class=\"g-font-size-16 g-mb-30\">An online pipeline for the analysis of antimicrobial resistance. That includes to screen the nanopore reads agains Antibiotic Resistance Genes (ARGs), Metal Resistance Genes (MRGs), Mobile Genetic Elements (MGEs) that help to the spread\n                    of ARGs/MGEs, and taxonomy annotation that allows to understand the context of the nanopore reads.</p>\n\n                <ul class=\"list-unstyled g-color-gray-dark-v4 mb-0\">\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> DeepARG is used to annotate ARGs\n                    </li>\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> A set of collected MGEs from NCBI\n                    </li>\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> BacMet for the metal resistance profiling\n                    </li>\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> Centrifuge is used to infer the taxonomy of each nanopore read\n                    </li>\n                </ul>\n            </div>\n\n            <div class=\"col-lg-6 g-bg-img-hero g-pos-rel\" style=\"background-image: url(assets/img/map3.png);\">\n                <div class=\"text-center w-100 g-px-40\">\n                    <h2 class=\"h1 g-color-gray-light-v2 g-font-weight-600 g-letter-spacing-0_5\"> {{ messages[0] }}\n                        <span class=\"u-text-animation u-text-animation--typing\"></span>\n                    </h2>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>\n<!-- End About Our Company -->\n\n<hr class=\"g-brd-gray-light-v4 my-0\">\n\n\n<section class=\"1g-bg-secondary g-py-100\">\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-lg-6 g-bg-img-hero g-pos-rel\">\n                <div class=\"text-center w-100 g-px-40\">\n\n                    <img height=\"350\" width=\"350\" src=\"assets/img/projects.png\" type=\"image/svg+xml\">\n\n                </div>\n\n            </div>\n\n            <div class=\"col-lg-6 align-self-center g-mb-100 g-mb-0--lg\">\n                <header class=\"u-heading-v2-3--bottom g-brd-primary g-mb-20\">\n                    <h2 class=\"h4 u-heading-v2__title g-color-gray-dark-v2 g-font-weight-600 text-uppercase\"> Our recent projects </h2>\n                </header>\n\n                <p class=\"g-font-size-16 g-mb-30\">We have been actively developing bioinformatics solutions. Particularly for the analysis of antimicrobial resistance on Metagenomes. Here there is a list of our recent developed tools. </p>\n\n                <ul class=\"list-unstyled g-color-gray-dark-v4 mb-0\">\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> DeepARG: A deep learning approach to predict antibiotic resistance on metagenomes.\n                    </li>\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> ARGminer: A crowdsourcing based approach for the annotation and inspection of antibiotic resistance genes\n                    </li>\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> MetaStorm: A public webservice for the analysis of metagenomes.\n                    </li>\n                </ul>\n            </div>\n\n\n        </div>\n    </div>\n</section>\n\n<hr class=\"g-brd-gray-light-v4 my-0\">\n\n<section class=\"1g-bg-secondary g-py-100\">\n    <div class=\"container\">\n        <div class=\"row\">\n\n\n            <div class=\"col-lg-6 align-self-center g-mb-100 g-mb-0--lg\">\n                <header class=\"u-heading-v2-3--bottom g-brd-primary g-mb-20\">\n                    <h2 class=\"h4 u-heading-v2__title g-color-gray-dark-v2 g-font-weight-600 text-uppercase\"> Funding </h2>\n                </header>\n\n                <!-- <p class=\"g-font-size-16 g-mb-30\">nanoARG is currenlty funded by: </p> -->\n\n                <ul class=\"list-unstyled g-color-gray-dark-v4 mb-0\">\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> PIRE: Halting Environmental Antimicrobial Resistance Dissemination (HEARD)\n                    </li>\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> Nacional Science Fundation (NSF)\n                    </li>\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> Virginia Polytechnic Institute and State University\n                    </li>\n\n                    <li class=\"d-flex g-mb-10\">\n                        <i class=\"icon-check g-color-primary g-mt-5 g-mr-10\"></i> The authors acknowledge Advanced Research Computing at Virginia Tech for providing computational resources and technical support that have contributed to the development\n                        of this project (<a href=\"http://www.arc.vt.edu\">more</a>)\n                    </li>\n\n                </ul>\n            </div>\n\n            <div class=\"col-lg-6 g-bg-img-hero g-pos-rel\">\n                <br><br><br>\n                <div class=\"text-center w-100 g-px-40\">\n\n                    <img height=\"180\" width=\"350\" src=\"assets/img/funding.png\">\n\n                </div>\n            </div>\n\n        </div>\n    </div>\n</section>\n\n\n\n<hr class=\"g-brd-gray-light-v4 my-0\">\n\n<section class=\"1g-bg-secondary g-py-100\">\n    <div class=\"container\">\n        <div class=\"row\">\n\n\n            <div class=\"col-lg-12 align-self-center g-mb-100 g-mb-0--lg\">\n                <header class=\"u-heading-v2-3--bottom g-brd-primary g-mb-20\">\n                    <h2 class=\"h4 u-heading-v2__title g-color-gray-dark-v2 g-font-weight-600 text-uppercase\"> How to cite us </h2>\n                </header>\n\n\n                <h3> <strong> <a target=\"_blank\" href=\"https://www.biorxiv.org/content/biorxiv/early/2018/11/29/483248.full.pdf\"> NanoARG: A web service for contextualizing antimicrobial resistance genes identified from Nanopore-derived metagenomes </a> </strong> </h3>\n                G. A. Arango-Argoty, D. Dai, A. Pruden, P. Vikesland, L. S. Heath, and L. Zhang ( <i> BioRxiv </i>)\n\n\n            </div>\n        </div>\n    </div>\n</section>"
 
 /***/ }),
 
@@ -721,7 +721,7 @@ var HomeComponent = (function () {
         this.messages = [
             'AMR is an increasingly serious threat to global public health'
         ];
-        this.message = this.messages[this._cont];
+        // this.message = this.messages[this._cont];
     };
     HomeComponent.prototype.onComplete = function () {
         // this.message = this.messages[1];
@@ -738,7 +738,7 @@ var HomeComponent = (function () {
     ], HomeComponent);
     return HomeComponent;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/home.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/home.component.js.map
 
 /***/ }),
 
@@ -850,7 +850,7 @@ var LoginComponent = (function () {
     return LoginComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/login.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/login.component.js.map
 
 /***/ }),
 
@@ -917,7 +917,7 @@ var ProjectRoutingModule = (function () {
     ], ProjectRoutingModule);
     return ProjectRoutingModule;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/project-routing.module.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/project-routing.module.js.map
 
 /***/ }),
 
@@ -1036,7 +1036,7 @@ var ProjectComponent = (function () {
     return ProjectComponent;
     var _a, _b, _c, _d, _e, _f, _g;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/project.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/project.component.js.map
 
 /***/ }),
 
@@ -1127,7 +1127,7 @@ var ProjectModule = (function () {
     ], ProjectModule);
     return ProjectModule;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/project.module.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/project.module.js.map
 
 /***/ }),
 
@@ -1210,7 +1210,7 @@ var ExecuteComponent = (function () {
     return ExecuteComponent;
     var _a, _b, _c, _d, _e;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/execute.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/execute.component.js.map
 
 /***/ }),
 
@@ -1328,7 +1328,7 @@ var MetadataComponent = (function () {
     return MetadataComponent;
     var _a, _b, _c, _d, _e, _f, _g;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/metadata.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/metadata.component.js.map
 
 /***/ }),
 
@@ -1406,7 +1406,7 @@ var ParametersComponent = (function () {
     return ParametersComponent;
     var _a, _b, _c, _d, _e;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/parameters.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/parameters.component.js.map
 
 /***/ }),
 
@@ -1442,7 +1442,7 @@ var SampleRoutingModule = (function () {
     ], SampleRoutingModule);
     return SampleRoutingModule;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/sample-routing.module.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/sample-routing.module.js.map
 
 /***/ }),
 
@@ -1550,7 +1550,7 @@ var SampleComponent = (function () {
     return SampleComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/sample.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/sample.component.js.map
 
 /***/ }),
 
@@ -1618,7 +1618,7 @@ var SampleModule = (function () {
     ], SampleModule);
     return SampleModule;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/sample.module.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/sample.module.js.map
 
 /***/ }),
 
@@ -1701,7 +1701,7 @@ var UploadComponent = (function () {
     return UploadComponent;
     var _a, _b, _c, _d, _e, _f;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/upload.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/upload.component.js.map
 
 /***/ }),
 
@@ -1814,7 +1814,7 @@ var EventDrops = (function () {
     };
     return EventDrops;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/EventDrops.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/EventDrops.js.map
 
 /***/ }),
 
@@ -2137,7 +2137,7 @@ var Genome = (function () {
     ;
     return Genome;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/Gmap.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/Gmap.js.map
 
 /***/ }),
 
@@ -2186,7 +2186,7 @@ var Stats = (function () {
     };
     return Stats;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/OverallStats.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/OverallStats.js.map
 
 /***/ }),
 
@@ -2378,7 +2378,7 @@ var Chords = (function () {
     ;
     return Chords;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/chords.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/chords.js.map
 
 /***/ }),
 
@@ -2604,7 +2604,7 @@ var Network = (function () {
     };
     return Network;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/network.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/network.js.map
 
 /***/ }),
 
@@ -2700,7 +2700,7 @@ var TaxonomyVisualization = (function () {
     return TaxonomyVisualization;
 }());
 ;
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/taxonomy.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/taxonomy.js.map
 
 /***/ }),
 
@@ -3156,7 +3156,7 @@ var ViewSamplesComponent = (function () {
     return ViewSamplesComponent;
     var _a, _b, _c, _d, _e, _f;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/view-samples.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/view-samples.component.js.map
 
 /***/ }),
 
@@ -3217,7 +3217,7 @@ var ProcessOutputComponent = (function () {
     ], ProcessOutputComponent);
     return ProcessOutputComponent;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/process_output.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/process_output.component.js.map
 
 /***/ }),
 
@@ -3278,7 +3278,7 @@ var RelativeAbundanceComponent = (function () {
     ], RelativeAbundanceComponent);
     return RelativeAbundanceComponent;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/relative_abundance.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/relative_abundance.component.js.map
 
 /***/ }),
 
@@ -3339,7 +3339,7 @@ var RunCanuComponent = (function () {
     ], RunCanuComponent);
     return RunCanuComponent;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/run_canu.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/run_canu.component.js.map
 
 /***/ }),
 
@@ -3400,7 +3400,7 @@ var TutorialsComponent = (function () {
     ], TutorialsComponent);
     return TutorialsComponent;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/tutorials.component.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/tutorials.component.js.map
 
 /***/ }),
 
@@ -3414,7 +3414,7 @@ var environment = {
     api_url: 'https://bench.cs.vt.edu/api/nanoarg',
     upload_dir: ''
 };
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/environment.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/environment.js.map
 
 /***/ }),
 
@@ -3435,7 +3435,7 @@ if (__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment *
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["enableProdMode"])();
 }
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_3__app_app_module__["a" /* AppModule */]);
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/main.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/main.js.map
 
 /***/ }),
 
@@ -3529,7 +3529,7 @@ var AuthService = (function () {
     return AuthService;
     var _a, _b;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/auth.service.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/auth.service.js.map
 
 /***/ }),
 
@@ -3549,7 +3549,7 @@ var Sha512 = (function () {
     };
     return Sha512;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/encrypt.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/encrypt.js.map
 
 /***/ }),
 
@@ -3638,7 +3638,7 @@ var ProjectService = (function () {
     return ProjectService;
     var _a;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/project.service.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/project.service.js.map
 
 /***/ }),
 
@@ -3762,7 +3762,7 @@ var SampleService = (function () {
     return SampleService;
     var _a;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/sample.service.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/sample.service.js.map
 
 /***/ }),
 
@@ -3817,7 +3817,7 @@ var Session = (function () {
     return Session;
     var _a;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/session.service.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/session.service.js.map
 
 /***/ }),
 
@@ -3872,7 +3872,7 @@ var UserService = (function () {
     return UserService;
     var _a;
 }());
-//# sourceMappingURL=/Volumes/drive/projects/ARG/nanoARG/frontend/src/user.service.js.map
+//# sourceMappingURL=/Volumes/drive/projects/nanoARG/frontend/src/user.service.js.map
 
 /***/ }),
 
