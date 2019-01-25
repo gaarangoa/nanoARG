@@ -415,7 +415,7 @@ export class ViewSamplesComponent implements OnInit {
               // console.log(this.selected_read);
 
               // co-occurrence network
-              this.network.render('network', this.network_data, [1]);
+            //   this.network.render('network', this.network_data, [1]);
 
               // co-occurrence chords
               // const item = document.getElementById('co_occurrence_chords');

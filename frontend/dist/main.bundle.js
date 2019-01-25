@@ -3021,7 +3021,7 @@ var ViewSamplesComponent = (function () {
                 _this.selected_read.link = _this.generate_gene_arrangement_image(_this.filter_reads[index]);
                 // console.log(this.selected_read);
                 // co-occurrence network
-                _this.network.render('network', _this.network_data, [1]);
+                //   this.network.render('network', this.network_data, [1]);
                 // co-occurrence chords
                 // const item = document.getElementById('co_occurrence_chords');
                 // item.innerHTML = '';
