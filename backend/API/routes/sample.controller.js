@@ -31,6 +31,8 @@ router.get('/read/results/:sample_id', function(req, res, next) {
                 // console.log(response)
 
                 var fi = '/src/data/' + response[0].projectID + '_' + sample_id + '.json';
+                var fi2 = '/src/data/' + response[0].projectID + '_' + sample_id + '.min.json';
+
                 cmd = 'ls -lstg ' + fi;
                 var dir = exec(cmd, function(err, stdout, stderr) {
                     if (err) {
@@ -47,7 +49,7 @@ router.get('/read/results/:sample_id', function(req, res, next) {
                         // If the results file is too big to be processed
                         if (fileSizeInMegabytes >= 20) {
 
-                            fs.readFile(fi, 'utf8', function(err, data) {
+                            fs.readFile(fi2, 'utf8', function(err, data) {
                                 if (err) {
                                     res.json({
                                         status: false,
