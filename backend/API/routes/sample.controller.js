@@ -9,7 +9,7 @@ var fs = require('fs');
 var sys = require('sys');
 var exec = require('child_process').exec;
 
-var remote_host = "gustavo1@newriver1.arc.vt.edu:/groups/metastorm_cscee/nanoARG/backend/scheduler/remote/storage/";
+var remote_host = "gustavo1@cascades2.arc.vt.edu:/groups/metastorm_cscee/nanoARG/backend/scheduler/remote/storage/";
 
 router.get('/:sampleID', function(req, res, next) {
     var sampleID = req.params['sampleID'];
@@ -22,29 +22,70 @@ router.get('/:sampleID', function(req, res, next) {
         );
 });
 
-// read json file with results
 router.get('/read/results/:sample_id', function(req, res, next) {
     var sample_id = req.params['sample_id'];
-    // console.log(sampleID)
+
     sample.readElementByID(sample_id)
         .then(
             function(response) {
                 // console.log(response)
-                var fi = '/src/data/' + response[0]['projectID'] + '_' + sample_id + '.json';
-                var obj;
-                fs.readFile(fi, 'utf8', function(err, data) {
+
+                var fi = '/src/data/' + response[0].projectID + '_' + sample_id + '.json';
+                cmd = 'ls -lstg ' + fi;
+                var dir = exec(cmd, function(err, stdout, stderr) {
                     if (err) {
-                        res.json(false);
+                        res.json({
+                            message: 'still working',
+                            status: false
+                        });
                     } else {
-                        obj = JSON.parse(data);
-                        obj[0] = obj[0].slice(1, 100);
-                        res.json(obj);
+
+                        var fileSizeInMegabytes = parseInt(stdout.split(' ')[4]) / 1000000;
+
+                        // res.json({ filesize: filesize, status: 'file is ' });
+
+                        // If the results file is too big to be processed
+                        if (fileSizeInMegabytes >= 10) {
+                            res.json({
+                                size: fileSizeInMegabytes,
+                                message: 'results file is too big',
+                                status: false
+                            });
+                        } else {
+                            fs.readFile(fi, 'utf8', function(err, data) {
+                                if (err) {
+                                    res.json({
+                                        status: false,
+                                        message: 'still working'
+                                    });
+                                } else {
+                                    obj = JSON.parse(data);
+                                    obj[0] = obj[0].slice(1, 100);
+                                    res.json({
+                                        data: obj,
+                                        message: 'results are ready',
+                                        status: true,
+                                        size: fileSizeInMegabytes
+                                    });
+                                }
+                            });
+                        }
                     }
+
                 });
+
+                // var fileSizeInBytes = stats.size;
+
+                // var fileSizeInMegabytes = fileSizeInBytes / 1000000.0;
+
+                // res.json({
+                //     results_size: fileSizeInMegaBytes
+                // });
 
             }
         );
 });
+
 
 router.get('/read/results/download/:sample_id', function(req, res, next) {
     var sample_id = req.params.sample_id;
@@ -146,9 +187,6 @@ router.get('/status/:sample_id/:project_id/:status', function(req, res) {
 
         var dir = exec(cmd, function(err, stdout, stderr) {
             if (err) {
-                // should have err.code here?
-                // sample.updateElementByID(req.params.sample_id, { "status": "error retrieving results" });
-                // res.json(false);
                 console.log('error retrieving file');
             }
             console.log(stdout);

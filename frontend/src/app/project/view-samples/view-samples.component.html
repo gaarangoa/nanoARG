@@ -1,5 +1,10 @@
 <br>
 
+<p-dialog [style]="{width: '300px', height: '200px'}" header="Data is ready but cannot be displayed" [(visible)]="display" [modal]="true" [responsive]="true">
+    <span>{{alert_message}}</span>
+</p-dialog>
+
+
 <!-- Table with project info -->
 <div style="text-align:center">
     <p-dataTable [csvSeparator]="'\t'" #dt [value]="sampleService.samplesByProject" [rows]="5" [paginator]="true" [pageLinks]="3" exportFilename="metadata">

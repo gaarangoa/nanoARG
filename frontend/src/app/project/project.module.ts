@@ -18,40 +18,44 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ChartModule } from 'angular2-highcharts';
 import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 export function highchartsFactory() {
-  return require('highcharts');
+	return require('highcharts');
 }
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { RouterModule } from '@angular/router';
 import { TabViewModule } from 'primeng/primeng';
 import { CheckboxModule } from 'primeng/primeng';
+
+import { DialogModule } from 'primeng/primeng';
+
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    SampleModule,
-    ProjectRoutingModule,
-    StepsModule,
-    DataTableModule,
-    SharedModule,
-    GrowlModule,
-    ConfirmDialogModule,
-    BrowserModule,
-    ChartModule,
-    NgxChartsModule,
-    TabViewModule,
-    CheckboxModule,
-    FormsModule
-    // NgxChartsModule,
-    // BrowserModule
-  ],
-  providers: [
-    ConfirmationService,
-    {
-      provide: HighchartsStatic,
-      useFactory: highchartsFactory
-    }
-  ],
-  declarations: [ProjectComponent, ViewSamplesComponent]
+	imports: [
+		CommonModule,
+		RouterModule,
+		SampleModule,
+		ProjectRoutingModule,
+		StepsModule,
+		DataTableModule,
+		SharedModule,
+		GrowlModule,
+		ConfirmDialogModule,
+		BrowserModule,
+		ChartModule,
+		NgxChartsModule,
+		TabViewModule,
+		CheckboxModule,
+		FormsModule,
+		DialogModule
+		// NgxChartsModule,
+		// BrowserModule
+	],
+	providers: [
+		ConfirmationService,
+		{
+			provide: HighchartsStatic,
+			useFactory: highchartsFactory
+		}
+	],
+	declarations: [ ProjectComponent, ViewSamplesComponent ]
 })
 export class ProjectModule {}

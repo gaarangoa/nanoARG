@@ -85,6 +85,14 @@ export class SampleService {
       });
   }
 
+  get_sample_results_size(sample_id: string) {
+    return this.http
+      .get(this.base_url + '/sample/read/size/' + sample_id)
+      .map(res => {
+        return res.json();
+      });
+  }
+
   get_sample_status(sample_id: string) {
     return this.http.get(this.base_url + '/sample/' + sample_id).map(res => {
       return res.json();
