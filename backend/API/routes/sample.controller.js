@@ -46,11 +46,25 @@ router.get('/read/results/:sample_id', function(req, res, next) {
 
                         // If the results file is too big to be processed
                         if (fileSizeInMegabytes >= 20) {
-                            res.json({
-                                size: fileSizeInMegabytes,
-                                message: 'results file is too big',
-                                status: false
+
+                            fs.readFile(fi, 'utf8', function(err, data) {
+                                if (err) {
+                                    res.json({
+                                        status: false,
+                                        message: 'Error: rerun your sample'
+                                    });
+                                } else {
+                                    obj = JSON.parse(data);
+                                    obj[0] = obj[0].slice(1, 100);
+                                    res.json({
+                                        data: obj,
+                                        message: 'results file is too big',
+                                        status: true,
+                                        size: fileSizeInMegabytes
+                                    });
+                                }
                             });
+
                         } else {
                             fs.readFile(fi, 'utf8', function(err, data) {
                                 if (err) {
