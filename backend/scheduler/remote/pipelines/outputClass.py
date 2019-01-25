@@ -418,7 +418,7 @@ def read_map(parameters=[]):
         "total_bp_counts": total_bp_counts
     }
 
-    json.dump([filter_data[:100], net, arg_labels, filter_taxa[:100], info], open(
+    json.dump([filter_data[:10], net, arg_labels, filter_taxa[:20], info], open(
         parameters["storage_remote_dir"]+"/all.bestHit.min.json", "w"))
 
     json.dump([filter_data, net, arg_labels, filter_taxa, info], open(
