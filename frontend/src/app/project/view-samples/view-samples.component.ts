@@ -335,25 +335,26 @@ export class ViewSamplesComponent implements OnInit {
 
           if (res['status'] === false) {
 
-
-            if (res['message'] == 'results file is too big') {
-                this.alert_message = "The results are ready, However, because of the length of the results it cannot be displayed in the website. We strongly recommend to download the results from the 'results' button and use the tutorials for visualizing it.";
-                this.showDialog()
-                return false;
-            }
-
             this.msgs.push({
                 severity: 'info',
                 summary: 'Info Message',
                 detail: res['message']
             });
 
-
           } else {
 
-            if (res['message'] == 'Rendering Network may be slow!') {
-                this.alert_message = "The sample "+sample_id+" contains many nodes and edges. Rendering this network may take a while. Probably is better to use a desktop tool such as cytoscape. See Tutorials to process the json file produced by NanoARG.";
-                this.showDialog()
+            if (res['message'] == 'results file is too big') {
+
+
+                this.confirmationService.confirm({
+                    message:
+                      "The sample "+sample_id+" contains many nodes and edges. Rendering this network may take a while. Probably is better to use a desktop tool such as cytoscape. See Tutorials to process the json file produced by NanoARG.",
+                    header: 'Rendering Network may be Slow!',
+                    icon: 'fa fa-play',
+                    accept: () => {
+                    }
+                  });
+
             }
               // console.log(res);
 
@@ -484,7 +485,7 @@ export class ViewSamplesComponent implements OnInit {
     // console.log(sample)
     this.confirmationService.confirm({
       message:
-        'ARGpore will execute only if only there were any errors during the execution.',
+        'NanoARG will execute only if only there were any errors during the execution.',
       header: 'Re-run sample',
       icon: 'fa fa-play',
       accept: () => {

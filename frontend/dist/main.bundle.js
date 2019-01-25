@@ -2980,11 +2980,6 @@ var ViewSamplesComponent = (function () {
         var _this = this;
         this.sampleService.get_sample_results(sample_id).subscribe(function (res) {
             if (res['status'] === false) {
-                if (res['message'] == 'results file is too big') {
-                    _this.alert_message = "The results are ready, However, because of the length of the results it cannot be displayed in the website. We strongly recommend to download the results from the 'results' button and use the tutorials for visualizing it.";
-                    _this.showDialog();
-                    return false;
-                }
                 _this.msgs.push({
                     severity: 'info',
                     summary: 'Info Message',
@@ -2992,9 +2987,14 @@ var ViewSamplesComponent = (function () {
                 });
             }
             else {
-                if (res['message'] == 'Rendering Network may be slow!') {
-                    _this.alert_message = "The sample " + sample_id + " contains many nodes and edges. Rendering this network may take a while. Probably is better to use a desktop tool such as cytoscape. See Tutorials to process the json file produced by NanoARG.";
-                    _this.showDialog();
+                if (res['message'] == 'results file is too big') {
+                    _this.confirmationService.confirm({
+                        message: "The sample " + sample_id + " contains many nodes and edges. Rendering this network may take a while. Probably is better to use a desktop tool such as cytoscape. See Tutorials to process the json file produced by NanoARG.",
+                        header: 'Rendering Network may be Slow!',
+                        icon: 'fa fa-play',
+                        accept: function () {
+                        }
+                    });
                 }
                 // console.log(res);
                 // this.raw_reads = res[0];
@@ -3071,7 +3071,7 @@ var ViewSamplesComponent = (function () {
         var _this = this;
         // console.log(sample)
         this.confirmationService.confirm({
-            message: 'ARGpore will execute only if only there were any errors during the execution.',
+            message: 'NanoARG will execute only if only there were any errors during the execution.',
             header: 'Re-run sample',
             icon: 'fa fa-play',
             accept: function () {
