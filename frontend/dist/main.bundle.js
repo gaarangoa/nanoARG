@@ -2838,7 +2838,7 @@ var ViewSamplesComponent = (function () {
         };
         this.sub = this.route.params.subscribe(function (params) {
             // this.dt.reset();
-            __WEBPACK_IMPORTED_MODULE_10_rxjs_observable_TimerObservable__["TimerObservable"].create(0, 2000)
+            __WEBPACK_IMPORTED_MODULE_10_rxjs_observable_TimerObservable__["TimerObservable"].create(0, 10000)
                 .takeWhile(function () { return _this.alive; })
                 .subscribe(function () {
                 _this.sampleService
@@ -3118,16 +3118,16 @@ var ViewSamplesComponent = (function () {
                     item.data['sample'] = sample['name'];
                     item.data['rel_abn_args'] = (item['data'].size *
                         1 /
-                        res[4]['total_mapped_ARG_reads']).toFixed(5);
+                        res['data'][4]['total_mapped_ARG_reads']).toFixed(5);
                     item.data['rel_abn_total_genes'] = (item['data'].size *
                         10000 /
-                        res[4]['total_functional_reads']).toFixed(5);
+                        res['data'][4]['total_functional_reads']).toFixed(5);
                     item.data['rel_abn_total_reads'] = (item['data'].size *
                         1000000000 /
-                        res[4]['total_bp_counts']).toFixed(5);
+                        res['data'][4]['total_bp_counts']).toFixed(5);
                     item.data['rel_abn_unique_strains'] = (item['data'].size *
                         1 /
-                        res[4]['total_unique_genomes']).toFixed(5);
+                        res['data'][4]['total_unique_genomes']).toFixed(5);
                     item.data['category'] = item['data']['metadata'][3];
                     _this.all_samples.push(item.data);
                 });
