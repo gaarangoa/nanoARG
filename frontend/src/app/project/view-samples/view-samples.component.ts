@@ -351,6 +351,10 @@ export class ViewSamplesComponent implements OnInit {
 
           } else {
 
+            if (res['message'] == 'Rendering Network may be slow!') {
+                this.alert_message = "The sample "+sample_id+" contains many nodes and edges. Rendering this network may take a while. Probably is better to use a desktop tool such as cytoscape. See Tutorials to process the json file produced by NanoARG.";
+                this.showDialog()
+            }
               // console.log(res);
 
               // this.raw_reads = res[0];

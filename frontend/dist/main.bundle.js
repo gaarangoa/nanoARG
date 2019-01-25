@@ -2992,6 +2992,10 @@ var ViewSamplesComponent = (function () {
                 });
             }
             else {
+                if (res['message'] == 'Rendering Network may be slow!') {
+                    _this.alert_message = "The sample " + sample_id + " contains many nodes and edges. Rendering this network may take a while. Probably is better to use a desktop tool such as cytoscape. See Tutorials to process the json file produced by NanoARG.";
+                    _this.showDialog();
+                }
                 // console.log(res);
                 // this.raw_reads = res[0];
                 _this.filter_reads = res['data'][0];
