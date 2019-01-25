@@ -2975,6 +2975,57 @@ var ViewSamplesComponent = (function () {
         // console.log(_my_text);
         return _my_text;
     };
+    ViewSamplesComponent.prototype.one_sample_rendering = function (res, index) {
+        // this.raw_reads = res[0];
+        this.filter_reads = res['data'][0];
+        this.network_data = res['data'][1];
+        this.sample_info = res['data'][4];
+        //   console.log(res);
+        this.network_labels = res['data'][2];
+        this.taxonomy_data = res['data'][3];
+        this.read_length = res['data'][4]['read_length_distribution'];
+        this.selected_read = this.filter_reads[index].read[0];
+        // variable with general statistics
+        this.general_info = this.stats.overall_abundances(this.network_data);
+        // console.log(this.general_info);
+        // length distribution
+        this.line_chart = this.read_chart.length_distribution(this.read_length);
+        // Genes distribution
+        this.antibiotic_distribution_chart = this.read_chart.genes_distribution(this.network_data, 1, 3, this.network_labels, this.parameters);
+        this.args_distribution_chart = this.read_chart.genes_distribution(this.network_data, 1, 4, this.network_labels, this.parameters);
+        this.mges_distribution_chart = this.read_chart.genes_distribution(this.network_data, 2, 3, this.network_labels, this.parameters);
+        this.metal_distribution_chart = this.read_chart.genes_distribution(this.network_data, 4, 3, this.network_labels, this.parameters);
+        // reads with ARGs //
+        this.args_on_reads = this.condense_genes_reads(this.filter_reads);
+        // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
+        // const gene_organization_div = document.getElementById('gene_organization');
+        // gene_organization_div.innerHTML = '';
+        // this.event_drops.render( this.filter_reads[index]);
+        this.selected_read.link = this.generate_gene_arrangement_image(this.filter_reads[index]);
+        // console.log(this.selected_read);
+        // co-occurrence network
+        //   this.network.render('network', this.network_data, [1]);
+        // co-occurrence chords
+        // const item = document.getElementById('co_occurrence_chords');
+        // item.innerHTML = '';
+        // this.co_occurrence_chords.render('#co_occurrence_chords', this.network_data);
+        // barchart witht he species abundances //
+        this.taxonomy_sample_chart_species = this.taxonomy_visualization.render(this.taxonomy_data, 'species');
+        // this.taxonomy_sample_chart_genus = this.taxonomy_visualization.render(this.taxonomy_data, 'genus');
+        // table for the species abundances //
+        this.reads_table = this.filter_reads.map(function (i, ix) {
+            i.read[0]['index'] = ix;
+            return i.read[0];
+        });
+        this.total_bp_counts = res['data'][4]['total_bp_counts'];
+        // this.network.render('network_labels', this.network_data[1], 'grid', false);
+        // console.log(this.reads_table)
+        this.msgs.push({
+            severity: 'success',
+            summary: 'Info Message',
+            detail: 'Sample loaded'
+        });
+    };
     ViewSamplesComponent.prototype.get_sample_results = function (sample_id, index) {
         // console.log(this.parameters);
         var _this = this;
@@ -2989,63 +3040,17 @@ var ViewSamplesComponent = (function () {
             else {
                 if (res['message'] == 'results file is too big') {
                     _this.confirmationService.confirm({
-                        message: "The sample " + sample_id + " contains many nodes and edges. Rendering this network may take a while. Probably is better to use a desktop tool such as cytoscape. See Tutorials to process the json file produced by NanoARG.",
+                        message: "The sample " + sample_id + " contains many nodes and edges. Rendering this network may take a while. Probably is better to use a desktop tool such as cytoscape. See Resources tab to learn how to handle the json file produced by NanoARG.",
                         header: 'Rendering Network may be Slow!',
                         icon: 'fa fa-play',
                         accept: function () {
                         }
                     });
+                    _this.one_sample_rendering(res, index);
                 }
-                // console.log(res);
-                // this.raw_reads = res[0];
-                _this.filter_reads = res['data'][0];
-                _this.network_data = res['data'][1];
-                _this.sample_info = res['data'][4];
-                //   console.log(res);
-                _this.network_labels = res['data'][2];
-                _this.taxonomy_data = res['data'][3];
-                _this.read_length = res['data'][4]['read_length_distribution'];
-                _this.selected_read = _this.filter_reads[index].read[0];
-                // variable with general statistics
-                _this.general_info = _this.stats.overall_abundances(_this.network_data);
-                // console.log(this.general_info);
-                // length distribution
-                _this.line_chart = _this.read_chart.length_distribution(_this.read_length);
-                // Genes distribution
-                _this.antibiotic_distribution_chart = _this.read_chart.genes_distribution(_this.network_data, 1, 3, _this.network_labels, _this.parameters);
-                _this.args_distribution_chart = _this.read_chart.genes_distribution(_this.network_data, 1, 4, _this.network_labels, _this.parameters);
-                _this.mges_distribution_chart = _this.read_chart.genes_distribution(_this.network_data, 2, 3, _this.network_labels, _this.parameters);
-                _this.metal_distribution_chart = _this.read_chart.genes_distribution(_this.network_data, 4, 3, _this.network_labels, _this.parameters);
-                // reads with ARGs //
-                _this.args_on_reads = _this.condense_genes_reads(_this.filter_reads);
-                // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
-                // const gene_organization_div = document.getElementById('gene_organization');
-                // gene_organization_div.innerHTML = '';
-                // this.event_drops.render( this.filter_reads[index]);
-                _this.selected_read.link = _this.generate_gene_arrangement_image(_this.filter_reads[index]);
-                // console.log(this.selected_read);
-                // co-occurrence network
-                //   this.network.render('network', this.network_data, [1]);
-                // co-occurrence chords
-                // const item = document.getElementById('co_occurrence_chords');
-                // item.innerHTML = '';
-                // this.co_occurrence_chords.render('#co_occurrence_chords', this.network_data);
-                // barchart witht he species abundances //
-                _this.taxonomy_sample_chart_species = _this.taxonomy_visualization.render(_this.taxonomy_data, 'species');
-                // this.taxonomy_sample_chart_genus = this.taxonomy_visualization.render(this.taxonomy_data, 'genus');
-                // table for the species abundances //
-                _this.reads_table = _this.filter_reads.map(function (i, ix) {
-                    i.read[0]['index'] = ix;
-                    return i.read[0];
-                });
-                _this.total_bp_counts = res['data'][4]['total_bp_counts'];
-                // this.network.render('network_labels', this.network_data[1], 'grid', false);
-                // console.log(this.reads_table)
-                _this.msgs.push({
-                    severity: 'success',
-                    summary: 'Info Message',
-                    detail: 'Sample loaded'
-                });
+                else {
+                    _this.one_sample_rendering(res, index);
+                }
             }
         });
     };
