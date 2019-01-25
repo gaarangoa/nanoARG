@@ -45,7 +45,7 @@ router.get('/read/results/:sample_id', function(req, res, next) {
                         // res.json({ filesize: filesize, status: 'file is ' });
 
                         // If the results file is too big to be processed
-                        if (fileSizeInMegabytes >= 10) {
+                        if (fileSizeInMegabytes >= 20) {
                             res.json({
                                 size: fileSizeInMegabytes,
                                 message: 'results file is too big',
@@ -182,7 +182,11 @@ router.get('/status/:sample_id/:project_id/:status', function(req, res) {
         res.json(req.params);
     } else {
         // when the process is done retrieve the results
-        var cmd = "scp " + remote_host + req.params.project_id + "/" + req.params.sample_id + "/all.bestHit.json /src/data/" + req.params.project_id + "_" + req.params.sample_id + ".json";
+        var cmd1 = "scp " + remote_host + req.params.project_id + "/" + req.params.sample_id + "/all.bestHit.json /src/data/" + req.params.project_id + "_" + req.params.sample_id + ".json";
+        var cmd2 = "scp " + remote_host + req.params.project_id + "/" + req.params.sample_id + "/all.bestHit.min.json /src/data/" + req.params.project_id + "_" + req.params.sample_id + ".min.json";
+
+        var cmd = cmd1 + ' && ' + cmd2;
+
         console.log(cmd);
 
         var dir = exec(cmd, function(err, stdout, stderr) {
