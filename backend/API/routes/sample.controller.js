@@ -76,7 +76,7 @@ router.get('/read/results/:sample_id', function(req, res, next) {
                                     });
                                 } else {
                                     obj = JSON.parse(data);
-                                    obj[0] = obj[0].slice(1, 20);
+                                    obj[0] = obj[0].slice(0, 20);
                                     res.json({
                                         data: obj,
                                         message: 'results are ready',
