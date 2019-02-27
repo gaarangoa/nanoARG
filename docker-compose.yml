@@ -1,6 +1,5 @@
-version: '3'
+version: "3"
 services:
-
   database:
     image: mongo:3.6
     environment:
@@ -12,6 +11,7 @@ services:
     ports:
       - 27855:17863
     tty: true
+    restart: always
 
   api:
     image: node
@@ -29,6 +29,7 @@ services:
       - consumer
     depends_on:
       - database
+    restart: always
 
   frontend:
     image: nginx
@@ -40,6 +41,7 @@ services:
     tty: true
     ports:
       - 27857:80
+    restart: always
 
   scheduler:
     image: rabbitmq
@@ -52,6 +54,7 @@ services:
     ports:
       - 27858:15672
       - 27859:5672
+    restart: always
 
   consumer:
     image: python:2.7
@@ -69,5 +72,4 @@ services:
     ports:
       - 27860:8082
     command: python /src/consumer.py
-
-
+    restart: always
