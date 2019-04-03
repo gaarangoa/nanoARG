@@ -19,7 +19,7 @@ class Taxonomy():
         parameters = {
             "-f": "",
             "--min-hitlen": "25",
-            "-k": "15"
+            "-k": "10"
         }
 
         self.aligner.align(
