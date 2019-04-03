@@ -18,8 +18,8 @@ class Taxonomy():
     def align(self):
         parameters = {
             "-f": "",
-            # "--min-hitlen":"25",
-            # "-k":"50"
+            "--min-hitlen": "25",
+            "-k": "50"
         }
 
         self.aligner.align(
