@@ -4,7 +4,7 @@ Antibiotic Resistance data analysis of nanopore sequencing reads
         docker-compose build
         docker-compose up -d
 
-See each readme file under the services for setup.
+See each REAMDE.md file under the services for setup.
 
 ## Cluster
 add the global variable in the cluster to the external module on the cluster.
