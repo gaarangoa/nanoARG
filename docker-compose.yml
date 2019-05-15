@@ -20,7 +20,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./backend/API:/src
-      - ./backend/scheduler/consumer/local/access/:/root/.ssh/
+      - ./backend/scheduler/consumer/local/access/:/root/.ssh/ # path of the ssh key
     ports:
       - 27856:3000
     links:
