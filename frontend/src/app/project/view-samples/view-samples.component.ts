@@ -78,7 +78,7 @@ export class ViewSamplesComponent implements OnInit {
   public arg_height_plot: any;
   public arg_height_plot_btn: any;
   // public sample_list: any;
-    public alert_message: string;
+  public alert_message: string;
 
   constructor(
     public router: Router,
@@ -87,19 +87,19 @@ export class ViewSamplesComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private session: Session,
     private projectComponent: ProjectComponent
-  ) {}
+  ) { }
 
   display: boolean = false;
 
   showDialog() {
-      this.display = true;
+    this.display = true;
   }
 
   ngOnInit() {
 
     // this.domain_draw = new Domain();
 
-      this.alert_message = '';
+    this.alert_message = '';
 
     this.parameters = {
       identity: 25,
@@ -128,7 +128,7 @@ export class ViewSamplesComponent implements OnInit {
     this.stats = new Stats();
 
     this.taxonomy_visualization = new TaxonomyVisualization();
-    this.selected_sample = { name: '', _id: ''};
+    this.selected_sample = { name: '', _id: '' };
     this.network_data = { nodes: [], edges: [] };
     this.all_samples = [];
 
@@ -150,7 +150,7 @@ export class ViewSamplesComponent implements OnInit {
         .subscribe(() => {
           this.sampleService
             .getSamplesByProject(this.projectComponent.projectID)
-            .subscribe(response => {});
+            .subscribe(response => { });
         });
 
       this.sampleService
@@ -319,8 +319,8 @@ export class ViewSamplesComponent implements OnInit {
       // console.log(e)
       _my_text.push(
         _text[e].slice(0, -1) +
-          '&hscale=1&len=' +
-          Math.floor(data.read[0].len / 10)
+        '&hscale=1&len=' +
+        Math.floor(data.read[0].len / 10)
       );
     });
 
@@ -328,139 +328,139 @@ export class ViewSamplesComponent implements OnInit {
     return _my_text;
   }
 
-    one_sample_rendering(res: any, index: any) {
-        // this.raw_reads = res[0];
-        this.filter_reads = res['data'][0];
-        this.network_data = res['data'][1];
-        this.sample_info = res['data'][4];
-        //   console.log(res);
+  one_sample_rendering(res: any, index: any) {
+    // this.raw_reads = res[0];
+    this.filter_reads = res['data'][0];
+    this.network_data = res['data'][1];
+    this.sample_info = res['data'][4];
+    //   console.log(res);
 
-        this.network_labels = res['data'][2];
-        this.taxonomy_data = res['data'][3];
-        this.read_length = res['data'][4]['read_length_distribution'];
+    this.network_labels = res['data'][2];
+    this.taxonomy_data = res['data'][3];
+    this.read_length = res['data'][4]['read_length_distribution'];
 
-        this.selected_read = this.filter_reads[index].read[0];
+    this.selected_read = this.filter_reads[index].read[0];
 
-        // variable with general statistics
-        this.general_info = this.stats.overall_abundances(this.network_data);
-        // console.log(this.general_info);
+    // variable with general statistics
+    this.general_info = this.stats.overall_abundances(this.network_data);
+    // console.log(this.general_info);
 
-        // length distribution
-        this.line_chart = this.read_chart.length_distribution(this.read_length);
+    // length distribution
+    this.line_chart = this.read_chart.length_distribution(this.read_length);
 
-        // Genes distribution
-        this.antibiotic_distribution_chart = this.read_chart.genes_distribution(
-            this.network_data,
-            1,
-            3,
-            this.network_labels,
-            this.parameters
-        );
-        this.args_distribution_chart = this.read_chart.genes_distribution(
-            this.network_data,
-            1,
-            4,
-            this.network_labels,
-            this.parameters
-        );
-        this.mges_distribution_chart = this.read_chart.genes_distribution(
-            this.network_data,
-            2,
-            3,
-            this.network_labels,
-            this.parameters
-        );
-        this.metal_distribution_chart = this.read_chart.genes_distribution(
-            this.network_data,
-            4,
-            3,
-            this.network_labels,
-            this.parameters
-        );
+    // Genes distribution
+    this.antibiotic_distribution_chart = this.read_chart.genes_distribution(
+      this.network_data,
+      1,
+      3,
+      this.network_labels,
+      this.parameters
+    );
+    this.args_distribution_chart = this.read_chart.genes_distribution(
+      this.network_data,
+      1,
+      4,
+      this.network_labels,
+      this.parameters
+    );
+    this.mges_distribution_chart = this.read_chart.genes_distribution(
+      this.network_data,
+      2,
+      3,
+      this.network_labels,
+      this.parameters
+    );
+    this.metal_distribution_chart = this.read_chart.genes_distribution(
+      this.network_data,
+      4,
+      3,
+      this.network_labels,
+      this.parameters
+    );
 
-        // reads with ARGs //
-        this.args_on_reads = this.condense_genes_reads(this.filter_reads);
+    // reads with ARGs //
+    this.args_on_reads = this.condense_genes_reads(this.filter_reads);
 
-        // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
-        // const gene_organization_div = document.getElementById('gene_organization');
-        // gene_organization_div.innerHTML = '';
-        // this.event_drops.render( this.filter_reads[index]);
-        this.selected_read.link = this.generate_gene_arrangement_image(
-            this.filter_reads[index]
-        );
-        // console.log(this.selected_read);
+    // this.read_chart.render('#read_circle_map-1', this.filter_reads[index]['read'], this.filter_reads[index]['data']);
+    // const gene_organization_div = document.getElementById('gene_organization');
+    // gene_organization_div.innerHTML = '';
+    // this.event_drops.render( this.filter_reads[index]);
+    this.selected_read.link = this.generate_gene_arrangement_image(
+      this.filter_reads[index]
+    );
+    // console.log(this.selected_read);
 
-        // co-occurrence network
-      //   this.network.render('network', this.network_data, [1]);
+    // co-occurrence network
+    //   this.network.render('network', this.network_data, [1]);
 
-        // co-occurrence chords
-        // const item = document.getElementById('co_occurrence_chords');
-        // item.innerHTML = '';
-        // this.co_occurrence_chords.render('#co_occurrence_chords', this.network_data);
+    // co-occurrence chords
+    // const item = document.getElementById('co_occurrence_chords');
+    // item.innerHTML = '';
+    // this.co_occurrence_chords.render('#co_occurrence_chords', this.network_data);
 
-        // barchart witht he species abundances //
-        this.taxonomy_sample_chart_species = this.taxonomy_visualization.render(
-            this.taxonomy_data,
-            'species'
-        );
-        // this.taxonomy_sample_chart_genus = this.taxonomy_visualization.render(this.taxonomy_data, 'genus');
+    // barchart witht he species abundances //
+    this.taxonomy_sample_chart_species = this.taxonomy_visualization.render(
+      this.taxonomy_data,
+      'species'
+    );
+    // this.taxonomy_sample_chart_genus = this.taxonomy_visualization.render(this.taxonomy_data, 'genus');
 
-        // table for the species abundances //
-        this.reads_table = this.filter_reads.map((i, ix) => {
-            i.read[0]['index'] = ix;
-            return i.read[0];
-        });
+    // table for the species abundances //
+    this.reads_table = this.filter_reads.map((i, ix) => {
+      i.read[0]['index'] = ix;
+      return i.read[0];
+    });
 
-        this.total_bp_counts = res['data'][4]['total_bp_counts'];
+    this.total_bp_counts = res['data'][4]['total_bp_counts'];
 
-        // this.network.render('network_labels', this.network_data[1], 'grid', false);
-        // console.log(this.reads_table)
+    // this.network.render('network_labels', this.network_data[1], 'grid', false);
+    // console.log(this.reads_table)
 
-        this.msgs.push({
-            severity: 'success',
-            summary: 'Info Message',
-            detail: 'Sample loaded'
-        });
-    }
+    this.msgs.push({
+      severity: 'success',
+      summary: 'Info Message',
+      detail: 'Sample loaded'
+    });
+  }
 
   get_sample_results(sample_id: string, index: number) {
     // console.log(this.parameters);
 
-      this.sampleService.get_sample_results(sample_id).subscribe(res => {
+    this.sampleService.get_sample_results(sample_id).subscribe(res => {
 
-          if (res['status'] === false) {
+      if (res['status'] === false) {
 
-            this.msgs.push({
-                severity: 'info',
-                summary: 'Info Message',
-                detail: res['message']
-            });
-
-          } else {
-
-            if (res['message'] == 'results file is too big') {
-
-
-                this.confirmationService.confirm({
-                    message:
-                      "The sample "+sample_id+" contains many nodes and edges. Rendering this network may take a while. Probably is better to use a desktop tool such as cytoscape. See Resources tab to learn how to handle the json file produced by NanoARG.",
-                    header: 'Rendering Network may be Slow!',
-                    icon: 'fa fa-play',
-                    accept: () => {
-                    }
-                });
-
-                this.one_sample_rendering(res, index);
-            }
-            else {
-                this.one_sample_rendering(res, index);
-              }
-              // console.log(res);
-
-
-          }
-
+        this.msgs.push({
+          severity: 'info',
+          summary: 'Info Message',
+          detail: res['message']
         });
+
+      } else {
+
+        if (res['message'] == 'results file is too big') {
+
+
+          this.confirmationService.confirm({
+            message:
+              "The sample " + sample_id + " contains many nodes and edges. Rendering this network may take a while. Probably is better to use a desktop tool such as cytoscape. See Resources tab to learn how to handle the json file produced by NanoARG.",
+            header: 'Rendering Network may be Slow!',
+            icon: 'fa fa-play',
+            accept: () => {
+            }
+          });
+
+          this.one_sample_rendering(res, index);
+        }
+        else {
+          this.one_sample_rendering(res, index);
+        }
+        // console.log(res);
+
+
+      }
+
+    });
 
 
 
@@ -503,13 +503,13 @@ export class ViewSamplesComponent implements OnInit {
         // *************************************
         // TODO: create a service that updates the status of a sample given its ID !IMPORTANT
         // *************************************
-        this.sampleService.run(sample).subscribe(project => {});
+        this.sampleService.run(sample).subscribe(project => { });
       }
     });
 
     this.sampleService
       .set_sample_status(sample['_id'], sample['projectID'], 'running')
-      .subscribe(r => {});
+      .subscribe(r => { });
   }
 
   removeSample(sample: any) {
@@ -518,7 +518,7 @@ export class ViewSamplesComponent implements OnInit {
       header: 'Delete Confirmation',
       icon: 'fa fa-trash',
       accept: () => {
-        this.sampleService.deleteSample(sample).subscribe(() => {});
+        this.sampleService.deleteSample(sample).subscribe(() => { });
       }
     });
   }

@@ -1,2 +1,7 @@
 validation/
 validate/
+error_rate/
+correct.sh
+**.pyc
+.vscode/
+.DS_Store

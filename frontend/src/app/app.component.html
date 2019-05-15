@@ -1,9 +1,9 @@
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a routerLink="home" class="navbar-brand"><strong>ARG</strong> | nanopore </a>
+            <a routerLink="home" class="navbar-brand"><strong>Nano</strong> | ARG </a>
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-      </button>
+            </button>
         </div>
         <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
@@ -17,10 +17,11 @@
                 </li>
 
                 <li>
-                    <a href="https://bench.cs.vt.edu/argminer/#/forum/selected_question;id=1547661017164" target="_blank">
-            News and Updates
-            <span class="badge bg-yellow">New</span>
-          </a>
+                    <a href="https://bench.cs.vt.edu/argminer/#/forum/selected_question;id=1547661017164"
+                        target="_blank">
+                        News and Updates
+                        <span class="badge bg-yellow">New</span>
+                    </a>
                 </li>
 
                 <li>
@@ -31,7 +32,8 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li *ngIf="!authService.session.get('isLoggedIn')"><a routerLink="login">LogIn</a></li>
-                <li *ngIf="authService.session.get('isLoggedIn')"><a routerLink="login" (click)="logout()">Logout</a></li>
+                <li *ngIf="authService.session.get('isLoggedIn')"><a routerLink="login" (click)="logout()">Logout</a>
+                </li>
             </ul>
 
         </div>
