@@ -35,8 +35,9 @@
         </p-column>
         <p-column header="Download Results" styleClass="">
             <template let-sample="rowData" pTemplate="body">
-                <a class=" badge bg-blue " (click)="removeSample(sample)"> ARGs Table</a>
-                <a class=" badge bg-blue" [href]='api_url+"/sample/read/results/download/"+sample._id'>Full Table</a>
+                <a class=" badge bg-blue" [href]='api_url+"/sample/read/results/download/"+sample._id'>ARGs Table</a>
+                <a class=" badge bg-blue" [href]='api_url+"/sample/read/results/download/full_table/"+sample._id'>Full
+                    Table</a>
             </template>
         </p-column>
 
@@ -52,7 +53,7 @@
 
 <small class="">
     <strong>*ARGs Table</strong>: Contains sequences with at least one ARG. <br>
-    <strong>*Full Table</strong>: Contains sequences with either ARGs, MRGs, or MGEs.
+    <strong>*Full Table</strong>: Contains sequences with at elast one ARG, MRG, or MGE.
 </small>
 
 <hr>
