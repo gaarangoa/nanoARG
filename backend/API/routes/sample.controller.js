@@ -221,7 +221,7 @@ router.get('/status/:sample_id/:project_id/:status', function (req, res)
         var cmd2 = "scp " + remote_host + req.params.project_id + "/" + req.params.sample_id + "/all.bestHit.min.json /src/data/" + req.params.project_id + "_" + req.params.sample_id + ".min.json";
         var cmd3 = "scp " + remote_host + req.params.project_id + "/" + req.params.sample_id + "/all.bestHit-full.json /src/data/" + req.params.project_id + "_" + req.params.sample_id + "-full.json";
 
-        var cmd = cmd1 + ' && ' + cmd2 + ' ' + cmd3;
+        var cmd = cmd1 + ' && ' + cmd2 + ' && ' + cmd3;
 
         console.log(cmd);
 

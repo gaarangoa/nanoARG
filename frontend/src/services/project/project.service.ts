@@ -16,7 +16,7 @@ export class ProjectService {
   removed: Boolean;
   base_url: string;
 
-  constructor (private http:Http){
+  constructor(private http: Http) {
     this.projectsByUser = [];
     this.projectInfo = {};
     this.base_url = environment.api_url;
@@ -24,7 +24,7 @@ export class ProjectService {
 
   create(fields: Object) {
     console.log(fields)
-    return this.http.post(this.base_url+'/project/create/', fields)
+    return this.http.post(this.base_url + '/project/create/', fields)
       .map(res => {
         this.projectInfo = res.json()[0];
         this.projectsByUser.push(res.json())
@@ -32,32 +32,32 @@ export class ProjectService {
   }
 
 
-  readProjectByUserId(userID: string){
-    return this.http.get(this.base_url+'/project/user/'+userID)
+  readProjectByUserId(userID: string) {
+    return this.http.get(this.base_url + '/project/user/' + userID)
       .map(res => {
-        if(res.json()){this.projectsByUser = res.json();}
+        if (res.json()) { this.projectsByUser = res.json().reverse(); }
       })
   }
 
-  getProjectById(projectID: string){
-    return this.http.get(this.base_url+'/project/'+projectID)
+  getProjectById(projectID: string) {
+    return this.http.get(this.base_url + '/project/' + projectID)
       .map(res => {
         // console.log(res.json())
         this.projectInfo = res.json()[0];
       })
   }
 
-  deleteProject(fields: Object){
-    return this.http.post(this.base_url+'/project/remove/', fields)
-      .map( res=> {
+  deleteProject(fields: Object) {
+    return this.http.post(this.base_url + '/project/remove/', fields)
+      .map(res => {
         this.projectsByUser = this.projectsByUser.filter(item => item['_id'] != fields['_id'])
       });
   }
 
-  shareProject(fields: Object){
+  shareProject(fields: Object) {
     // console.log(fields)
-    return this.http.post(this.base_url+'/project/share/', fields)
-      .map( res=> {
+    return this.http.post(this.base_url + '/project/share/', fields)
+      .map(res => {
 
       });
   }

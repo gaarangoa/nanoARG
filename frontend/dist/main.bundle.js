@@ -3627,7 +3627,7 @@ var ProjectService = (function () {
         return this.http.get(this.base_url + '/project/user/' + userID)
             .map(function (res) {
             if (res.json()) {
-                _this.projectsByUser = res.json();
+                _this.projectsByUser = res.json().reverse();
             }
         });
     };
