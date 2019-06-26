@@ -28,7 +28,7 @@ cmd = "\n".join([
     'source /groups/metastorm_cscee/nanoARG/backend/scheduler/remote/env/nanoarg/bin/activate',
     "       /groups/metastorm_cscee/nanoARG/backend/scheduler/remote/env/nanoarg/bin/luigid --background --logdir=logs",
     'cd ' + parameters['remote_path'],
-    'rm *.json',
+    'rm ' + parameters['remote_path'] + '/*.json',
     '       /groups/metastorm_cscee/nanoARG/backend/scheduler/remote/env/nanoarg/bin/luigi --module ' + \
     parameters['pipeline'] + " RetrieveResults " + \
     " --local-scheduler --parameters " + sys.argv[1],

@@ -425,6 +425,7 @@ def read_map(parameters=[]):
         parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
 
     json.dump(data, open(
-        parameters['storage_remote_dir']+"all.bestHit-full.json"))
+        parameters['storage_remote_dir'] + "all.bestHit-full.json", "w")
+    )
 
     # json.dump([ data, net, arg_labels, taxa_info.values(), {"total_reads": len(read_length), "total_arg_reads": total_arg_reads} ], open(parameters["storage_remote_dir"]+"/complete.bestHit.json", "w"))
