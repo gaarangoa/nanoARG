@@ -424,7 +424,7 @@ def read_map(parameters=[]):
     json.dump([filter_data, net, arg_labels, filter_taxa, info], open(
         parameters["storage_remote_dir"]+"/all.bestHit.json", "w"))
 
-    json.dump([data, net, arg_labels, filter_taxa, info], open(
+    json.dump([data, net, arg_labels, filter_taxap, info], open(
         parameters['storage_remote_dir'] + "/all.bestHit-full.json", "w")
     )
 
