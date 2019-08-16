@@ -1,3 +1,4 @@
+from pipelines.outputClass import read_map
 import luigi
 import os
 import base64
@@ -10,7 +11,7 @@ from pipelines.mgeClass import MGEs
 from pipelines.argClass import ARGs
 from pipelines.TaxonomyClass import Taxonomy
 
-ssh_server = 'cascades2.arc.vt.edu'
+ssh_server = 'calogin2'
 
 
 class MobileGenetiElements(luigi.Task):
@@ -96,9 +97,6 @@ class TaxonomyTask(luigi.Task):
         par = json.loads(base64.b64decode(self.parameters))
         taxa = Taxonomy(par['remote_input_file'], 'centrifuge')
         return luigi.LocalTarget(taxa.observable_file)
-
-
-from pipelines.outputClass import read_map
 
 
 class RetrieveResults(luigi.Task):
