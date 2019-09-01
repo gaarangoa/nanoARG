@@ -120,15 +120,16 @@ class RetrieveResults(luigi.Task):
         os.system("ssh "+ssh_server+" python " +
                   par['remote_path']+"/observable.py "+self.parameters + " " + " Retrieving-results")
         read_map(parameters=par)
-        os.system("ssh "+ssh_server+" python " +
-                  par['remote_path']+"/observable.py "+self.parameters + " done")
+        cmd = "ssh "+ssh_server+" python " + \
+            par['remote_path'] + "/observable.py " + self.parameters + " done"
+        print(cmd)
+        os.system(cmd)
 
 
 @luigi.Task.event_handler(luigi.Event.FAILURE)
 def mourn_failure(task, exception):
     parameters = task.parameters
     par = json.loads(base64.b64decode(parameters))
-    # print("----------------- ERROR ------------8-8--8-8-8-8--8-8-8-8-8-8-8-8-8-8-8-8-8-8-8-8--88-")
     print(str(exception))
     os.system("ssh "+ssh_server+" python " +
               par['remote_path']+"/observable.py "+parameters + " " + " FAIL:problem-with-data")
