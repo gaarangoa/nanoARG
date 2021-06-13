@@ -1,37 +1,3 @@
-// How to use the CRUD operations
+## When cluster get moved 
 
-user.readElementByID('58bed1d7f7d14e7d65ff7d2f')
-    .then(
-        function(response){
-            console.log(response)
-        }
-    ); 
-
-newUser = { username:'Jane',
-            password:'1234',
-            email:'jane@jane.com',
-            name:'Jane Wilson',
-            association:'ARCK'}
-
-user.createElement(newUser)
-    .then(
-        function(response){
-            console.log(response)
-        }
-    ); 
-
-
-user.removeElementByID('58bee86fe596dcc3fdc735e6')
-    .then(
-        function(response){
-            console.log(response)
-        }
-    ); 
-
-
-user.updateElementByID('58bee93af7dc49c5839fb3b7', {name:'GUGU'})
-    .then(
-        function(response){
-            console.log(response)
-        }
-    );
+update under .config.js the remote host url
