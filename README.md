@@ -18,3 +18,12 @@ ng build --base-href /nanoarg/ --env=prod
 <!-- export PYTHONPATH=$PYTHONPATH:/groups/metastorm_cscee/nanoARG/backend/scheduler/remote/ -->
 <!-- Use 27857 as port for frontend -->
 
+## Config files:
+```bash
+        API: .config.js
+        scheduler: ./local/config.py
+        remote: conf.py
+```
+```bash
+        Frontend: setup docker-compose under command parameter, there setup the prod or dev environment as well as the url. This will run angular (ideally build the package). 
+```
