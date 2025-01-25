@@ -26,4 +26,6 @@ ng build --base-href /nanoarg/ --env=prod
 ```
 ```bash
         Frontend: setup docker-compose under command parameter, there setup the prod or dev environment as well as the url. This will run angular (ideally build the package). 
+
+        ng serve --env prod --base-href /nanoarg/ --host 0.0.0.0
 ```
