@@ -1,4 +1,5 @@
 var project = require('../model/project.model');
+var config_ = require('../.config');
 
 var express = require('express');
 var router = express.Router();
@@ -9,7 +10,7 @@ var fs = require('fs');
 var sys = require('sys');
 var exec = require('child_process').exec;
 
-var remote_host = "gustavo1@newriver1.arc.vt.edu:/groups/metastorm_cscee/nanoARG/backend/scheduler/remote/storage/";
+var remote_host = config_.remote_host; // "gustavo1@cascades2.arc.vt.edu:/groups/metastorm_cscee/nanoARG/backend/scheduler/remote/storage/";
 
 router.get('/:sampleID', function (req, res, next)
 {

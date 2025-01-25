@@ -31,17 +31,21 @@ services:
       - database
     restart: always
 
-  frontend:
-    image: nginx
+  frontend_angular:
+    # image: nginx
     build:
       context: ./frontend/
       dockerfile: Dockerfile
     volumes:
-      - ./frontend/dist/:/usr/share/nginx/html/
+      # - ./frontend/dist/:/usr/share/nginx/html/
+      - ./frontend/:/frontend/
+    working_dir: /frontend
+    command: ng serve --host 0.0.0.0
     tty: true
     ports:
-      - 27857:80
+      - 27857:4200
     restart: always
+    
 
   scheduler:
     image: rabbitmq
