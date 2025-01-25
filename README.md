@@ -23,9 +23,12 @@ ng build --base-href /nanoarg/ --env=prod
         API: .config.js
         scheduler: ./local/config.py
         remote: conf.py
+
 ```
 ```bash
         Frontend: setup docker-compose under command parameter, there setup the prod or dev environment as well as the url. This will run angular (ideally build the package). 
+
+        set the prouction url: ./src/environments/environment.prod.ts: api_url set as the url defined in the server (bench2.cs.vt/nanoarg/api/)
 
         ng serve --env prod --base-href /nanoarg/ --host 0.0.0.0
 ```
